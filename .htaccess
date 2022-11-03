@@ -1,0 +1,163 @@
+Options -Indexes +FollowSymLinks
+
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteEngine On 
+
+
+<If "%{HTTP_USER_AGENT} !~ /(iPhone; CPU iPhone OS 1[0-2]|iPad; CPU OS 1[0-2]|iPod touch; CPU iPhone OS 1[0-2]|Macintosh; Intel Mac OS X.*Version\x2F1[0-2].*Safari|Macintosh;.*Mac OS X 10_14.* AppleWebKit.*Version\x2F1[0-3].*Safari)/i">
+    Header always edit Set-Cookie (.*) "$1; SameSite=None"
+</If>
+
+
+RewriteCond %{SERVER_PORT} 80 
+##RewriteRule ^(.*)$ https://gjepc.org/$1 [R=301,L]
+Redirect 301 /hrms https://performancemanager10.successfactors.com/login?company=thegemjewe&bplte
+Redirect 301 /stats https://gemjewellery.ap1.sapanalytics.cloud/sap/fpa/ui/tenants/006/app.html#;view_id=story;storyId=C83572EF9C60F6065840EF7FEE28619A;forceOpenView=true
+Redirect 301 /crm http://survey.jamoutsourcing.com/gjepc_new
+Redirect 301 /helpdesk https://survey.jamoutsourcing.com/gjepc_new/index.php/complaint/complaint
+Redirect 301 /hybris https://my342878.crm.ondemand.com/
+Redirect 301 /reliefs-aid https://gjepc.org/relief-aid-applications-form.php
+Redirect 301 /sharepoint https://gjepcindia.sharepoint.com/sites/gjepcindia
+#Redirect 301 /vbsm/exhibitor-login https://intl.gjepc.org/exhibitor-login
+
+Redirect 301 /about_us.php https://gjepc.org/about-us.php 
+Redirect 301 /union_budget.php https://gjepc.org/union-budget.php
+Redirect 301 /marketing_initiatives.php https://gjepc.org/marketing-initiatives.php
+Redirect 301 /mission_and_vision.php https://gjepc.org/mission-and-vision.php
+Redirect 301 /india_center.php https://gjepc.org/india-center.php
+Redirect 301 /sub_committee.php https://gjepc.org/sub-committee.php
+Redirect 301 /trade_shows.php https://gjepc.org/trade-shows.php
+Redirect 301 /road_shows.php https://gjepc.org/road-shows.php
+Redirect 301 /design_inspration.php https://gjepc.org/design-inspiration.php
+Redirect 301 /knowledge_forum.php https://gjepc.org/knowledge-forum.php
+Redirect 301 /kp_gallery.php https://gjepc.org/kp-gallery.php
+Redirect 301 /mines_to_market.php https://gjepc.org/mines-to-market.php
+Redirect 301 /idi_surat.php https://gjepc.org/idi-surat.php
+Redirect 301 /region_wise_panel_wise_members_during_2018-19.php https://gjepc.org/region-wise-panel-wise-members-during-2018-19.php
+Redirect 301 /apply_for_membership.php https://gjepc.org/apply-for-membership.php
+Redirect 301 /kimberley_process.php https://gjepc.org/kimberley-process.php
+Redirect 301 /circulars_and_notifications.php https://gjepc.org/circulars-and-notifications.php
+Redirect 301 /exhibition_permission.php https://gjepc.org/exhibition-permission.php
+Redirect 301 /related_links.php https://gjepc.org/related-links.php
+Redirect 301 /miscellaneous_information.php https://gjepc.org/miscellaneous-information.php
+Redirect 301 /archives_list.php https://gjepc.org/archives-list.php
+Redirect 301 /policy_and_handbook.php https://gjepc.org/policy-and-handbook.php
+Redirect 301 /micro_small_and_medium_enterprises_sector.php https://gjepc.org/micro-small-and-medium-enterprises-sector.php
+Redirect 301 /about_swasthya_ratna_policy.php https://gjepc.org/about-swasthya-ratna-policy.php
+Redirect 301 /jewellers_for_hope.php https://gjepc.org/jewellers-for-hope.php
+Redirect 301 /press_release.php https://gjepc.org/press-release.php
+Redirect 301 /video_gallery.php https://gjepc.org/video-gallery.php
+Redirect 301 /vendor_gst.php https://gjepc.org/vendor-gst.php
+Redirect 301 /gst_cust.php https://gjepc.org/gst-cust.php
+Redirect 301 /contact_us.php https://gjepc.org/contact-us.php
+Redirect 301 /registraiton_landing.php https://gjepc.org/registraiton-landing.php
+Redirect 301 /csr_book.php https://gjepc.org/csr-book.php
+Redirect 301 /swacchata_pakhwada_campaign.php https://gjepc.org/swacchata-pakhwada-campaign.php
+Redirect 301 /call_center.php https://gjepc.org/call-center.php
+Redirect 301 /jewellery_park_mumbai.php https://gjepc.org/jewellery-park-mumbai.php
+Redirect 301 /view_article.php https://gjepc.org/view-article.php
+Redirect 301 /gold_rates.php https://gjepc.org/gold-rates.php
+Redirect 301 /holiday_list.php https://gjepc.org/holiday-list.php
+Redirect 301 /ddes_faq.php https://gjepc.org/ddes-faq.php
+Redirect 301 /benefits_hindi.php https://gjepc.org/benefits-hindi.php
+Redirect 301 /becameamember_hindi.php https://gjepc.org/becameamember-hindi.php
+Redirect 301 /renewalmember_hindi.php https://gjepc.org/renewalmember-hindi.php
+Redirect 301 /procedure_hindi.php https://gjepc.org/procedure-hindi.php
+Redirect 301 /kimberley_info.php https://gjepc.org/kimberley-info.php
+#Redirect 301 /relief-aid-applications-form.php https://gjepc.org/404.php
+Redirect 301 /solitaire-international.php https://gjepc.org/solitaire/
+Redirect 301 /sap https://webdisp.gjepcindia.com/sap/bc/gui/sap/its/webgui/?sap-client=200&sap-language=EN
+Redirect 301 /ithelp https://sdpondemand.manageengine.com
+Redirect 301 /msme-overview.php https://www.gjepc.org/msme-defination.php
+
+#Redirect File Only When Not Found
+ErrorDocument 404 https://gjepc.org/404.php
+
+Redirect 301 /igjme/steady_stream_of_visitors_on_day_one_of_IGJME.php https://gjepc.org/igjme
+Redirect 301 /igjme/faqs.php https://gjepc.org/igjme
+Redirect 301 /igjme/circular.php https://gjepc.org/igjme
+Redirect 301 /igjme/exhibitors_look.php https://gjepc.org/igjme
+
+<filesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+    Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Video
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/mpeg "access plus 1 year"
+
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # Others
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>
+
+## EXPIRES CACHING ##
+<IfModule mod_deflate.c>
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+<ifModule mod_gzip.c>
+  mod_gzip_on Yes
+  mod_gzip_dechunk Yes
+  mod_gzip_item_include file .(html?|txt|css|js|php|pl)$
+  mod_gzip_item_include handler ^cgi-script$
+  mod_gzip_item_include mime ^text/.*
+  mod_gzip_item_include mime ^application/x-javascript.*
+  mod_gzip_item_exclude mime ^image/.*
+  mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+
+deny from 175.176.50.
+deny from 49.144.196.
+deny from 52.243.61.
+deny from 159.203.57.
+deny from 49.144.202.
+deny from 137.117.45.
+deny from 49.144.194.
+deny from 49.144.205.
+deny from 49.144.197.
+

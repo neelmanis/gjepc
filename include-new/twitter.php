@@ -1,0 +1,1 @@
+<div id="twitterL"><a  data-lazy-widget="twitter_2" class="twitter-timeline" data-height="350" href="https://twitter.com/GJEPCIndia" style="display:block;">Tweets by GJEPCIndia</a></div>

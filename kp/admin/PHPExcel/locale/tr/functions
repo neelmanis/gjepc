@@ -1,0 +1,238 @@
+m-type-taxonomy menu-item-object-category mom_default_menu_item menu-item-depth-1"><a href="http://www.alnaharda.com/category/%d8%a7%d9%84%d8%af%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d8%ad%d9%8a%d8%a7%d8%a9/">الدين و الحياة</a></li>
+	<li id="menu-item-1386" class="menu-item menu-item-type-taxonomy menu-item-object-category mom_default_menu_item menu-item-depth-1"><a href="http://www.alnaharda.com/category/%d9%85%d8%b1%d8%a3%d8%a9-%d9%88%d8%b7%d9%81%d9%84/">مرأة وطفل</a></li>
+	<li id="menu-item-4214" class="menu-item menu-item-type-taxonomy menu-item-object-category mom_default_menu_item menu-item-depth-1"><a href="http://www.alnaharda.com/category/%d8%a7%d9%84%d8%b5%d8%ad%d8%a9/">الصحة</a></li>
+	<li id="menu-item-4215" class="menu-item menu-item-type-taxonomy menu-item-object-category mom_default_menu_item menu-item-depth-1"><a href="http://www.alnaharda.com/category/%d8%aa%d8%b9%d9%84%d9%8a%d9%85-%d9%88-%d8%ac%d8%a7%d9%85%d8%b9%d8%a7%d8%aa/">تعليم و جامعات</a></li>
+</ul>
+<i class='responsive-caret'></i>
+</li>
+<li id="menu-item-4248" class="menu-item menu-item-type- menu-item-object- mom_default_menu_item menu-item-depth-0"><a>توك شو</a></li>
+</ul>                        </div>
+                                            		    <div class="nav-buttons">
+                                        			<span class="nav-button nav-login">
+			    <i class="momizat-icon-users"></i>
+			</span>
+			<div class="nb-inner-wrap">
+			    <div class="nb-inner lw-inner">
+			                            <div class="mom-login-widget">
+                                                        <form class="mom-login-form" action="http://www.alnaharda.com/wp-login.php" method="post">
+					<div class="mom-username">
+						<input type="text" name="log" value="" placeholder="اسم المستخدم">
+					</div>
+
+					<div class="mom-password">
+						<input type="password" name="pwd" value="" placeholder="الرقم السري">
+					</div>
+
+					<div class="mom-submit-wrapper">
+						<button class="button submit user-submit" name="user-submit" type="submit">تسجيل الدخول</button>
+						<input type="checkbox" id="rememberme" name="rememberme" value="forever" >
+						<label for="rememberme"><i class="dashicons dashicons-yes"></i>تذكرنى</label>
+                                                <input type="hidden" name="redirect_to" value="http://www.alnaharda.com/%D8%B4%D8%B9%D8%B1-%D9%86%D9%81%D8%B3%D9%8A-%D8%A3%D8%B4%D9%8A%D9%84%D9%83-%D9%81%D9%88%D9%82-%D9%83%D8%AA%D8%A7%D9%81%D9%89-%D9%84%D9%80%D9%80-%D8%A5%D8%B3%D8%B1%D8%A7%D8%A1-%D9%85%D8%AC%D8%A7/" />
+					</div>
+										<span class="mlw-extra">
+												<a href="/wp-login.php?action=register" class="mlw-register">تسجيل</a>
+																	</span>
+					                            </form>
+                            			    <div class="clear"></div>
+                        </div>
+			    </div>
+			</div>
+		    		    
+		     
+                    <span class="nav-button nav-search">
+                        <i class="fa-icon-search"></i>
+                    </span>
+                    <div class="nb-inner-wrap search-wrap border-box">
+                        <div class="nb-inner sw-inner">
+                        <div class="search-form mom-search-form">
+                            <form method="get" action="http://www.alnaharda.com">
+                                <input class="sf" type="text" placeholder="بحث ..." autocomplete="off" name="s">
+                                <button class="button" type="submit"><i class="fa-icon-search"></i></button>
+                            </form>
+                            <span class="sf-loading"><img src="http://www.alnaharda.com/wp-content/themes/goodnews5/images/ajax-search-nav.gif" alt="loading..." width="16" height="16"></span>
+                        </div>
+                    <div class="ajax_search_results">
+                    </div> <!--ajax search results-->
+                    </div> <!--sw inner-->
+                    </div> <!--search wrap-->
+                    		
+		    </div> <!--nav-buttons-->
+                    
+                </div>
+                </div> <!--nav inner-->
+            </nav> <!--Navigation-->
+	    <div class="boxed-content-wrapper clearfix">
+             
+            <div class="nav-shaddow"></div>
+                        
+            <div class="inner">
+                        
+        <div class="breaking-news">
+    <div class="the_ticker" >
+    <div class="bn-title"><span>أخر الأخبار</span></div>
+    <div class="news-ticker">
+        <ul>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-%d8%b1%d8%b3%d9%85/">مواهب النهارده : &#8221; رسم &#8221; لــ محمود رضوان</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/">مواهب النهارده : &#8221; غناء &#8221; نسينى لــ ميرنا عبد الوهاب</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d9%86%d9%81%d8%b3%d9%8a-%d8%a3%d8%b4%d9%8a%d9%84%d9%83-%d9%81%d9%88%d9%82-%d9%83%d8%aa%d8%a7%d9%81%d9%89-%d9%84%d9%80%d9%80-%d8%a5%d8%b3%d8%b1%d8%a7%d8%a1-%d9%85%d8%ac%d8%a7/">&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/4323-2/">هيئة أمريكية: تفشي سلالة جديدة من «إنفلوانزا الطيور»</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d9%85%d9%88%d9%82%d8%b9-%d8%a3%d9%85%d8%b1%d9%8a%d9%83%d9%8a-%d9%88%d8%a7%d8%b4%d9%86%d8%b7%d9%86-%d8%aa%d9%88%d8%a7%d8%b5%d9%84-%d8%b3%d9%8a%d8%a7%d8%b3%d8%a9-%d9%86%d8%b4%d8%b1-%d8%a7%d9%84%d9%82/">موقع أمريكي: واشنطن تواصل سياسة نشر القواعد العسكرية الفاشلة في العالم</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/4314-2/">نتنياهو يهاجم &#8220;الأذان&#8221; ويصفه بـ&#8221;الضوضاء&#8221;</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/4311-2/">سبورتنج بطلا لـ&#8221;كأس السلة &#8220;على حساب الأهلى</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d8%a7%d9%84%d9%82%d9%84%d9%88%d8%a8-%d8%a3%d9%86%d9%88%d8%a7%d8%b9-%d9%84%d9%80%d9%80-%d8%a8%d8%a7%d8%b3%d9%86%d8%aa-%d8%ad%d8%b3%d9%8a%d9%86/">&#8221; شعر &#8221; القلوب أنواع لــ باسنت حسين</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d8%b1%d8%b3%d9%85-%d8%b4%d8%ae%d8%b5%d9%8a%d8%a7%d8%aa-%d9%85%d8%b4%d8%a7%d9%87%d9%8a%d8%b1-%d9%84%d9%80%d9%80-%d9%85%d8%b5%d8%b7%d9%81%d9%89-%d9%85%d8%ad%d9%85%d8%af/">&#8221; رسم &#8221; شخصيات مشاهير لــ مصطفى محمد مصطفى</a></li>
+            <li><i class="fa-icon-double-angle-left"></i><a href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d9%87%d9%84-%d9%8a%d8%ac%d9%88%d8%b2-%d9%84%d9%80%d9%80-%d9%85%d8%ad%d9%85%d8%af-%d8%ac%d9%85%d8%a7%d9%84/">&#8221; شعر &#8221; هل يجوز لــ محمد جمال</a></li>
+        </ul>
+    </div> <!--news ticker-->
+    </div>
+        <span class="current_time">    جرينتش+2 11:47      </span>
+        </div> <!--breaking news-->
+            </div>    <div class="inner">
+                
+                            <div class="main_container">
+           <div class="main-col">
+                                <div class="category-title">
+                        <div class="mom_breadcrumb breadcrumb breadcrumbs"><div class="breadcrumbs-plus">
+<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="http://www.alnaharda.com/" class="home"><span itemprop="title">الرئيسية</span></a></span> <span class='separator'><i class="sep fa-icon-double-angle-left"></i></span> <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="http://www.alnaharda.com/category/%d9%85%d9%88%d8%a7%d9%87%d8%a8/" title="مواهب"><span itemprop="title">مواهب</span></a></span> <span class='separator'><i class="sep fa-icon-double-angle-left"></i></span> <span itemprop="name">&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد</span></div></div>                </div>
+                                        <div class="base-box blog-post p-single bp-horizontal-share post-4327 post type-post status-publish format-standard has-post-thumbnail hentry category-154 tag-545 tag-1361 tag-alnaharda-got-talent tag-alnaharda-com tag-arabs-got-talent tag-arabs-got-talent-2016 tag-927 tag-1359 tag-869 tag-862 tag-------arabs-got-tal tag---2016 tag-864 tag----2016 tag-1242 tag------2016 tag-1012 tag-787 tag-1086 tag-870 tag---alnaharda-got-talent tag-866 tag----alnaharda-com tag-825 tag---alnaharda-com tag-382 tag-1360"itemscope itemtype="http://schema.org/Article">
+<h1 class="post-tile entry-title" itemprop="name">&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد</h1>
+<div class="mom-post-meta single-post-meta"><span class="author vcard">الكاتب: <span class="fn"><a href="http://www.alnaharda.com/author/sherifmadrid/">sherifmadrid</a></span></span><span>on: <time datetime="2016-01-16T19:38:34+00:00" itemprop="datePublished" class="updated">يناير 16, 2016</time></span><span>In: <a href="http://www.alnaharda.com/category/%d9%85%d9%88%d8%a7%d9%87%d8%a8/" title="View all posts in مواهب">مواهب</a></span><span><a href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d9%86%d9%81%d8%b3%d9%8a-%d8%a3%d8%b4%d9%8a%d9%84%d9%83-%d9%81%d9%88%d9%82-%d9%83%d8%aa%d8%a7%d9%81%d9%89-%d9%84%d9%80%d9%80-%d8%a5%d8%b3%d8%b1%d8%a7%d8%a1-%d9%85%d8%ac%d8%a7/#respond">لا يوجد تعليقات</a></span><span>Views: 26 views</span></div><div class="entry-content">
+            <div class="advads-adsens-respo-post-top" id="advads-1727610413"><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-8840593782862292" data-ad-slot="6465401638" data-ad-format="auto"></ins>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script></div><div id="attachment_4328" style="width: 711px" class="wp-caption aligncenter"><img class="size-full wp-image-4328" src="http://www.alnaharda.com/wp-content/uploads/2016/01/%D8%A5%D8%B3%D8%B1%D8%A7%D8%A1-%D9%85%D8%AC%D8%A7%D9%87%D8%AF.jpg" alt="إسراء مجاهد - أخبار النهارده alnaharda.com" width="701" height="714" srcset="http://www.alnaharda.com/wp-content/uploads/2016/01/إسراء-مجاهد-295x300.jpg 295w, http://www.alnaharda.com/wp-content/uploads/2016/01/إسراء-مجاهد.jpg 701w" sizes="(max-width: 701px) 100vw, 701px"><p class="wp-caption-text"><span style="color: #ff0000;">إسراء مجاهد – أخبار النهارده alnaharda.com</span></p></div>
+<p> </p>
+<p><span style="font-size: 14pt; color: #800080;">على خطى برنامج المواهب الشهير عرب جوت تالنت 2016 arab’s got talent يسير <a style="color: #800080;" href="http://www.alnaharda.com" target="_blank">موقع أخبار النهارده alnaharda.com</a> باستمرار تقديم فقرة المواهب تحت عنوان <a style="color: #800080;" href="http://www.alnaharda.com/category/%D9%85%D9%88%D8%A7%D9%87%D8%A8/" target="_blank">مواهب النهارده alnaharda got talent</a> ، ونعرض لكم النهارده موهبة جديدة فى الشعر ، لــ إسراء مجاهد ، وتعرض قصيدة  نفسي أشيلك فوق كتافى.</span></p><div class="advads-adsens-respo-post" id="advads-648462368"><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-8840593782862292" data-ad-slot="6465401638" data-ad-format="auto"></ins>
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script></div>
+<p> </p>
+<p><span style="font-size: 14pt; color: #333399;">إسراء مجاهد أبو العزم ، مهندسة معمارية ، من محافظة الدقهلية .</span></p>
+<p> </p>
+<p><span style="color: #000000;"><strong><span style="font-size: 14pt;">وإليكم قصيدتها نفسي أشيلك فوق كتافى :</span> </strong></span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;">نفسي اشيلك فوق كتافي نفسي تسمعي صوت هتافي نفسي تعرفي إن حياتي من غيرك متلزمنيش </span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;">نفسي أقول بأعلى صوت نفسي أكسر الحدود الي حلفت يوم عليا بيكي متفرحنيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> نفسي أقول ليكي بحبك نفسي تفهمي إني عشقتك نفسي تعرفي إني لحبك قررت أعيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> انتي عايشه جوا مني انتي أصلا حته مني انتي إلي زيك ف الدنيا متلاقيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> قلبي عايش بس ليكي قلبي رابط نفسه بيكي وحالف انو لغيرك مش هيعيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> نفسي كل الناس تعرف اني عشقتك نفسي كل الدنيا تفهم اني بحبك وان حياتي من غيرك متساويش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> عايز أقولك أن انتي سبب ضحكتي وابتسامتي الي من يوم لوقاكي ماسابتنيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> انتي كل حاجه ليا انتي اصلا نور عينيا الي بدعي ربي يجمعني بيها والي ليها أقسمت أعيش</span></p>
+<p><span class="null" style="font-size: 14pt; color: #000000;"> حبيت أقولك ف النهايه أن انتي أجمل بدايه عشت ادعي ربي بغيرها ميرزقنيش</span></p>
+<p> </p>
+<p><span style="font-size: 14pt; color: #ff0000;">..</span></p>
+<p><span style="font-size: 14pt; color: #ff0000;"><strong>لو عندك موهبة وحابب تبعتهالنا ننشرها باسمك وصورتك </strong></span></p>
+<p><span style="font-size: 14pt; color: #ff0000;"><strong>تابعنا على الايفنت : </strong></span></p>
+<p><span style="font-size: 14pt; color: #ff0000;"><a style="color: #ff0000;" href="https://www.facebook.com/events/1000440780009466/" target="_blank">اضغط هنا للتوجه إلى الإيفنت</a></span></p>
+                  <div class="post-tags">
+            <span class="pt-title">وسوم: </span> <a href="http://www.alnaharda.com/tag/%d8%b4%d8%b9%d8%b1/" rel="tag">" شعر "</a><a href="http://www.alnaharda.com/tag/%d8%b4%d8%b9%d8%b1-%d9%86%d9%81%d8%b3%d9%8a-%d8%a3%d8%b4%d9%8a%d9%84%d9%83-%d9%81%d9%88%d9%82-%d9%83%d8%aa%d8%a7%d9%81%d9%89-%d9%84%d9%80%d9%80-%d8%a5%d8%b3%d8%b1%d8%a7%d8%a1-%d9%85%d8%ac%d8%a7/" rel="tag">" شعر " نفسي أشيلك فوق كتافى لــ إسراء مجاهد</a><a href="http://www.alnaharda.com/tag/alnaharda-got-talent/" rel="tag">alnaharda got talent</a><a href="http://www.alnaharda.com/tag/alnaharda-com/" rel="tag">alnaharda.com</a><a href="http://www.alnaharda.com/tag/arabs-got-talent/" rel="tag">arab's got talent</a><a href="http://www.alnaharda.com/tag/arabs-got-talent-2016/" rel="tag">arab's got talent 2016</a><a href="http://www.alnaharda.com/tag/%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">أخبار النهارده</a><a href="http://www.alnaharda.com/tag/%d8%a5%d8%b3%d8%b1%d8%a7%d8%a1-%d9%85%d8%ac%d8%a7%d9%87%d8%af/" rel="tag">إسراء مجاهد</a><a href="http://www.alnaharda.com/tag/%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">النهارده</a><a href="http://www.alnaharda.com/tag/%d8%a8%d8%b1%d9%86%d8%a7%d9%85%d8%ac-%d8%a7%d9%84%d9%85%d9%88%d8%a7%d9%87%d8%a8/" rel="tag">برنامج المواهب</a><a href="http://www.alnaharda.com/tag/%d8%a8%d8%b1%d9%86%d8%a7%d9%85%d8%ac-%d8%a7%d9%84%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d8%b4%d9%87%d9%8a%d8%b1-%d8%b9%d8%b1%d8%a8-%d8%ac%d9%88%d8%aa-%d8%aa%d8%a7%d9%84%d9%86%d8%aa-arabs-got-tal/" rel="tag">برنامج المواهب الشهير عرب جوت تالنت arab's got talent</a><a href="http://www.alnaharda.com/tag/%d8%ad%d9%81%d9%84%d8%a9-%d8%a7%d9%84%d9%85%d9%88%d8%a7%d9%87%d8%a8-2016/" rel="tag">حفلة المواهب 2016</a><a href="http://www.alnaharda.com/tag/%d8%b9%d8%b1%d8%a8-%d8%ac%d9%88%d8%aa-%d8%aa%d8%a7%d9%84%d9%86%d8%aa/" rel="tag">عرب جوت تالنت</a><a href="http://www.alnaharda.com/tag/%d8%b9%d8%b1%d8%a8-%d8%ac%d9%88%d8%aa-%d8%aa%d8%a7%d9%84%d9%86%d8%aa-2016/" rel="tag">عرب جوت تالنت 2016</a><a href="http://www.alnaharda.com/tag/%d8%b9%d8%b1%d8%a8-%d8%ac%d9%88%d8%aa-%d8%aa%d8%a7%d9%84%d9%86%d8%aa-%d8%a7%d9%84%d9%85%d9%88%d8%b3%d9%85-%d8%a7%d9%84%d8%ae%d8%a7%d9%85%d8%b3/" rel="tag">عرب جوت تالنت الموسم الخامس</a><a href="http://www.alnaharda.com/tag/%d8%b9%d8%b1%d8%a8-%d8%ac%d9%88%d8%aa-%d8%aa%d8%a7%d9%84%d9%86%d8%aa-%d8%a7%d9%84%d9%85%d9%88%d8%b3%d9%85-%d8%a7%d9%84%d8%ae%d8%a7%d9%85%d8%b3-2016/" rel="tag">عرب جوت تالنت الموسم الخامس 2016</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%86%d9%88%d8%b9%d8%a7%d8%aa-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">منوعات النهارده</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d8%a7%d9%87%d8%a8/" rel="tag">مواهب</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d8%a7%d9%87%d8%a8-2016/" rel="tag">مواهب 2016</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">مواهب النهارده</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-2016/" rel="tag">مواهب النهارده 2016</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-alnaharda-got-talent/" rel="tag">مواهب النهارده alnaharda got talent</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d9%82%d8%b9-%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">موقع أخبار النهارده</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d9%82%d8%b9-%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-alnaharda-com/" rel="tag">موقع أخبار النهارده alnaharda.com</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d9%82%d8%b9-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87/" rel="tag">موقع النهارده</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d9%82%d8%b9-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-alnaharda-com/" rel="tag">موقع النهارده ALNAHARDA.COM</a><a href="http://www.alnaharda.com/tag/%d9%85%d9%88%d9%87%d8%a8%d8%a9-%d8%a7%d9%84%d8%b4%d8%b9%d8%b1/" rel="tag">موهبة الشعر</a><a href="http://www.alnaharda.com/tag/%d9%86%d9%81%d8%b3%d9%89-%d8%a3%d8%b4%d9%8a%d9%84%d9%83-%d9%81%d9%88%d9%82-%d9%83%d8%aa%d8%a7%d9%81%d9%89/" rel="tag">نفسى أشيلك فوق كتافى</a>        </div> <!-- post tags -->
+        
+       <div class="mom-social-share ss-horizontal border-box">
+	                <div class="ss-icon facebook">
+                <a href="#" onclick="window.open('http://www.facebook.com/sharer/sharer.php?m2w&s=100&p&#91;url&#93;=http%3A%2F%2Fwww.alnaharda.com%2F%25d8%25b4%25d8%25b9%25d8%25b1-%25d9%2586%25d9%2581%25d8%25b3%25d9%258a-%25d8%25a3%25d8%25b4%25d9%258a%25d9%2584%25d9%2583-%25d9%2581%25d9%2588%25d9%2582-%25d9%2583%25d8%25aa%25d8%25a7%25d9%2581%25d9%2589-%25d9%2584%25d9%2580%25d9%2580-%25d8%25a5%25d8%25b3%25d8%25b1%25d8%25a7%25d8%25a1-%25d9%2585%25d8%25ac%25d8%25a7%2F&p&#91;images&#93;&#91;0&#93;=http%3A%2F%2Fwww.alnaharda.com%2Fwp-content%2Fuploads%2F2016%2F01%2F%D8%A5%D8%B3%D8%B1%D8%A7%D8%A1-%D9%85%D8%AC%D8%A7%D9%87%D8%AF.jpg&p&#91;title&#93;=&p&#91;summary&#93;=&nbsp; على خطى برنامج المواهب الشهير عرب جوت تالنت 2016 arab’s got talent يسير موقع أخبار النهارده alnaharda.com باستمرار تقديم فقرة المواهب تحت عنوان مواهب الن', 'Share This', 'menubar=no,toolbar=no,resizable=no,scrollbars=no, width=600,height=455');"><span class="icon"><i class="fa-icon-facebook"></i>Share</span></a>
+                <span class="count">0</span>
+            </div> <!--icon-->
+	    
+	                <div class="ss-icon twitter">
+                <a href="#" onclick="window.open('http://twitter.com/share?text=&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد&url=http%3A%2F%2Fwww.alnaharda.com%2F%25d8%25b4%25d8%25b9%25d8%25b1-%25d9%2586%25d9%2581%25d8%25b3%25d9%258a-%25d8%25a3%25d8%25b4%25d9%258a%25d9%2584%25d9%2583-%25d9%2581%25d9%2588%25d9%2582-%25d9%2583%25d8%25aa%25d8%25a7%25d9%2581%25d9%2589-%25d9%2584%25d9%2580%25d9%2580-%25d8%25a5%25d8%25b3%25d8%25b1%25d8%25a7%25d8%25a1-%25d9%2585%25d8%25ac%25d8%25a7%2F', 'Post this On twitter', 'menubar=no,toolbar=no,resizable=no,scrollbars=no,width=600,height=455');"><span class="icon"><i class="fa-icon-twitter"></i>Tweet</span></a>
+                <span class="count"></span>
+            </div> <!--icon-->
+	    
+	                <div class="ss-icon googleplus">
+                <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.alnaharda.com%2F%25d8%25b4%25d8%25b9%25d8%25b1-%25d9%2586%25d9%2581%25d8%25b3%25d9%258a-%25d8%25a3%25d8%25b4%25d9%258a%25d9%2584%25d9%2583-%25d9%2581%25d9%2588%25d9%2582-%25d9%2583%25d8%25aa%25d8%25a7%25d9%2581%25d9%2589-%25d9%2584%25d9%2580%25d9%2580-%25d8%25a5%25d8%25b3%25d8%25b1%25d8%25a7%25d8%25a1-%25d9%2585%25d8%25ac%25d8%25a7%2F"
+onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=no,scrollbars=no,height=455,width=600');return false"><span class="icon"><i class="fa-icon-google-plus"></i>Share</span></a>
+                <span class="count">0</span>
+            </div> <!--icon-->
+	    		    	            <div class="ss-icon linkedin">
+                <a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.alnaharda.com%2F%25d8%25b4%25d8%25b9%25d8%25b1-%25d9%2586%25d9%2581%25d8%25b3%25d9%258a-%25d8%25a3%25d8%25b4%25d9%258a%25d9%2584%25d9%2583-%25d9%2581%25d9%2588%25d9%2582-%25d9%2583%25d8%25aa%25d8%25a7%25d9%2581%25d9%2589-%25d9%2584%25d9%2580%25d9%2580-%25d8%25a5%25d8%25b3%25d8%25b1%25d8%25a7%25d8%25a1-%25d9%2585%25d8%25ac%25d8%25a7%2F&title=&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد&source=http%3A%2F%2Fwww.alnaharda.com"
+onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=no,scrollbars=no,height=455,width=600');return false;"><span class="icon"><i class="fa-icon-linkedin"></i>Share</span></a>
+                <span class="count">0</span>
+            </div> <!--icon-->
+	    	                <div class="ss-icon pinterest">
+                <a href="http://pinterest.com/pin/create/bookmarklet/?media=http%3A%2F%2Fwww.alnaharda.com%2Fwp-content%2Fuploads%2F2016%2F01%2F%D8%A5%D8%B3%D8%B1%D8%A7%D8%A1-%D9%85%D8%AC%D8%A7%D9%87%D8%AF.jpg&amp;
+url=http%3A%2F%2Fwww.alnaharda.com%2F%25d8%25b4%25d8%25b9%25d8%25b1-%25d9%2586%25d9%2581%25d8%25b3%25d9%258a-%25d8%25a3%25d8%25b4%25d9%258a%25d9%2584%25d9%2583-%25d9%2581%25d9%2588%25d9%2582-%25d9%2583%25d8%25aa%25d8%25a7%25d9%2581%25d9%2589-%25d9%2584%25d9%2580%25d9%2580-%25d8%25a5%25d8%25b3%25d8%25b1%25d8%25a7%25d8%25a1-%25d9%2585%25d8%25ac%25d8%25a7%2F&amp;
+is_video=false&amp;description=&#8221; شعر &#8221; نفسي أشيلك فوق كتافى لــ إسراء مجاهد"
+onclick="javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=no,scrollbars=no,height=455,width=600');return false;"><span class="icon"><i class="fa-icon-pinterest"></i>Share</span></a>
+                <span class="count">0</span>
+            </div> <!--icon-->
+	    		    <div class="clear"></div>
+        </div> <!--social share-->
+
+</div> <!-- entry content -->
+</div> <!-- base box -->
+            
+            <div class="np-posts">
+                <ul>
+			                    <li class="np-post prev border-box">
+						<div class="post-img">
+                            <a href="http://www.alnaharda.com/4323-2/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/طيور-90x60.jpeg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/طيور-180x120.jpeg" alt=""></a>
+                        </div>
+			                        <div class="details has-feature-image">
+                            <a href="http://www.alnaharda.com/4323-2/" class="link prev"><i class="fa-icon-double-angle-right"></i>السابق</a>
+                            <h3><a href="http://www.alnaharda.com/4323-2/">هيئة أمريكية: تفشي سلالة جديدة من «إنفلوانزا الطيور»</a></h3>
+                        </div>
+                    </li>
+		    		                        <li class="np-post next border-box">
+						<div class="post-img">
+                            <a href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/ميرنا-عبد-الوهاب-90x60.jpg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/ميرنا-عبد-الوهاب-180x120.jpg" alt=""></a>
+                        </div>
+			                        <div class="details has-feature-image">
+                            <a href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/" class="link next"><i class="fa-icon-double-angle-left"></i>التالى</a>
+                            <h3><a href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/">مواهب النهارده : &#8221; غناء &#8221; نسينى لــ ميرنا عبد الوهاب</a></h3>
+                        </div>
+                    </li>
+		                    </ul>
+            </div> <!-- np posts -->
+<h2 class="single-title">نبذة عن الكاتب</h2>
+            <div class="base-box single-box about-the-author">
+                <div class="author_avatar"><img alt='' src='http://0.gravatar.com/avatar/f0e4f9f8c4fadda33b8cbdf34bdce895?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f0e4f9f8c4fadda33b8cbdf34bdce895?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' /></div>
+                <div class="author_desc">
+                    <h3 calss="vcard author"><span class="fn"><a href="http://www.alnaharda.com/author/sherifmadrid/">sherifmadrid</a></span>  </span></h3>
+        <p>
+			</p>
+                 <div class="mom-socials-icons author-social-icons">
+        <ul>
+                                                                                                   <li class="rss"><a target="_blank" href="http://www.alnaharda.com/author/sherifmadrid/feed/"><i class="fa-icon-rss"></i></a></li>
+                                                                                                                                                                        </u>
+
+        <div class="clear"></div>
+    </div>
+
+                </div>
+	            <div class="clear"></div>
+
+            </div>
+                <h2 class="single-title">مقالات ذات صلة</h2>
+            <div class="base-box single-box">
+                <ul class="single-related-posts">
+	   	     	       <li>
+			                        <a href="http://www.alnaharda.com/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-%d8%b1%d8%b3%d9%85/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/محمود-رضوان-190x122.jpg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/محمود-رضوان-480x380.jpg" alt="مواهب النهارده : &#8221; رسم &#8221; لــ محمود رضوان"></a>
+			                        <h4><a itemprop="name" href="http://www.alnaharda.com/%d9%85%d9%88%d8%a7%d9%87%d8%a8-%d8%a7%d9%84%d9%86%d9%87%d8%a7%d8%b1%d8%af%d9%87-%d8%b1%d8%b3%d9%85/">مواهب النهارده : &#8221; رسم &#8221; لــ محمود رضوان</a></h4>
+                        <div class="mom-post-meta">
+			<time datetime="2016-01-17T09:41:59+00:00">يناير 17, 2016</time>
+			</div>
+                </li>
+
+	       <li>
+			                        <a href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/ميرنا-عبد-الوهاب-190x122.jpg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/ميرنا-عبد-الوهاب-610x380.jpg" alt="مواهب النهارده : &#8221; غناء &#8221; نسينى لــ ميرنا عبد الوهاب"></a>
+			                        <h4><a itemprop="name" href="http://www.alnaharda.com/%d8%ba%d9%86%d8%a7%d8%a1-%d9%86%d8%b3%d9%8a%d9%86%d9%89-%d9%84%d9%80%d9%80-%d9%85%d9%8a%d8%b1%d9%86%d8%a7-%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d9%88%d9%87%d8%a7%d8%a8/">مواهب النهارده : &#8221; غناء &#8221; نسينى لــ ميرنا عبد الوهاب</a></h4>
+                        <div class="mom-post-meta">
+			<time datetime="2016-01-17T09:11:50+00:00">يناير 17, 2016</time>
+			</div>
+                </li>
+
+	       <li>
+			                        <a href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d8%a7%d9%84%d9%82%d9%84%d9%88%d8%a8-%d8%a3%d9%86%d9%88%d8%a7%d8%b9-%d9%84%d9%80%d9%80-%d8%a8%d8%a7%d8%b3%d9%86%d8%aa-%d8%ad%d8%b3%d9%8a%d9%86/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/بسنت-حسين-190x122.jpg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/بسنت-حسين-610x380.jpg" alt="&#8221; شعر &#8221; القلوب أنواع لــ باسنت حسين"></a>
+			                        <h4><a itemprop="name" href="http://www.alnaharda.com/%d8%b4%d8%b9%d8%b1-%d8%a7%d9%84%d9%82%d9%84%d9%88%d8%a8-%d8%a3%d9%86%d9%88%d8%a7%d8%b9-%d9%84%d9%80%d9%80-%d8%a8%d8%a7%d8%b3%d9%86%d8%aa-%d8%ad%d8%b3%d9%8a%d9%86/">&#8221; شعر &#8221; القلوب أنواع لــ باسنت حسين</a></h4>
+                        <div class="mom-post-meta">
+			<time datetime="2016-01-15T19:44:29+00:00">يناير 15, 2016</time>
+			</div>
+                </li>
+
+	       <li>
+			                        <a href="http://www.alnaharda.com/%d8%b1%d8%b3%d9%85-%d8%b4%d8%ae%d8%b5%d9%8a%d8%a7%d8%aa-%d9%85%d8%b4%d8%a7%d9%87%d9%8a%d8%b1-%d9%84%d9%80%d9%80-%d9%85%d8%b5%d8%b7%d9%81%d9%89-%d9%85%d8%ad%d9%85%d8%af/"><img src="http://www.alnaharda.com/wp-content/uploads/2016/01/مصطفى-محمد-190x122.jpg" data-hidpi="http://www.alnaharda.com/wp-content/uploads/2016/01/مصطفى-محمد-509x380.jpg" alt="&#8221; رسم &#8221; شخصيات مشاهير لــ مصطفى محمد مصطفى"></a>
+			                        <h4><a itemprop="name" href="http://www.alnaharda.com/%d8%b1%d8%b3%d9%85-%d8%b4%d8%ae%d8%b5%d9%8a%d8%a7%d8%aa-%d9%85%d8%b4%d8%a7%d9%87%d9%8a%d8%b1-%d9%84%d9%80%d9%80-%d9%85%d8%b5%d8%b7%d9%81%d9%89-%d9%85%d8%ad%d9%85%d8%af/">&#8221; رسم &#8221; شخصيات مشاهير لــ مصطفى محمد مصطفى</a></h4>
+                        <div class="mom-post-meta">
+			<time datetime="2016-01-15T19:28:54+00:00">يناير 15, 2016</time>
+			</div>
+                <

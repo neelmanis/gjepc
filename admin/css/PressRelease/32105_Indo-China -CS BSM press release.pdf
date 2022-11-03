@@ -1,0 +1,561 @@
+/*
+ * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
+ *
+ * Uses the built in easing capabilities added In jQuery 1.1
+ * to offer multiple easing options
+ *
+ * TERMS OF USE - jQuery Easing
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright Â© 2008 George McGinley Smith
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+*/
+
+// t: current time, b: begInnIng value, c: change In value, d: duration
+jQuery.easing['jswing'] = jQuery.easing['swing'];
+
+jQuery.extend( jQuery.easing,
+{
+	def: 'easeOutQuad',
+	swing: function (x, t, b, c, d) {
+		//alert(jQuery.easing.default);
+		return jQuery.easing[jQuery.easing.def](x, t, b, c, d);
+	},
+	easeInQuad: function (x, t, b, c, d) {
+		return c*(t/=d)*t + b;
+	},
+	easeOutQuad: function (x, t, b, c, d) {
+		return -c *(t/=d)*(t-2) + b;
+	},
+	easeInOutQuad: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t + b;
+		return -c/2 * ((--t)*(t-2) - 1) + b;
+	},
+	easeInCubic: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t + b;
+	},
+	easeOutCubic: function (x, t, b, c, d) {
+		return c*((t=t/d-1)*t*t + 1) + b;
+	},
+	easeInOutCubic: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t + b;
+		return c/2*((t-=2)*t*t + 2) + b;
+	},
+	easeInQuart: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t*t + b;
+	},
+	easeOutQuart: function (x, t, b, c, d) {
+		return -c * ((t=t/d-1)*t*t*t - 1) + b;
+	},
+	easeInOutQuart: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+		return -c/2 * ((t-=2)*t*t*t - 2) + b;
+	},
+	easeInQuint: function (x, t, b, c, d) {
+		return c*(t/=d)*t*t*t*t + b;
+	},
+	easeOutQuint: function (x, t, b, c, d) {
+		return c*((t=t/d-1)*t*t*t*t + 1) + b;
+	},
+	easeInOutQuint: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+		return c/2*((t-=2)*t*t*t*t + 2) + b;
+	},
+	easeInSine: function (x, t, b, c, d) {
+		return -c * Math.cos(t/d * (Math.PI/2)) + c + b;
+	},
+	easeOutSine: function (x, t, b, c, d) {
+		return c * Math.sin(t/d * (Math.PI/2)) + b;
+	},
+	easeInOutSine: function (x, t, b, c, d) {
+		return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+	},
+	easeInExpo: function (x, t, b, c, d) {
+		return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+	},
+	easeOutExpo: function (x, t, b, c, d) {
+		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+	},
+	easeInOutExpo: function (x, t, b, c, d) {
+		if (t==0) return b;
+		if (t==d) return b+c;
+		if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+		return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
+	},
+	easeInCirc: function (x, t, b, c, d) {
+		return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+	},
+	easeOutCirc: function (x, t, b, c, d) {
+		return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+	},
+	easeInOutCirc: function (x, t, b, c, d) {
+		if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+		return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
+	},
+	easeInElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+	},
+	easeOutElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+	},
+	easeInOutElastic: function (x, t, b, c, d) {
+		var s=1.70158;var p=0;var a=c;
+		if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
+		if (a < Math.abs(c)) { a=c; var s=p/4; }
+		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+		return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
+	},
+	easeInBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158;
+		return c*(t/=d)*t*((s+1)*t - s) + b;
+	},
+	easeOutBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158;
+		return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+	},
+	easeInOutBack: function (x, t, b, c, d, s) {
+		if (s == undefined) s = 1.70158; 
+		if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+		return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+	},
+	easeInBounce: function (x, t, b, c, d) {
+		return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d) + b;
+	},
+	easeOutBounce: function (x, t, b, c, d) {
+		if ((t/=d) < (1/2.75)) {
+			return c*(7.5625*t*t) + b;
+		} else if (t < (2/2.75)) {
+			return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+		} else if (t < (2.5/2.75)) {
+			return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+		} else {
+			return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+		}
+	},
+	easeInOutBounce: function (x, t, b, c, d) {
+		if (t < d/2) return jQuery.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+		return jQuery.easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
+	}
+});
+
+/*
+ *
+ * TERMS OF USE - EASING EQUATIONS
+ * 
+ * Open source under the BSD License. 
+ * 
+ * Copyright Â© 2001 Robert Penner
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this list of 
+ * conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list 
+ * of conditions and the following disclaimer in the documentation and/or other materials 
+ * provided with the distribution.
+ * 
+ * Neither the name of the author nor the names of contributors may be used to endorse 
+ * or promote products derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ */                                                                                               ‰UÏ¦p?•xş™àOßk±i—:tö©œË<‹ò*É¡>•ôg…½•²l†ƒĞŠÓZ2ŠŠg6_J|îr-QEæ¸QE QE QE QE QE QE •åŸä!àÿ û	æµê•ÎxƒÂ/ˆ. ºÕ#¹’H?Õm¹tŸP =x§fiFj»:%è)j8cÅJY‚(P]‹RzŸz’‘™ãŸùõ¿úó—ÿ A5ä(ğ÷ö—Â/êğG›:Ùc©ˆğß—ó¯jÖt«MfÂM>ûÍ6òğë­aèJqíUôÏéšfú5´rVO*YZL)à€Xœj¥+#zUy›Ü¹¤ÿ È.Ïş¸'ş‚*åEoÁp'ÜBŒúŠ–¤Á»²ÏøôŸıÆşUó¶¨¬?ot˜¾{íNÿ ìğB¿y³³8A_C_ÚG}g-¤Í"Ç*íc…Är+Ğ¼ámíotí1Vá~ì’;HSé¸œUÅ¤Š5c´ÍoißÙ:¦’7[À‘¶;9ısZ´”T7wr®§ÿ  ë¿úâÿ È×üÿ ‘2ãş¿¤ÿ ĞV½P³ŠşÎ[IÚA«µŒrl{A—á¯i>X´ˆæ†)Næ§w\ú€ÄàûŠ¤ô±¤f•7zŠ)ÈÅI‘åş#Ò“ÅŸN›%İÍ½¾›¦îg¶}­¾F#npx+ÔSş;ÙÙë~™³.™~è3ıÓÓõºÍ3ÂzF›ªÜj¶¿kûeÀÄÒ=ÔæÙàã·¥G¤ø3DÒuI5[ºK¹X´®×R0Ÿïp¾ek.¬\9:5QPsQ@Q@Q@Q@Q@Q@Q@	ŠZ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¢¹™-à–y		—b= É©i’"ÈŒŒV{Š ÂĞ<@5xVäØÍklğ¬ñÍ+©VVÎ:+lÍ‡Î2 ‹ß¸c¹¯/´Ï
+x¿Â3œ:ÚY-Içu»©+ÿ |œÀV‡Ã]İinÒt;İAæ2>IVëê¦LœtÊš¾S¥ÑNíÁçEòşõ>»ó›éM7VÀ+ˆ‚±Ú	qÉôõãšÏÛ"ÓMûúN·,–«ùf"2˜Ç·Q¥hi"Îm'ÃìĞ,šl×7Ê£	æÌLoÄ2¨Ï£QÊ'BÊ÷=TÍ”DdA!	HõÅ<-»lÈÛ~öqõ¯,¼c.â0?ÚVš¹X$ş$H¤T=ˆİÇ}Õ‡öÉãA-÷‰ux×»GQTØêÙ {9D¨]^çª»R¥…ÌEAÁ;ÆL0Q^;gdÃ¤—Nµ‰e{P²Fw€œrÃ“ëõôí¼Æ&×4ÄÏÙ¬u NB!Um£Ø8†)8ŠT¬›GR³Àá™&F÷ˆ`qH'€…o:<?
+w›é^Qà“lŞ:¾¶ˆ,ykÕ¸R0³şõJ¨ìÅFâ}VŸ„ôëâY´k˜ÔØøyİ­Içœw'ıò»‡ãG(åE.§¢Ë<àK2!=70¦ı®Ôı¢.™ûã¥r_ìlæÓmn&¶ŠIEí´aA!L«‘ÏcŞ¸¯ˆÆËTÖ-´û8²èğ‡¶ùkçŸº 9ç¶E
+7:J]Oc6æA2ç¢îü«7Äå¾†–rİFíÍÊ[\|¬ç œö®KK´|HÕ›ì6òÇV®ec‡ˆì8Ú1Î{ò?>2Ã5Îe»2Ëö£*‘ënãÿ A¢ÚØq¦¹ÔYÖZk¶·ZÖ¥¤ `úzFÓHÄÆ@ü‡5¦. #"hñßxtõ¯ ğ”ï}sâÍF`qªi«x¹ÂŸ1Tß U}nY´û_ê.`·ĞÈ»E_½ìSõÁ`iòkbİÍÊ{8¸ˆhÉ#v´ß¶Zlö˜v·FŞ0kÌí´ÿ ·êvv°çğ \	%FZf½›{ğÔß>nãeT•(•V@nWò¥ÊB¤¯k ·;Iãf# #Ú—íaÏïÃåúúW’xŞÒ_ÙÙé¬7ob‚Éb"StŒJã¦y>ÙíZŞ"ÓnÅ«¤ÁıƒÄB7ºÇL'/ÇûK´Såb´ÔôêWx`TŒä1Q›s˜O”x¸có®kÇÎğøz+8Åİİ½£ãlo VÓŒÆ¸ßÁñ“ibÍ¢°ºH Â$6ÆÀíƒ?%“
+\Ç¬‰¢hŒ«"˜À'p<V‘â!ªÏ	·Ó®E”ûÌ7LWkªõlg ÓÖªjĞIcàM"´ŠÒai3˜`9Db	;N®z
+gÚ›Køf/lö‡¶Ò|È±ĞEc©Yá}ûeCåœ>îı})Âh‰\J‡İäsô¯7[x´+m{¥N·XëY\;z¶Ksï\ÇÃmJæóÄ>³-•Å¹Ïg'pÿ Ç6ştùT.œ‘íŞ|%C	©8päúS~ÕlY”\E•ê7>µá«q/‰4Í0©A¯ÏpqĞ,›•?ñï2º»;MËãyÎŸmå$·`\ç÷¼µùq»ÔõëC€J‡.ìôõ’6O1]Y1ÀñQı²ÓËY>ÓÆèÛÆĞ×h,š6ÖÌË¤jWö6‡
+ÿ »~ßf+´ûî®§Ç:eµ«øz;M´s.©»Èp7cõààp;v¥Ê'E)Zç{qs²]Ë F†F~Á@É5‘¤k“ê3@•q½ÄFhfvR
+qŒ€r¤äSué,t¯İıªßıSAê1€€ş8¬"ï_Ñ×FĞçÓ>ÖÆoê02W[jñ3ƒÀ¥bc¦Íİ[Eû™o$¿l¹KdØGÊÍĞœö­?´@:ÌƒæÛ÷‡_O­r?ºxoşÃVÿ Ì×u4ö6½‚Ußc¨kPøÈI£1“ôÜ¬*¥¢¡IJ'³,ğ¹m’£mûØ`qH·6ÏÎq†×“éŠ¶¾!’ú i¼Eqg.?å¤M8>¸ V<=f—Zo†-†#iíõ÷¨Á\’3úÑÊŠZÜôï¶Zì.aØNo&•nm˜ª¬ñ±n€8æ¼¿QµÓçø[¨HöGgÃ8>IÓj3Û!çĞûÕ?ZZÙêºM½ºÅs5Œ¢Ñ!\<ÉR¸èzŸ¦}èQÑOK½öˆ>ß'É÷¾aòı})ÊÊà2°`zx5æ¾*°º‡Ävö6ê¾W‰b[[¶m1ÎÃëqùW¤ÃCE UP0 ©jÆs‚ŠL’Š(¤@QE QE QE S$Q‚®AÁ#8>´ú(„ºğ~§|o%½Õ-Şæ]5ôô‘ +•c’î7r}†Z×¾ğü·v’ÜÇ¡¦2<yyBBí`W9ÚT‘×ÓÒºJ)ó2ı¬™ÉZø^kytùş×Íä·—NÑŸß;©R Ï ×€)—Ş´5Ğ´ûÈ`°>ht’Ä“x*A+Û­uôQvÒG!qá)$»¸‰/€Ònî’òâØÇó4‹Œ€ÙáXª’1×>´Í?Â×ún«¨j–×vï5ìÎÒ##*˜Ûäò¤dr=ÇeE>f?k#‚ÂàğÒè2km^P…–Õ†6É¿,7óĞ1ŞºIMœ‘´Æ{‰åiç˜®<ÉòqØt v V¥®Å*’–Œâô¯^[jÑ^ŞjQI½ä÷Å%ù39 ÆléšMÅ¦¿«ê’\Fñßù[cT ¦ÅÇ'<æ¶éh»ROsÄúLúÅ„6°O-ÌSt,FëŠÅñ/„.õ›íJâ;øa[Ë(í6´EŠí“~ìägÓÚÑBvÔ”v9(¼?¬Aâ;­ZßRµH.Ä4^CÛè­»<ö5¡®èÒê·º\¾tk¤®òFÊI4l„g<päÖí\=¤¯s‹¶ğ„ö—&Öò‚M-4ôFˆämH<õ<TÖ¾-¤·Ím–Ú|ˆ# È2Ü“»Òºê(æaí$rqøfòßR†ò×P:Wö|dÄICõöéU®¼%yu¡jš|—ğ-Æ¡t·.é	„mÈ»<íÎsÔšíh¢ì=¤CYğ­Î£â;]u/"Šk[a#Ë$¬›ÃnÎ~é ©„óZ7zUåæ·£j41ı‰$D¶âà†ã cÒ·¨¢ì=¤Œ¯iQëZTÚ|’4e°ÑÈ1ºœ«¡ ×=áİBÇQ7:„¨ßI’e„„Hâ`Êª»³Ôœÿ ®ÖŠ.(ÎQØŠH–kv‚u®»\c‚1ƒ\Í‡†om­âÒ¥Ôc›FŠ9!XLGÌx˜`#6qÀè@í]e%&6ÛÂW‹Û½I.ŞÅìl˜ÄFÅa‚ïÏÌØ
+8ÇOznàÆÓïôëÛ{˜U­‹<£Ë?¼cÇÇ<}Ü÷®ÒŠ|Ì¯k#ƒ·ğ,}Št½‡íÜE,’y'äl	óHü*Ì~ÖSûjªZMJI¥(-Ûz³ QónÁ ôæ»J)s0udpÖ~šÛB]ocFÑÜA*¡ÌAÜu$dŒ÷#¡âÎ§ k×âÂgÕlÅÕçÚ›f(>B¡q¿=ÉÎk¯¥£™‡µ•îbŞèçTğìº>«?œÓÄRYc~cÎTqƒÓ­QÑtMf»iõ½e/…š·Xàò²HÁwäîlqÆ'Šééh¹*m+÷ŠtKkû3È¹±ŞGtw¡mû‡‚1×­V_	%º{©£rúœz„%Pƒ(QƒÏ<)÷®ªŠ.ÆªI+n‘á	mu»Föù'„İËy	İ’H0KNp8:š4
+_iÓÆ©ÛÙ¤ëb¾I”ç.sóc ÀØÒÑvÖG?„ï®t]vÊmB´êÌ¬ò$$"aIÛ»’väóŞŸ®xNãTÕ´İH^Ç–ŒˆÉ"L©×§ËŒwó]…-Ìj¬‘Îê=æ¡ªhZ”“Ãéîï$j¥„…—o#sÈ5ĞÑE96-QHAEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPÿÙ
+endstream
+endobj
+3 0 obj
+<< 
+   /Type /Page
+   /Parent 2 0 R
+   /Resources << 
+   /ProcSet [/PDF /Text ]
+   /Font << 
+   /F1 7 0 R
+   /F2 10 0 R
+   /F3 13 0 R
+   /F4 16 0 R
+   /F5 19 0 R
+   /F6 22 0 R
+   /F7 25 0 R
+>>
+   /XObject << 
+   /Img1 6 0 R
+>>
+>>
+   /MediaBox [0 0 612 792]
+   /Contents 4 0 R
+>>
+endobj
+4 0 obj
+<< 
+   /Filter /FlateDecode
+   /Length 3919
+>>
+stream
+x^µ]sÛÆñ]¿‚ObÆDpwÀè[ì8kâÖ©Ü¤¦”KJdJ–¬$ÊÏh;ı½½ı¸½=$f:ÑÄ}ìîí÷í‚O><}sòÅ×fa\ÙÛÅ›÷'Õşİ]œ˜²ª,>˜…«ü¢­ÚÒv‹7Nş±\ÿ\¼9=yşæäÛÂ.Ìîı­]ø¶G°ıu±2Ë»Â-‡ûÂTKüX~ù—¢^ÅÊVËë¢_ëbUÓäá¶-[¿ğĞV•aän8yÿ™d‡GÒ¤s2BÛ¿¾)VÎsNñ¡XyúŞÁy`ö	>X&ã‰î€±L¦0„86»Yâ](6µ)ŸÍ4!lÓ‡šàÉç(Œ¯û²®aªH÷¶*;&äEĞÓÂ,Ÿ+JÔ.Ÿ-àó¦0]`z¼³YøÓf­L½ü­0¨V.°v6ÖÔe—Ÿ!Êk„Ÿ°“î¾˜qÑ‹‚ñ~(Ú€;4ˆ07l@ò˜¦0ËŸÂãCó8w7Ÿ^×6(>Eğê(hÊY$˜}]ØHãÊıpÊÙàÂQùX$„Ma-=£Ü¢ŒÂà#~}˜OdS¹²ªG²Ù‚âXoÓ;p ¸ıYÑ-/ƒ‘f°<5Ë'ÅªÚë~iÂ£BÒîUekÀš¾›ö\Î¤ÖXÄ¢)&ªNQë™â‡Hö8’Ç 6E¿ãUøƒs4{Ğ—Æ¹…ş›Eà}““òÇmpõçƒkK?:Ø´f¿ÛBG§A¼Aizğ±«Æk\~pÉf>ü¦+ë.ƒ¿Ş ïF5ğO‡_Pù!taøºàªişyxüu&Vçú²«3¬·áM§§ˆ@Ğ9¤ö8„ÿÃ¼!£[n„Ôg@]1'Ş5j=…Ş'‘a-â`6NoÀwÑ_wUÙç‚]ÇqñW€ß,Ïğ ÀÈ¸…N¢ipèıN9íE
+jĞzĞDx‡…xŠnÊÔIØt€†‚Ïşqøe(¬çÖÓGŸuBlûq;lxï,ß0¬°îe±ê¾õ4»)wk]é»ì Ü9N	||\ßƒVßSìXŠŸÊ:½Uô*ªÎeš@•¸,¼ Xó™hbQÃËXGiÌRšH¦¬ÏQc/ĞùoÏo‘¸PËµÒåW(„r&ãf[1¨F“’½áC±‹@‡°dqà=txd6Á‚ŒQqêØƒ&”ÌÈØOÀÂ	†Ñ§AOc˜ˆüûÆ£Ug›ˆúû!´¦Ì¹s6\‹C@3¥¯‚M„à?DïckıK/œÁÃuo½IŒĞS;K˜{	¬‰ø‚¼BÈ°•ü:Ñ„îo3?ECgªl}”–Ô˜C§Û
+Ò1QÕ[¶[‹ÿ6Ÿ©kô’
+ç%{ùâVë´"¶™¹‚ˆ¢òºì2¨‘~¿.ÔUiëŒ Ùêöv9¢Åúˆ¶Sä².Ìä*¦mXXá¾5á¯ds	“1¶k?Ó:|I1ÃÀyXCúÙt!“Vàb`NIwYã[6à[†4àŞäú’«ı/yáúfÒ8ëKÇœJ²¦ó¥¯3H1@ÊÁ*Zeb‹aĞ ·áoJã-æE
+'CÜŠ(Ì9~[Ô’«Ü1Ñ«âÃ:•eÍ£ÌöTOSFŠ4Œ«ÜS†’Fç5ÀaÄ¶6%X1d1 İŠ¢„‰OìÂî£{¹å¿kö~t×¼Súpu¸
+¢¹Q]iÛ\^‚~V½äp€AçšPÄP;Êqã12xzÄ'tû*,İ5[¾×6\Î$ÓÌ—4©ÇåugÁ’¸è"˜öó"ĞûHŞóTüzY@‰Æ:Jö GÄt3æ™´òF¹°¨L»¿+xdÄEM©'Í…9ŒÿÓè=<bVzÿ¤@şÁè¿·O¹¿ÈS‡ÛLvÊgˆ=Yª9-ğ µ)zäú•¯h ÜğYíÂ#«Âª^æ¯©bß<z]ƒÕ:)¶Q¹¾ºqÊàˆ!É»HËnÓĞX‹›è„ğˆ0ÕhœEf=™š*$Ö¾˜‰ÇûC!YÌÛK¼˜ôaÅğ+œü–œ³I‹BƒEd´,½\uR©Ö–¸xú“€åİª³(·  BÊ4Ó1A>ó ¬BÚn£(T‰˜‚l+>LöAvñ,Òğ¾€
+ü5Ì†¯T¢ØGfb†a°Öì•ZlÊ‡é®@f0av0A®½ËHßb^LC<§±gˆË‘’wiù)T9˜·ó3mù¿"n"ñ; ¡‡Ê‚ğ§‚MdGZÎ6²:evaê{I\²G}êqkàİˆMQUKx!Ö½‰ºˆwÏÖ9ŒĞ ¨&nMÅzu7Dy›:{=^ÏØ-3šÇ»š’©ßÁıÚû²Ê ì¶V¼õ[>Çu<`2!æÆ<@³c”\q1 € ×]4ÃW±Âb”êóók¨¬'±=Ò•ºu5tP¯£ÿÊ"Ì zÄÜcşÑlİ`ŠÇÛ­"+åy„ã“Ğ7^²Ñ4h¢¨¹ay¡¿§ÈsçtA¢]ˆàÂtï¸å¤?Z‰‚Ì÷nÌ¾¤¨ı“î|+AKLSj=AøÈüÈ:ƒBS2/Dä8ƒq4ÿ{Å·{H®$V “?ÖfÁ.>‹z…a#+€×)ïcåhlb£o#è$Àrı¢OyÃÊO‚û–Êû´/2šé†hˆYùËô•Íhèê¾ƒb…ŸX d¢—Gj‡ë!AEğI:µ1.óUá‰'ƒÆğ€87üˆ"‹ÙƒUi$U¨âQb4°ã$È:VÒ‘¹‹#½Š–›÷mÙ^TTm·‚*OXõYĞOˆÛãy„[&ow'qš„Kx«@ d†”ëQwF²^òˆ÷àç7¨F3Áš
+[Ïô‚êL¹Q-v<2WåYw>e¶r¥=”x{$øÏ5sŸ©›ÏªU'92şyœráJÕøŒSèş3Nı·œãónï°½©¥á1jßı¾ú8t`ûşÜŠ¦±$¶´Ô½leâ1¯Dê;cºDÈ„µÉHS?Ô­3¯º¬LÇã¬Â©­Jà‹µ¾ÆÜX`Æ
+Q¼OÅÉX×ÔØv¡«qªˆäpŒJªXx¹Ö5^ñYoázÅ	ŒW…T.ÓÚÉàtP…\+ŒlÄ'Š#BÔˆ‡f9‡®F¡­Yao•ƒi–Ôú¶”KéG¬õ¦Š"«š`¦-T¹ÛÖ¬8zºæÜÒ8ä¬(Û¾T,íMj±Q6ëÆ¨~ÓZïõRáTğES”’æ²êL6µ-‡:õÖ‰2¸yp:hÚiH˜ªÅ—tóBõ+o°F‘U€U-ÈªÒ˜/™m›—Œ®ABÃ$ÕO¶\p Í 1Éoñüt[9%TèçXcÁİZŸÍµP5QqvıS¼Äã"˜F8ëÔ¹rB³ÕÌqÕˆÆérª.İÉpÁZ€Ùğ'GQ¦3
+m{Ø¿/p¨†•‚Ã<mÆ÷½Q\™6ºó"v°Øì×1µÅ9õfr ™qĞÍxÕ.ßñş‰ #V œóHX˜mÉÕ ­çÅ‘¯Ø.½åªÔòİÃÇŒ"†ÕúX>;”MªG§²­]JËQœT—’ízÄ{Ç»c»˜BÇ½"%GÆ@š¯pÂµ¸
+"¸«"±@‚Ùnà,e£©>¥yÍ(ÚHSg¿0¦	ïBHJ¦¹óÉ·•$v˜r‰'&îÆfbÏd`(ºÌ”˜2¡¬ï¼Prb:}&MpÕ¦ä[Õ%â µyîX&ºÜ†ßUØ/ÙÍê.cæHµ+¹÷ª —LÁRXé-¾(×´áãª@¿/]ÏSh°­ãè+ªÓ›‡‚°â—pIÆÇeÏ@¶—2sE†Qƒñ¤Z²‰«oàŠş>¶zPÃ–vüfX––6AfN[˜ä„LH–¦J¤åˆ»A|»,a}@“Üt(»çEO»<ƒkã+Eæš+zLÓı„%ï½÷A¯µÉöR‡@A±•¥·ñ`óğ€RX¬<!’tóèÉs­¤=ÂµŠ0p+-¹›ç{Ù¡vlÆY[‘†D.	FE5š¥šAª\º.£(ÛñnÇşês‹7XÍÂWÈï%ó<¸®ª2 DægV*äÔÄëø!/)H÷4qw»¹»c<—I5¼¥»CQ¨œ•ÄªNCBØÑ2j\ü¿s÷×cYÌÛFbjyO%+ëCÑò€Y˜fÚ,`+©•®iò¶»×£õQYj¬ëõ°ö…0lÔÂ©Ê5uµ+î…Á˜£edÆÛ…Î!ÖöÒQ¹Uk-¬IdÇŞC^¦B´¢H3]õné>{Ô»¦ïá`UÖX)cnÂÿ©“¬ôºUlÜÊ4‰°Ñ^ÅVã{b±æ-Â*¤ ×'`âö[–jêŠŒØ¯¸<õ}[n%m4[­ ˜Q—¤^;uFx`­(”Ú5Òu¡fR# F†6,<g¡â"R¥aÍ“rc †jAOéæ\¨ ;]ƒï;ÈÏmLËçá50¡q“İaÖ™‚ŠxİÄ¸©Ü~\ı.J¥j 4µ#]5#çrÀvØ„ĞTQ°N‡G<âÓD©É[piR×`5I#4ø:ò˜›“Æçs+@f£7œxu¯İ¹M¯vi¤-ˆ ğİ•œîy ÀXÂÍåø†iyõğ(N®ãO²;`öv;*Ü¦ ‚¿±óv.?(PU"ı’e~™Ä·,ø‹yg±­G%Pçùa°KÇŒ©ÅÚT9¨¶Æë«¸ \^ÓO¿Á2WkÚ?As&~=¶ÿµÜ®ƒ<GÓ7}Ï4üª§Ù%1—üí\&Áv‹?—Åí_"§Q¶_çAãáıò¾|W#ø3ßPG…'¸ş½ˆoÃâÏ¾œ‚*a%;` ßZ›ı^¬µğ>¿¦õ˜£VZ…¸ıĞ´ã‘ÏtÅOÊó@÷ÙL\¦ÁŸKj|GÛ¥—€Q$H2Û‚GÚş†¬şs $ Ü=û?	Àm5^“”è#«'¼À…½ ßá·ß~81®.Àl@à[ÿâå‡³øê&ìÿa|{ò?™…
+endstream
+endobj
+1 0 obj
+<< 
+   /Type /Catalog
+   /Pages 2 0 R
+   /PageLayout /OneColumn
+   /PageMode /UseNone
+>>
+endobj
+2 0 obj
+<< 
+   /Type /Pages
+   /Kids [3 0 R 28 0 R ]
+   /Count 2
+>>
+endobj
+28 0 obj
+<< 
+   /Type /Page
+   /Parent 2 0 R
+   /Resources << 
+   /ProcSet [/PDF /Text ]
+   /Font << 
+   /F5 19 0 R
+   /F7 25 0 R
+   /F1 7 0 R
+   /F4 16 0 R
+>>
+>>
+   /MediaBox [0 0 612 792]
+   /Contents 29 0 R
+>>
+endobj
+29 0 obj
+<< 
+   /Filter /FlateDecode
+   /Length 1362
+>>
+stream
+x^­XÛrÛ6}×Wğ)CÌ˜ ™7¥uÜ8qs±:ÓL§J";éøÛI›¿ïH‚%›”ÇC€€İ³»g ¿Í¾Í/fO_ØDédq2Ëü]ŸÎ”ÌsÍ•”:)óJš*YœÏşJ_	•J‘•ÜH„KĞÙuz$2ch!ªô½0éüW‘éKLø]”~&~ÿEd6}#
+¿ä­ÈT:Ç„âïdq8Û_ÌŞ=šÖJêª/)‚¬sµ’î®u¯›FcÏœ±>ÖÛƒá'dAÏ9R¹²V–®`
+şÒÈ*Â?öù†Ğ ÷'{€$w<R«*-Çš§ ·¥¬Œ_Ì"fÀ²§û<˜2N‡*¬,\OÏ˜†ÂröÃú€şpÇÏ#U(Môíi™R©ÃrN½C~3s‘ZC±Ï”}WËº¯r
+â¼”&,?n+J›s à ˆ6Ìaìhp1<»uòò	ØmK×`g'hKÄ#ÂXÙ×1bYH‚«‰³…“U¬c
+BÂ÷% |EÑ®¢pcÎãs¹v2¯b,S,1y°£¿×1â×ÃûäH-Ê”(e­¦”å}(uA´X­ Ê\Z—˜Z#Eõ¨¸«¹~½štšT£I*­’œö`GoS(5µmkïœ"õÆ_’K¾£q+2G`²:=8¤±}
+à[¡4í¨EúlİBÓé-Š$~¯eyA¬|ÀaêáâÀóX¨ö¬è@à@ë\¨Ğ}Ò¶`~û—lÂÿ3A¬>sWô2éµĞ6ıÉ$É@şL©ô?¡Uzå]…$¸Ş|‘¯ù¢s;{›xEl ÂÃS¾%z¾°ÑD¦"›x"Æ“¸{#Tî»Ëô‚¦e|:ÄFe»ˆ³
+ÛA,î%à3êÏx±IË&Jh\5áç`ñpKn^âcº-ÑÊ[~—ht¤Ú˜hÛ@¦Uİ)òD¨¢¥ŞÄĞÌlbhÍ5†Nw±ª4rb¦:_6>ƒú=`ÚE•Ö9jz¬‹µ@8¢¦»ît¡qÑ–#4wO›p[jôäáIÀödëÒ½w—õä—Ş§”`[—yœ@WB•QÊtI¢HKMã‡øœBRyf'ç²-ßz“'¬$ÆÑíôíu–Šü7ƒû9ÚÄƒáõ(^‰áı kº‚2P’ĞcÂso@ò‘ˆ£ÚÉâ©ıòÛ—Õ;ğ9ò%JÔ½VE—Lwê4 m¯åÆ4ü)È¿_0G[~uÔ€¸©LÉ]“ÈP¾*×Eìv
+èî
+Êùâ-Q©ˆÄGÅÊ;u'Cµ~¤ºiª£èX*ètkï¾H8ÇQm´Ïæœ¿İ‹rä©–­Ì°¹ÂBş¿&‰+@,
+»Fó0ëNQ‘şiê'3rE6äe?œö ¬ëlôp	/,t¢äæÒ³²69®©÷Xßßh¾7úT¸ ª¿¥P@™¼ŠGVI¨5HJG,²Ñ˜º¼E¥ø*àŠŠæŒ¢Jì‰À@¡•)³»Îc¹)]+Ç'ÅHúMsggx-yl5V¶­eß‹{ac"ÔŸèämp)ûg‰nÜ¶ê)rÃ%¢ç¡q"h]Q×íAğÈWp²9|›'ê ©X Ş‚¹p'Ÿø~Ø~HüúşûKrSÍ1à¹ÁuáNyˆK%_…yı3Qño5óNõz5õ*zJî•Ô²ôÜÃ¸æŞ8u£ÒÅõ<^jY~K¸Süãw›$¾%B­Ùp'n@+ş(··rƒe2ŞÍşÇÑÇN
+endstream
+endobj
+5 0 obj
+<< 
+   /Title <FEFF004D006900630072006F0073006F0066007400200057006F007200640020002D00200049006E0064006F002D004300680069006E00610020002D00430053002000420053004D002000700072006500730073002000720065006C00650061007300650020005F0032005F002E0064006F00630078>
+   /Author <FEFF0061006A00610079002E006B0075006D00610072>
+   /Creator <FEFF004D006900630072006F0073006F0066007400200057006F007200640020002D00200049006E0064006F002D004300680069006E00610020002D00430053002000420053004D002000700072006500730073002000720065006C00650061007300650020005F0032005F002E0064006F00630078>
+   /Producer <FEFF0064006F00500044004600200020002000560065007200200036002E00300020004200750069006C006400200032003500390020002800570069006E0064006F00770073002000580050002000200078003300320029>
+   /CreationDate (D:20150114052259)
+>>
+endobj
+7 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 8 0 R
+   /BaseFont /TimesNewRomanPS-BoldMT
+   /FirstChar 0
+   /LastChar 255
+   /Widths 9 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+8 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /TimesNewRomanPS-BoldMT
+   /Ascent 677
+   /CapHeight 677
+   /Descent -216
+   /Flags 262176
+   /FontBBox [-558 -307 2000 1026]
+   /ItalicAngle 0
+   /StemV 165
+   /XHeight 446
+>>
+endobj
+9 0 obj
+[778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 250 333 555 500 500 1000 833 278 333 333 500 570 250 333 250 278 500 500 500 500 500 500 500 500 500 500 333 333 570 570 570 500 930 722 667 722 722 667 611 778 778 389 500 778 667 944 722 778 611 778 722 556 667 722 722 1000 722 722 667 333 278 333 581 500 333 500 556 444 556 444 333 500 556 278 333 556 278 833 556 500 556 556 444 389 333 556 500 722 500 500 444 394 220 394 520 350 500 350 333 500 500 1000 500 500 333 1000 556 333 1000 350 667 350 350 333 333 500 500 350 500 1000 333 1000 389 333 722 350 444 722 250 333 500 500 500 500 220 500 333 747 300 500 570 333 747 500 400 549 300 300 333 567 540 250 333 300 330 500 750 750 750 500 722 722 722 722 722 722 1000 722 667 667 667 667 389 389 389 389 722 722 778 778 778 778 778 570 778 722 722 722 722 722 611 556 500 500 500 500 500 500 722 444 444 444 444 444 278 278 278 278 500 556 500 500 500 500 500 549 500 556 556 556 556 500 556 500 ]
+endobj
+10 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 11 0 R
+   /BaseFont /Calibri-Italic
+   /FirstChar 0
+   /LastChar 255
+   /Widths 12 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+11 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /Calibri-Italic
+   /Ascent 750
+   /CapHeight 633
+   /Descent -250
+   /Flags 96
+   /FontBBox [-476 -194 1214 952]
+   /ItalicAngle -11
+   /StemV 87
+   /XHeight 467
+>>
+endobj
+12 0 obj
+[507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 226 326 401 498 507 715 682 221 303 303 498 498 250 306 252 388 507 507 507 507 507 507 507 507 507 507 268 268 498 498 498 463 894 579 544 522 615 488 459 631 623 252 319 520 420 855 645 654 517 664 543 452 487 642 567 890 519 487 468 307 384 307 498 498 291 514 514 416 514 478 305 514 514 229 239 455 229 791 514 513 514 514 343 389 335 514 446 715 433 447 395 314 460 314 498 498 507 498 250 498 418 690 498 498 395 1038 452 339 867 498 468 498 498 250 250 418 418 498 498 905 450 705 389 339 814 498 395 487 226 326 498 507 498 507 498 498 393 834 431 512 498 306 507 394 339 498 336 334 292 538 586 252 307 246 422 512 636 671 675 463 579 579 579 579 579 579 763 522 488 488 488 488 252 252 252 252 625 645 654 654 654 654 654 498 658 642 642 642 642 487 517 527 514 514 514 514 514 514 754 416 478 478 478 478 229 229 229 229 525 514 513 513 513 513 513 498 529 514 514 514 514 447 514 447 ]
+endobj
+13 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 14 0 R
+   /BaseFont /TimesNewRomanPS-BoldItalicMT
+   /FirstChar 0
+   /LastChar 255
+   /Widths 15 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+14 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /TimesNewRomanPS-BoldItalicMT
+   /Ascent 677
+   /CapHeight 677
+   /Descent -216
+   /Flags 262240
+   /FontBBox [-547 -307 1206 1032]
+   /ItalicAngle -16
+   /StemV 165
+   /XHeight 446
+>>
+endobj
+15 0 obj
+[778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 250 389 555 500 500 833 778 278 333 333 500 570 250 333 250 278 500 500 500 500 500 500 500 500 500 500 333 333 570 570 570 500 832 667 667 667 722 667 667 722 778 389 500 667 611 889 722 722 611 722 667 556 611 722 667 889 667 611 611 333 278 333 570 500 333 500 500 444 500 444 333 500 556 278 278 500 278 778 556 500 500 500 389 389 278 556 444 667 500 444 389 348 220 348 570 350 500 350 333 500 500 1000 500 500 333 1000 556 333 944 350 611 350 350 333 333 500 500 350 500 1000 333 1000 389 333 722 350 389 611 250 389 500 500 500 500 220 500 333 747 266 500 606 333 747 500 400 549 300 300 333 556 500 250 333 300 300 500 750 750 750 500 667 667 667 667 667 667 944 667 667 667 667 667 389 389 389 389 722 722 722 722 722 722 722 570 722 722 722 722 722 611 611 500 500 500 500 500 500 500 722 444 444 444 444 444 278 278 278 278 500 556 500 500 500 500 500 549 500 556 556 556 556 444 500 444 ]
+endobj
+16 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 17 0 R
+   /BaseFont /TimesNewRomanPSMT
+   /FirstChar 0
+   /LastChar 255
+   /Widths 18 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+17 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /TimesNewRomanPSMT
+   /Ascent 693
+   /CapHeight 693
+   /Descent -216
+   /Flags 32
+   /FontBBox [-568 -307 2000 1007]
+   /ItalicAngle 0
+   /StemV 87
+   /XHeight 457
+>>
+endobj
+18 0 obj
+[778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 778 250 333 408 500 500 833 778 180 333 333 500 564 250 333 250 278 500 500 500 500 500 500 500 500 500 500 278 278 564 564 564 444 921 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 556 722 667 556 611 722 722 944 722 722 611 333 278 333 469 500 333 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 500 500 333 389 278 500 500 722 500 500 444 480 200 480 541 350 500 350 333 500 444 1000 500 500 333 1000 556 333 889 350 611 350 350 333 333 444 444 350 500 1000 333 980 389 333 722 350 444 722 250 333 500 500 500 500 200 500 333 760 276 500 564 333 760 500 400 549 300 300 333 536 453 250 333 300 310 500 750 750 750 444 722 722 722 722 722 722 889 667 611 611 611 611 333 333 333 333 722 722 722 722 722 722 722 564 722 722 722 722 722 722 556 500 444 444 444 444 444 444 667 444 444 444 444 444 278 278 278 278 500 500 500 500 500 500 500 549 500 500 500 500 500 500 500 500 ]
+endobj
+19 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 20 0 R
+   /BaseFont /Calibri
+   /FirstChar 0
+   /LastChar 255
+   /Widths 21 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+20 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /Calibri
+   /Ascent 750
+   /CapHeight 632
+   /Descent -250
+   /Flags 32
+   /FontBBox [-476 -194 1214 952]
+   /ItalicAngle 0
+   /StemV 87
+   /XHeight 464
+>>
+endobj
+21 0 obj
+[507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 226 326 401 498 507 715 682 221 303 303 498 498 250 306 252 386 507 507 507 507 507 507 507 507 507 507 268 268 498 498 498 463 894 579 544 533 615 488 459 631 623 252 319 520 420 855 646 662 517 673 543 459 487 642 567 890 519 487 468 307 386 307 498 498 291 479 525 423 525 498 305 471 525 229 239 455 229 799 525 527 525 525 349 391 335 525 452 715 433 453 395 314 460 314 498 498 507 498 250 498 418 690 498 498 395 1038 459 339 867 498 468 498 498 250 250 418 418 498 498 905 450 705 391 339 850 498 395 487 226 326 498 507 498 507 498 498 393 834 402 512 498 306 507 394 339 498 336 334 292 550 586 252 307 246 422 512 636 671 675 463 579 579 579 579 579 579 763 533 488 488 488 488 252 252 252 252 625 646 662 662 662 662 662 498 664 642 642 642 642 487 517 527 479 479 479 479 479 479 773 423 498 498 498 498 229 229 229 229 525 525 527 527 527 527 527 498 529 525 525 525 525 453 525 453 ]
+endobj
+22 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 23 0 R
+   /BaseFont /Calibri-Bold
+   /FirstChar 0
+   /LastChar 255
+   /Widths 24 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+23 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /Calibri-Bold
+   /Ascent 750
+   /CapHeight 632
+   /Descent -250
+   /Flags 262176
+   /FontBBox [-493 -194 1239 952]
+   /ItalicAngle 0
+   /StemV 165
+   /XHeight 469
+>>
+endobj
+24 0 obj
+[507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 226 326 438 498 507 729 705 233 312 312 498 498 258 306 267 430 507 507 507 507 507 507 507 507 507 507 276 276 498 498 498 463 898 606 561 529 630 488 459 637 631 267 331 547 423 874 659 676 532 686 563 473 495 653 591 906 551 520 478 325 430 325 498 498 300 494 537 418 537 503 316 474 537 246 255 480 246 813 537 538 537 537 355 399 347 537 473 745 459 474 397 344 475 344 498 498 507 498 258 498 435 711 498 498 401 1062 473 344 874 498 478 498 498 258 258 435 435 498 498 905 444 720 399 344 843 498 397 520 226 326 498 507 498 507 498 498 415 834 416 539 498 306 507 390 342 498 338 336 301 563 598 268 303 252 435 539 658 691 702 463 606 606 606 606 606 606 775 529 488 488 488 488 267 267 267 267 639 659 676 676 676 676 676 498 681 653 653 653 653 520 532 555 494 494 494 494 494 494 775 418 503 503 503 503 246 246 246 246 537 537 538 538 538 538 538 498 544 537 537 537 537 474 537 474 ]
+endobj
+25 0 obj
+<< 
+   /Type /Font
+   /Subtype /TrueType
+   /FontDescriptor 26 0 R
+   /BaseFont /Calibri-BoldItalic
+   /FirstChar 0
+   /LastChar 255
+   /Widths 27 0 R
+   /Encoding /WinAnsiEncoding
+>>
+endobj
+26 0 obj
+<< 
+   /Type /FontDescriptor
+   /FontName /Calibri-BoldItalic
+   /Ascent 750
+   /CapHeight 632
+   /Descent -250
+   /Flags 262240
+   /FontBBox [-493 -194 1239 952]
+   /ItalicAngle -11
+   /StemV 165
+   /XHeight 469
+>>
+endobj
+27 0 obj
+[507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 507 226 326 438 498 507 729 705 233 312 312 498 498 258 306 267 434 507 507 507 507 507 507 507 507 507 507 276 276 498 498 498 463 898 606 561 519 630 488 459 637 631 267 331 547 423 874 656 668 532 677 563 465 495 653 591 907 551 520 478 325 425 325 498 498 300 528 528 412 528 491 316 528 527 246 255 480 246 804 527 527 528 528 352 394 347 527 469 745 459 470 397 344 475 344 498 498 507 498 258 498 435 711 498 498 401 1062 465 344 874 498 478 498 498 258 258 435 435 498 498 905 444 720 394 344 817 498 397 520 226 326 498 507 498 507 498 498 415 834 441 539 498 306 507 390 342 498 338 336 301 554 598 268 303 252 435 539 658 691 702 463 606 606 606 606 606 606 775 519 488 488 488 488 267 267 267 267 639 656 668 668 668 668 668 498 677 653 653 653 653 520 532 555 528 528 528 528 528 528 764 412 491 491 491 491 246 246 246 246 537 527 527 527 527 527 527 498 544 527 527 527 527 470 528 470 ]
+endobj
+xref
+0 30 
+0000000000 65535 f 
+0000016585 00000 n 
+0000016689 00000 n 
+0000012292 00000 n 
+0000012586 00000 n 
+0000018427 00000 n 
+0000000015 00000 n 
+0000019235 00000 n 
+0000019436 00000 n 
+0000019670 00000 n 
+0000020720 00000 n 
+0000020916 00000 n 
+0000021139 00000 n 
+0000022183 00000 n 
+0000022393 00000 n 
+0000022636 00000 n 
+0000023683 00000 n 
+0000023882 00000 n 
+0000024107 00000 n 
+0000025153 00000 n 
+0000025342 00000 n 
+0000025556 00000 n 
+0000026600 00000 n 
+0000026794 00000 n 
+0000027018 00000 n 
+0000028062 00000 n 
+0000028262 00000 n 
+0000028494 00000 n 
+0000016764 00000 n 
+0000016984 00000 n 
+trailer
+<< 
+   /Root 1 0 R
+   /Info 5 0 R
+   /Size 30
+>>
+startxref
+29538
+%%EOF

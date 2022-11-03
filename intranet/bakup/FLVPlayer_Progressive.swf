@@ -1,0 +1,218 @@
+jQuery(function(){
+    if(!jQuery.cookie('recent_items')){
+        jQuery('#box-item-visited').hide();
+    }
+    else{
+        jQuery('#box-item-visited').show();
+    }
+    _visited_top = jQuery('#item_history').offset().top;
+  //  ebItemVisited.itemHistoryInit();
+    if(_visited_run ==0  && _visited_top>0)
+    {
+        if(jQuery(window).scrollTop()>_visited_top-1200){
+            _visited_run =1;
+            ebItemVisited.itemHistoryInit();
+
+        }
+    }
+    jQuery(window).scroll(function(){
+        if(_visited_run ==0  && _visited_top>0)
+        {
+            if(jQuery(window).scrollTop()>_visited_top-1200){
+                _visited_run =1;
+                ebItemVisited.itemHistoryInit();
+
+            }
+        }
+
+    });
+});
+var _visited_top = 0;
+var _visited_run = 0;
+
+/*Item Visited*/
+if (typeof ebItemVisited == 'undefined') {
+    var ebItemVisited = {
+        recent_items:'',
+        cookie_data:'',
+        curItemId:0,
+        mv_zone_id:'',
+        show_box_most_view_index:0,
+        conf:function () {
+    } };
+    window.ebItemVisited = ebItemVisited;
+    ebItemVisited.conf();
+}
+ebItemVisited.removeItem = function (ck_id, page) {
+    var recent_items = ebItemVisited.recent_items;
+    var cookie_ids = recent_items.split(",");
+    var stt = 0;
+    var tmp_ids = '';
+    for (var i = 0; i < cookie_ids.length; i++) {
+        if (!isNaN(cookie_ids[i]) && ck_id != cookie_ids[i] && stt < 11) {
+            var reid = parseInt(cookie_ids[i]);
+            if (!isNaN(reid) && reid > 0 && reid != '') {
+                tmp_ids += (tmp_ids != '' ? ',' : '') + parseInt(cookie_ids[i]);
+                stt++;
+            }
+        }
+    }
+    if (stt && tmp_ids) {
+        var cookie_data = ebItemVisited.cookie_data;
+        recent_items = tmp_ids;
+        var tem_arr = [];
+        stt = 0;
+        for (i = 0; i < cookie_data.length; i++) {
+            if (cookie_data[i].item_id != ck_id) {
+                tem_arr[stt] = { "item_id":"" + cookie_data[i].item_id + "", "item_url":"" + cookie_data[i].item_url + "", "item_title":"" + cookie_data[i].item_title + "", "price":"" + cookie_data[i].price + "", "item_image":"" + cookie_data[i].item_image + "" };
+                stt++;
+            }
+        }
+        if (stt) {
+            cookie_data = tem_arr;
+            ebItemVisited.cookie_data = cookie_data;
+            ebItemVisited.show_item_history(page, 1);
+        } else {
+            recent_items = '';
+        }
+    } else {
+        recent_items = '';
+    }
+    if (recent_items == '') {
+        document.getElementById("item_history").style.display = 'none';
+    }
+    jQuery('#__item_visit_' + ck_id).remove();
+    jQuery.cookie(ebItemVisited.recent_items, recent_items, { path:'/', expires:16 });
+};
+ebItemVisited.Init = function () {
+    if(typeof EB_ADS_OFF !='undefined' && EB_ADS_OFF == 1)
+    {
+      //  return false;
+    }
+    if (ebItemVisited.recent_items) {
+        var act = 'item';
+        var code = 'item_history';
+        var data = 'itemids=' + ebItemVisited.recent_items;
+        var callBack = function (json) {
+            ebItemVisited.cookie_data = json;
+            if(ebItemVisited.cookie_data.length==0)
+            //khong co item nao thi an di
+            {
+                jQuery('#item_history').hide();
+            }
+            else{
+                ebItemVisited.show_item_history(1, 1);
+
+            }
+        };
+        ebAction.dataType = 'json';
+        return ebAction.runAjax(act, code, data, callBack, true);
+    }
+};
+ebItemVisited.showListItemVisited = function (show_page, rebuild) {
+    var cookie_data = ebItemVisited.cookie_data;
+    //cookie_data = shuffleArray(cookie_data);
+    if (typeof(show_page) == 'undefined' || show_page == 1) show_page = 0;
+    if (typeof(rebuild) == 'undefined') {
+        rebuild = 0;
+    }
+    var re_items = '';
+    if (cookie_data.length) {
+        var html_content = '';
+        var html_content_new = '<ul>';
+        html_content = '<div class="box-slide"><div class="slide-mid">';/*<div class="slide-title">Các tin bạn đã xem</div>*/
+        var page = 1;
+        var gstt = 1;
+        var max_page = Math.ceil(cookie_data.length / 6);
+        var new_page = 1;
+        for (var i = 0; i < cookie_data.length; i++) {
+            if (rebuild) {
+                re_items += (re_items != '' ? ',' : '') + '' + cookie_data[i].item_id + '';
+            }
+            if (new_page) {
+                new_page = 0;
+                var page_pre = page - 1;
+                if (i == 0) {
+                    page_pre = max_page;
+                }
+                html_content += '<div id = "his_page_' + page + '" ' + (page > 1 ? 'style="display:none"' : '') + '><div class="slide-content"><div class="box-btn-slide-left"><input type="button" name="btnSlideLeft" class="btnSlideLeft" onclick="ebItemVisited.show_his_page(' + page_pre + ',' + page + ');"/></div><div class="box-slide-content">';
+            }
+            var price = "";
+            var price_new = "";
+            if (cookie_data[i].price != "undefined" && cookie_data[i].price) {
+                price = cookie_data[i].price + ' <span>đ</span>';
+                price_new = cookie_data[i].price;
+            }
+            html_content += '<div class="slide-img ';
+            if(i%6==5){
+                html_content += 'last_child';
+            }else if(i%6==0){
+                html_content += 'first_child';
+            }
+            html_content += '" id="__item_visit_' + cookie_data[i].item_id + '" lang="' + cookie_data[i].item_id + '"><img class="element-del" src="style/images/list_del_hover.gif" width="13" height="13" title="Xóa kh?i danh sách" id="ck_del_' + cookie_data[i].item_id + '" onclick="ebItemVisited.ck_remove(' + cookie_data[i].item_id + ',' + page + ');"/>\ <div class="box-slide-img" ' + (cookie_data[i].item_image != '' ? '' : 'style="background:url(style/images/no-images-69x53.jpg) no-repeat center') + '">\ <a href="' + cookie_data[i].item_url + '"><img src="' + (cookie_data[i].item_image != '' ? cookie_data[i].item_image : 'style/images201005/space.gif') + '" class="lazyload" width="150" height="160"/></a>\ </div>\ <div class="box-slide-other">\ <div class="box-slide-other-title">\ <a href="' + cookie_data[i].item_url + '" title="' + cookie_data[i].item_title + '">' + cookie_data[i].item_title + '</a>\ </div>\ <div class="box-slide-other-price">\ ' + price + '\ </div>\ </div>\ </div>';
+            if(i<=3){
+                html_content_new +='<li><a class="i_img" href="' + cookie_data[i].item_url + '"><img src="' + (cookie_data[i].item_image != '' ? cookie_data[i].item_image : 'style/images201005/space.gif') + '"/></a><a class="i_title" href="' + cookie_data[i].item_url + '" title="' + cookie_data[i].item_title + '">' + cookie_data[i].item_title + '</a><b class="i_price">' + price_new + '<label>đ</label></b></li>'
+            }
+            if (gstt == 6 || i == cookie_data.length - 1) {
+                var page_next = page + 1;
+                if (i == cookie_data.length - 1) {
+                    page_next = 1;
+                }
+                html_content += '</div>\ <div class="box-btn-slide-right">\ <input type="button"  name="btnSlideRight" class="btnSlideRight" onclick="ebItemVisited.show_his_page(' + page_next + ',' + page + ');"/>\ </div>\ </div>\ </div>';
+                gstt = 1;
+                page++;
+                new_page = 1;
+            } else {
+                gstt++;
+            }
+        }
+        html_content += '</div>\ </div>\ </div>';
+        html_content_new += '</ul>';
+        if(cookie_data.length){
+            jQuery('#item_history_new').html(html_content_new);
+        }else{
+            jQuery('#item_history_new').parents('.box_review_hide').hide();
+        }
+        document.getElementById("list-visited").innerHTML = html_content;
+        //document.getElementById("list-visited").style.display = '';
+        jQuery(".slide-img").each(function () {
+            jQuery(this).mouseover(function () {
+                jQuery("#ck_del_" + this.lang).show();
+            });
+            jQuery(this).mouseout(function () {
+                jQuery("#ck_del_" + this.lang).hide();
+            });
+        });
+        if (show_page) {
+            jQuery("#his_page_" + 1).hide();
+            jQuery("#his_page_" + show_page).show();
+        }
+        if (rebuild && re_items != recent_items) {
+            jQuery.cookie('recent_items', re_items, { path:'/', expires:16 });
+        }
+    }
+}
+/*End file :  */
+/*end visited*/
+ebItemVisited.itemHistoryInit = function(){
+    if(jQuery('.area-content-his .box-item-visited .slide-mid').length == 0)
+    {
+        recent_items = jQuery.cookie('recent_items');
+        if(!recent_items){
+            jQuery('#box-item-visited').hide();
+            ebItemVisited.init_most_item_most_view();
+        }else{
+            jQuery('#box-item-visited').show();
+        }
+        ebItemVisited.recent_items=recent_items;
+        ebItemVisited.Init();
+    }
+}
+ebItemVisited.show_his_page = function(page_show, page_hide){
+    if(page_hide && page_show!=page_hide){
+        jQuery("#his_page_" + page_show).show();
+        jQuery("#his_page_" + page_hide).hide();
+    }
+}
+ebItemVisited.show_item_history = function(show_page,rebuild){
+    return ebItemVisited.showListItemVisited(s

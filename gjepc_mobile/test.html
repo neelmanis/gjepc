@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>toggleSlide Up</title>
+<style>
+html, body {
+  height:100%;
+}
+body {
+  padding:0;
+  margin:0;
+  background:#000;
+  font-family:Arial, Helvetica, sans-serif;
+}
+#container {
+  width:960px;
+  height:100%;
+  margin:0 auto;
+  position:relative;
+}
+#about_popup {
+  width:360px;
+  height:160px;
+  padding:20px;
+  background:#333;
+  position:absolute;
+  left:0;
+  bottom:0;
+  display:none;
+  -moz-border-radius-topleft:20px;
+  -moz-border-radius-topright:20px;
+  -webkit-border-top-left-radius:20px;
+  -webkit-border-top-right-radius:20px;
+}
+#about_popup h1 {
+  color:#fff;
+  margin:0;
+  font-size:20px;
+}
+#about_popup p {
+  margin:0;
+  color:#fff;
+}
+#bottom_bar {
+  width:100%;
+  height:40px;
+  background:#333;
+  background:-moz-linear-gradient(#333,#000);
+  background:-webkit-gradient(linear, left top, left bottom, from(#333), to(#000));
+  box-shadow:-4px 0 4px #111;
+  position:absolute;
+  bottom:0;
+}
+#bottom_bar ul {
+  list-style:none;
+  width:960px;
+  margin:0 auto;
+}
+#bottom_bar ul li {
+  float:left;
+  line-height:40px;
+}
+#bottom_bar ul li a {
+  color:#fff;
+  text-decoration:none;
+  margin-right:20px;
+}
+body{
+	height:2000px;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script>
+$(function() {
+  $(window).scroll(function() {
+    $('#about_popup').slideUp();
+  });
+});
+</script>
+</head>
+
+<body>
+<div id="container">
+  <div id="about_popup">
+    <h1>About</h1>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+  </div>
+</div>
+<div id="bottom_bar">
+  <ul id="bottom_menu">
+    <li><a href="#about">About</a></il>
+  </ul>
+</div>
+
+
+</body>
+</html>

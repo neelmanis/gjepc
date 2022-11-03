@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:9080/soap-websiteservice-wsdl/Calculator" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Calculator" targetNamespace="http://localhost:9080/soap-websiteservice-wsdl/Calculator">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost:9080/soap-websiteservice-wsdl/Calculator">
+      <xsd:element name="Average">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="num1" type="xsd:int" />
+            <xsd:element name="num2" type="xsd:int"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AverageResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:complexType name="AverageRequestType">
+        <xsd:sequence>
+            <xsd:element name="num1" type="xsd:int"></xsd:element>
+            <xsd:element name="num2" type="xsd:int"></xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AverageRequest">
+    <wsdl:part element="tns:Average" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AverageResponse">
+    <wsdl:part element="tns:AverageResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="Calculator">
+    <wsdl:operation name="Average">
+      <wsdl:input message="tns:AverageRequest"/>
+      <wsdl:output message="tns:AverageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculatorSOAP" type="tns:Calculator">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Average">
+      <soap:operation soapAction="http://localhost:9080/soap-websiteservice-wsdl/Calculator/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Calculator">
+    <wsdl:port binding="tns:CalculatorSOAP" name="CalculatorSOAP">
+      <soap:address location="http://localhost:9080/soap-websiteservice-wsdl/server.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

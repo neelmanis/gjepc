@@ -1,0 +1,470 @@
+
+@media screen and (min-width: 700px) {	
+.useage_main {width:100%; height: auto; /*min-height:200px; */ float:left; margin: 10px auto 0px; }
+.table_main {width:100%; /*min-height:200px;*/ height:auto; padding:0px; }
+.selection_boxes {text-align:right;}
+
+
+}
+
+@media screen and (max-width: 699px) {
+.useage_main {width:100%; height: auto; float:left; margin: 10px auto 0px;}
+.table_main {width:100%; height:auto; padding:0px;}
+.selection_boxes {text-align:center;}
+
+}
+
+.selection_boxes {width:100%; float:left; margin-bottom: 10px;}
+
+.discount_box {width: auto; height:auto; display:inline-block; padding:5px; margin:0px 0px 10px 0px; font-size:14px; color:#000;}
+
+select {width:100%; max-width:410px; min-width:120px; height:auto; padding:5px; margin:0px; border:1px solid #dedede; background:#FFF !important; font-size:14px;}
+@media screen and (max-width: 990px) {
+	select{min-width:0;}
+	
+}
+
+@media screen and (max-width: 390px) {
+select { padding:5px 3px !important;}
+}
+
+.table_main {
+/*-moz-box-shadow:inset 0px 0px 20px #dedede;
+-webkit-box-shadow:inset 0px 0px 20px #dedede;
+box-shadow:inset 0px 0px 20px #dedede;*/
+/*border: 1px solid #ddd;*/
+font-size:18px;
+text-align: center;
+
+/*background:#fff;*/
+}
+	
+
+.pagi_box {width:100%; height:auto; float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; margin:10px 0px;}
+
+.pagi_box ul {padding:0px; margin:0px; float:right;}
+.pagi_box ul li {display:inline-block; float:left; text-align:center;}
+.pagi_box ul li a {width:16px; height:16px; padding:1px; margin:0px 2px; display:inline-block; color:#4b4b4b; font-weight:bold;}
+.pagi_box ul li a:hover {color:#f57f20;}
+.pagi_box ul li a.active {background:#afafaf; color:#fff; width:16px; height:16px; padding:1px; display:inline-block;}
+
+.pagi_box a.dirc {font-size:14px; margin: 0px 5px;}
+.pagi_box a.dirc {width:auto; display:inline-block; color:#4b4b4b; background:none; font-weight: normal;}
+.pagi_box a.dirc:hover {width:auto; display:inline-block; color:#f57f20; background:none;}
+
+
+
+.table_main input[type="text"]{border:1px solid #dedede; padding:5px ; text-align:center; min-width:30px; max-width:30px; }
+
+.table_main textarea{border:1px solid #dedede; padding:0px 3%; width:94%; }
+
+
+
+.table_main tr{background:#fff; font-size:14px; text-align:left;}
+.table_main tr th{background:#868686; text-align:center;}
+.table_main a{display:block; text-align:center;}
+
+/* 	xxxxxxxxxxxxxxxxxxxxxxxxxx
+		Responsive Tables
+	xxxxxxxxxxxxxxxxxxxxxxxxxx */
+
+
+@media only screen and (max-width: 800px) {
+	
+	/* Force table to not be like tables anymore */
+	#no-more-tables table, 
+	#no-more-tables thead, 
+	#no-more-tables tbody, 
+	#no-more-tables th, 
+	#no-more-tables td, 
+	#no-more-tables tr { 
+		display: block; 
+		font-size:15px;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables thead tr { 
+		position: absolute;
+		display:none;
+	}
+
+	#no-more-tables tr { border-bottom: 1px dotted #ccc; margin-bottom:10px; }
+	#no-more-tables tr:last-child { border-bottom: 0px solid #ccc; margin-bottom:10px; }
+	#no-more-tables td { 
+		position: relative;
+		padding-left: 38%; 
+		white-space: normal;
+		text-align:left;
+		vertical-align:text-top;
+	}
+
+	#no-more-tables td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 8px;
+		width: 45%; 
+		padding-right: 0px; 
+		white-space: nowrap;
+		text-align:left;
+		overflow:hidden;
+		font-weight: bold;
+	}
+
+	/*
+	Label the data
+	*/
+	#no-more-tables td:before { content: attr(data-title); }
+	
+	.table_main {border: 1px solid #c2c0bd;}
+	
+}
+	
+	
+.table-bordered{border:0px solid #ff0000; border-collapse:collapsed; *border-collapse:collapsed;}
+.table-bordered th,.table-bordered td,.table-bordered th,.table-bordered td{border:0px solid #FC0;}
+.table-bordered thead:first-child tr:first-child th,.table-bordered tbody:first-child tr:first-child th,.table-bordered tbody:first-child tr:first-child td {/*border-top:0px;*/ text-transform: capitalize; font-size:18px; font-weight:normal;}
+
+.table-condensed th, .table-condensed td {/*padding:15px;*/ /*padding:5px;*/ border:1px solid #c2c1be; padding:10px;  }
+
+.table-condensed {border-collapse:collapse; width:100%;}
+
+/*.table-condensed td .event_img{width:100px; margin:0 20px; background:#fff; float:left; }*/
+.table-condensed td img{vertical-align:middle; margin:0 15px;}
+
+
+.table-condensed a { color:#a9006f; }
+.table-condensed a:hover{ color:#000; }
+
+@media only screen and (max-width: 800px) {
+	
+.table-condensed tr{padding: 0px 0px 10px 0px;}
+
+.table-condensed tr td{border: 0px solid #ddd !important; padding: 10px 10px 0px 10px;}
+.table-condensed td img{display:block; margin:0 auto 10px; }
+}
+
+.table-bordered thead:first-child tr th{color:#fff; font-size:14px !important;}
+
+.table-bordered thead:first-child tr th:first-child {text-align:left;}
+
+.table-condensed td:first-child{text-align:left;}
+
+
+
+
+
+
+
+
+
+
+
+
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx OTHER TABLE STARTS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+
+@media screen and (min-width: 700px) {	
+.table_main_other {width:100%; /*min-height:200px;*/ height:auto; padding:0px;}
+
+
+}
+
+@media screen and (max-width: 699px) {
+.table_main_other {width:100%; height:auto; padding:0px;}
+}
+
+.selection_boxes {width:100%; float:left; margin-bottom: 10px;}
+
+.discount_box {width: auto; height:auto; display:inline-block; padding:5px; margin:0px 0px 10px 0px; font-size:12px; color:#000;}
+
+select {width:100%; max-width:410px; min-width:120px; height:auto; padding:5px; margin:0px; border:1px solid #ddd; background:#FFF !important; font-size:12px;}
+@media screen and (max-width: 990px) {
+	select{min-width:0;}
+	
+}
+
+@media screen and (max-width: 390px) {
+select { padding:5px 3px !important;}
+}
+
+.table_main_other {
+text-align: center;
+float:left;
+margin-bottom:20px;
+font-size:12px !important; 
+
+/*background:#fff;*/
+}
+	
+
+.pagi_box {width:100%; height:auto; float:left; font-size:12px; margin:10px 0px;}
+
+.pagi_box ul {padding:0px; margin:0px; float:right;}
+.pagi_box ul li {display:inline-block; float:left; text-align:center;}
+.pagi_box ul li a {width:16px; height:16px; padding:1px; margin:0px 2px; display:inline-block; color:#4b4b4b; font-weight:bold;}
+.pagi_box ul li a:hover {color:#f57f20;}
+.pagi_box ul li a.active {background:#afafaf; color:#fff; width:16px; height:16px; padding:1px; display:inline-block;}
+
+.pagi_box a.dirc {font-size:12px; margin: 0px 5px;}
+.pagi_box a.dirc {width:auto; display:inline-block; color:#4b4b4b; background:none; font-weight: normal;}
+.pagi_box a.dirc:hover {width:auto; display:inline-block; color:#f57f20; background:none;}
+
+
+
+.table_main_other input[type="text"]{/*border:1px solid #dedede; padding:5px ; text-align:center; min-width:30px; max-width:30px;*/ background:#fff; }
+
+.table_main_other textarea{border:1px solid #dedede; padding:0px 3%; width:94%; }
+
+
+
+.table_main_other tr{ font-size:12px; text-align:left; }
+.table_main_other tr th{background:#efefef; text-align:center; color:#000;}
+.table_main_other a{display:block; text-align:center;}
+
+/* 	xxxxxxxxxxxxxxxxxxxxxxxxxx
+		Responsive Tables
+	xxxxxxxxxxxxxxxxxxxxxxxxxx */
+
+
+@media only screen and (max-width: 800px) {
+	
+	/* Force table to not be like tables anymore */
+	#no-more-tables-other table, 
+	#no-more-tables-other thead, 
+	#no-more-tables-other tbody, 
+	#no-more-tables-other th, 
+	#no-more-tables-other td, 
+	#no-more-tables-other tr { 
+		display: block; 
+		font-size:12px;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables-other thead tr { 
+		position: absolute;
+		display:none;
+	}
+
+	#no-more-tables-other tr { border-bottom: 1px dotted #ccc; margin-bottom:10px; }
+	#no-more-tables-other tr:last-child { border-bottom: 0px solid #ccc; margin-bottom:10px; }
+	#no-more-tables-other td { 
+		position: relative;
+		padding-left: 45%; 
+		white-space: normal;
+		text-align:left;
+		vertical-align:text-top;
+	}
+
+	#no-more-tables-other td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 8px;
+		width: 45%; 
+		padding-right: 0px; 
+		white-space: nowrap;
+		text-align:left;
+		overflow:hidden;
+		font-weight: bold;
+	}
+
+	/*
+	Label the data
+	*/
+	#no-more-tables-other td:before { content: attr(data-title); text-transform:capitalize; }
+	
+	.table_main_other {border: 1px solid #c2c0bd; background:#f7f7f7;}
+	
+}
+	
+	
+.table-bordered-other{border:0px solid #ff0000; border-collapse:collapsed; *border-collapse:collapsed;}
+.table-bordered-other th,.table-bordered-other td,.table-bordered-other th,.table-bordered-other td{border:0px solid #FC0;}
+.table-bordered-other thead:first-child tr:first-child th,.table-bordered-other tbody:first-child tr:first-child th,.table-bordered-other tbody:first-child tr:first-child td {/*border-top:0px;*/ text-transform: capitalize; font-size:18px; font-weight:normal;}
+
+.table-condensed-other th, .table-condensed-other td {/*padding:15px;*/ /*padding:5px;*/ border:1px solid #fff; padding:10px;  }
+
+.table-condensed-other {border-collapse:collapse; width:100%; background:#f7f7f7;}
+
+/*.table-condensed td .event_img{width:100px; margin:0 20px; background:#fff; float:left; }*/
+.table-condensed-other td img{vertical-align:middle; margin:0 15px;}
+
+
+.table-condensed-other a { color:#a9006f; }
+.table-condensed-other a:hover{ color:#000; }
+
+@media only screen and (max-width: 800px) {
+	
+.table-condensed-other tr{padding: 0px 0px 10px 0px;}
+
+.table-condensed-other tr td{border: 0px solid #ddd !important; padding: 10px 10px 0px 10px;}
+.table-condensed-other td img{display:block; margin:0 auto 10px; }
+}
+
+.table-bordered-other thead:first-child tr th{color:#000; font-size:12px !important; font-weight:bold !important;}
+
+.table-bordered-other thead:first-child tr th:first-child {text-align:left;}
+
+.table-condensed-other td:first-child{text-align:left;}
+
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx OTHER TABLE ENDS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+
+
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  TABLE 2 STARTS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+@media screen and (min-width: 700px) {	
+.table_job {width:100%; /*min-height:200px;*/ height:auto; padding:0px;}
+
+
+}
+
+@media screen and (max-width: 699px) {
+.table_job {width:100%; height:auto; padding:0px;}
+}
+
+.selection_boxes {width:100%; float:left; margin-bottom: 10px;}
+
+.discount_box {width: auto; height:auto; display:inline-block; padding:5px; margin:0px 0px 10px 0px; font-size:12px; color:#000;}
+
+select {width:100%; max-width:410px; min-width:120px; height:auto; padding:5px; margin:0px; border:1px solid #ddd; background:#FFF !important; font-size:12px;}
+@media screen and (max-width: 990px) {
+	select{min-width:0;}
+	
+}
+
+@media screen and (max-width: 390px) {
+select { padding:5px 3px !important;}
+}
+
+.table_job {
+text-align: center;
+float:left;
+margin-bottom:20px;
+font-size:12px !important;
+margin-bottom:25px;
+
+/*background:#fff;*/
+}
+	
+
+.pagi_box {width:100%; height:auto; float:left; font-size:12px; margin:10px 0px;}
+
+.pagi_box ul {padding:0px; margin:0px; float:right;}
+.pagi_box ul li {display:inline-block; float:left; text-align:center;}
+.pagi_box ul li a {width:16px; height:16px; padding:1px; margin:0px 2px; display:inline-block; color:#4b4b4b; font-weight:bold;}
+.pagi_box ul li a:hover {color:#f57f20;}
+.pagi_box ul li a.active {background:#afafaf; color:#fff; width:16px; height:16px; padding:1px; display:inline-block;}
+
+.pagi_box a.dirc {font-size:12px; margin: 0px 5px;}
+.pagi_box a.dirc {width:auto; display:inline-block; color:#4b4b4b; background:none; font-weight: normal;}
+.pagi_box a.dirc:hover {width:auto; display:inline-block; color:#f57f20; background:none;}
+
+
+
+.table_job input[type="text"]{/*border:1px solid #dedede; padding:5px ; text-align:center; min-width:30px; max-width:30px;*/ background:#fff; }
+
+.table_job textarea{border:1px solid #dedede; padding:0px 3%; width:94%; }
+
+
+
+.table_job tr{ font-size:14px; text-align:left; }
+.table_job tr th{background:#5977b3; text-align:center; color:#000;}
+.table_job a{display:block; text-align:center;}
+.table_job tr:nth-child(odd){background:#efefef;}
+.grand_total{font-size:16px; font-weight:bold; color:#fff !important;}
+
+/* 	xxxxxxxxxxxxxxxxxxxxxxxxxx
+		Responsive Tables
+	xxxxxxxxxxxxxxxxxxxxxxxxxx */
+
+
+@media only screen and (max-width: 800px) {
+	
+	/* Force table to not be like tables anymore */
+	#no-more-tables-job table, 
+	#no-more-tables-job thead, 
+	#no-more-tables-job tbody, 
+	#no-more-tables-job th, 
+	#no-more-tables-job td, 
+	#no-more-tables-job tr { 
+		display: block; 
+		font-size:12px;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables-job thead tr { 
+		position: absolute;
+		display:none;
+	}
+
+	#no-more-tables-job tr { border-bottom: 1px dotted #ccc; /*margin-bottom:10px;*/ }
+	#no-more-tables-job tr:last-child { border-bottom: 0px solid #ccc; /*margin-bottom:10px;*/ }
+	#no-more-tables-job td { 
+		position: relative;
+		padding-left: 55%; 
+		white-space: normal;
+		text-align:left;
+		vertical-align:text-top;
+	}
+
+	#no-more-tables-job td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 8px;
+		width: 45%; 
+		padding-right: 0px; 
+		white-space: nowrap;
+		text-align:left;
+		overflow:hidden;
+		font-weight: bold;
+	}
+
+	/*
+	Label the data
+	*/
+	#no-more-tables-job td:before { content: attr(data-title); text-transform:capitalize; }
+	
+	.table_job {border: 1px solid #c2c0bd; /*background:#f7f7f7;*/}
+	
+}
+	
+	
+.table-bordered-job{border:0px solid #ff0000; border-collapse:collapsed; *border-collapse:collapsed;}
+.table-bordered-job th,.table-bordered-job td,.table-bordered-job th,.table-bordered-job td{border:0px solid #FC0;}
+.table-bordered-job thead:first-child tr:first-child th,.table-bordered-job tbody:first-child tr:first-child th,.table-bordered-job tbody:first-child tr:first-child td {/*border-top:0px;*/ text-transform: capitalize; font-size:18px; font-weight:normal;}
+
+.table-condensed-job th, .table-condensed-job td {/*padding:15px;*/ /*padding:5px;*/ border:1px solid #d4d4d4; padding:10px;   vertical-align: text-top; color:#000; }
+
+.table-condensed-job {border-collapse:collapse; width:100%; background:#fff;}
+
+/*.table-condensed td .event_img{width:100px; margin:0 20px; background:#fff; float:left; }*/
+.table-condensed-job td img{vertical-align:middle; margin:0 15px;}
+
+
+.table-condensed-job a { color:#a9006f; }
+.table-condensed-job a:hover{ color:#000; }
+
+@media only screen and (max-width: 800px) {
+	
+.table-condensed-job tr{padding: 0px 0px 10px 0px;}
+
+.table-condensed-job tr td{border: 0px solid #ddd !important; padding: 10px 10px 0px 10px;}
+.table-condensed-job td img{display:block; /*margin:0 auto 10px;*/ }
+}
+
+.table-bordered-job thead:first-child tr th{color:#fff; font-size:14px !important;}
+
+.table-bordered-job thead:first-child tr th:first-child {text-align:left;}
+
+.table-condensed-job td:first-child{text-align:left;}
+
+.table_job a.contact{ max-width:90px; background:url(../images/contact_arrow.png) no-repeat 90% 7px #000; padding:5px 8px; border-radius:15px; color:#fff; text-align:center; text-transform:capitalize;}
+.table_job a.contact:hover{background:url(../images/contact_arrow.png) no-repeat 90% 7px #ed1a21; border-radius:5px;}
+
+.table_job span{display:block; font-size:10px;}
+
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  TABLE 2 ENDS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+

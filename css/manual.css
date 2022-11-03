@@ -1,0 +1,393 @@
+#manual_login{
+background:#fff;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-khtml-border-radius: 3px;
+border-radius: 3px;
+
+-webkit-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.16);
+-moz-box-shadow:    0px 0px 10px rgba(50, 50, 50, 0.16);
+box-shadow:         0px 0px 10px rgba(50, 50, 50, 0.16);
+
+width:263px;
+
+
+padding:20px;
+margin:0px auto;
+	}
+	
+#manual_login .loginLeft{
+	float:left;
+	width:400px;}	
+	
+#manual_login input.textField{
+border:1px solid #e4e4e4;
+padding:5px;
+width:250px;
+margin-bottom:20px;
+	
+	}
+
+#manual_login input.textField:focus{
+	border:1px solid #a5a5a5;
+	}
+
+
+#manual_login label{
+	display:block;
+	text-transform:uppercase;
+	color:#828282;}
+	
+#manual_login .link{
+	margin-bottom:10px;
+	background:#f2f2f2;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	padding:5px;
+	}	
+
+
+
+/*** form wrapper ***/
+
+#formWrapper{
+	width:100%;
+	float:left;
+	background:#fff;
+	padding:10px;
+	}
+	
+
+#formWrapper h2{
+	font-size:14px;
+	margin:0 0 10px 0;
+	padding:0;}	
+
+#formWrapper h3{
+	margin:0 0 20px 0;
+	padding:0;
+	font-size:14px;
+	color:#751b53;}
+
+
+#advertisement{
+	float:right;
+	width:235px;
+/*	margin-top:52px;*/
+	}
+	
+#advertisement .head{
+	background:url(../manual/images/advertise_bg.jpg) repeat-x;
+	line-height:25px;
+	text-align:center;
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;
+	}	
+
+#manualFormContainer h1{
+	font-weight:normal;
+	font-size:18px;
+	margin-bottom:20px;
+	}
+	
+#formWrapper table.common{
+	background:#fff;
+	border:1px solid #d9d9d9;
+	margin-bottom:20px;
+	border-collapse:collapse;
+	width:100%;}	
+	
+#formWrapper table.common td, #formWrapper table.common th{
+	padding:5px 5px;
+	}
+	
+#formWrapper table.common th{
+	background:#d9d9d9;
+	text-align:left;
+	color:#000;}
+
+#formWrapper table.common td{
+	border-bottom:1px solid #d9d9d9;
+	}
+	
+#formWrapper table.common td.centerAlign{
+	 text-align:center;
+	}
+	
+#formWrapper table.common td.bold{
+	font-weight:bold;
+	color:#7a235a;}	
+	
+.mark{
+	background:#fff;
+	padding:10px;
+/*	float:left;*/
+/*border:1px solid #d9d9d9;*/
+	}
+
+.mark ul{
+	margin:0;
+	padding:0;
+	list-style:none;}
+
+.mark ul li{
+	margin-bottom:10px;
+	}
+	
+.mark ul li div.left{
+	float:left;
+	width:50px;}	
+	
+.mark ul li img{
+	vertical-align:text-top;
+	margin-right:10px;
+	}
+
+.advtContent{
+	min-height:100px;
+	background:#fff;}
+	
+
+#formWrapper ol.numeric{
+	margin:0;
+	padding:0;
+	list-style:decimal;
+	}
+	
+#formWrapper ol.numeric li{
+	padding-left:15px;
+	margin-left:25px;
+	margin-bottom:15px;
+	}
+	
+.red{
+	color:#F00;}	
+	
+#formWrapper .textField{
+	width:140px;
+	padding:3px 5px;
+	border:1px solid #d9d9d9;
+	overflow:hidden;
+	font-size: 12px;
+	text-transform:uppercase;
+	}
+	
+
+#formWrapper .qty{
+	width:30px;
+	padding:3px 5px;
+	border:1px solid #d9d9d9;
+	overflow:hidden;
+	}
+
+
+#formWrapper .amt{
+	width:80px;
+	padding:3px 5px;
+	border:1px solid #d9d9d9;
+	overflow:hidden;
+	}
+
+#formWrapper .calendar{
+border:1px solid #e4e4e4;
+padding:5px;
+width:100px;
+
+}
+
+	
+#formWrapper .textArea{
+	width:180px;
+	padding:3px 5px;
+	border:1px solid #d9d9d9;
+	overflow:hidden;
+	height:50px;
+	resize:none;
+	}	
+
+#formWrapper .textField:focus, #formWrapper .textArea:focus{
+	border:1px solid #751c54;
+	}
+
+#formWrapper .qty:focus{
+	border:1px solid #751c54;
+	}
+
+#formWrapper .amt:focus{
+	border:1px solid #751c54;
+	}
+	
+
+#formWrapper .calendar:focus{
+	border:1px solid #751c54;
+	}
+
+/**** form ****/
+
+#formWrapper table.formManual{
+	background:#f5f5f5;
+	/*border:1px solid #d9d9d9;*/
+	margin-bottom:15px;
+	border-collapse:collapse;
+	width:100%;}	
+	
+#formWrapper table.formManual td, #formWrapper table.formManual th{
+	padding:5px 3px 5px 8px;
+	vertical-align:top;
+	}
+	
+#formWrapper table.formManual th{
+	background:#d9d9d9;
+	text-align:left;
+	color:#000;}
+	
+	
+#formWrapper table.formManual th.borderRight{
+	border-right:1px solid #fff;
+	}	
+
+#formWrapper table.formManual td{
+	border-bottom:1px solid #fff;
+	}
+	
+#formWrapper table.formManual td.centerAlign{
+	 text-align:center;
+	}
+	
+#formWrapper table.formManual td.bold{
+	/*font-weight:bold;*/
+	color:#7a235a;}	
+	
+#formWrapper table.formManual sup{
+	color:#F00;}
+
+
+/*** gray bg ***/
+
+#formWrapper .title{
+background:url(../images/title_arrow.jpg) no-repeat right top;
+float:left;
+padding-right:12px;
+margin-bottom:5px;
+}
+
+#formWrapper .titleBig{
+background:url(../manual/images/arrow_big.jpg) no-repeat right;
+float:left;
+padding-right:30px;
+margin-bottom:10px;
+}
+
+
+
+#formWrapper h4{
+margin:0px 0px;
+padding:0px 5px 0px 12px;
+line-height:23px;
+background:url(../images/title_bg.jpg) repeat-x;
+font-size:15px;
+font-weight:normal;
+color:#000;
+
+}
+
+#formWrapper h4 sup{
+	color:#F00;}
+
+#formWrapper h4.newBg{
+	background:url(../manual/images/title_big_bg.jpg) repeat-x !important;
+	}
+
+
+#formWrapper p{
+	margin-bottom:10px;}
+	
+#formWrapper p.special{
+	background:#f5f5f5;
+	padding:10px;
+		}
+		
+#formWrapper .chooseButton{
+	background:#fff;
+	margin-bottom:10px;
+	width:195px;
+	}
+	
+#formWrapper .chooseButton .chooseFile{
+	width:180px;
+	border:1px solid #e4e4e4;
+padding:5px;
+	}	
+	
+#formWrapper .maroon_btn{
+border:none;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-khtml-border-radius: 5px;
+border-radius: 5px;
+/*background:#924b77 url(../images/white_arrow.png) no-repeat;
+background-position:135px center;*/
+background:#924b77;
+color:#fff;
+padding:5px;
+display:block;
+min-width:52px;
+text-align:center;
+/*float:left;*/
+margin-right:5px;
+font-weight:bold;
+cursor:pointer;
+display:inline-block;}
+
+#formWrapper .maroon_btn:hover{
+	background:#000;}
+	
+.uploadPhoto img{
+	width:136px;
+	height:128px;
+	
+	}
+
+
+.leftDiv{
+float:left;
+padding-right:5px;
+}	
+
+.rightSpace{
+margin-right:20px;
+}
+
+.bigTextField{
+	width:95%;
+	height:50px;
+	padding:3px 5px;
+	border:1px solid #d9d9d9;
+	margin-bottom:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+	
+.block{
+	display:block;
+	width:100px;
+	float:left;}
+	
+table.tableBorder {
+	border-collapse:collapse;}	
+	
+table.tableBorder td{
+	border:2px solid #FFF;
+	padding:5px;
+	text-align:center;}	
+	
+
+
+/**** standfitting *********/
+
+.standimage img{
+width:60px;
+height:auto;}	
+	

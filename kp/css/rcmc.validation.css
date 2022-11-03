@@ -1,0 +1,9 @@
+
+function adx_detectmobile(){if(navigator.userAgent.match(/Android/i)||navigator.userAgent.match(/webOS/i)||navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i)||navigator.userAgent.match(/iPod/i)||navigator.userAgent.match(/BlackBerry/i)||navigator.userAgent.match(/Windows Phone/i)){return true;}
+else{return false;}}
+var adx_adserver_url="cs.adxpansion.com";var adx_iframe_keyword='';if(typeof adx_keywords!='undefined'){adx_iframe_keyword=adx_keywords;}
+if(typeof adx_iframe_pos=='undefined'){var adx_iframe_pos=Math.floor(Math.random()*90000)+10000;}
+var adx_context_title='';try{var adx_page_titles=document.getElementsByTagName("TITLE");if(typeof adx_page_titles!='undefined'){adx_context_title=adx_page_titles[0].text;}}catch(adx_err){}
+var d=new Date();var tzoffset=-d.getTimezoneOffset();var adx_requested_url='';var adx_url='';try{if(typeof window.top.location.href!='undefined'){adx_url=window.top.location.href;}else{adx_url=document.location.href;}}catch(adx_err2){try{adx_url=window.document.referrer;}catch(adx_err3){}}
+if(adx_url.length>0){adx_requested_url=adx_url;}
+var adx_general_context='';if(adx_context_ti

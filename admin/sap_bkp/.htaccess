@@ -1,0 +1,4 @@
+Redirect 301 /survey http://bit.ly/2zBSd2q
+Redirect 301 "https://www.gjepc.org/survey" "http://bit.ly/2zBSd2q"
+Redirect 301 /hrms https://performancemanager10.successfactors.com/login?company=thegemjewe&bplte
+Redirect 301 hrms.gjepc.org https://performancemanager10.successfactors.com/login?company=thegemjewe&bplte

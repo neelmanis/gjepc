@@ -1,0 +1,141 @@
+﻿
+#container
+        {
+            margin-top:20px;
+			
+            
+        }
+        #slider
+        {
+            margin: 0 auto;
+			text-align:center;
+			width: 270px;
+			height: 126px;
+        }
+
+#slider div a{
+	font-size: 12px;
+	color: white;
+	font-weight: bold;
+	float:left;
+	padding:10px;
+	text-decoration:none;
+}	
+
+#slider div a:hover{color:#F1D5CA;}	
+		
+.image-slider{
+
+	width: 270px;
+	height: 126px;
+	background-color: #;	
+	position: relative; /*overflow: hidden;*/
+	font-family:Arial, Tahoma, sans-serif;
+
+}
+.image-slider-back, .image-slider-forward
+{
+	float: right;
+	width: 23px;
+	height: 30px; /*background-color: #121212;*/
+	color: ;
+	position: relative;
+	z-index:9999;
+	top:20px;
+	left:-240px;
+	
+	margin:25px 30px 0px 240px;
+	cursor: pointer;
+	background-color: #;
+}
+
+.image-slider-back
+{
+	background-image: url(../images/arrow-left.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.image-slider-forward
+{
+	background-image: url(../images/arrow-right.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	top:-280px;
+	left:52px;
+	
+}
+.image-slider-contents
+{
+	width: 270px;
+	height: 300px;
+	float: left;
+	position: relative;
+	overflow: hidden;
+	background-color:#;
+	margin-top:-55px;
+}
+/*.image-slider-contents .contents-wrapper > div*/
+.image-slider-contents .contents-wrapper
+{
+	position: absolute;
+	
+}
+.image-slider-contents .outer
+{
+	background-color: White;
+	float: left;
+	width: 270px;
+	height: 126px;
+	margin:0px 2px;
+	cursor:pointer;
+	
+}
+.image-slider-contents .outer > div
+{
+	width: 270px;
+	height: 126px;
+	
+}
+
+
+
+
+/* --------------------*/
+
+.slidertable{
+	float:left;
+	width:271px;
+	height:126px;
+	padding-top:7px;
+/*	background-color:#fff;*/
+	
+}
+.slider_headingtext{
+font-size:16px; 
+margin-bottom:8px; 
+text-transform:uppercase; 
+text-align:left; 
+font-weight:bold; 
+color:#767676;
+}
+
+.subtext{
+width:80px; 
+float:left;
+margin-bottom:8px; 
+text-align:left; 
+font-size:11px; 
+color:#767676; 
+text-transform:uppercase; 
+
+}
+.subtext22{
+width:220px; 
+float:left; 
+margin-bottom:8px; 
+text-align:left; 
+color:#767676;
+}
+
+
+

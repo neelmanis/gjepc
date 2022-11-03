@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+.trade_wrap{ width:100%; margin:0 auto;}
+.trade_title{ width:100%;}
+.trade_title ul{ margin:0px; padding:0px;}
+.trade_title ul li{ display:inline-block; background:#70134a; color:#FFFFFF; padding:5px; margin-bottom:20px;}
+.trade_title ul li:hover{ background:#1187CA;}
+
+.trade_title ul li a{ color:#FFFFFF; text-decoration: none; font-family: "Lucida Sans";}
+
+.trade_title .active{ background:#1187CA;}
+.trade_form{ width:auto; height:300px; padding-top:5px;}
+
+.trade_form .left{ float:left;}
+.trade_form .right{ float:right;}
+
+.trade_form_field{width: auto; text-align: left;  min-height: 34px;  float: left;}
+
+.trade_lable{width: 138px; height: 20px; float: left; font-family: "Lucida Sans"; font-size: 11px; color: #666666; padding-top: 3px; font-weight: normal;}
+.trade_input{width: 175px; float: left; padding: 3px; margin-top: 0px; border:solid 1px #666666;}
+.trade_input_text { height: 15px; width: 175px;float: left;margin-right: 10px;font-size: 12px; color: #333333; border: 0px; outline: none; line-height: 18px; text-transform: uppercase;}
+.admin_trade_wrap{margin: 0 auto;
+    width: 90%;}
+.padding_width_head{display:none;}
+.trade_input1{width: 85px; float: left; padding: 3px; margin-right:5px; border:solid 1px #666666;}
+.trade_input_text1 { height: 15px; width: 85px;float: left; margin-right: 10px;font-size: 12px; color: #333333; border: 0px; outline: none; line-height: 18px; text-transform: uppercase;}
+
+.check_box{ margin-top:5px;}
+
+.trade_form .button input{ margin:0px; padding:0px; position:relative;}
+.trade_form .button input[type="submit"]{ background:#192DA2; width:100px; height:30px; color:#fff; display:block; text-align:center; cursor:pointer; border:none;} 
+.trade_form .button input[type="submit"]:hover{background:#CC176B;}
+
+.head{ font-size:16px; padding:10px 10px 10px 0px;}
+
+.trade_lable1 {
+  width: 170px;
+  height: 20px;
+  float: left;
+  font-family: "Lucida Sans";
+  font-size: 11px;
+  color: #666666;
+  padding-top: 3px;
+  font-weight: normal;
+}
+
+.input_fields_wrap{ margin:0px; padding:0px;}
+
+.input_fields_wrap .add_field_button{ background:#AC1316; padding:5px; border:none; color:#FFFFFF; margin-right:5px;  cursor:pointer; font-size:12px;}
+.input_fields_wrap .add_field_button:hover{ background:#6840D9;}
+
+.input_fields_wrap .remove_field_button{ background:#6840D9; padding:5px; border:none; color:#FFFFFF; margin-right:5px;  cursor:pointer; font-size:12px;}
+.input_fields_wrap .remove_field_button:hover{ background:#AC1316;}
+
+
+.admin_trade_lable{
+  /* width: 138px; */
+  height: 20px;
+  float: left;
+  font-family: "Lucida Sans";
+  font-size: 14px;
+  color: #666666;
+  font-weight: normal;
+  margin-right:20px;
+}
+
+.admin_trade_redio{  float: left;  margin-right:5px;}

@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+.arrowlistmenu{
+/*width: 690px;*/ /*width of accordion menu*/
+
+margin-top:10px !important; 
+}
+
+
+.main_accord
+	{/*width:690px;*/
+	border:1px solid  #d1d1d1;
+	margin-bottom:20px;
+
+	}
+
+
+.arrowlistmenu .menuheader{ /*CSS class for menu headers in general (expanding or not!)*/
+color: #000;
+padding:10px 30px 10px 15px; /*header text is indented 10px*/
+cursor: hand;
+cursor: pointer;
+font-family:"Trebuchet MS";
+font-size:13px;
+text-align:left;
+font-weight:bold;
+margin-bottom:2px; 
+border:1px solid #ddd;
+background:url(../images/plus_minus.png) no-repeat right top #fff ;
+text-transform:uppercase;
+
+}
+
+.arrowlistmenu .openheader{ /*CSS class to apply to expandable header when it's expanded*/
+
+background:url(../images/plus_minus.png) no-repeat right bottom #5977b3;
+color:#fff !important;
+
+}
+
+
+
+.arrowlistmenu .accord_detail{
+height: auto;
+/*width:660px;*/
+font-family:"Trebuchet MS";
+font-size:13px;
+text-align: left;
+padding:15px;
+line-height:20px;
+text-align:justify;
+background-color:#fff;
+border:1px solid #ddd;
+margin-bottom:2px;
+margin-top:-3px;
+}
+
+.arrowlistmenu .accord_detail .heading{color:#ca4c3e; font-weight:bold; font-size:14px;}
