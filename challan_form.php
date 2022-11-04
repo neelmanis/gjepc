@@ -15,7 +15,7 @@ if($eligible_for_renewal=="Y"){
 		return;	exit;
 }
 /*.....................Update the payment status................*/
-include 'indivisual_payment_status_update.php';
+// include 'indivisual_payment_status_update.php';
 
 $info_status = $conn ->query("select a.company_pan_no as `pan_no`,a.company_gstn as gst_no,b.status,region_id,b.member_type_id from registration_master
  a, information_master b where a.id='$registration_id'  and b.registration_id='$registration_id' and b.status=1");
@@ -398,10 +398,11 @@ $uregistration1 =  $conn ->query("UPDATE `registration_master` SET company_pan_n
 
 /*.............................Payment data.............................*/
 $gjepc_account_no	=	filter($_REQUEST['gjepc_account_no']);
-$payment_mode		=	$_REQUEST['payment_mode'];
+$payment_mode		=	"3";
 $membership_fees	=	$_REQUEST['membership_fees'];
 $admission_fees		=	$_REQUEST['admission_fees'];
 $ad_valorem=0;
+
 
 if($admission_fees==0 && $gst_holder_status=="Y"){
 echo "<script type='text/javascript'> alert('Something issue in Admission fee');
@@ -470,6 +471,8 @@ $queryc = $conn ->query("select * from challan_master where registration_id='$re
 $num = $queryc->num_rows;
 if($num>0)
 {
+	$resultChallan = $queryc->fetch_assoc();
+
 $_SESSION['ReferenceNo']=$ReferenceNo=rand(100,9999999).time();
 $clog = $conn ->query("insert into challan_payment_log set registration_id='$registration_id',ReferenceNo='$ReferenceNo',post_date='$post_date'");
 
@@ -502,31 +505,42 @@ else
 	$company_name=getNameCompany($registration_id,$conn);
 	$comoany_pan_no=getCompanyPan($registration_id,$conn);
 	$company_bp_no=getBPNO($registration_id,$conn);
+ 
+	if($resultChallan['Response_Code']=="E000" || $resultChallan['Response_Code']=="captured"){
+		$_SESSION['succ_msg']="You have already made the payment";
+		// header('location:apply_rcms_certificate.php');exit;
+		echo "<script type='text/javascript'> alert('You have already made the payment');
+			window.location.href='apply_rcms_certificate.php';
+			</script>";
+			return;	exit;
+	}else{
+		include 'membership_pay.php';
+	}
 	
-	$key="2200043013901118";
+	// $key="2200043013901118";
 	
-	$mandate_str=aes128Encrypt($ReferenceNo."|1|".$total_payable."|".$email_id."|".$company_name."|".$comoany_pan_no,$key);
-	$optional_str=aes128Encrypt($company_bp_no,$key);
+	// $mandate_str=aes128Encrypt($ReferenceNo."|1|".$total_payable."|".$email_id."|".$company_name."|".$comoany_pan_no,$key);
+	// $optional_str=aes128Encrypt($company_bp_no,$key);
 	
-	$return_url_str=aes128Encrypt("https://gjepc.org/payment_success.php",$key);
-	$reference_str=aes128Encrypt($ReferenceNo,$key);
-	$submerchant_str=aes128Encrypt("1",$key);
-	$amount_str=aes128Encrypt($total_payable,$key);
-	$payment_mode_str=aes128Encrypt($payment_mode,$key);
+	// $return_url_str=aes128Encrypt("https://gjepc.org/payment_success.php",$key);
+	// $reference_str=aes128Encrypt($ReferenceNo,$key);
+	// $submerchant_str=aes128Encrypt("1",$key);
+	// $amount_str=aes128Encrypt($total_payable,$key);
+	// $payment_mode_str=aes128Encrypt($payment_mode,$key);
 	
-	$encypted_text="https://eazypay.icicibank.com/EazyPG?merchantid=221392&mandatory fields=".$mandate_str."&optional fields=".$optional_str."&returnurl=".$return_url_str."&Reference No=".$reference_str."&submerchantid=".$submerchant_str."&transaction amount=".$amount_str."&paymode=".$payment_mode_str;
+	// $encypted_text="https://eazypay.icicibank.com/EazyPG?merchantid=221392&mandatory fields=".$mandate_str."&optional fields=".$optional_str."&returnurl=".$return_url_str."&Reference No=".$reference_str."&submerchantid=".$submerchant_str."&transaction amount=".$amount_str."&paymode=".$payment_mode_str;
 	
 	/*................................Get payment Status........................................*/
-	if($payment_mode=="1"){
-		$_SESSION['succ_msg']="Challan Successfully Saved";
-		header('location:apply_rcms_certificate.php');exit;
-	}
-	else if($result['Response_Code']=="E000"){
-		$_SESSION['succ_msg']="You have already made the payment";
-		header('location:apply_rcms_certificate.php');exit;
-	}else{
-		header('location:'.$encypted_text);exit;
-	}
+	// if($payment_mode=="1"){
+	// 	$_SESSION['succ_msg']="Challan Successfully Saved";
+	// 	header('location:apply_rcms_certificate.php');exit;
+	// }
+	// else if($result['Response_Code']=="E000"){
+	// 	$_SESSION['succ_msg']="You have already made the payment";
+	// 	header('location:apply_rcms_certificate.php');exit;
+	// }else{
+	// 	header('location:'.$encypted_text);exit;
+	// }
 }
 
 $sql = "SELECT * FROM `challan_master` WHERE 1 and registration_id='$registration_id' and challan_financial_year='$cur_fin_yr' order by id desc limit 1";
@@ -932,7 +946,7 @@ $_SESSION['form_chk_msg2']="";
 				<div class="col-md-6"></div>
 			</div>-->
             
-            <div id="manufDiv" class="col-12">
+         <!--    <div id="manufDiv" class="col-12">
             <div class="row">
 				<div class="form-group col-12">
 					<label class="form-label" for="company_name">Payment Mode: <span>*</span></label>
@@ -944,7 +958,7 @@ $_SESSION['form_chk_msg2']="";
 						</div>					
 				</div>
                 </div>
-			</div>
+			</div> -->
             
              <div class="form-group col-sm-6">
 				<label class="form-label" for="membership_fees">Membership Fees: <span>*</span></label>
@@ -1196,7 +1210,7 @@ $.validator.addMethod("gst_no", function(value, element) {
                 required: true,
 				gst_no: true
             },		
-			payment_mode: "required",
+			// payment_mode: "required",
 			membership_fees: "required",
 			admission_fees: "required",
 			total: "required",
@@ -1325,7 +1339,7 @@ $.validator.addMethod("gst_no", function(value, element) {
 				minlength:"Please enter not less than 15 characters",
 				maxlength:"Please enter not more than 15 characters"
 				},
-			payment_mode: "Required.",
+			// payment_mode: "Required.",
 			membership_fees: "Please Enter Membership Fees",
 			admission_fees: "Please Enter Admission Fees",
 			total: "Please enter total amount",
@@ -1546,26 +1560,33 @@ $(document).ready(function () {
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("input[name='payment_mode']").click(function () {
-			if($(this).val()=="1") {
-				$("#bank_details").show();		
-				$("#bank_name").removeAttr("disabled");
-				$("#branch_name").removeAttr("disabled");
-				$("#branch_city").removeAttr("disabled");
-				$("#branch_postal_code").removeAttr("disabled");
-				$("#cheque_no").removeAttr("disabled");
-				$("#cheque_date").removeAttr("disabled");				
-				
-            } else {
-                $("#bank_details").hide();
+    	 $("#bank_details").hide();
 				$("#bank_name").attr("disabled", "disabled"); 
 				$("#branch_name").attr("disabled", "disabled"); 
 				$("#branch_city").attr("disabled", "disabled"); 
 				$("#branch_postal_code").attr("disabled", "disabled"); 
 				$("#cheque_no").attr("disabled", "disabled"); 
-				$("#cheque_date").attr("disabled", "disabled"); 
-            }
-        });
+				$("#cheque_date").attr("disabled", "disabled");
+   //      $("input[name='payment_mode']").click(function () {
+			// if($(this).val()=="1") {
+			// 	$("#bank_details").show();		
+			// 	$("#bank_name").removeAttr("disabled");
+			// 	$("#branch_name").removeAttr("disabled");
+			// 	$("#branch_city").removeAttr("disabled");
+			// 	$("#branch_postal_code").removeAttr("disabled");
+			// 	$("#cheque_no").removeAttr("disabled");
+			// 	$("#cheque_date").removeAttr("disabled");				
+				
+   //          } else {
+   //              $("#bank_details").hide();
+			// 	$("#bank_name").attr("disabled", "disabled"); 
+			// 	$("#branch_name").attr("disabled", "disabled"); 
+			// 	$("#branch_city").attr("disabled", "disabled"); 
+			// 	$("#branch_postal_code").attr("disabled", "disabled"); 
+			// 	$("#cheque_no").attr("disabled", "disabled"); 
+			// 	$("#cheque_date").attr("disabled", "disabled"); 
+   //          }
+   //      });
     });
 </script>
 <style type="text/css">

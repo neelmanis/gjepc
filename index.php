@@ -21,18 +21,18 @@ include 'db.inc.php';
     .voteLink {display: block; text-transform: lowercase; font-size: 14px; margin-top: 5px;}
 </style>
 
-<div id="myModal" class="modal fade" role="dialog">
+<!-- <div id="myModal" class="modal fade" role="dialog">
     <div class=" modal-dialog" style="max-width: 500px;">    
         <button type="button" id="click_popup" class="close"></button>   
         <div class="clear"></div>        
-        <div class="modal-body popup_txt p-0"> 
+        <div class="modal-body popup_txt p-0">  -->
            <!-- <a href="https://floorplan.gjepc.org/" target="_blank" class="d-block "><img src="https://gjepc.org/iijs-premiere/assets/images/popup/02.07.2022.jpg" class="img-fluid d-table mx-auto" alt=""></a>
            <a href="https://registration.gjepc.org/single_visitor.php" target="_blank"><img src="https://registration.gjepc.org/images/visitor-reg-live.jpg" class="img-fluid d-table mx-auto" alt=""></a> -->
-           <a href="https://amritmahotsav.nic.in/har-ghar-tiranga.htm" target="_blank"><img src="assets/images/popup/harghar-tiranga-popup-min.webp" class="img-fluid d-table mx-auto" alt=""></a>
+           <!-- <a href="https://amritmahotsav.nic.in/har-ghar-tiranga.htm" target="_blank"><img src="assets/images/popup/harghar-tiranga-popup-min.webp" class="img-fluid d-table mx-auto" alt=""></a> -->
            <!-- <img src="assets/images/popup/harghar-tiranga-popup.jpg" alt=""> -->
-        </div>
+ <!--        </div>
     </div>
-</div> 
+</div>  -->
 <!-- /MODAL POPUP 1 -->
 
 <!-- <div id="myModal2" class="modal fade" role="dialog">
@@ -159,16 +159,14 @@ include 'db.inc.php';
                                     <div class="covid_links mb-4">
                                         <div class="d-flex mb-3 ab_none justify-content-between align-items-center">
                                             <div><h1 class="title mb-0">ViewPoint</h1></div>
-                                            <div><a href="view-points.php" class="fade_anim d-block viewPoint_btn"> View All</a></div>
+                                            <div><a href="https://gjepc.org/solitaire/category/viewpoint/" target="_blank" class="fade_anim d-block viewPoint_btn"> View All</a></div>
                                         </div>
                                        <!--  <a href="https://gjepc.org/solitaire/south-india-is-opening-up-to-18-kt-gold/" target="_blank">South India Is Opening Up To 18-Kt Gold</a> -->
 
-                                        <a href="https://gjepc.org/solitaire/certification-under-swarna-adarsh-abhiyan-could-begin-by-end-of-2023-mike-oswin/" target="_blank">Certification Under Swarna Adarsh Abhiyan Could Begin By End Of 2023: Mike Oswin</a>
+                                        <a href="https://gjepc.org/solitaire/orders-worth-%e2%82%b949407-crores-placed-at-iijs-premiere-2022-hansa-report/" target="_blank">Orders Worth ₹49407 crores Placed at IIJS Premiere 2022: Hansa Report</a>
 
-                                        <a href="https://gjepc.org/solitaire/department-of-commerce-sets-gj-export-target-of-45-7-billion-for-2022-23/" target="_blank">Department of Commerce Sets G&J Export Target Of $45.7 Billion For 2022-23</a>
-                                        <!-- <a href="https://gjepc.org/solitaire/us-consumer-diamond-demand-in-2022-is-poised-to-remain-resilient/" target="_blank">US Consumer Diamond Demand In 2022 Is Poised to Remain Resilient</a>
-
-                                        <a href="https://gjepc.org/solitaire/gold-sheds-war-premium-but-uncertainty-may-see-price-soar-again/" target="_blank">Gold Sheds War Premium, But Uncertainty May See Price Soar Again</a> -->
+                                        <a href="https://gjepc.org/solitaire/uks-financial-crisis-triggers-big-challenges-for-importing-jewellers/" target="_blank">UK’s Financial Crisis Triggers Big Challenges For Importing Jewellers</a>
+                                        
                                 
                                     </div>
                                     <a href="gjepc-webinar.php" class="fade_anim d-block viewPoint_btn rounded-0 text-center py-2 mb-4"><i class="fa fa-desktop" aria-hidden="true"></i> Click Here For Webinar</a>
@@ -188,7 +186,7 @@ include 'db.inc.php';
                             <div><img src="assets-new/images/home_page/rightBox01/ijh2.webp" class="w-100 border-0" alt=""></div>
                             <div><img src="assets-new/images/home_page/rightBox01/ijh3.webp" class="w-100 border-0" alt=""></div>
                         </a>
-                        <a href="https://amritmahotsav.nic.in/har-ghar-tiranga.htm" target="_blank" class="d-block"><img src="assets-new/images/home_page/rightBox02/harghar-tiranga-min.webp" class="w-100 d-block" alt=""></a>                                         
+                        <a href="https://gjepc.org/iijs-signature/" target="_blank" class="d-block"><img src="assets-new/images/home_page/rightBox02/iijs-signature-extend.jpg" class="w-100 d-block" alt=""></a>                                         
                     </div>  
                 </div>
             </div> 
@@ -211,54 +209,49 @@ include 'db.inc.php';
         </div>        
     </div> <!-- /ticker Section -->
 
-    <div class="container mb-5">
+   <!-- <div class="container mb-5">
         <h2 class="title text-center">EVS Voting</h2>
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <a href="https://gjepcdpgc2022.in/" target="_blank" class="panelVote">
                     Diamond Panel Voting 
-                   <!--  <span class="voteLink">https://gjepcdpgc2022.in/</span> -->
-                    <!-- <svg viewBox="0 0 24 24" id="_24x24_On_Light_Next" data-name="24x24/On Light/Next" xmlns="http://www.w3.org/2000/svg">
-  <rect id="view-box" width="24" height="24"opacity="0"/>
-  <path id="Shape" d="M10.22,9.28a.75.75,0,0,1,0-1.06l2.72-2.72H.75A.75.75,0,0,1,.75,4H12.938L10.22,1.281A.75.75,0,1,1,11.281.22l4,4a.749.749,0,0,1,0,1.06l-4,4a.75.75,0,0,1-1.061,0Z" transform="translate(4.25 7.25)" />
-</svg> -->
+                   
 
 <span class="blink" style="color:#f00; font-size: 14px;">New*</span>
 
                 </a></div>
                 
-            <div class="col-md-6"><a href="https://gjepcsjpgc2022.in/" target="_blank" class="panelVote">Studded Jewellery Panel Voting <span class="blink" style="color:#f00; font-size: 14px;">New*</span>  <!-- <svg viewBox="0 0 24 24" id="_24x24_On_Light_Next" data-name="24x24/On Light/Next" xmlns="http://www.w3.org/2000/svg">
-  <rect id="view-box" width="24" height="24"opacity="0"/>
-  <path id="Shape" d="M10.22,9.28a.75.75,0,0,1,0-1.06l2.72-2.72H.75A.75.75,0,0,1,.75,4H12.938L10.22,1.281A.75.75,0,1,1,11.281.22l4,4a.749.749,0,0,1,0,1.06l-4,4a.75.75,0,0,1-1.061,0Z" transform="translate(4.25 7.25)" />
-</svg>  --></a></div>
+            <div class="col-md-6"><a href="https://gjepcsjpgc2022.in/" target="_blank" class="panelVote">Studded Jewellery Panel Voting <span class="blink" style="color:#f00; font-size: 14px;">New*</span>  
+</a></div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container mb-5">
         <div class="adv_slider">
+            
+             <div>
+                <div class="row">
+                    
+                    
+                     <!-- <div class="col-md-6"><a href="banking-summit-2022.php" target="_blank" class="d-block capture_click"><img src="assets-new/images/600x200bs.jpg" class="img-fluid" alt=""></a></div> -->
+                     <div class="col-md-6"><a href="https://www.giaindia.in/pearl-analysis/?utm_source=GJEPC_IIJS_Pearl_GIA&utm_medium=GJEPC_IIJS_Pearl_GIA&utm_campaign=GJEPC_IIJS_Pearl_GIA&utm_id=GJEPC_IIJS_Pearl_GIA&utm_term=GJEPC_IIJS_Pearl_GIA" class="d-block capture_click" target="_blank"><img src="assets-new/images/home_page/advertisement/Pearl web banner_GJEPC-min.webp" class="img-fluid" alt=""></a></div>
+
+                       <div class="col-md-6"><a href="https://www.gold.org/" target="_blank" class="d-block capture_click"><img src="assets-new/images/600x200%20pixel_2.jpg" class="img-fluid" alt=""></a></div>
+                </div>
+            </div>
+
             <div>
                 <div class="row">
-                    <div class="col-md-6"><a href="https://gjepc.org/iijs-premiere/iijs-spectrum-seminars.php" target="_blank" class="d-block capture_click" target="_blank"><img src="assets/images/advertisement/art-schedule-seminar-min.webp" class="img-fluid" alt=""></a></div>
-                   
-                    <div class="col-md-6"><a href="https://gjepc.org/iijs-premiere/" target="_blank" class="d-block"><img src="assets-new/images/home_page/advertisement/iijsP-min.webp" class="img-fluid" alt=""></a></div>
+                 
 
-                      
-                    
-                </div>
-            </div>
-             <div>
-                <div class="row">
-                    <div class="col-md-6"><a href="https://www.giaindia.in/pearl-analysis/?utm_source=GJEPC_IIJS_Pearl_GIA&utm_medium=GJEPC_IIJS_Pearl_GIA&utm_campaign=GJEPC_IIJS_Pearl_GIA&utm_id=GJEPC_IIJS_Pearl_GIA&utm_term=GJEPC_IIJS_Pearl_GIA" class="d-block capture_click" target="_blank"><img src="assets-new/images/home_page/advertisement/Pearl web banner_GJEPC-min.webp" class="img-fluid" alt=""></a></div>
+                  
+
                     <div class="col-md-6"><a href="https://gjepc.org/solitaire/" data-id="4" class="d-block capture_click" target="_blank"><img src="assets-new/images/home_page/advertisement/solitaire.webp" class="img-fluid" alt=""></a></div>
+
                     
                 </div>
             </div>
-             <div>
-                <div class="row">
-                    <div class="col-md-6"><a href="https://www.gold.org/" target="_blank" class="d-block capture_click"><img src="assets-new/images/home_page/advertisement/600x200_pixel_1-min.webp" class="img-fluid" alt=""></a></div>
-                    
-                </div>
-            </div>
+            
         </div>
     </div>
     
@@ -294,27 +287,19 @@ include 'db.inc.php';
         
         <div class="event_slider"> 
 
-            <!-- <div>
+           
+             <div>
                 <div class="event_wrp">
-                   <a href="https://cbpssubscriber.mygov.in/aff/Kdca3l88EM4pCQoM" target="_blank"><img src="https://cbpssubscriber.mygov.in/assets/uploads/89vQkZbZihu8Szgn" id="_Kdca3l88EM4pCQoM" onclick="javascript:window.open('https://cbpssubscriber.mygov.in/aff/Kdca3l88EM4pCQoM')" style="cursor:pointer; width: 100%; height:100%; object-fit: cover;" onload="javascript:(function(){if(typeof _done == 'undefined' || !_done){this.setAttribute('src', this.getAttribute('src')+'?'+Math.floor((Math.random() * 100) + 1)); _done=true;}}).call(this)" ></a>
+                    <a href="annual_reports.php"> <img src="assets/images/annualReport.jpg" class="img-fluid"> </a>
                 </div>
-            </div>
+            </div> 
 
-            <div>
-                <div class="event_wrp">
-                    <a href="https://theartisanawards.com/" target="_blank"> <img src="assets-new/images/home_page/event/artisan-award.webp" class="img-fluid"> </a>
-                </div>
-            </div>   -->
             <div>
                 <div class="event_wrp">
                     <a href="pdf/Unleashing-The-Export-Potential-Of-Indian-Gem&Jewellery-Sector.pdf" target="_blank"> <img src="assets-new/images/home_page/event/Unleashing-The-Export-Potential-Of-Indian-Gem&Jewellery-Sector.jpg" class="img-fluid"> </a>
                 </div>
             </div> 
-            <div>
-                <div class="event_wrp">
-                    <a href="#"> <img src="assets-new/images/home_page/event/harghar-tiranga-logo-Eng-Blue-min.webp" class="img-fluid"> </a>
-                </div>
-            </div> 
+           
             <div>
                 <div class="event_wrp">
                     <a href="pdf/The-10-Glorious-Years-of-GJEPC.pdf" target="_blank"> <img src="assets-new/images/home_page/event/gjepc-10-years-min.webp" class="img-fluid"> </a>
@@ -907,9 +892,6 @@ include 'db.inc.php';
 </section> <!-- main container wrp -->
 
 <?php include 'include-new/footer.php'; ?>
-
-
-
 <script>
 $(document).ready(function(){
     $("#click_popup").on("click", function(e){

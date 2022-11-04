@@ -73,6 +73,18 @@ include 'db.inc.php';
 				<ul class="circular_wrap mt-4">
                  <div class="circular_slider row">
 					<div id="result">
+						<div class="col-12">
+				      <a href="https://gjepc.org/emailer_gjepc/29.09.2022/index.html" target="_blank" class="new_pdf_wrp">
+				          <p class="blue">2022-09-29</p> 
+				          <div class="circular_text">Best export award for the performance year 2018-2019 & 2019-20</div>
+				      </a>
+					</div>
+					<div class="col-12">
+				      <a href="https://www.youtube.com/watch?v=ReCnJV1ZsyA&feature=youtu.be" target="_blank" class="new_pdf_wrp">
+				          <p class="blue">2022-08-20</p> 
+				          <div class="circular_text">You tube recording for online voting process of COA 2022-24 </div>
+				      </a>
+					</div>
 					<?php 
 					$sqlC="SELECT * FROM `circulars_master` WHERE 1 and status='1' and cat_id='$rowsx[id]' order by post_date desc";
 					$resultC=$conn ->query($sqlC);

@@ -93,6 +93,7 @@ if($comm_result['new_update_status']=='No')
 $action=$_REQUEST['action'];
 if($action=="save")
 {
+	// print_r($_POST);exit;
 $registration_id=$_REQUEST['registration_id'];
 $region_id=$_REQUEST['region_id'];
 
@@ -216,7 +217,7 @@ $membership_fees=$rfees['membership_fee'];
 $ad_valorem=$rfees['ad_valorem'];
 */
 $ad_valorem=0;
-$payment_mode	=	$_REQUEST['payment_mode'];
+$payment_mode	=	"3";
 $membership_fees =	trim($_REQUEST['membership_fees']);
 $admission_fees	 =	trim($_REQUEST['admission_fees']);
 $total			=	trim($_REQUEST['total']);
@@ -255,10 +256,11 @@ $queryc = $conn ->query("select * from challan_master where registration_id='$re
 $num = $queryc->num_rows;
 if($num>0)
 {
+	$resultChallan = $queryc->fetch_assoc();
 	$_SESSION['ReferenceNo']=$ReferenceNo=rand(100,9999999).time();
 	$clog = $conn ->query("insert into challan_payment_log set registration_id='$registration_id',ReferenceNo='$ReferenceNo',post_date='$post_date'");
 	
-	echo $sql1="update challan_master set registration_id='$registration_id',gst_holder_status='$gst_holder_status',export_sales_to_foreign_tourists='$export_sales_to_foreign_tourists',export_synthetic_stones='$export_synthetic_stones',export_costume_jewellery='$export_costume_jewellery',export_other_precious_metal_jewellery='$export_other_precious_metal_jewellery',export_pearls='$export_pearls',export_coloured_gemstones='$export_coloured_gemstones',export_gold_jewellery='$export_gold_jewellery',export_studded_gold_jewellery='$export_studded_gold_jewellery',export_silver_jewellery='$export_silver_jewellery',export_studded_silver_jewellery='$export_studded_silver_jewellery',export_rough_diamonds='$export_rough_diamonds',export_cut_polished_diamonds='$export_cut_polished_diamonds',export_rough_lgd='$export_rough_lgd',export_cut_polished_lgd='$export_cut_polished_lgd',export_imitation_jewellery='$export_imitation_jewellery',export_other_items='$export_other_items',export_total='$export_total',import_findings_mountings='$import_findings_mountings',import_false_pearls='$import_false_pearls',import_rough_imitation_stones='$import_rough_imitation_stones',import_silver='$import_silver',import_raw_pearls='$import_raw_pearls',import_cut_polished_gemstones='$import_cut_polished_gemstones',import_rough_gemstones='$import_rough_gemstones',import_gold='$import_gold',import_cut_polished_diamonds='$import_cut_polished_diamonds',import_rough_diamonds='$import_rough_diamonds',import_synthetic_stones='$import_synthetic_stones',import_gold_jewellery='$import_gold_jewellery',import_silver_jewellery='$import_silver_jewellery',import_rough_lgd='$import_rough_lgd',import_cut_polished_lgd='$import_cut_polished_lgd',import_imitation_jewellery='$import_imitation_jewellery',import_other_items='$import_other_items',import_total='$import_total',export_fob_value='$export_fob_value',import_cif_value='$import_cif_value',challan_financial_year='$cur_fin_yr',challan_region_name='$region_code',challan_region_no='$challan_no',gjepc_account_no='$gjepc_account_no',payment_mode='$payment_mode',membership_fees='$membership_fees',admission_fees='$admission_fees',ad_valorem='$ad_valorem',total='$total',service_tax='$service_tax',total_payable='$total_payable',bank_name='$bank_name',branch_name='$branch_name',branch_city='$branch_city',branch_postal_code='$branch_postal_code',cheque_no='$cheque_no',cheque_date='$cheque_date',ReferenceNo='$ReferenceNo',declaration='$declaration',ReferenceNo='$ReferenceNo',status='1',post_date='$post_date',ip_address='$ip_address' where registration_id='$registration_id' and challan_financial_year='$cur_fin_yr'";
+	 $sql1="update challan_master set registration_id='$registration_id',gst_holder_status='$gst_holder_status',export_sales_to_foreign_tourists='$export_sales_to_foreign_tourists',export_synthetic_stones='$export_synthetic_stones',export_costume_jewellery='$export_costume_jewellery',export_other_precious_metal_jewellery='$export_other_precious_metal_jewellery',export_pearls='$export_pearls',export_coloured_gemstones='$export_coloured_gemstones',export_gold_jewellery='$export_gold_jewellery',export_studded_gold_jewellery='$export_studded_gold_jewellery',export_silver_jewellery='$export_silver_jewellery',export_studded_silver_jewellery='$export_studded_silver_jewellery',export_rough_diamonds='$export_rough_diamonds',export_cut_polished_diamonds='$export_cut_polished_diamonds',export_rough_lgd='$export_rough_lgd',export_cut_polished_lgd='$export_cut_polished_lgd',export_imitation_jewellery='$export_imitation_jewellery',export_other_items='$export_other_items',export_total='$export_total',import_findings_mountings='$import_findings_mountings',import_false_pearls='$import_false_pearls',import_rough_imitation_stones='$import_rough_imitation_stones',import_silver='$import_silver',import_raw_pearls='$import_raw_pearls',import_cut_polished_gemstones='$import_cut_polished_gemstones',import_rough_gemstones='$import_rough_gemstones',import_gold='$import_gold',import_cut_polished_diamonds='$import_cut_polished_diamonds',import_rough_diamonds='$import_rough_diamonds',import_synthetic_stones='$import_synthetic_stones',import_gold_jewellery='$import_gold_jewellery',import_silver_jewellery='$import_silver_jewellery',import_rough_lgd='$import_rough_lgd',import_cut_polished_lgd='$import_cut_polished_lgd',import_imitation_jewellery='$import_imitation_jewellery',import_other_items='$import_other_items',import_total='$import_total',export_fob_value='$export_fob_value',import_cif_value='$import_cif_value',challan_financial_year='$cur_fin_yr',challan_region_name='$region_code',challan_region_no='$challan_no',gjepc_account_no='$gjepc_account_no',payment_mode='$payment_mode',membership_fees='$membership_fees',admission_fees='$admission_fees',ad_valorem='$ad_valorem',total='$total',service_tax='$service_tax',total_payable='$total_payable',bank_name='$bank_name',branch_name='$branch_name',branch_city='$branch_city',branch_postal_code='$branch_postal_code',cheque_no='$cheque_no',cheque_date='$cheque_date',ReferenceNo='$ReferenceNo',declaration='$declaration',ReferenceNo='$ReferenceNo',status='1',post_date='$post_date',ip_address='$ip_address' where registration_id='$registration_id' and challan_financial_year='$cur_fin_yr'";
 	$xresult = $conn ->query($sql1);
 	if (!$xresult) die ($conn->error);
 	
@@ -266,7 +268,7 @@ if($num>0)
 $_SESSION['ReferenceNo']=$ReferenceNo=rand(100,9999999).time();
 $clog = $conn ->query("insert into challan_payment_log set registration_id='$registration_id',ReferenceNo='$ReferenceNo',post_date='$post_date'");
 
-echo $sql1="insert into challan_master set gcode='R',registration_id='$registration_id',gst_holder_status='$gst_holder_status',export_sales_to_foreign_tourists='$export_sales_to_foreign_tourists',export_synthetic_stones='$export_synthetic_stones',export_costume_jewellery='$export_costume_jewellery',export_other_precious_metal_jewellery='$export_other_precious_metal_jewellery',export_pearls='$export_pearls',export_coloured_gemstones='$export_coloured_gemstones',export_gold_jewellery='$export_gold_jewellery',export_studded_gold_jewellery='$export_studded_gold_jewellery',export_silver_jewellery='$export_silver_jewellery',export_studded_silver_jewellery='$export_studded_silver_jewellery',export_rough_diamonds='$export_rough_diamonds',export_cut_polished_diamonds='$export_cut_polished_diamonds',export_rough_lgd='$export_rough_lgd',export_cut_polished_lgd='$export_cut_polished_lgd',export_imitation_jewellery='$export_imitation_jewellery',export_other_items='$export_other_items',export_total='$export_total',import_findings_mountings='$import_findings_mountings',import_false_pearls='$import_false_pearls',import_rough_imitation_stones='$import_rough_imitation_stones',import_silver='$import_silver',import_raw_pearls='$import_raw_pearls',import_cut_polished_gemstones='$import_cut_polished_gemstones',import_rough_gemstones='$import_rough_gemstones',import_gold='$import_gold',import_cut_polished_diamonds='$import_cut_polished_diamonds',import_rough_diamonds='$import_rough_diamonds',import_synthetic_stones='$import_synthetic_stones',import_gold_jewellery='$import_gold_jewellery',import_silver_jewellery='$import_silver_jewellery',import_rough_lgd='$import_rough_lgd',import_cut_polished_lgd='$import_cut_polished_lgd',import_imitation_jewellery='$import_imitation_jewellery',import_other_items='$import_other_items',import_total='$import_total',export_fob_value='$export_fob_value',import_cif_value='$import_cif_value',challan_financial_year='$cur_fin_yr',challan_region_name='$region_code',challan_region_no='$challan_no',gjepc_account_no='$gjepc_account_no',payment_mode='$payment_mode',membership_fees='$membership_fees',admission_fees='$admission_fees',ad_valorem='$ad_valorem',total='$total',service_tax='$service_tax',total_payable='$total_payable',bank_name='$bank_name',branch_name='$branch_name',branch_city='$branch_city',branch_postal_code='$branch_postal_code',cheque_no='$cheque_no',cheque_date='$cheque_date',ReferenceNo='$ReferenceNo',declaration='$declaration',status='1',post_date='$post_date',ip_address='$ip_address'";
+ $sql1="insert into challan_master set gcode='R',registration_id='$registration_id',gst_holder_status='$gst_holder_status',export_sales_to_foreign_tourists='$export_sales_to_foreign_tourists',export_synthetic_stones='$export_synthetic_stones',export_costume_jewellery='$export_costume_jewellery',export_other_precious_metal_jewellery='$export_other_precious_metal_jewellery',export_pearls='$export_pearls',export_coloured_gemstones='$export_coloured_gemstones',export_gold_jewellery='$export_gold_jewellery',export_studded_gold_jewellery='$export_studded_gold_jewellery',export_silver_jewellery='$export_silver_jewellery',export_studded_silver_jewellery='$export_studded_silver_jewellery',export_rough_diamonds='$export_rough_diamonds',export_cut_polished_diamonds='$export_cut_polished_diamonds',export_rough_lgd='$export_rough_lgd',export_cut_polished_lgd='$export_cut_polished_lgd',export_imitation_jewellery='$export_imitation_jewellery',export_other_items='$export_other_items',export_total='$export_total',import_findings_mountings='$import_findings_mountings',import_false_pearls='$import_false_pearls',import_rough_imitation_stones='$import_rough_imitation_stones',import_silver='$import_silver',import_raw_pearls='$import_raw_pearls',import_cut_polished_gemstones='$import_cut_polished_gemstones',import_rough_gemstones='$import_rough_gemstones',import_gold='$import_gold',import_cut_polished_diamonds='$import_cut_polished_diamonds',import_rough_diamonds='$import_rough_diamonds',import_synthetic_stones='$import_synthetic_stones',import_gold_jewellery='$import_gold_jewellery',import_silver_jewellery='$import_silver_jewellery',import_rough_lgd='$import_rough_lgd',import_cut_polished_lgd='$import_cut_polished_lgd',import_imitation_jewellery='$import_imitation_jewellery',import_other_items='$import_other_items',import_total='$import_total',export_fob_value='$export_fob_value',import_cif_value='$import_cif_value',challan_financial_year='$cur_fin_yr',challan_region_name='$region_code',challan_region_no='$challan_no',gjepc_account_no='$gjepc_account_no',payment_mode='$payment_mode',membership_fees='$membership_fees',admission_fees='$admission_fees',ad_valorem='$ad_valorem',total='$total',service_tax='$service_tax',total_payable='$total_payable',bank_name='$bank_name',branch_name='$branch_name',branch_city='$branch_city',branch_postal_code='$branch_postal_code',cheque_no='$cheque_no',cheque_date='$cheque_date',ReferenceNo='$ReferenceNo',declaration='$declaration',status='1',post_date='$post_date',ip_address='$ip_address'";
 	$getResult = $conn ->query($sql1);
 	if(!$getResult) die ($conn->error);
 }	
@@ -274,34 +276,27 @@ echo $sql1="insert into challan_master set gcode='R',registration_id='$registrat
 	$getResults = $conn ->query($sql2);
 	if(!$getResults) die ($conn->error);
 	
+	
 	$email_id    = trim(getUserEmail($registration_id,$conn));
 	$company_name= trim(getNameCompany($registration_id,$conn));
 	$comoany_pan_no = trim(getCompanyPan($registration_id,$conn));
 	$company_bp_no=getBPNO($registration_id,$conn);
-	
-	$key="2200043013901118";
-	
-	$mandate_str=aes128Encrypt($ReferenceNo."|1|".$total_payable."|".$email_id."|".$company_name."|".$comoany_pan_no,$key);
-	$optional_str=aes128Encrypt($company_bp_no,$key);
-	
-	$return_url_str=aes128Encrypt("https://gjepc.org/payment_success.php",$key);
-	$reference_str=aes128Encrypt($ReferenceNo,$key);
-	$submerchant_str=aes128Encrypt("1",$key);
-	$amount_str=aes128Encrypt($total_payable,$key);
-	$payment_mode_str=aes128Encrypt($payment_mode,$key);
-	
-	$encypted_text="https://eazypay.icicibank.com/EazyPG?merchantid=221392&mandatory fields=".$mandate_str."&optional fields=".$optional_str."&returnurl=".$return_url_str."&Reference No=".$reference_str."&submerchantid=".$submerchant_str."&transaction amount=".$amount_str."&paymode=".$payment_mode_str;
-	/*................................Get payment Status........................................*/
-	if($payment_mode=="1"){
-		$_SESSION['succ_msg']="Challan Successfully Saved";
-		header('location:apply_rcms_certificate.php');exit;
-	}
-	else if($result['Response_Code']=="E000"){
+    /*................................Get payment Status........................................*/
+    
+		if($resultChallan['Response_Code']=="E000" || $resultChallan['Response_Code']=="captured"){
 		$_SESSION['succ_msg']="You have already made the payment";
-		header('location:apply_rcms_certificate.php');exit;
+		// header('location:apply_rcms_certificate.php');exit;
+		echo "<script type='text/javascript'> alert('You have already made the payment');
+			window.location.href='apply_rcms_certificate.php';
+			</script>";
+			return;	exit;
 	}else{
-		header('location:'.$encypted_text);exit;
+		include 'membership_pay.php';
 	}
+	
+	
+	
+	
 }
 ?>
 
@@ -635,12 +630,12 @@ $num = $ccc->num_rows;
 				<div class="col-md-6"></div>
 			</div>-->
             
-            <div id="manufDiv" class="col-12">
+        <!--     <div id="manufDiv" class="col-12">
             	<div class="row">
 				<div class="form-group col-12">
 					<label class="form-label" for="company_name">Payment Mode: <span>*</span></label>
 						<div class="form-group radio inline-form">
-							<label for="No"><input type="radio" name="payment_mode" id="payment_mode" value="3" /> NetBanking</label>			
+							<label><input type="radio"  name="payment_mode" id="payment_mode" value="3"  /> &nbsp; Online </label>			
 							<label for="Yes"><input type="radio" name="payment_mode" id="payment_mode" value="4" /> Debit Card</label>
 							<label for="No"><input type="radio" name="payment_mode" id="payment_mode" value="5" /> Credit Card</label>				  
                             <label for="No"><input type="radio" name="payment_mode" id="payment_mode" value="2" /> RTGS/NEFT </label>
@@ -648,7 +643,7 @@ $num = $ccc->num_rows;
 					
 				</div>
                 </div>
-			</div>
+			</div> -->
              <div class="form-group col-sm-6">
 				<label class="form-label" for="membership_fees">Membership Fees: <span>*</span></label>
 				<input type="text" class="form-control" id="membership_fees" name="membership_fees" value="<?php echo $membership_fees;?>" readonly="readonly" placeholder="Membership Fees"/>
@@ -949,7 +944,6 @@ $.validator.addMethod("gst_no", function(value, element) {
              //   maxlength: 15,
 			//    gst_no: true
             },
-			payment_mode: "required",
 			
 			membership_fees: "required",
 			admission_fees: "required",
@@ -1081,7 +1075,6 @@ $.validator.addMethod("gst_no", function(value, element) {
 				minlength:"Please enter not less than 15 characters",
 				maxlength:"Please enter not more than 15 characters"
 				},
-			payment_mode: "Required.",
 			membership_fees: "Please enter membership fees",
 			admission_fees: "Please enter admission fees",
 			total: "Please enter total amount",
@@ -1307,29 +1300,37 @@ $(document).ready(function () {
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("input[name='payment_mode']").click(function () {
-			if($(this).val()=="1") {
-				$("#bank_details").show();
-								
-				$("#bank_name").removeAttr("disabled");
-				$("#branch_name").removeAttr("disabled");
-				$("#branch_city").removeAttr("disabled");
-				$("#branch_postal_code").removeAttr("disabled");
-				$("#cheque_no").removeAttr("disabled");
-				$("#cheque_date").removeAttr("disabled");				
-				
-            } else {
-				
-                $("#bank_details").hide();
+    			$("#bank_details").hide();
 				$("#bank_name").attr("disabled", "disabled"); 
 				$("#branch_name").attr("disabled", "disabled"); 
 				$("#branch_city").attr("disabled", "disabled"); 
 				$("#branch_postal_code").attr("disabled", "disabled"); 
 				$("#cheque_no").attr("disabled", "disabled"); 
 				$("#cheque_date").attr("disabled", "disabled"); 
+
+   //      $("input[name='payment_mode']").click(function () {
+			// if($(this).val()=="1") {
+			// 	$("#bank_details").show();
+								
+			// 	$("#bank_name").removeAttr("disabled");
+			// 	$("#branch_name").removeAttr("disabled");
+			// 	$("#branch_city").removeAttr("disabled");
+			// 	$("#branch_postal_code").removeAttr("disabled");
+			// 	$("#cheque_no").removeAttr("disabled");
+			// 	$("#cheque_date").removeAttr("disabled");				
 				
-            }
-        });
+   //          } else {
+				
+   //              $("#bank_details").hide();
+			// 	$("#bank_name").attr("disabled", "disabled"); 
+			// 	$("#branch_name").attr("disabled", "disabled"); 
+			// 	$("#branch_city").attr("disabled", "disabled"); 
+			// 	$("#branch_postal_code").attr("disabled", "disabled"); 
+			// 	$("#cheque_no").attr("disabled", "disabled"); 
+			// 	$("#cheque_date").attr("disabled", "disabled"); 
+				
+   //          }
+   //      });
     });
 </script>
 <style type="text/css">

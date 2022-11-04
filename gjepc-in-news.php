@@ -1076,6 +1076,54 @@ include 'db.inc.php';
 
             <ul id="" class="circular_wrap row mb-4">
 
+              <li class="col-12 item">
+                      <a href="https://jewelleryoutlook.com/industry-news-vipul-shah-takes-charge-as-chairman-of-the-gem-jewellery-export-promotion-council-for-the-term-september-2022-september-2024/" target="_blank" class="new_pdf_wrp">
+                          <div class="circular_text">INDUSTRY NEWS – Vipul Shah takes charge as Chairman of the Gem & Jewellery Export Promotion Council from September 2022-September 2024
+</div>
+                          <div class="clearfix"></div>
+                      </a>
+                  </li>
+
+                          <li class="col-12 item">
+                      <a href="https://instoremag.com/iijs-premiere-2022-creates-history-records-50000-visitors-expected-to-generate-business-worth-rs-50000-crore/?utm_source=omeda&utm_medium=email&utm_campaign=Newsletter&utm_term=&utm_content=IS+Newsletter_bulletin-subscribers&oly_enc_id=9718I1568689I0D" target="_blank" class="new_pdf_wrp">
+                          <div class="circular_text">IIJS Premiere 2022 Creates History – Records 50,000 Visitors; Expected to Generate Business Worth Rs. 50,000 Crore
+</div>
+                          <div class="clearfix"></div>
+                      </a>
+                  </li>
+
+                                <li class="col-12 item">
+                      <a href="https://www.naj.co.uk/jewellery-news/david-brough-man-on-the-move-attendance-hits-record-high-at-indias-biggest-jewellery-trade-show" target="_blank" class="new_pdf_wrp">
+                          <div class="circular_text">MAN ON THE MOVE - Attendance hits record high at India’s biggest jewellery trade show
+</div>
+                          <div class="clearfix"></div>
+                      </a>
+                  </li>
+
+                  <li class="col-12 item">
+                      <a href="https://www.goldbookmagazine.com/gbm/iijs-premiere-2022-creates-history-records-50000-visitors-expected-to-generate-business-worth/news/" target="_blank" class="new_pdf_wrp">
+                          <div class="circular_text">IIJS PREMIERE 2022 CREATES HISTORY – RECORDS 50,000 VISITORS; EXPECTED TO GENERATE BUSINESS WORTH
+</div>
+                          <div class="clearfix"></div>
+                      </a>
+                  </li>
+    
+
+
+              <li class="col-12 item">
+                      <a href="https://jewelleryoutlook.com/industry-news-india-pavilion-showcased-at-jgw-singapore/" target="_blank" class="new_pdf_wrp">
+                          <div class="circular_text">TRADE FAIR – India Pavilion showcased at JGW Singapore</div>
+                          <div class="clearfix"></div>
+                      </a>
+                  </li>
+
+          
+
+
+
+
+
+
 
               <li class="col-12 item">
                       <a href="https://www.jckonline.com/editorial-article/artisan-awards-jewelry-collectors/" target="_blank" class="new_pdf_wrp">
@@ -1348,6 +1396,17 @@ include 'db.inc.php';
             <h2 class="title">TV Interviews</h2>            
             <div class="video_listing">
 
+
+              <div class="mx-3">
+                    <a data-fancybox href="https://www.youtube.com/watch?v=RLP8VlITTl4" class="d-block"><img src="assets/images/video_thumb/gjepc_news/18.10.2022.jpg" class="img-fluid d-block" alt=""></a>
+                </div>
+
+              <div class="mx-3">
+                    <a data-fancybox href="https://www.youtube.com/watch?v=Zc0b6OtyOik" class="d-block"><img src="assets/images/video_thumb/gjepc_news/18.08.2022.jpg" class="img-fluid d-block" alt=""></a>
+                </div>
+              <div class="mx-3">
+                    <a data-fancybox href="https://www.youtube.com/watch?v=5Zho2aVj3WY" class="d-block"><img src="assets/images/video_thumb/gjepc_news/29.07.2022.jpg" class="img-fluid d-block" alt=""></a>
+                </div>
               <div class="mx-3">
                     <a data-fancybox href="https://www.youtube.com/watch?v=_hxLvipbbKY" class="d-block"><img src="assets/images/video_thumb/gjepc_news/14-07-2022.jpg" class="img-fluid d-block" alt=""></a>
                 </div>

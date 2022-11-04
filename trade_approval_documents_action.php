@@ -60,7 +60,7 @@ if(isset($_FILES['upload1']) && $_FILES['upload1']['name']!="")
 
 	if(isset($_FILES['upload3']) && $_FILES['upload3']['name']!="")
 		{
-			 $file_name3=$_FILES['upload3']['name'];
+			$file_name3=$_FILES['upload3']['name'];
 			$file_temp3=$_FILES['upload3']['tmp_name'];
 			$file_type3=$_FILES['upload3']['type'];
 			$file_size3=$_FILES['upload3']['size'];
@@ -181,7 +181,7 @@ $message ='<table width="96%" bgcolor="#fbfbfb" style="margin:2% auto; border:2p
 		<td style="padding:30px;">
 		<table width="100%" border="0px" background="#fbfbfb" cellpadding="0px" cellspacing="0px">		
 		<tr>
-		<td align="left"><img src="https://gjepc.org/images/gjepc_logon.png" width="238" height="78" /></td>
+		<td align="left"><img src="https://gjepc.org/assets/images/logo.webp" width="238" height="78" /></td>
 		</tr>
 		<tr><td></td><td align="right"></td></tr>
 		<tr><td align="right" colspan="2" height="30px"><hr /></td></tr>
@@ -218,7 +218,7 @@ $message ='<table width="96%" bgcolor="#fbfbfb" style="margin:2% auto; border:2p
 		<td style="padding:30px;">
 		<table width="100%" border="0px" background="#fbfbfb" cellpadding="0px" cellspacing="0px">		
 		<tr>
-		<td align="left"><img src="https://gjepc.org/images/gjepc_logon.png" width="238" height="78" /></td>
+		<td align="left"><img src="https://gjepc.org/assets/images/logo.webp" width="238" height="78" /></td>
 		</tr>
 		<tr><td></td><td align="right"></td></tr>
 		<tr><td align="right" colspan="2" height="30px"><hr /></td></tr>
@@ -289,7 +289,7 @@ $message ='<table width="96%" bgcolor="#fbfbfb" style="margin:2% auto; border:2p
 		<td style="padding:30px;">
 		<table width="100%" border="0px" background="#fbfbfb" cellpadding="0px" cellspacing="0px">		
 		<tr>
-		<td align="left"><img src="http://www.gjepc.org/images/indo_gjepc_logo.png" width="238" height="78" /></td>
+		<td align="left"><img src="https://gjepc.org/assets/images/logo.webp" width="238" height="78" /></td>
 		</tr>
 		<tr><td></td><td align="right"></td></tr>
 		<tr><td align="right" colspan="2" height="30px"><hr /></td></tr>
@@ -328,7 +328,7 @@ $message ='<table width="96%" bgcolor="#fbfbfb" style="margin:2% auto; border:2p
 		<td style="padding:30px;">
 		<table width="100%" border="0px" background="#fbfbfb" cellpadding="0px" cellspacing="0px">		
 		<tr>
-		<td align="left"><img src="http://www.gjepc.org/images/indo_gjepc_logo.png" width="238" height="78" /></td>
+		<td align="left"><img src="https://gjepc.org/assets/images/logo.webp" width="238" height="78" /></td>
 		</tr>
 		<tr><td></td><td align="right"></td></tr>
 		<tr><td align="right" colspan="2" height="30px"><hr /></td></tr>

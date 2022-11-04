@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Calcutta');
 error_reporting(0);
 
-$hostname = "localhost";
+$hostname = "192.168.40.107";
 $uname = "gjepcliveuserdb";
 $pwd = "KGj&6(pcvmLk5";
 $database = "gjepclivedatabase";
@@ -12,6 +12,14 @@ $conn = new mysqli($hostname, $uname, $pwd, $database);
 // Check connection
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+function getwbs($event,$conn)
+{
+	$query_sel = "SELECT wbs FROM visitor_event_master where shortcode='$event'";	
+	$result = $conn->query($query_sel);
+	$row = $result->fetch_assoc(); 		
+	return $row['wbs'];
 }
 
 function getBPNO($registration_id,$conn)
@@ -32,7 +40,7 @@ function getCompanyNonMemBPNO($registration_id,$conn)
 
 function getSap_material_no($event,$conn)
 {
-	$query_sel = "SELECT material_no FROM visitor_event_master where shortcode='$event' AND status='1'";	
+	$query_sel = "SELECT material_no FROM visitor_event_master where shortcode='$event'";	
 	$result = $conn->query($query_sel);
 	$row = $result->fetch_assoc(); 		
 	return $row['material_no'];
@@ -65,9 +73,11 @@ $soapRenewalUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageSer
 $soapUser = "pi_admin";  //  username
 $soapPassword = "Deloitte@123"; // password
 	
-$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2022' AND event='iijs22' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND sales_order_no IS NULL order by tpsl_txn_time";
+//$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2023' AND event='signature23' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND sales_order_no='pecify eith' order by tpsl_txn_time asc";  
 
-//$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2023' AND event='combo23' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND sales_order_no IS NULL order by tpsl_txn_time";
+//$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2023' AND event='signature23' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND sales_order_no IS NULL order by tpsl_txn_time desc";
+
+$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2023' AND event='stcombo23' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND sales_order_no IS NULL order by tpsl_txn_time desc";
 
 //$values = "SELECT * FROM `visitor_order_detail` WHERE 1 AND payment_status='Y' AND year='2022' AND event='iijs22' AND payment_type!='free' AND txn_status='0300' AND sap_sale_order_create_status='0' AND regId='600905790' AND sales_order_no IS NULL limit 1";
 $sqlx = $conn ->query($values);
@@ -82,23 +92,28 @@ if($countx > 0)
 		
 		$checkMember = CheckMembership($registration_id,$conn);
 		if($checkMember=="M")
+		{
 			$ho_bp_number = getBPNO($registration_id,$conn);
-		else
+		} else {
+			$ho_bp_number = getBPNO($registration_id,$conn);
+			if($ho_bp_number !=''){
+			$ho_bp_number = getBPNO($registration_id,$conn);
+			} else {
 			$ho_bp_number = getCompanyNonMemBPNO($registration_id,$conn);
-
+			}
+		}
+		
 		$order_id = $challanResult['orderId'];
 		$amountPaid = $challanResult['total_payable'];
 		$txnID = $challanResult['tpsl_txn_id'];
 		$txnDate = $challanResult['tpsl_txn_time'];
 		$getTxnDate = date("Ymd", strtotime($txnDate));
 		
-		$bpinfo = "SELECT * FROM `registration_master` WHERE `id` = '$registration_id' limit 1";
+		$bpinfo = "SELECT city FROM `registration_master` WHERE `id` = '$registration_id' limit 1";
 		$bpInfoResult = $conn ->query($bpinfo);
 		$bpRows = $bpInfoResult->fetch_assoc();
 		$city = $bpRows['city'];
-		
-		$wbs = 'DE-071';
-	
+			
 	$xml_exhibition_string = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gjep="http://gjepcvisitorreg.com">
 	<soapenv:Header/>
 	<soapenv:Body>
@@ -118,8 +133,8 @@ if($countx > 0)
 			<Event_Type>D</Event_Type>
         </SOAD_Header>';
 	 
-	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND year='2022' AND `show`='iijs22'";
-//	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND year='2023' AND `show`='combo23'";
+//	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND year='2023' AND `show`='signature23'";
+	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND year='2023' AND `show`='stcombo23'";
 	$visitor_result = $conn ->query($visitor_query);
 	$countx = $visitor_result->num_rows;
 	$counter = "10";
@@ -129,6 +144,7 @@ if($countx > 0)
 	$amount = $visitor_row['amount'];
 	$event = $visitor_row['payment_made_for'];
 	$event_material = getSap_material_no($visitor_row['payment_made_for'],$conn);
+	$event_wbs = getwbs($visitor_row['payment_made_for'],$conn);
 	if($visitor_id!=''){
 		$visitorBP_id = getVisitorBPNo($visitor_id,$conn);
 		if($visitorBP_id!=''){ $visitorBP_id = getVisitorBPNo($visitor_id,$conn); } else { echo $registration_id.' <br/> N'; exit; }
@@ -142,7 +158,7 @@ if($countx > 0)
             <Order_Qty>1</Order_Qty>
             <Plant>1110</Plant>
             <Item_Category>TAD</Item_Category>
-            <WBS>'.$wbs.'</WBS>
+            <WBS>'.$event_wbs.'</WBS>
 			<cond1_Lebel>ZVIS</cond1_Lebel>
             <Cond1_Val>'.$amount.'</Cond1_Val>
             <Cond2_Lebel></Cond2_Lebel>
@@ -166,7 +182,7 @@ if($countx > 0)
             <Posting_date>'.$getTxnDate.'</Posting_date>
             <Company_code>1000</Company_code>
             <Currency>INR</Currency>
-			<WBS>'.$wbs.'</WBS>
+			<WBS>'.$event_wbs.'</WBS>
             <Account>'.$ho_bp_number.'</Account>
             <Sp_gl_indicator>K</Sp_gl_indicator>
             <Doc_text>'.$order_id.'</Doc_text>
@@ -181,10 +197,10 @@ if($countx > 0)
       </gjep:MT_Visitor_IN>
 		</soapenv:Body>
 	</soapenv:Envelope>';
-				
-	/* header("Content-Type:text/xml");
+	
+	 header("Content-Type:text/xml");
 	 echo $xml_exhibition_string; exit; 
-	*/
+	
 	
 			$headers1 = array(
                         "Content-type: text/xml;charset=\"utf-8\"",
@@ -234,9 +250,9 @@ if($countx > 0)
 					if(!empty($strings))
 					{	$flag=1;
 						$sales_order_no = trim(substr($strings, strpos($strings, "@ ")+1,11));
-						$sqlx = "UPDATE `visitor_order_detail` SET `sap_push_date`=NOW(),`sap_push_admin`='1',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1',delivery_id='dump' WHERE `regId`='$registration_id' AND orderId='".$order_id."' AND year='2022' AND event='iijs22'";
+				//		$sqlx = "UPDATE `visitor_order_detail` SET `sap_push_date`=NOW(),`sap_push_admin`='1',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1',delivery_id='dump' WHERE `regId`='$registration_id' AND orderId='".$order_id."' AND year='2023' AND event='signature23'";
 					
-				//	$sqlx = "UPDATE `visitor_order_detail` SET `sap_push_date`=NOW(),`sap_push_admin`='1',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1',delivery_id='dump' WHERE `regId`='$registration_id' AND orderId='".$order_id."' AND year='2023' AND event='combo23'";
+					$sqlx = "UPDATE `visitor_order_detail` SET `sap_push_date`=NOW(),`sap_push_admin`='1',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1',delivery_id='dump' WHERE `regId`='$registration_id' AND orderId='".$order_id."' AND year='2023' AND event='stcombo23'";
 					$result = $conn ->query($sqlx);
 					if($result){ header("Location: https://gjepc.org/dump_bulk_visitor_so.php"); }
 					}

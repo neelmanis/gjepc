@@ -39,6 +39,21 @@ include 'functions.php';
             
             <div class="any_slider">
             <div class="px-3">
+                    <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-July-2022.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-July-2022.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
+            <div class="px-3">
+                    <a href="pdf/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
+            <div class="px-3">
+                    <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-June-2022.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-June-2022.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
+            <div class="px-3">
                     <a href="pdf/market_reports/India-Malaysia-Collaboration-Possibilities-2.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/India-Malaysia-Collaboration-Possibilities-2.jpg" class="img-fluid d-block">
                     </a>
@@ -53,21 +68,7 @@ include 'functions.php';
                         <img src="assets/images/market_reports/Annual-report-2021-22.jpg" class="img-fluid d-block">
                     </a>
                 </div>
-                <div class="px-3">
-                    <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-March-2022.pdf" target="_blank" class="any_box">
-                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-March-2022.jpg" class="img-fluid d-block">
-                    </a>
-                </div>
-                <div class="px-3">
-                    <a href="pdf/G&J-Trade-Trends-April-December-2021-Report.pdf" target="_blank" class="any_box">
-                        <img src="assets/images/market_reports/G&J-Trade-Trends-April-December-2021-Report.jpg" class="img-fluid d-block">
-                    </a>
-                </div>
-                <div class="px-3">
-                    <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-February-2022.pdf" target="_blank" class="any_box">
-                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-February-2022.jpg" class="img-fluid d-block mb-3">
-                    </a>
-                </div>
+                
                 <div class="px-3">
                     <a href="pdf/market_reports/India-Malaysia-Global-Connect-Report.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/India-Malaysia-Global-Connect-Report.jpg" class="img-fluid d-block mb-3">
@@ -106,9 +107,11 @@ include 'functions.php';
         
                 <div class="col">                
                     <marquee class="d-block"> 
-                        <a href="#">June 2022 Export/Import Figures</a> 
-                        <a href="#">G&J trade quick update – June 2022</a> 
-                        <a href="#">G&J Trade trends quarterly report – (April -June 2022)</a> 
+                        <!-- <a href="#">August 2022 Export/Import figures </a>  -->
+                        <a href="#">SEZ Catalyst for G&J sector report</a>
+                        <a href="#">G&J Trade Trends Half Yearly Report ( April -September 2022)</a>
+                        <a href="#">SEZ Catalyst for gems and jewellery sector report </a> 
+                        <a href="#">G&J Trade trends quarterly report - (April -June 2022)</a> 
                         <a href="#">SEZ Focus Quarterly Newsletter # 3</a> 
                     </marquee>                 
                 </div>  
@@ -119,15 +122,19 @@ include 'functions.php';
         
                 <div class="col">                
                     <marquee class="d-block"> 
-                        <a href="pdf/market_reports/India-Malaysia-Collaboration-Possibilities-2.pdf" target="_blank" class="new_pdf_wrp">India – Malaysia Collaboration Possibilities # 2 </a>
-                        <a href="pdf/GJ-Trade-Trends-Annual-report-2021-22.pdf" target="_blank" class="new_pdf_wrp">Gem & Jewellery Trade Trends - April - March 2022 </a>
-                        <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-March-2022.pdf" target="_blank">G&J Trade Quick update ( April -March 2022 ) </a>
-                        <a href="pdf/G&J-Trade-Trends-April-December-2021-Report.pdf" target="_blank">Gems and Jewellery Trade trends Quarterly report ( April – December  2021 )</a> 
-                        <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-February-2022.pdf" target="_blank">G&J Trade Quick update (April - February 2022)</a>    
+                        <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-September-2022.pdf" target="_blank" >Gem and Jewellery Trade Update April - September 2022</a>
+                       
+                        <a href="pdf/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.pdf" target="_blank" >Unleashing The Export Potential Of Indian Gem & Jewellery Sector w.r.t Export Targets, Export Strategy and Achievements in FY2021-2022 </a>
+                      
+                        <a href="pdf/market_reports/India-Malaysia-Collaboration-Possibilities-2.pdf" target="_blank" >India – Malaysia Collaboration Possibilities # 2 </a>
+                        <a href="pdf/GJ-Trade-Trends-Annual-report-2021-22.pdf" target="_blank" >Gem & Jewellery Trade Trends - April - March 2022 </a>
+                        <!-- <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-March-2022.pdf" target="_blank">G&J Trade Quick update ( April -March 2022 ) </a> -->
+                        <!-- <a href="pdf/G&J-Trade-Trends-April-December-2021-Report.pdf" target="_blank">Gems and Jewellery Trade trends Quarterly report ( April – December  2021 )</a>  -->
+                        <!-- <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-February-2022.pdf" target="_blank">G&J Trade Quick update (April - February 2022)</a>     -->
                         <a href="pdf/market_reports/India-Malaysia-Global-Connect-Report.pdf" target="_blank">India – Malaysia Collaboration possibilities </a>
                         <a href="pdf/market_reports/India-Egypt-Global-Connect-Report.pdf" target="_blank">India - Egypt Collaboration possibilities </a>
                         <a href="pdf/market_reports/India–Lebanon-IGC-Report.pdf" target="_blank">India - Lebanon Collaboration possibilities</a> 
-                        <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-Jan-2022.pdf" target="_blank">G&J Trade Quick update ( April -January 2022)</a>
+                        <!-- <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-Jan-2022.pdf" target="_blank">G&J Trade Quick update ( April -January 2022)</a> -->
                         <a href="assets/images/statistics/sez/SEZ-Focus-GJEPC-Quarterly-Newsletter2.pdf" target="_blank">SEZ Focus # 2 quarterly newsletter </a> 
                     </marquee>                 
                 </div>        
@@ -489,6 +496,18 @@ include 'functions.php';
                                                 <div id="monthly_2022">
 
                                                     <ul class="row">
+                                                    <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-September-2022.pdf" target="_blank" class="new_pdf_wrp">April - September 2022</a>
+                                                        </li>
+                                                    <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-August-2022.pdf" target="_blank" class="new_pdf_wrp">April - August 2022</a>
+                                                        </li>
+                                                        <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-July-2022.pdf" target="_blank" class="new_pdf_wrp">April -July 2022</a>
+                                                        </li>
+                                                        <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-June-2022.pdf" target="_blank" class="new_pdf_wrp">April -June 2022</a>
+                                                        </li>
                                                         <li class="col-md-4 px-2">
                                                             <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-May-2022.pdf" target="_blank" class="new_pdf_wrp">April - May 2022 </a>
                                                         </li>
@@ -637,8 +656,13 @@ include 'functions.php';
                                                 <ul class="row">   
 
                                                         <li class="col-md-6 px-2">
+                                                            <a href="pdf/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            Unleashing The Export Potential Of Indian Gem & Jewellery Sector w.r.t Export Targets, Export Strategy and Achievements in FY2021-2022
+                                                            </a>
+                                                        </li>    
+                                                        <li class="col-md-6 px-2">
                                                             <a href="pdf/Reasons-of-fall-in-G&J-exports-2005-17.pdf" target="_blank" class="h-100 new_pdf_wrp">
-                                                           Causes of Decline in Gem and Jewellery Exports  from India FY2005 – FY2017 
+                                                           Causes of Decline in Gem and Jewellery Exports  from India FY2005 - FY2017 
                                                             </a>
                                                         </li>    
 
@@ -694,6 +718,77 @@ include 'functions.php';
 
                                                 <div id="EP_2022" class="Economy_Updates_hide show">                                        
                                                     <ul class="row">  
+                                                        
+                                                    <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/India's-Merchandise-Exports-and-Gem-and-Jewellery-Exports-September-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            India’s Merchandise Exports and Gem and Jewellery Exports September 2022
+ 
+</a></li>
+
+                                                    <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/WTO-Trade-Outlook-And-Statistics-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            Trade Statistics & Outlook -October 2022 
+ 
+</a></li>
+
+
+<li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IMF-WEO-October-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            IMF World Economic Outlook (WEO), October 2022
+ 
+</a></li>
+<li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IIP-August-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            INDEX OF INDUSTRIAL PRODUCTION AND USE-BASED INDEX 
+
+ 
+</a></li>
+
+
+
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/ADB-Outlook-September-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                             Asian Development Outlook, September 2022 
+</a></li>
+
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IIP-July-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                              Index Of Industrial Production And Use-based Index
+July 2022
+</a>
+                                                        </li>
+
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/Foreign-Trade-Data-August-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                                India’s Merchandise Exports and Gem and Jewellery Exports
+August 2022</a>
+                                                        </li>
+
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/FDI-Inflows-in-Gem-and-Jewellery-Sector-Q1-2022-2023.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                               FDI Inflows in Indian Gem and Jewellery Sector
+April -June 2022</a>
+                                                        </li>
+
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/ADB-Outlook-July-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                                Asian Development Outlook, July 2022</a>
+                                                        </li>
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/Foreign-Trade-Data-July-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                                India’s Merchandise Exports and Gem and Jewellery Exports
+July 2022</a>
+                                                        </li>
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IIP-June-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                                INDEX OF INDUSTRIAL PRODUCTION AND USE-BASED INDEX 
+June 2022</a>
+                                                        </li>
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IMF-WEO-July-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                                IMF World Economic Outlook (WEO), July 2022
+</a>
+                                                        </li>
 
                                                         <li class="col-md-6 px-2">
                                                             <a href="pdf/economy_updates/2022/Foreign-Trade-Data-May-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">

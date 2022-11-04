@@ -10,10 +10,7 @@ $registration_id = intval(filter($_SESSION['USERID']));
     <div class="container inner_container">
     
     <h1 class="bold_font text-center mb-5"> <img src="assets/images/gold_star.png"  class="d-block mx-auto mb-4"> My Account - Trade Permission</h1>
-    
 	<div class="row justify-content-between">
-   
-    
 	<div class="col-lg-auto order-lg-12 col-md-12 " data-sticky_parent>
 		<?php include 'include/regMenu.php'; ?>
 	</div>
@@ -28,6 +25,18 @@ $_SESSION['form_chk_msg']='';
 ?>
 
 <div class="col-lg col-md-12 ">
+
+<?php if($admin_allowed=='Y' || $application_status=='C'){ ?>
+<a href="trade_approval.php?action=Add"  class="cta">ADD NEW APPLICATION</a>
+<?php } else if($count==1){
+	if(($today_date > $f_date) && ($app_report_status=='P' || $app_report_status=='N')){?>
+	<div class="padding_width_head" style="font-size:13px;" >NOTE : Report is not submitted duration exceeded 90 days</div>
+	<?php }else {?>
+	<a href="trade_approval.php?action=Add" class="cta">ADD NEW APPLICATION</a>
+	<?php }} else {?>
+    <a href="trade_approval.php?action=Add" class="cta">ADD NEW APPLICATION</a>
+    <?php } ?>
+	
 		<table class="responsive_table portal_table mb-4" style="font-size:13px;">
 			<thead>
 				<tr>
@@ -36,7 +45,6 @@ $_SESSION['form_chk_msg']='';
 					<th>Membership ID</th>
 					<th>Created Date</th>
 					<th>Action</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody id="CommunicationDetails">
@@ -50,7 +58,8 @@ $_SESSION['form_chk_msg']='';
 			?>
 				<tr>
 					<td data-column="No."><?php echo $i;?></td>
-					<td data-column="Member Name"><a href="trade_approval.php?app_id=<?php echo $app_id; ?>"><?php echo $ans['member_name'];?> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+					<td data-column="Member Name"><a href="trade_approval.php?app_id=<?php echo $app_id; ?>">
+					<?php echo filter(strtoupper(str_replace(array('&amp;','&AMP;'), '&', $ans['member_name'])));?> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 					<td data-column="Membership ID"><?php echo filter($ans['membership_id']);?></td>
 					<td data-column="Created Date"><?php echo $ans['created_date'];?></td>
 					<td class="gallery" data-column="Action">
@@ -68,13 +77,13 @@ $_SESSION['form_chk_msg']='';
 					<a href="#">Report & Application Approved</a>			  
 					<?php } ?>
 					</td>
-					<td>
+					<!--<td>
 					<?php if($ans['permission_type']=="exhibition"){?>
 					 <a href="trade_exh_print_ack.php?app_id=<?php echo $app_id; ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
 					<?php } else {?>
 					<a href="trade_other_print_ack.php?app_id=<?php echo $app_id; ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a> 
 					<?php }?>
-					</td>
+					</td>-->
 					<?php $i++; if($ans['admin_allow_for_application']=='Y'){$admin_allowed=$ans['admin_allow_for_application'];}} ?>
 
 <?php
@@ -103,17 +112,6 @@ $application_status = $ans_max2['application_status'];
 </tr>
 </tbody>
 </table>
-
-<?php if($admin_allowed=='Y' || $application_status=='C'){?>
-<a href="trade_approval.php?action=Add"  class="cta">ADD NEW APPLICATION</a>
-<?php }else if($count==1){
-	if(($today_date > $f_date) && ($app_report_status=='P' || $app_report_status=='N')){?>
-	<div class="padding_width_head" style="font-size:13px;" >NOTE : Report is not submitted duration exceeded 90 days</div>
-	<?php }else {?>
-	<a href="trade_approval.php?action=Add" class="cta">ADD NEW APPLICATION</a>
-	<?php }} else {?>
-    <a href="trade_approval.php?action=Add" class="cta">ADD NEW APPLICATION</a>
-    <?php }?>
 </div>
 </div>
 </div>

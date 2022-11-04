@@ -50,7 +50,7 @@ $pageDescription  = "The Gem & Jewellery Export Promotion Council (GJEPC) was se
         </div>
         <?php 
 
-        $sql_webinars = "SELECT * FROM webinar_master WHERE type='webinar' AND status='1' AND post_date >= CURDATE() ORDER BY post_date ASC";
+        $sql_webinars = "SELECT * FROM webinar_master WHERE type='webinar' AND status='1' AND id !='162' AND post_date >= CURDATE() ORDER BY post_date ASC";
         $result_webinars = $conn->query($sql_webinars);
         $count_webinars = $result_webinars->num_rows;
 

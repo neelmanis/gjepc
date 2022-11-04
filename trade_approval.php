@@ -146,7 +146,7 @@ $end=$start+2;
                                 </div>                              
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="cust_add">Customer Address*</label>
+                                    <label class="form-label" for="cust_add">Customer Address <span>*</span></label>
                                   	<select name="customer_add" id="customer_add" class="form-control" disabled>
                                         <option value="">- Select Address -</option>
                                        <?php
@@ -158,40 +158,40 @@ $end=$start+2;
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                	<label class="form-label" for="member_name">Member Name*</label>;
+                                	<label class="form-label" for="member_name">Member Name <span>*</span></label>;
                                     <input type="text" class="form-control" name="member_name" id="member_name" 
 									value="<?php echo filter(strtoupper(str_replace(array('&amp;','&AMP;'), '&', $_SESSION['COMPANYNAME'])));?>" onkeyup="getexportdata()" readonly="readonly">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="Address1">Address*</label>
+                                    <label class="form-label" for="Address1">Address <span>*</span></label>
                                     <input type="text" class="form-control" name="address1" id="address1" value="<?php echo filter($result['address1']);?>" readonly="readonly">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="address2">Address 2*</label>
+                                    <label class="form-label" for="address2">Address 2 <span>*</span></label>
                                     <input type="text" class="form-control" name="address2" id="address2" value="<?php echo filter($result['address2']);?>" readonly="readonly">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                	<label class="form-label" for="pincode">Pincode*</label>
-                                    <input type="number" class="form-control" name="pincode" id="pincode" value="<?php echo filter($result['pincode']);?>" readonly="readonly">
+                                	<label class="form-label" for="pincode">Pincode <span>*</span></label>
+                                    <input type="text" class="form-control numeric" name="pincode" id="pincode" value="<?php echo filter($result['pincode']);?>" readonly="readonly" autocomplete="off" maxlength="6" onkeypress="if(this.value.length==6) return false;">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="city">City*</label>
+                                    <label class="form-label" for="city">City <span>*</span></label>
                                     <input type="text" class="form-control" name="city" id="city" value="<?php echo filter($result['city']);?>" readonly="readonly">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="email">E-mail*</label>
+                                    <label class="form-label" for="email">E-mail <span>*</span></label>
                                     <input type="text" class="form-control" name="email" id="email" value="<?php echo filter($ans_add['email_id']); ?>" readonly="readonly">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="comemail">Communication E-mail*</label>
+                                    <label class="form-label" for="comemail">Communication E-mail <span>*</span></label>
                                     <input type="text" class="form-control" name="commemail" id="commemail" value="<?php echo filter($result['commemail']);?>" readonly="readonly">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="per_type">Premission Type*</label>
+                                    <label class="form-label" for="per_type">Premission Type <span>*</span></label>
                                   
                                         <select name="permission_type" id="permission_type" class="form-control">
                                         <option value="">---------- Select ----------</option>
@@ -206,7 +206,7 @@ $end=$start+2;
                                 
                                     <div class="repeatThis">
                                         <div class="form-group col-sm-6">
-                                            <label class="form-label" for="per_type">Visiting Countries*</label>
+                                            <label class="form-label" for="per_type">Visiting Countries <span>*</span></label>
                                                 <select name="visiting_country[]" id="visiting_country" class="form-control" disabled>
                                                 <option value="">----------Select ----------</option>
                                                 <?php
@@ -218,7 +218,7 @@ $end=$start+2;
                                                 </select>                                          
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label class="form-label" for="city">City*</label>
+                                            <label class="form-label" for="city">City <span>*</span></label>
                                             <input type="text" class="form-control" name="visiting_city[]" id=""  value="<?php echo $result['city1'];?>" readonly="readonly">
                                         </div>                                        
                                     </div>
@@ -228,7 +228,7 @@ $end=$start+2;
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="item1">Item 1</label>
+                                    <label class="form-label" for="item1">Export Product Category 1</label>
                    
                                         <select name="item1" id="item1" class="form-control" disabled>
                                         <option value="">Select Item</option>								
@@ -243,12 +243,12 @@ $end=$start+2;
                                         <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item1']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                         </select> 
                                
-                                    <label class="form-label" for="invoice_value1">Invoice </label>
+                                    <label class="form-label" for="invoice_value1">Invoice Value in Dollar </label>
                                     <input type="number" class="form-control" name="invoice_value1" id="invoice_value1"  value='<?php echo $result['invoice_value1'];?>' onkeyup="getotalinvoice()" autocomplete="off" readonly="readonly">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="item1">Item 2</label>
+                                    <label class="form-label" for="item1">Export Product Category 2</label>
                                     
                                         <select name="item2" id="item2" class="form-control" disabled>
                                         <option value="">Select Item</option>
@@ -263,12 +263,12 @@ $end=$start+2;
                                         <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item2']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                         </select>
                                   
-                                    <label class="form-label" for="invoice_value2">Invoice </label>
+                                    <label class="form-label" for="invoice_value2">Invoice Value in Dollar </label>
                                     <input type="number" class="form-control" name="invoice_value2" id="invoice_value2" value="<?php echo $result['invoice_value2'];?>" onkeyup="getotalinvoice()" autocomplete="off" readonly="readonly">
                                 </div>	
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="item1">Item 3</label>
+                                    <label class="form-label" for="item1">Export Product Category 3</label>
                                    
                                         <select name="item3" id="item3" class="form-control" disabled>
                                         <option value="">Select Item</option>
@@ -283,12 +283,12 @@ $end=$start+2;
                                         <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item3']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                         </select>
                                  
-                                    <label class="form-label" for="invoice_value3">Invoice </label>
+                                    <label class="form-label" for="invoice_value3">Invoice Value in Dollar </label>
                                     <input type="number" class="form-control" name="invoice_value3" id="invoice_value3" value="<?php echo $result['invoice_value3'];?>" onkeyup="getotalinvoice()" autocomplete="off" readonly="readonly">
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="item1">Item 4</label>
+                                    <label class="form-label" for="item1">Export Product Category 4</label>
                                         <select name="item4" id="item4" class="form-control" disabled>
                                         <option value="">Select Item</option>
                                         <option value="LOOSE DIAMONDS" <?php if($result['item4']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -302,12 +302,12 @@ $end=$start+2;
                                         <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item4']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                         </select>
                                    
-                                    <label class="form-label" for="invoice_value4">Invoice </label>
+                                    <label class="form-label" for="invoice_value4">Invoice Value in Dollar </label>
                                     <input type="number" class="form-control" name="invoice_value4" id="invoice_value4" value="<?php echo $result['invoice_value4'];?>" onkeyup="getotalinvoice()" autocomplete="off" readonly="readonly">
                                 </div>	
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="item1">Item 5</label>
+                                    <label class="form-label" for="item1">Export Product Category 5</label>
                                         <select name="item5" id="item5" class="form-control" disabled>
                                         <option value="">Select Item</option>
                                         <option value="LOOSE DIAMONDS" <?php if($result['item5']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -321,17 +321,17 @@ $end=$start+2;
                                         <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item5']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                         </select>
                                
-                                    <label class="form-label" for="invoice_value5">Invoice </label>
+                                    <label class="form-label" for="invoice_value5">Invoice Value in Dollar </label>
                                     <input type="number" class="form-control" name="invoice_value5" id="invoice_value5" value="<?php echo $result['invoice_value5'];?>" onkeyup="getotalinvoice()" autocomplete="off" readonly="readonly">
                                 </div>
                                 	
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="apprx_invoice_value">Approx Invoice Value*</label>
+                                    <label class="form-label" for="apprx_invoice_value">Approx Invoice Value <span>*</span></label>
                                     <input type="text" class="form-control" name="apprx_invoice_value" id="apprx_invoice_value" value="<?php echo (!empty($result['apprx_invoice_value'])) ? $result['apprx_invoice_value'] : 0?>" readonly="readonly">
 								</div>					
                      
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="bank_name">Bank Name*</label>                                    
+                                    <label class="form-label" for="bank_name">Bank Name <span>*</span></label>                                    
                                         <select name="bank_name" id="bank_name" class="form-control" disabled>
                                         <option value="">---------- Select ----------</option>
                                         <?php 
@@ -344,12 +344,12 @@ $end=$start+2;
                                 </div>
                                 
                                 <div class="form-group" <?php if($result['other_bank_name']==''){?> style="display:none;" <?php }?> id="other_bank_div">
-                                    <label class="form-label" for="other_bank_name">Other bank name*</label>
+                                    <label class="form-label" for="other_bank_name">Other bank name <span>*</span></label>
                                         <input type="text" class="form-control trade_input_text" name="other_bank_name" id="other_bank_name" value="<?php echo filter($result['other_bank_name']);?>" readonly="readonly">                                   
                                 </div>
                                 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-label" for="bank_branch">Bank Branch*</label>
+                                    <label class="form-label" for="bank_branch">Bank Branch <span>*</span></label>
                                         <input type="text" class="form-control trade_input_text" name="bank_branch" id="bank_branch" value="<?php echo filter($result['branch_name']);?>" readonly="readonly">
                                 </div>
                                 
@@ -482,12 +482,12 @@ $end=$start+2;
                             $ans_add = $sql_add->fetch_assoc();
                             ?>
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="members_no">Membership Id.</label>
+                                <label class="form-label" for="members_no">Membership ID</label>
                                 <input type="text" class="form-control" name="membership_id" id="membership_id" value="<?php echo filter(getMembershipId($_SESSION['USERID'],$conn)); ?>" readonly="readonly">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="pan_no">Customer Address*</label>
+                                <label class="form-label" for="pan_no">Customer Address <span>*</span></label>
                                     <select name="customer_add" id="customer_add" class="form-control">
                                     <option value="">- Select -</option>
                                     <?php
@@ -498,38 +498,38 @@ $end=$start+2;
                                     </select>                               
                             </div>
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="member_name">Member Name*</label>
+                                <label class="form-label" for="member_name">Member Name <span>*</span></label>
                                 <input type="text" class="form-control" name="member_name" id="member_name" value="<?php echo filter(strtoupper(str_replace(array('&amp;','&AMP;'), '&', $_SESSION['COMPANYNAME'])));?>" onkeyup="getexportdata()" readonly="readonly">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="Address1">Address*</label>
+                                <label class="form-label" for="Address1">Address <span>*</span></label>
                                 <input type="text" class="form-control" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $result['address1'];?>" name="address1" id="address1" value="<?php echo filter($result['address1']);?>" >
                             </div>
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="address2">Address 2*</label>
+                                <label class="form-label" for="address2">Address 2 <span>*</span></label>
                                 <input type="text" class="form-control" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $result['address2'];?>" name="address2" id="address2" value="<?php echo filter($result['address2']);?>">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="pincode">Pincode*</label>
-                                <input type="number" class="form-control" name="pincode" id="pincode" value="<?php echo filter($result['pincode']);?>"></div>
+                                <label class="form-label" for="pincode">Pincode <span>*</span></label>
+                                <input type="text" class="form-control numeric" name="pincode" id="pincode" value="<?php echo filter($result['pincode']);?>" autocomplete="off" maxlength="6" onkeypress="if(this.value.length==6) return false;"></div>
                           
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="city">City*</label>
+                                <label class="form-label" for="city">City <span>*</span></label>
                                 <input type="text" class="form-control" name="city" id="city" value="<?php echo filter($result['city']); ?>">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="email">E-mail*</label>
+                                <label class="form-label" for="email">E-mail <span>*</span></label>
                                 <input type="text" class="form-control" name="email" id="email" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $result['email_id'];?>" value="<?php echo filter($ans_add['email_id']);?>" readonly="readonly">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="comemail">Communication E-mail*</label>
+                                <label class="form-label" for="comemail">Communication E-mail <span>*</span></label>
                                 <input type="text" class="form-control" name="commemail" id="commemail" value="<?php echo filter($result['commemail']);?>">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="per_type">Premission Type*</label>
+                                <label class="form-label" for="per_type">Premission Type <span>*</span></label>
                                     <select name="permission_type" id="permission_type" class="form-control">
                                     <option value="">- Select -</option>
                                     <option value="promotional_tour" <?php if($result['permission_type']=="promotional_tour"){?> selected="selected"<?php }?>>Promotional  Tour</option>
@@ -544,7 +544,7 @@ $end=$start+2;
                                 <div class="row repeatThis">
                                 
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="per_type">Visiting Countries*</label>
+                                        <label class="form-label" for="per_type">Visiting Countries <span>*</span></label>
                                             <select name="visiting_country[]" id="visiting_country" class="form-control">
                                             <option value="">- Select -</option>
                                             <?php
@@ -557,7 +557,7 @@ $end=$start+2;
                                     </div>
                                     
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="city">City*</label>
+                                        <label class="form-label" for="city">City <span>*</span></label>
                                         <input type="text" class="form-control" name="visiting_city[]" id=""  value="<?php echo $result['city1'];?>">
                                     </div>                                    
                                 </div>
@@ -565,7 +565,7 @@ $end=$start+2;
                                 <div class="row repeatThis">
                                 
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="per_type">Visiting Countries*</label>
+                                        <label class="form-label" for="per_type">Visiting Countries <span>*</span></label>
                                             <select name="visiting_country[]" id="visiting_country" class="form-control">
                                             <option value="">- Select -</option>
                                             <?php
@@ -578,7 +578,7 @@ $end=$start+2;
                                     </div>
                                     
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="city">City*</label>
+                                        <label class="form-label" for="city">City <span>*</span></label>
                                         <input type="text" class="form-control" name="visiting_city[]" id=""  value="<?php echo $result['city2'];?>">
                                     </div>
                                     
@@ -587,7 +587,7 @@ $end=$start+2;
                                 <div class="row repeatThis">
                                 
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="per_type">Visiting Countries*</label>
+                                        <label class="form-label" for="per_type">Visiting Countries <span>*</span></label>
                                             <select name="visiting_country[]" id="visiting_country" class="form-control">
                                             <option value="">- Select -</option>
                                             <?php
@@ -601,21 +601,20 @@ $end=$start+2;
                                     </div>
                                     
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label" for="city">City*</label>
+                                        <label class="form-label" for="city">City <span>*</span></label>
                                         <input type="text" class="form-control" name="visiting_city[]" id="" value="<?php echo filter($result['city3']);?>">
                                     </div>	
                                     							
                                 </div>
                                 
-                                <div class="addMore form-group">
-                                    
+                                <div class="addMore form-group">                                   
                                     
                                     <a href="javascript:void(0);" class="cta add_button" title="Add field"><i class="fa fa-plus" aria-hidden="true"> </i> Add More</a>	
                                 </div>
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="item1">Item 1</label>
+                                <label class="form-label" for="item1">Export Product Category 1</label>
                                     <select name="item1" id="item1" class="form-control">
                                     <option value="">Select Item</option>                
                                     <option value="LOOSE DIAMONDS" <?php if($result['item1']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -629,12 +628,12 @@ $end=$start+2;
                                     <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item1']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                     </select>
                               
-                                <label class="form-label" for="invoice_value1">Invoice </label>
+                                <label class="form-label" for="invoice_value1">Invoice Value in Dollar </label>
                                 <input type="number" class="form-control" name="invoice_value1" id="invoice_value1"  value='<?php echo $result['invoice_value1'];?>' onkeyup="getotalinvoice()" autocomplete="off">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="item1">Item 2</label>
+                                <label class="form-label" for="item1">Export Product Category 2</label>
                                     <select name="item2" id="item2" class="form-control">
                                     <option value="">Select Item</option>
                                     <option value="LOOSE DIAMONDS" <?php if($result['item2']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -647,12 +646,12 @@ $end=$start+2;
 									<option value="SILVER COINS (OTHER THAN LEGAL TENDER)" <?php if($result['item2']=="SILVER COINS (OTHER THAN LEGAL TENDER)"){?> selected="selected"<?php }?>>SILVER COINS (OTHER THAN LEGAL TENDER)</option>
                                     <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item2']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                     </select>
-                                <label class="form-label" for="invoice_value2">Invoice </label>
+                                <label class="form-label" for="invoice_value2">Invoice Value in Dollar </label>
                                 <input type="number" class="form-control" name="invoice_value2" id="invoice_value2" value="<?php echo $result['invoice_value2'];?>" onkeyup="getotalinvoice()" autocomplete="off">
                             </div>
                             	
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="item1">Item 3</label>
+                                <label class="form-label" for="item1">Export Product Category 3</label>
                                     <select name="item3" id="item3" class="form-control">
                                     <option value="">Select Item</option>
                                     <option value="LOOSE DIAMONDS" <?php if($result['item3']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -666,12 +665,12 @@ $end=$start+2;
                                     <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item3']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                     </select>
                              
-                                <label class="form-label" for="invoice_value3">Invoice </label>
+                                <label class="form-label" for="invoice_value3">Invoice Value in Dollar </label>
                                 <input type="number" class="form-control" name="invoice_value3" id="invoice_value3" value="<?php echo $result['invoice_value3'];?>" onkeyup="getotalinvoice()" autocomplete="off">
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="item1">Item 4</label>
+                                <label class="form-label" for="item1">Export Product Category 4</label>
                                     <select name="item4" id="item4" class="form-control">
                                     <option value="">Select Item</option>
                                     <option value="LOOSE DIAMONDS" <?php if($result['item4']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -685,12 +684,12 @@ $end=$start+2;
                                     <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item4']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                     </select>
                             
-                                <label class="form-label" for="invoice_value4">Invoice </label>
+                                <label class="form-label" for="invoice_value4">Invoice Value in Dollar </label>
                                 <input type="number" class="form-control" name="invoice_value4" id="invoice_value4" value="<?php echo $result['invoice_value4'];?>" onkeyup="getotalinvoice()" autocomplete="off">
                             </div>	
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="item1">Item 5</label>
+                                <label class="form-label" for="item1">Export Product Category 5</label>
                                     <select name="item5" id="item5" class="form-control">
                                     <option value="">Select Item</option>
                                     <option value="LOOSE DIAMONDS" <?php if($result['item5']=="LOOSE DIAMONDS"){?> selected="selected"<?php }?>>LOOSE DIAMONDS</option>
@@ -704,17 +703,17 @@ $end=$start+2;
                                     <option value="ALL TYPES OF GEM & JEWELLERY" <?php if($result['item5']=="ALL TYPES OF GEM & JEWELLERY"){?> selected="selected"<?php }?>>ALL TYPES OF GEM & JEWELLERY</option>
                                     </select>
                                 
-                                <label class="form-label" for="invoice_value5">Invoice </label>
+                                <label class="form-label" for="invoice_value5">Invoice Value in Dollar </label>
                                 <input type="number" class="form-control" name="invoice_value5" id="invoice_value5" value="<?php echo $result['invoice_value5'];?>" onkeyup="getotalinvoice()" autocomplete="off">
                             </div>	
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="apprx_invoice_value">Approx Invoice Value*</label>
+                                <label class="form-label" for="apprx_invoice_value">Approx Invoice Value <span>*</span></label>
                                     <input type="number" class="form-control" name="apprx_invoice_value" id="apprx_invoice_value" value="<?php echo (!empty($result['apprx_invoice_value'])) ? $result['apprx_invoice_value'] : 0?>" readonly="readonly">
                             </div>	
                             				
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="bank_name">Bank Name*</label>
+                                <label class="form-label" for="bank_name">Bank Name <span>*</span></label>
                                     <select name="bank_name" id="bank_name" class="form-control">
                                     <option value="">-- Select Bank --</option>
                                     <?php 
@@ -727,12 +726,12 @@ $end=$start+2;
                             </div>
                             
                             <div class="form-group" <?php if($result['other_bank_name']==''){?> style="display:none;" <?php }?> id="other_bank_div">
-                                <label class="form-label" for="other_bank_name">Other Bank Name*</label>
+                                <label class="form-label" for="other_bank_name">Other Bank Name <span>*</span></label>
                                 <input type="text" class="form-control trade_input_text" name="other_bank_name" id="other_bank_name" value="<?php echo filter($result['other_bank_name']);?>">                                
                             </div>
                             
                             <div class="form-group col-sm-6">
-                                <label class="form-label" for="bank_branch">Bank Branch*</label>
+                                <label class="form-label" for="bank_branch">Bank Branch <span>*</span></label>
                                 <input type="text" class="form-control trade_input_text" name="bank_branch" id="bank_branch" value="<?php echo filter($result['branch_name']);?>">                                
                             </div>
                             
@@ -855,6 +854,12 @@ $end=$start+2;
 <!--<script src="js/bootstrap-datepicker.js"></script>-->
 <!--<link href="css/datepicker.css" rel="stylesheet" type="text/css" />
 -->
+<style>
+.form-group label span {
+    color: #f00;
+    font-size: 18px;
+}
+</style>
 <script>
 $("#passport_issue_date").keypress(function(event) {event.preventDefault();});
 $("#passport_expiry_date").keypress(function(event) {event.preventDefault();});
@@ -1000,5 +1005,14 @@ $('#bank_name').on('change',function(){
 	else
 	  $('#other_bank_div').hide();	
 	});	
+});
+</script>
+<script>
+$('.numeric').keypress(function (event) {
+  var keycode = event.which;
+  if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) 
+  {
+    event.preventDefault();
+  }
 });
 </script>

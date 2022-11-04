@@ -3906,6 +3906,13 @@ function intlVisitorPhoto($id,$conn)
 	$row = $result->fetch_assoc(); 		
 	return $row['photograph_fid'];
 }
+function getMemberCountry($id,$conn)
+{
+	$query_visitor = "SELECT country FROM `registration_master` WHERE `id`='$id'";
+	$result = $conn->query($query_visitor);
+	$row = $result->fetch_assoc(); 		
+	return $row['country'];
+}
 
 function checkIvrApproval_status($regid,$conn)
 {

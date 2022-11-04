@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Calcutta');
 error_reporting(0);
 
-$hostname = "localhost";
+$hostname = "192.168.40.107";
 $uname = "gjepcliveuserdb";
 $pwd = "KGj&6(pcvmLk5";
 $database = "gjepclivedatabase";

@@ -67,7 +67,7 @@ function validate()
 		 }
 		 if(!document.getElementById('member_cer').checked)
 		 {
-				alert('Please Select Copy of Valid Mem Ceritificate.');
+				alert('Please Select Copy of Valid Mem Certificate.');
 				$("#member_cer").focus();
 				return false;
 		 }
@@ -78,6 +78,13 @@ function validate()
 				$("#past_org").focus();
 				return false;
 		 }
+		 
+		if(!document.getElementById('passport').checked)
+		{
+				alert('Please select Passport');
+				$("#passport").focus();
+				return false;
+		}
 		 
 		 if(!document.getElementById('terms_and_cond').checked)
 		{
@@ -107,13 +114,13 @@ function validate()
 			document.getElementById('upload1').focus();
 			return false;
 		}
-		else if(ext=='png' || ext=='jpg' || ext=='jpeg' || ext=='gif' || ext=='pdf' || ext=='xls' || ext=='PDF')
+		else if(ext=='png' || ext=='jpg' || ext=='jpeg' || ext=='pdf' || ext=='xls' || ext=='PDF')
 		{
 			
 		}
 		else
 		{
-			alert('Select Only png,gif,jpg,jpeg,pdf,excel File for IEC no.');
+			alert('Select Only png,gif,jpg,jpeg,pdf File for IEC no.');
 			document.getElementById('upload1').focus();
 			return false;
 		}
@@ -135,7 +142,7 @@ function validate()
 			document.getElementById('upload2').focus();
 			return false;
 		}
-		else if(ext2=='png' || ext2=='jpg' || ext2=='jpeg' || ext2=='gif' || ext2=='pdf' || ext2=='xls' || ext2=='PDF')
+		else if(ext2=='png' || ext2=='jpg' || ext2=='jpeg' || ext2=='pdf' || ext2=='xls' || ext2=='PDF')
 		{
 			
 		}
@@ -163,7 +170,7 @@ function validate()
 			document.getElementById('upload4').focus();
 			return false;
 		}
-		else if(ext4=='png' || ext4=='jpg' || ext4=='jpeg' || ext4=='gif' || ext4=='pdf' || ext4=='xls' || ext4=='PDF')
+		else if(ext4=='png' || ext4=='jpg' || ext4=='jpeg' || ext4=='gif' || ext4=='pdf' || ext4=='PDF')
 		{
 			
 		}
@@ -193,15 +200,10 @@ $(function() {
 });
 </script>
 
-	<section class="py-5">
-    
-	<div class="container inner_container">
-    
-    <h1 class="bold_font text-center mb-5"> <img src="assets/images/gold_star.png" class="title_star d-block mx-auto">My Account - Trade Documents</h1>
-    
-		<div class="row">    
-    
-
+	<section class="py-5">    
+	<div class="container inner_container">    
+    <h1 class="bold_font text-center mb-5"><img src="assets/images/gold_star.png" class="title_star d-block mx-auto">My Account - Trade Documents</h1>
+    <div class="row"> 
 	<div class="col-lg-auto order-lg-12 col-md-12 " data-sticky_parent>
 		<?php include 'include/regMenu.php'; ?>
 	</div>
@@ -245,14 +247,14 @@ if($application_status=='Y' || $application_status=='C'){
 							<label class="col-md-12" for="ppp">
                             <input type="hidden" name="application_status" id="application_status" value="Y"/>
 							<input type="checkbox" class="check_box" id="Indian_pavilion" name="Indian_pavilion" onclick="checkBox();" <?php if($row['indian_pavilion']=="Y"){?> checked="checked"<?php }?> disabled="disabled" />Indian Pavilion
-							</label>
+							 <strong>(Tick If you are participating through GJEPC)</strong></label>
 							</div>
 
 							<div class="form-group radio inline-form col-sm-6">
 							<label for="ppp">
 							<input type="checkbox" class="check_box" value="Y" id="iec_no_copy" name="iec_no_copy" <?php if($row['iec_no_copy']=="Y"){?> checked="checked"<?php }?> disabled="disabled"/> Copy of Valid IEC No.
 							</label>
-                            <input type="file" name="upload1" id="upload1"  disabled="disabled"/>
+                            <input type="file" name="upload1" id="upload1" disabled="disabled"/>
 							</div>
                             						
 							<div class="form-group radio inline-form col-sm-6">
@@ -264,7 +266,7 @@ if($application_status=='Y' || $application_status=='C'){
 																				
 							<div class="form-group radio inline-form col-sm-6">
 							<label  for="ppp">
-							<input type="checkbox" class="check_box" id="fair_org" value="Y" name="fair_org" <?php if($row['fair_org']=="Y"){?> checked="checked"<?php }?> disabled="disabled"/> Letter from Fair Organi.
+							<input type="checkbox" class="check_box" id="fair_org" value="Y" name="fair_org" <?php if($row['fair_org']=="Y"){?> checked="checked"<?php }?> disabled="disabled"/> Participation Proof
 							</label>
                             <input type="file" name="upload3" id="upload3"  disabled="disabled"/>
 							</div>										
@@ -280,7 +282,7 @@ if($application_status=='Y' || $application_status=='C'){
 							<label  for="ppp">
 							<input type="checkbox" class="check_box" id="passport" value="Y" name="passport" <?php if($row['passport']=="Y"){?> checked="checked"<?php }?> disabled="disabled"/> Passport Photocopy of.
 							</label>
-                            <input type="file" name="upload5" id="upload5"   disabled="disabled"/>
+                            <input type="file" name="upload5" id="upload5" disabled="disabled"/>
 							</div>
 							</div>
 							<?php if($exhibition_type=="branded_jewellery" || $exhibition_type=="person_hand"){?>
@@ -365,7 +367,7 @@ if($application_status=='Y' || $application_status=='C'){
 							<div class="form-group radio inline-form col-md-4">
 							<label  for="ppp">
                             <input type="hidden" name="application_status" id="application_status" value="N"/>
-							<input type="checkbox" class="check_box" id="Indian_pavilion"  name="Indian_pavilion" onclick="checkBox();" <?php if($row['indian_pavilion']=="Y"){?> checked="checked"<?php }?> />	Indian Pavilion
+							<input type="checkbox" class="check_box" id="Indian_pavilion"  name="Indian_pavilion" onclick="checkBox();" <?php if($row['indian_pavilion']=="Y"){?> checked="checked"<?php }?> />	Indian Pavilion <strong>(Tick If you are participating through GJEPC) </strong>
 							</label>								
 							</div>
 
@@ -373,7 +375,7 @@ if($application_status=='Y' || $application_status=='C'){
 									<label for="ppp">
 										<input type="checkbox" class="check_box" value="Y" id="iec_no_copy" name="iec_no_copy" <?php if($row['iec_no_copy']=="Y"){?> checked="checked"<?php }?> /> Copy of Valid IEC No.
 									</label>
-								<input type="file" name="upload1" id="upload1"  />
+								<input type="file" name="upload1" id="upload1" accept=".jpg,.jpeg,.png,.pdf" />
 							</div>
 							
 							<div class="form-group radio inline-form col-md-4">
@@ -381,15 +383,15 @@ if($application_status=='Y' || $application_status=='C'){
 										<input type="checkbox" class="check_box" value="Y" id="member_cer" name="member_cer" <?php if($row['member_cer']=="Y"){?> checked="checked"<?php }?> /> Copy of Valid Mem Cer.
 									</label>
 								
-								 <input type="file" name="upload2" id="upload2"  />
+								 <input type="file" name="upload2" id="upload2" accept=".jpg,.jpeg,.png,.pdf" />
 							</div>
 							
 							<div class="form-group radio inline-form col-md-4">
 									<label for="ppp">
-										<input type="checkbox" class="check_box" id="fair_org" value="Y" name="fair_org" <?php if($row['fair_org']=="Y"){?> checked="checked"<?php }?> /> Letter from Fair Organi.
+										<input type="checkbox" class="check_box" id="fair_org" value="Y" name="fair_org" <?php if($row['fair_org']=="Y"){?> checked="checked"<?php }?> /> Participation Proof
 									</label>
 								
-								<input type="file" name="upload3" id="upload3"   />
+								<input type="file" name="upload3" id="upload3"  accept=".jpg,.jpeg,.png,.pdf" />
 							</div>
 							
 							<div class="form-group radio inline-form col-md-4">
@@ -397,7 +399,7 @@ if($application_status=='Y' || $application_status=='C'){
 										<input type="checkbox" class="check_box" id="past_org" value="Y" name="past_org" <?php if($row['past_org']=="Y"){?> checked="checked"<?php }?> /> 3 Years Past Exports Ex.
 									</label>
 								
-								<input type="file" name="upload4" id="upload4" />
+								<input type="file" name="upload4" id="upload4" accept=".jpg,.jpeg,.png,.pdf"/>
 							</div>	
 
 							<div class="form-group radio inline-form col-md-4">
@@ -405,7 +407,7 @@ if($application_status=='Y' || $application_status=='C'){
 										<input type="checkbox" class="check_box" id="passport" value="Y" name="passport" <?php if($row['passport']=="Y"){?> checked="checked"<?php }?> /> Passport Photocopy of.
 									</label>
 							
-								<input type="file" name="upload5" id="upload5" />
+								<input type="file" name="upload5" id="upload5" accept=".jpg,.jpeg,.png,.pdf"/>
 							</div>	
 							<?php if($exhibition_type=="branded_jewellery" || $exhibition_type=="person_hand"){?>
 							<div class="form-group radio inline-form col-sm-6">
@@ -413,19 +415,19 @@ if($application_status=='Y' || $application_status=='C'){
 										<input type="checkbox" class="check_box" id="brand_cer" value="Y" name="brand_cer" <?php if($row['brand_cer']=="Y"){?> checked="checked"<?php }?> /> Brand Regs Certificate.
 									</label>
 							
-								<input type="file" name="upload6" id="upload6"  />
+								<input type="file" name="upload6" id="upload6"  accept=".jpg,.jpeg,.png,.pdf"/>
 							</div>
 							<div class="form-group radio inline-form col-sm-6">
 							<label for="ppp">
 							<input type="checkbox" class="check_box" id="proof_authenticity" value="Y" name="proof_authenticity" <?php if($row['proof_authenticity']=="Y"){?> checked="checked"<?php }?> /> Proof of Authenticity o.
 							</label>								
-							<input type="file" name="upload7" id="upload7" />
+							<input type="file" name="upload7" id="upload7" accept=".jpg,.jpeg,.png,.pdf"/>
 							</div>
 							<div class="form-group radio inline-form col-sm-6">
 							<label for="ppp">
 							<input type="checkbox" class="check_box" id="contract_with" value="Y" name="contract_with" <?php if($row['contract_with']=="Y"){?> checked="checked"<?php }?> /> Proof of Contract with.
 							</label>								
-							<input type="file" name="upload8" id="upload8"  />
+							<input type="file" name="upload8" id="upload8" accept=".jpg,.jpeg,.png,.pdf"/>
 							</div>
 							 <?php }?>
 							 

@@ -13,23 +13,23 @@ include 'db.inc.php';?>
 
 			<div class="col-12 text-center">
           <h1 class="bold_font"><div class="d-block"><img src="assets/images/gold_star.png"></div>
-          Tenders</h1>
+          Annual Reports</h1>
       </div>
 
 	     	<div class="col-12">
 
-					<div class="row mb-5">
+					<!-- <div class="row mb-5">
 						<div class="col-sm-6 mb-2 mb-sm-0">
 							<a href="pdf/HELP-DOCUMENT-vendor.pdf" class="cta w-100 h-100 text-center d-block" target="_blank"> Help Document for Online Vendor Registration & EOI Process</a>
 						</div>
 						<div class="col-sm-6">
 							<a href="vendor_login.php" class="cta w-100 h-100 text-center d-block"> Vendor-Registration/ Login  For EOI 2022-2024</a>
 						</div>
-					</div>
+					</div> -->
 
 					<ul class="circular_wrap row">
 						<?php
-						$sql="SELECT * FROM `tender_master` WHERE status='1' and `type` ='tender' order by id desc";
+						$sql="SELECT * FROM `tender_master` WHERE status='1' and `type` ='annual_report' order by id desc";
 						$result=$conn ->query($sql);
 						while($rows=$result->fetch_assoc())
 						{ 
@@ -52,7 +52,7 @@ include 'db.inc.php';?>
                     </div>
                     <div class="modal-body">
                         
-		                <form action="tender.inc.php" method="post" enctype="multipart/form-data" class="form-block minibuffer" onSubmit="return loginvalidate()">
+		                <form action="annual_report_inc.php" method="post" enctype="multipart/form-data" class="form-block minibuffer" onSubmit="return loginvalidate()">
 		                <?php token(); ?>
                       <div class="form-group">
                         <label class="form-label" for="company_name">Company Name :</label>

@@ -54,14 +54,15 @@ $member_type_id = filter($rows['member_type_id']);
 <div class="row">            
              
 <div class="col-lg-auto order-lg-12 col-md-12 " data-sticky_parent><?php include 'include/regMenu.php'; ?></div>
-    
+ 
 <?php 
 if($_SESSION['succ_msg']!=""){
 echo "<span style='color: green;'>".$_SESSION['succ_msg']."</span>";
 $_SESSION['succ_msg']="";
 }
 ?>
-<div class="col-lg col-md-12 ">
+
+<div class="col-lg-8 col-md-12 ">
     
 <div class="row">
 <?php 

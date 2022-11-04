@@ -4,12 +4,13 @@
 	$email_array = explode(",",$to_admins);
 	//echo '<pre>'. print_r($email_array); 
 	//echo '<pre>'. print_r($to_admin); exit;
-	send_mail($email_array,"Hello Test Emails","This is test mail","donotreply@gjepcindia.com");
+	send_mail($email_array,"Hello Test Emails","This is test mail","santosh@kwebmaker.com");
 	
 	function send_mail($to, $subject, $message,$cc){
 	/*Start Config*/
 	$account="donotreply@gjepcindia.com";
-	$password="Gjepc@786";
+	//$password="Gjepc@786";
+	$password="kngtnsnqthmysqmp";
 	//$to="neelmani@kwebmaker.com";
 	$from="donotreply@gjepcindia.com";
 	$from_name="GJEPC INDIA";
@@ -37,10 +38,10 @@
 	
 	$mail->AddCC($cc);
 	if(!$mail->send()){
-	 return false;
+	 // return false;
 	  echo 0;
 	} else {
-	 return true;
+	 // return true;
 	  echo 1;
 	}
 }
