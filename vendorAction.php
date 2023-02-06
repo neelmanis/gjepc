@@ -447,7 +447,7 @@ for($x = 0; $x < $arrlength4; $x++) {
 if($alreadyRegistered==0) {
 if($arrayCommonUpVal == $arrayCommonVal) {
 
-   if($arrayVariablesCommonVal == $arrayVariableVal) {
+   // if($arrayVariablesCommonVal == $arrayVariableVal) {
    $sql = "INSERT INTO vendor_area_registration SET vendor_id='$vendor_id',area_id='$areaId',area='$area',status='pending',created_at='$created_at',ip_address='$ip_address'"; 
    $result =  $conn ->query($sql);
    if($result){
@@ -501,11 +501,11 @@ Kindly login at our website - iijs-signature.org to verify the same.
       echo json_encode(array("status"=>"invalid","title"=>"Error")); exit;
     }
 
-   }else{
-    $msg=  " Kindly Upload required area specific  documents under upload  douments section";
-  echo json_encode(array("status"=>"v_doc_error","title"=>"Success","message"=>$msg)); exit;
+  //  }else{
+  //   $msg=  " Kindly Upload required area specific  documents under upload  douments section";
+  // echo json_encode(array("status"=>"v_doc_error","title"=>"Success","message"=>$msg)); exit;
 
-   }
+  //  }
 
 }else{
   $msg= " Kindly Upload required common documents under upload  douments section";

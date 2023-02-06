@@ -141,18 +141,11 @@ $pageDescription  = "Gem Jewellery Export Promotion Council (GJEPC) is Indias Ap
                         </div>
                     </div>
 
-                    <div class="mb-5 col-9 col-sm-6 col-md-4 col-lg-3 text-center" data-aos="fade-up">
-                        <div class="team_box">
-                            <div class="team_pic"><img src="assets/images/our_structure/Priyanka-goel.png" class="img-fluid"></div>
-                            <h2> Priyanka Goel</h2>
-                            <span>Dy. Director-HR</span>
-                            <a href="mailto:priyanka.goel@gjepcindia.com"> priyanka.goel@gjepcindia.com </a>
-                        </div>
-                    </div>
+                    
                     
 				</div>
                 
-                <div class="row py-5" style="border-top:1px solid #ddd;">
+                <div class="row py-5 justify-content-center" style="border-top:1px solid #ddd;">
                 	
                     <div class="col-12"><h2 class="title text-center mb-5"><span class="d-table mx-auto mb-3" style="width:35px;"><img src="assets/images/black_star.png" class="img-fluid d-block" /></span>Regional Directors</h2></div>
                     
@@ -163,15 +156,23 @@ $pageDescription  = "Gem Jewellery Export Promotion Council (GJEPC) is Indias Ap
                             <span> Surat</span>
                         </div>
                     </div>
-                    
+
                     <div class="mb-5 col-9 col-sm-6 col-md-4 col-lg-3 text-center" data-aos="fade-up">
+                        <div class="team_box">
+                            <div class="team_pic"><img src="assets/images/our_structure/RD/sanjeev.png" class="img-fluid"></div>
+                            <h2>  Sanjeev Bhatia</h2>
+                            <span> Delhi</span>
+                        </div>
+                    </div>
+                    
+                  <!--   <div class="mb-5 col-9 col-sm-6 col-md-4 col-lg-3 text-center" data-aos="fade-up">
                         <div class="team_box">
                             <div class="team_pic"><img src="assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
                             <h2>  K K Duggal </h2>
                             <span> Delhi</span>
                         </div>
                     </div>
-                    
+                     -->
                     <!-- <div class="mb-5 col-9 col-sm-6 col-md-4 col-lg-3 text-center" data-aos="fade-up">
                     	<div class="team_box">
                         	<div class="team_pic"><img src="assets/images/our_structure/RD/sanjay_singh.jpg" class="img-fluid"></div>

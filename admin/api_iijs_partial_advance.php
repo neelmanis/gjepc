@@ -26,12 +26,12 @@ if(!empty($_POST))
 	$soapUser = "pi_admin";  //  username
 	$soapPassword = "Deloitte@123"; // password
 	
-	$show = "IIJS PREMIERE 2022";
+	$show = "IIJS SIGNATURE 2023";
 	
-	$eventData ="select wbs from exh_event_master where status='1'";
+	$eventData ="select wbs from exh_event_master where eventDescription='$show' ";
 	$eventResult =$conn ->query($eventData);
 	$fetch_Eventdata = $eventResult->fetch_assoc();
-	$wbs = $fetch_Eventdata['wbs'];
+	 $wbs = $fetch_Eventdata['wbs'];
 	
 	/* Start Sales Order */
 	$query="select a.id,a.uid,a.bp_number,a.billing_address_id,a.company_name,a.contact_person,a.region,a.city,a.country,a.created_date,a.get_billing_bp_number,b.gid,b.last_yr_participant,b.section,b.category,b.selected_area,b.selected_premium_type,b.options,c.cheque_dd_no,c.cheque_tds_gross_amount,c.net_payable_amount,c.payment_status,c.document_status,c.application_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='$show' and a.uid='".$registration_id."' ";
@@ -46,8 +46,6 @@ if(!empty($_POST))
 	$nonmemberBP = getCompanyNonMemBPNO($registration_id,$conn);
 	if($billing_bp==''){ $billing_bp = $nonmemberBP; }
 	
-	
-	
 	if($country=="IN"){
 		$currency="INR";
 		$bank_acnt_no="255241";  /*................. Domestic Account ....................*/
@@ -57,7 +55,7 @@ if(!empty($_POST))
 	}
 	
 	/* UTR Data */
-	$getUTR = "SELECT * FROM `utr_history` where registration_id='$registration_id' AND `show`='$show' AND payment_made_for='ALLOTMENT' AND comment='ALLOTMENT' AND utr_number='$utr_no' AND payment_status='captured' limit 1";
+	$getUTR = "SELECT * FROM `utr_history` where registration_id='$registration_id' AND `show`='$show' AND payment_made_for='ALLOTMENT' AND utr_number='$utr_no' AND payment_status='captured' limit 1";
 	$utrResult =  $conn ->query($getUTR);
 	$utrResultrows = $utrResult->fetch_assoc();
 	$utr_number = $utrResultrows['utr_number'];
@@ -96,8 +94,8 @@ if(!empty($_POST))
 	    </soapenv:Body>
 	</soapenv:Envelope>';
 				
-	/*header ("Content-Type:text/xml");
-	echo $xml_exhibition_string; exit; */
+	//  header ("Content-Type:text/xml");
+	// echo $xml_exhibition_string; exit; 
 	
 			$headers1 = array(
                         "Content-type: text/xml;charset=\"utf-8\"",
@@ -146,8 +144,8 @@ if(!empty($_POST))
 					if(!empty($strings))
 					{	$flag=1;
 						$sales_order_no = trim(substr($strings, strpos($strings, "@ ")+1,11));
-					$sqlx = "UPDATE `utr_history` SET `sap_push_date`=NOW(),`sap_push_admin`='$adminID',`part_sales_order_no`='$sales_order_no',`part_salesorder_status`='1' WHERE `utr_number`='$utr_no' AND `registration_id`='$registration_id' AND `show` ='$show' AND payment_made_for='ALLOTMENT' AND comment='ALLOTMENT'"; 
-						$result = $conn ->query($sqlx);
+					$sqlx = "UPDATE `utr_history` SET `sap_push_date`=NOW(),`sap_push_admin`='$adminID',`part_sales_order_no`='$sales_order_no',`part_salesorder_status`='1' WHERE `utr_number`='$utr_no' AND `registration_id`='$registration_id' AND `show` ='$show' AND payment_made_for='ALLOTMENT'"; 
+					$result = $conn ->query($sqlx);
 					}
 			}
 			echo $flag;	

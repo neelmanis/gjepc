@@ -72,7 +72,7 @@ if(!empty($_POST))
 		if(empty($addRows['city']))  {	$city = $hocity; } else { $city = $addRows['city']; }
 	}
 	
-	$query="SELECT * FROM `visitor_order_detail` WHERE regId='".$registration_id."' AND orderId='".$order_id."' AND payment_status='Y' AND (event='iijs22' || event='signature23' || event='iijstritiya23' || event='combo23')";
+	$query="SELECT * FROM `visitor_order_detail` WHERE regId='".$registration_id."' AND orderId='".$order_id."' AND payment_status='Y' AND (event='signature23' || event='iijstritiya23' || event='combo23' || event='STCOMBO23')";
 	$getChallanResult = $conn ->query($query);
 	$challanResult = $getChallanResult->fetch_assoc();
 
@@ -109,7 +109,7 @@ if(!empty($_POST))
         </SOAD_Header>';
 	
 /*.................................. Visitor Loop ........................................*/
-	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND (`show`='iijs22' || `show`='signature23' || `show`='iijstritiya23' || `show`='combo23')";
+	$visitor_query = "SELECT * FROM `visitor_order_history` WHERE `registration_id`= '$registration_id' AND `orderId`='".$order_id."' AND payment_status='Y' AND (`show`='signature23' || `show`='iijstritiya23' || `show`='combo23' || `show`='STCOMBO23')";
 	$visitor_result = $conn ->query($visitor_query);
 	$countx = $visitor_result->num_rows;
 	$counter = "10";

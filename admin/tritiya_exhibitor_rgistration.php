@@ -161,8 +161,9 @@ $("div.fancyDemo a").fancybox();
     		<div class="content_head"><a href="tritiya_exhibitor_rgistration.php">
     	<div class="content_head_button">IIJS-Tritiya Exhibitor List</div></a>
 		<div style="float:right; padding-right:10px; font-size:12px;">
-		<a href="export_combo_exhibitor_rgistration.php">Download COMBO Data</a>
-		<a href="export_utr_tritiya_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> <a href="export_approve_tritiya_exhibitor_rgistration.php">&nbsp;Download Data</a></div>
+		<!--<a href="export_combo_exhibitor_rgistration.php">Download COMBO Data</a>
+		<a href="export_utr_tritiya_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> <a href="export_approve_tritiya_exhibitor_rgistration.php">&nbsp;Download Data</a>-->
+		</div>
 		<?php
 		if($_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='1'){ ?>
 		<a href="tritiya_exhibitor_rgistration.php?action=old_to_part" onClick="return(window.confirm('Are you sure you want to Clear Old to Part Data'));" >Clear SAP Error</a>	

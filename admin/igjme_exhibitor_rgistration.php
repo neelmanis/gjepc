@@ -63,7 +63,34 @@ if($_REQUEST['Reset']=="Reset")
 		}	
 	}
 }
-?>  
+?>
+
+<?php
+if($_REQUEST['action']=='old_to_part')
+{
+		$get = "SELECT * FROM exh_reg_payment_details where `show`='IGJME' AND (sales_order_no='tem categor' || sales_order_no='rror in doc' || sales_order_no='old-to part' || sales_order_no='pecify eith' || sales_order_no='o customer')";
+		$result_query = $conn ->query($get);
+		$getCount = $result_query->num_rows;
+		
+		$get2 = "SELECT * FROM `utr_history` where `show` ='IGJME'  AND (first_sales_order_no='tem categor' || first_sales_order_no='rror in doc' || first_sales_order_no='old-to part' || first_sales_order_no='pecify eith' || first_sales_order_no='o customer')";
+		$result_query2 = $conn ->query($get2);
+		$getCount2 = $result_query2->num_rows;
+		
+		if($getCount >0 && $getCount2 >0){
+		$sql="UPDATE `exh_reg_payment_details` SET `sap_sale_order_create_status` = '0', `sales_order_no` = '' WHERE `show`='IGJME' AND (sales_order_no='tem categor' || sales_order_no='rror in doc' || sales_order_no='old-to part' || sales_order_no='pecify eith' || sales_order_no='o customer') AND `sap_sale_order_create_status` = '1'";
+		$result = $conn ->query($sql);  
+		
+		$sql2="UPDATE `utr_history` SET `sap_so_status` = '0', `first_sales_order_no` =  '' WHERE `show`='IGJME'  AND (first_sales_order_no='tem categor' || first_sales_order_no='rror in doc' || first_sales_order_no='old-to part' || first_sales_order_no='pecify eith' || first_sales_order_no='o customer') AND `sap_so_status` = '1'";
+		$result2 = $conn ->query($sql2); 
+		 
+        if(!$result) die ($conn->error);
+		echo "<meta http-equiv=refresh content=\"0;url=igjme_exhibitor_rgistration.php\">";
+		} else { 
+		echo "<script> alert('No old To Part Found');</script>";
+		echo "<meta http-equiv=refresh content=\"0;url=igjme_exhibitor_rgistration.php\">";
+		}		
+}
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -130,22 +157,27 @@ ddsmoothmenu.init({
         <a href="export_utr_igjme_exhibitor_rgistration.php">&nbsp;Download Payment Data</a>
 		<a href="export_approve_igjme_exhibitor_registration.php">&nbsp;Download All Data</a>
 		</div><?php } ?>
+		<?php
+		if($_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='1'){ ?>
+		<a href="igjme_exhibitor_rgistration.php?action=old_to_part" onClick="return(window.confirm('Are you sure you want to Clear Old to Part Data'));" >Clear SAP Error</a>	
+		<?php }	?>
 		</div>
     <div class="content_details1">
    	<?php 
 	if($_SESSION['curruser_role']=="Super Admin")
 	{
-	$sql5="select a.id,a.company_name,a.contact_person,a.region,a.created_date,b.last_yr_participant,b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022'";
+	$sql5="select a.id,a.company_name,a.contact_person,a.region,a.created_date,b.last_yr_participant,b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME'";
 	} else {	
 	if(preg_match('/L/',$_SESSION['curruser_admin_access']))
 	{
 	$sql5="select a.id,a.company_name,a.contact_person,a.region,a.created_date,b.last_yr_participant,
-	b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022'";	
+	b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME'";	
 	} else {
 	$sql5="select a.id,a.company_name,a.contact_person,a.region,a.created_date,b.last_yr_participant,
-	b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022' AND a.region='".$_SESSION["curruser_region_id"]."' ";
+	b.selected_area,b.selected_premium_type,c.payment_status,c.document_status,c.application_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME' AND a.region='".$_SESSION["curruser_region_id"]."' ";
 	}
 	}
+	//echo $sql5;
 	$result5=$conn->query($sql5);
 	$total_application=$result5->num_rows;
 	
@@ -351,15 +383,15 @@ $_SESSION['succ_msg']="";
 	$start=($page-1)*$limit;
 if($_SESSION['curruser_role']=="Super Admin")
 {
-	 $sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.created_date,b.last_yr_participant,b.options,b.selected_area,b.selected_premium_type,b.options,b.exhibition_type,c.payment_id,c.payment_status,c.document_status,c.application_status,c.modified_date,c.sales_order_no,c.sap_sale_order_create_status from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022'";
+	 $sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.created_date,b.last_yr_participant,b.options,b.selected_area,b.selected_premium_type,b.options,c.payment_id,c.payment_status,c.document_status,c.application_status,c.modified_date,c.sales_order_no,c.sap_sale_order_create_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME'";
 } else {
 	if(preg_match('/O/',$_SESSION['curruser_admin_access']))
 	{
 	$sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.created_date,b.last_yr_participant,b.options,
-b.selected_area,b.selected_premium_type,c.payment_id,c.payment_status,c.document_status,c.application_status,c.sales_order_no,c.sap_sale_order_create_status
-from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022'";	
+			b.selected_area,b.selected_premium_type,c.payment_id,c.payment_status,c.document_status,c.application_status,c.sales_order_no,c.sap_sale_order_create_status
+			from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME'";	
 	} else {
-	$sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.created_date,b.last_yr_participant,b.options,	b.selected_area,b.selected_premium_type,c.payment_id,c.payment_status,c.document_status,c.application_status,c.sales_order_no,c.sap_sale_order_create_status from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME 2022' AND a.region='".$_SESSION["curruser_region_id"]."' ";
+	$sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.created_date,b.last_yr_participant,b.options,	b.selected_area,b.selected_premium_type,c.payment_id,c.payment_status,c.document_status,c.application_status,c.sales_order_no,c.sap_sale_order_create_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid where a.event_for='IGJME' AND a.region='".$_SESSION["curruser_region_id"]."' ";
 	}
 }
   if($_SESSION['first_name']!="")
@@ -523,13 +555,16 @@ from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.
     
     </td>-->
     <td align="left" valign="middle"><a href="igjme_exh_registration_step1.php?id=<?php echo $rows['id'];?>&registration_id=<?php echo $rows['uid'];?>"><img src="images/edit1.png" border="0" /></a> 
-    <a href="igjme_exh_registration_step4.php?id=<?php echo $rows['id'];?>&registration_id=<?php echo $rows['uid'];?>">A/D</a>
+		<a href="igjme_exh_registration_step4.php?id=<?php echo $rows['id'];?>&registration_id=<?php echo $rows['uid'];?>">A/D</a>
+		<?php if($_SESSION['curruser_role']=="Super Admin") { ?>
+		<a href="delete_exh_registration.php?id=<?php echo $rows['id'];?>&registration_id=<?php echo $rows['uid'];?>"> Delete</a>
+		<?php } ?>
     </td>
 	<?php if($rows['application_status']=="approved"){  ?>
 	<?php if($rows['sap_sale_order_create_status'] == 0) { ?>
-	<td class="so" data-url="<?php if($bpno==''){ echo $nonmemberBP; }else { echo $bpno; }?> <?php echo $rows['uid'];?>">CREATE SO</td>
+		<td class="so" data-url="<?php if($bpno==''){ echo $nonmemberBP; }else { echo $bpno; }?> <?php echo $rows['uid'];?> <?php echo csrf_sap_token();?>">CREATE SO</td>
 	<?php } else { ?>
-    <td><a onclick="return(window.confirm('Sales Order Already Created'));"><img src="images/active.png"/></a></td>
+    	<td><a onclick="return(window.confirm('Sales Order Already Created'));"><img src="images/active.png"/></a></td>
     <?php } ?>
 	<?php } else {?>
 	<td></td>
@@ -688,6 +723,7 @@ $(".so").click(function() {
 	var values = $(this).data('url').split(" ");
 	var bpno=values[0];
 	var registration_id=values[1];
+	var csrf_sap_token=values[2];
 	//alert(bpno);
 	
 	if (confirm("Are you sure you want to create Sales Order")) 
@@ -695,14 +731,14 @@ $(".so").click(function() {
 		$.ajax({
 		url: "api_igjme_exhibition.php",
 		method:"POST",
-		data:{bpno:bpno,registration_id:registration_id},
+		data:{bpno:bpno,registration_id:registration_id,csrf_sap_token:csrf_sap_token,show:"IGJME"},
 		type: "POST",
 		beforeSend: function() {
         	$("#overlay").show();
     	},
 		success:function(data)
 		{ 	
-			//console.log(data); exit;
+			//console.log(data); return false;
 			if($.trim(data)==1){
 				alert("Sales Order successfully Created..");
 				window.location.href = "igjme_exhibitor_rgistration.php";

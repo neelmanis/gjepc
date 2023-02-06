@@ -21,7 +21,7 @@ $pageTitle = "Committee of Administration - GJEPC India";
             <div class="grid_gallery">    
 
                 <div class="row justify-content-center mb-5 pb-5" style="border-bottom:1px dashed #a89c5d;">               		
-                    <div class="col-md-6 mb-4" data-aos="fade-left">                                    
+                    <!-- <div class="col-md-6 mb-4" data-aos="fade-left">                                    
                         <div class="cvMan_wrp py-sm-0">                            
                             <div class="row no-gutters align-items-center">                                
                                 <div class="col-auto">
@@ -33,7 +33,7 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 </div>                                
                             </div>                            
                         </div>                                
-                	</div>
+                	</div> -->
                		
                     <div class="col-md-6 " data-aos="fade-left">                                    
                         <div class="cvMan_wrp  py-sm-0">                            
@@ -43,42 +43,65 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="col mt-sm-3 mt-lg-0 pl-3">
                                 	<h2 class="title"> Vipul Shah</h2>
+                                    <p>Chairman</p>
+                                </div>                                
+                            </div>                            
+                        </div>                                
+                	</div>   
+                    <div class="col-md-6 " data-aos="fade-left">                                    
+                        <div class="cvMan_wrp  py-sm-0">                            
+                            <div class="row no-gutters align-items-center">                                
+                                <div class="col-auto">
+                                <div class="cvMan_pic"><img src="assets/images/coa/Kirit-Bhansali.jpg" class="img-fluid d-block" /></div></div>
+                                
+                                <div class="col mt-sm-3 mt-lg-0 pl-3">
+                                    <h2 class="title"> Kirit Bhansali</h2>
                                     <p>Vice Chairman</p>
                                 </div>                                
                             </div>                            
                         </div>                                
-                	</div>                    
+                    </div>                     
                 </div>
                 
                 <div class="row mb grid_gallery" data-spy="scroll" data-target=".nav-tabs" data-offset="50">      
 	
-                    <div class="col-md-3"  id="nav" data-sticky_parent>                   	
+                    <div class="col-md-3"  id="nav" data-sticky_parent> 
+
                 		<ul id="tabs" class="nav nav-tabs justify-content-center" role="tablist" data-sticky_column>        			
                             <li class="nav-item">
                                 <a id="tab-A" href="#pane-A" class="nav-link" data-toggle="tab" role="tab">All</a>
                             </li> 
-                             <li class="nav-item">
-                                <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab">Colored Gemstones & Pearls</a>
+                            <li class="nav-item">
+                                <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab">Diamond Panel</a>
                             </li> 
                             <li class="nav-item">
-                                <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">Diamond Panel</a>
-                            </li>       
+                                <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">Gold Jewellery & OPMJ Panel</a>
+                            </li>  
+                                 
                             <li class="nav-item">
-                                <a id="tab-C" href="#pane-C" class="nav-link" data-toggle="tab" role="tab"> Gold Jewellery & Other Precious Metal Jewellery Panel Committee</a>
+                                <a id="tab-C" href="#pane-C" class="nav-link" data-toggle="tab" role="tab"> Studded Jewellery Panel </a>
                             </li>
                             <li class="nav-item">
-                                <a id="tab-D" href="#pane-D" class="nav-link" data-toggle="tab" role="tab">Sales To Foreign Tourists / Synthetic Stones / Costume Fashion Jewellery</a>
+                                <a id="tab-D" href="#pane-D" class="nav-link" data-toggle="tab" role="tab">Lab Grown Diamond Panel</a>
                             </li>        
                         	<li class="nav-item">
-                                <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Silver Panel</a>
+                                <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Coloured Gemstones Panel </a>
                             </li>
                             <li class="nav-item">
-                                <a id="tab-F" href="#pane-G" class="nav-link" data-toggle="tab" role="tab">Government Nominee</a>
+                                <a id="tab-G" href="#pane-G" class="nav-link" data-toggle="tab" role="tab">Silver Jewellery Panel</a>
                             </li>
-                        </ul>                
+                            <!-- <li class="nav-item">
+                                <a id="tab-H" href="#pane-H" class="nav-link" data-toggle="tab" role="tab">Synthetic Stones/Sales to Foreign Tourists/Costume Fashion Jewellery</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a id="tab-I" href="#pane-I" class="nav-link" data-toggle="tab" role="tab">Special Economic Zone</a>
+                            </li>
+                        </ul>  
+
                     </div>
 
-                    <div id="content" class="col-12 col-lg-9 tab-content" role="tablist">        
+                    <div id="content" class="col-12 col-lg-9 tab-content" role="tablist">      
+
                         <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
                         
                             <div class="card-header" role="tab" id="heading-A">
@@ -90,241 +113,545 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div id="collapse-A" class="collapse show" data-parent="#content" role="tabpanel" aria-labelledby="heading-A">
                                 
                                 <div class="card-body">
-                                
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Panel Members</h2>
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid"></div> Diamond Panel</h2>
                                 
                                     <div class="row justify-content-center">
 
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
                                                 <div class="team_pic"><img src="assets/images/coa/coa_new/Ajesh-Mehta.png" class="img-fluid"></div>
-                                                <h2> Ajesh Mehta</h2>
-                                                <span> Member </span> 
+                                                <h2> Shri. Ajesh Mehta</h2>
+                                                <span> Member</span> 
                                             </div>
                                         </div> 
                                         
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/badrinarayan.png" class="img-fluid"></div>
-                                                <h2> Badrinarayanan Gupta</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/saunak-parikh.png" class="img-fluid"></div>
+                                                <h2>Shri. Saunak Parikh</h2>
+                                                <span>Member</span> 
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/dilip-shah.png" class="img-fluid"></div>
-                                                <h2> Dilip Shah</h2>
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/sanju-kothari.png" class="img-fluid"></div>
+                                                <h2>Shri. Sanju Kothari</h2>
                                                  <span> Member </span> 
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/k-srinivasan.png" class="img-fluid"></div>
-                                                <h2> K. Srinivasan</h2>
-                                                 <span> Member </span> 
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/manish-jivani.png" class="img-fluid"></div>
-                                                <h2> Manish Jiwani</h2>
-                                                 <span> Member</span> 
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4 mb-5">
+                                            <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
                                                 <div class="team_pic"><img src="assets/images/coa/coa_new/choksi.png" class="img-fluid"></div>
-                                                <h2> Milan Chokshi </h2>
+                                                <h2>Shri. Milan Chokshi </h2>
                                                 <span> Member </span> 
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mansukh-kothari.png" class="img-fluid"></div>
-                                                <h2> Mansukh Kothari</h2>
-                                                 <span>Member</span> 
-                                            </div>
-                                        </div>
-
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/tayal.png" class="img-fluid"></div>
-                                                <h2> Mahender Tayal</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>-->
-
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mahendra-agarwal.png" class="img-fluid"></div>
-                                                <h2>Mahendra Agarwal</h2>
-                                                <span> Member</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/nirav.png" class="img-fluid"></div>
+                                                <h2> Shri. Nirav Bhansali</h2>
+                                                <span> Member </span> 
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
                                                 <div class="team_pic"><img src="assets/images/coa/coa_new/Nilesh-Kothari.png" class="img-fluid"></div>
-                                                <h2>Nilesh Kothari</h2>
+                                                <h2>Shri. Nilesh Kothari</h2>
                                                 <span> Member </span> 
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/russell-mehta.png" class="img-fluid"></div>
-                                                <h2>Russell Mehta</h2>
-                                                 <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil-virani.png" class="img-fluid"></div>
+                                                <h2>Shri. Anil Virani</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Russell Mehta</h2>
+                                                 <span>Member</span> 
                                             </div>
                                         </div>
 
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Diamond Panel</h2>
+                                
+                                    <div class="row justify-content-center">
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/ram-babu.png" class="img-fluid"></div>
-                                                <h2> Ram Babu Gupta</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Ajesh-Mehta.png" class="img-fluid"></div>
+                                                <h2> Shri. Ajesh Mehta</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/saunak-parikh.png" class="img-fluid"></div>
+                                                <h2>Shri. Saunak Parikh</h2>
+                                                <span>Member</span> 
                                             </div>
                                         </div>
-                                    	<!-- <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/sanjay-shah.png" class="img-fluid"></div>
-                                                <h2> Sanjay Shah</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div> -->
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
                                                 <div class="team_pic"><img src="assets/images/coa/coa_new/sanju-kothari.png" class="img-fluid"></div>
-                                                <h2> Sanju Kothari</h2>
+                                                <h2>Shri. Sanju Kothari</h2>
                                                  <span> Member </span> 
                                             </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/suryakumar_sen.png" class="img-fluid"></div>
-                                                <h2> Suvankar Sen</h2>
-                                                 <span> Member </span> 
                                             </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
+
+                                            <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/shailesh-sangani.png" class="img-fluid"></div>
-                                                <h2> Shailesh Sangani</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/vijay-kedia.png" class="img-fluid"></div>
-                                                <h2> Vijay Kedia</h2>
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/choksi.png" class="img-fluid"></div>
+                                                <h2>Shri. Milan Chokshi </h2>
                                                 <span> Member </span> 
                                             </div>
-                                       	</div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/nirav.png" class="img-fluid"></div>
+                                                <h2> Shri. Nirav Bhansali</h2>
+                                                <span> Member </span> 
+                                            </div>
+                                        </div>
+
                                        
-                                    </div>
-                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Regional Chairmen</h2>
-                                
-                                    <div class="row">
-                                         
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/ashok-sheth.png" class="img-fluid"></div>
-                                                <h2> Ashok Seth</h2>
-                                                 <span> Northern Region </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Nilesh-Kothari.png" class="img-fluid"></div>
+                                                <h2>Shri. Nilesh Kothari</h2>
+                                                <span> Member </span> 
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/gajera.png" class="img-fluid"></div>
-                                                <h2> Ashok Gajera</h2>
-                                                 <span> Western Region </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/navadiya.png" class="img-fluid"></div>
-                                                <h2> Dineshbhai Navadiya</h2>
-                                                 <span> Gujarat Region </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/tayal.png" class="img-fluid"></div>
-                                                <h2> Mahender Kumar Tayal</h2>
-                                                 <span> Southern Region </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/bardiya.png" class="img-fluid"></div>
-                                                <h2> Nirmal Kumar Bardiya</h2>
-                                                <span> Rajasthan Region </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/pincha.png" class="img-fluid"></div>
-                                                <h2>Prakash Chandra Pincha</h2>
-                                                 <span> Eastern Region</span> 
-                                            </div>
-                                        </div>
+
+
                                        
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil-virani.png" class="img-fluid"></div>
+                                                <h2>Shri. Anil Virani</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Russell Mehta</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
                                     </div>
-                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Government Nominees</h2>
+                                </div>
+
+                                <div class="card-body">
                                 
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Gold Jewellery & OPMJ Panel</h2>
+                                    
                                     <div class="row justify-content-center">
                                          
-                                         <!-- <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/meeta.png" class="img-fluid"></div>
-                                                <h2>Meeta Rajivlochan, IAS</h2>
-                                                 <span>Additional DGFT, DGFT Zonal Office, Mumbai</span> 
-                                            </div>
-                                        </div>
-                                        
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/suresh_kumar.png" class="img-fluid"></div>
-                                                <h2>Suresh Kumar</h2>
-                                                 <span> Joint Secretary, Ministry of Commerce & Industry</span> 
-                                            </div>
-                                        </div>
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/saroj.png" class="img-fluid"></div>
-                                                <h2> Saroj Kumar Behera</h2>
-                                                 <span> Joint Director, Director General of Export Promotion </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/nawal-agarwal.png" class="img-fluid"></div>
+                                                <h2> Dr. Nawal Kishore Agarwal</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/pankaj-shah.png" class="img-fluid"></div>
+                                                <h2>Shri. Pankaj Shah</h2>
+                                                 <span> Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil.png" class="img-fluid"></div>
+                                                <h2> Anil Sankhwal</h2>
+                                                 <span> Member </span> 
                                             </div>
                                         </div> -->
-                                       
 
-                                        
                                         <div class="col-md-4 mb-5">
-                                                <div class="team_box text-center">
-                                                    <div class="team_pic"><img src="assets/images/coa/coa_new/Vipul-Bansal.png" class="img-fluid"></div>
-                                                    <h2>Vipul Bansal, IAS</h2>
-                                                    <span> Jt. secretary, MoC&I </span> 
-                                                </div>
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Dr. Rajendra Bhola</h2>
+                                                 <span> Member </span> 
                                             </div>
-                                        
+                                        </div>
 
-                                       
-                                     
-                                    <!--  </div> -->
-                                
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Suresh Khati</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri K Srinivasan</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Konal Doshi </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Prakash Pincha</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/khushboo-ranawat.png" class="img-fluid"></div>
+                                                <h2>Smt. Khushbu Ranawat</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
                                     </div>
                                 
                                 </div>
-                        
-                            </div>
 
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Lab Grown Diamond Panel</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/smit.png" class="img-fluid"></div>
+                                                <h2>Shri. Smit Patel</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Anup Zaveri</h2>
+                                                 <span>Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Jayesh Mistri</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Kautil Patel </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Manish Jivani</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Manish Patwa</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Nirav Virani</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Smt. Pooja Shah</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Coloured Gemstones Panel</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        
+                                        
+                                      
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mahendra-agarwal.png" class="img-fluid"></div>
+                                                <h2>Shri. Mahendra Agarwal</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Vijay Kedia</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Kamal Kothari</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2> Shri. Dinesh Khatoria</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rajesh Dhamani</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Sudhir Kothari</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Dwarka Prasad Khandelwal</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri.Neeraj Lunawat</h2>
+                                                <span>Member</span> 
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Silver Jewellery Panel</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/krishna.png" class="img-fluid"></div>
+                                                <h2>Shri. Krishna Behari Goyal</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Arvind Gupta</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rajeev Nagori </h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ram Babu Gupta </h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ashok Seth </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ravi Agarwal </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ashok Goyal</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Nikhil Jain</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+
+
+                                        
+                                    </div>
+                                
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Special Economic Zone</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/suryakumar_sen.png" class="img-fluid"></div>
+                                                <h2>Shri. Suvankar Sen</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Bobby Kothari </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Mehul Vaghani</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Neville Tata </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Adil Kotwal </h2>
+                                                 <span>Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ram Babu Gupta</h2>
+                                                 <span> Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Colin Shah</h2>
+                                                 <span> Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rohit Gupta </h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rashesh Bhanushali </h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+                        
                         </div>
 
                         <div id="pane-E" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-E">
@@ -332,7 +659,7 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div class="card-header" role="tab" id="heading-E">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-E" aria-expanded="false" aria-controls="collapse-E">
-                                       Colored Gemstones &  Pearls
+                                       Diamond Panel
                                     </a>
                                 </h5>
                             </div>
@@ -341,69 +668,77 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Colored Gemstones &  Pearls  </h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Diamond Panel</h2>
                                 
                                     <div class="row justify-content-center">
 
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Arun Gokhroo</h2>
-                                                <span>Permanent Invitee</span> 
-                                            </div>
-                                        </div>
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Dwarka Khandelwal</h2>
-                                                <span>Permanent Invitee</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Ajesh-Mehta.png" class="img-fluid"></div>
+                                                <h2> Shri. Ajesh Mehta</h2>
+                                                <span> Convener</span> 
                                             </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Kamal Kumar Kothari </h2>
-                                                <span> Permanent Invitee</span> 
-                                            </div>
-                                        </div>-->
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/vijay-kedia.png" class="img-fluid"></div>
-                                                <h2> Vijay Kedia</h2>
-                                                <span> Convener </span> 
-                                            </div>
-                                        </div>
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mahendra-agarwal.png" class="img-fluid"></div>
-                                                <h2>Mahendra Agarwal</h2>
-                                                <span> Co-convener</span> 
-                                            </div>
-                                        </div>
-                                         <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Neeraj Lunawat</h2>
-                                                <span>Permanent Invitee</span> 
-                                            </div>
-                                        </div>
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Pradeep Pansari (Jain)</h2>
-                                                <span>Permanent Invitee</span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Sudhir Kothari</h2>
-                                                <span>Permanent Invitee</span> 
-                                            </div>
-                                        </div>-->
+                                        </div> 
                                         
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/saunak-parikh.png" class="img-fluid"></div>
+                                                <h2>Shri. Saunak Parikh</h2>
+                                                <span>Co-Convener</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/sanju-kothari.png" class="img-fluid"></div>
+                                                <h2>Shri. Sanju Kothari</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/choksi.png" class="img-fluid"></div>
+                                                <h2>Shri. Milan Chokshi </h2>
+                                                <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/nirav.png" class="img-fluid"></div>
+                                                <h2> Shri. Nirav Bhansali</h2>
+                                                <span> Member </span> 
+                                            </div>
+                                        </div>
+
                                        
-                                                             
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Nilesh-Kothari.png" class="img-fluid"></div>
+                                                <h2>Shri. Nilesh Kothari</h2>
+                                                <span> Member </span> 
+                                            </div>
+                                        </div>
+
+
+                                       
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil-virani.png" class="img-fluid"></div>
+                                                <h2>Shri. Anil Virani</h2>
+                                                <span> Member</span> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Russell Mehta</h2>
+                                                 <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>       
                                 
@@ -416,7 +751,7 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div class="card-header" role="tab" id="heading-B">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
-                                        Diamond Panel
+                                        Gold Jewellery & OPMJ Panel
                                     </a>
                                 </h5>
                             </div>
@@ -425,111 +760,83 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                 
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Diamond Panel</h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Gold Jewellery & OPMJ Panel</h2>
                                     
                                     <div class="row justify-content-center">
-                                    
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil-virani.png" class="img-fluid"></div>
-                                                <h2> Anil Virani</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>-->
-                                         <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/gajera.png" class="img-fluid"></div>
-                                                <h2> Ashok Gajera</h2>
-                                                 <span> Invitee </span> 
-                                            </div>
-                                        </div>
+                                         
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Ashish Mehta</h2>
-                                                 <span> Permanent Invitee </span> 
-                                            </div>
-                                        </div>
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Ankit Shah </h2>
-                                                 <span> Permanent Invitee </span> 
-                                            </div>
-                                        </div>--> 
-                                        
-                                        <!-- <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/sanjay-shah.png" class="img-fluid"></div>
-                                                <h2> Sanjay Shah</h2>
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/nawal-agarwal.png" class="img-fluid"></div>
+                                                <h2> Dr. Nawal Kishore Agarwal</h2>
                                                  <span> Convener </span> 
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/pankaj-shah.png" class="img-fluid"></div>
+                                                <h2>Shri. Pankaj Shah</h2>
+                                                 <span> Co-Convener</span> 
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil.png" class="img-fluid"></div>
+                                                <h2> Anil Sankhwal</h2>
+                                                 <span> Member </span> 
+                                            </div>
                                         </div> -->
-                                         <div class="col-md-4 mb-5">
+
+                                        <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/manish-jivani.png" class="img-fluid"></div>
-                                                <h2> Manish Jiwani</h2>
-                                                 <span> Co-convener </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Dr. Rajendra Bhola</h2>
+                                                 <span> Co-opted Member </span> 
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Ajesh-Mehta.png" class="img-fluid"></div>
-                                                <h2> Ajesh Mehta</h2>
-                                                <span> Member </span> 
-                                            </div>
-                                        </div> 
-                                        
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/Nilesh-Kothari.png" class="img-fluid"></div>
-                                                <h2>Nilesh Kothari</h2>
-                                                <span> Member </span> 
-                                            </div>
-                                        </div> 
-                                        
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/dilip-shah.png" class="img-fluid"></div>
-                                                <h2> Dilip Shah</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div> 
-                                        
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/choksi.png" class="img-fluid"></div>
-                                                <h2> Milan Chokshi </h2>
-                                                <span> Member </span> 
-                                            </div>
-                                        </div> 
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/russell-mehta.png" class="img-fluid"></div>
-                                                <h2>Russell Mehta</h2>
-                                                 <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Suresh Khati</h2>
+                                                 <span>Co-Opted Member</span> 
                                             </div>
                                         </div>
-                                    	
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/sanju-kothari.png" class="img-fluid"></div>
-                                                <h2> Sanju Kothari</h2>
-                                                 <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri K Srinivasan</h2>
+                                                 <span>Co-Opted Member</span> 
                                             </div>
                                         </div>
-                                        <!--<div class="col-md-4 mb-5">
+
+                                        <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Saunak Parikh</h2>
-                                                 <span> Permanent Invitee</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Konal Doshi </h2>
+                                                 <span>Co-Opted Member</span> 
                                             </div>
-                                        </div>-->
-                                        
-                                       
-                                     
-                                     </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri Prakash Pincha</h2>
+                                                 <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/khushboo-ranawat.png" class="img-fluid"></div>
+                                                <h2>Smt. Khushbu Ranawat</h2>
+                                                 <span>Member</span> 
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 
                                 </div>
                             
@@ -542,7 +849,7 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div class="card-header" role="tab" id="heading-C">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="false" aria-controls="collapse-C">
-                                         Gold Jewellery & Other Precious Metal Jewellery Panel Committee	
+                                    Studded Jewellery Panel 
                                     </a>
                                 </h5>
                             </div>
@@ -551,91 +858,89 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                 
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Gold Jewellery & Other Precious Metal Jewellery Panel Committee	</h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Studded Jewellery Panel</h2>
                                 
                                     <div class="row justify-content-center">
 
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/ashok-sheth.png" class="img-fluid"></div>
-                                                <h2> Ashok Seth</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>-->
-                                    	<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/k-srinivasan.png" class="img-fluid"></div>
-                                                <h2> K. Srinivasan</h2>
-                                                 <span> Convener </span> 
-                                            </div>
-                                       	</div>
-                                       <!-- <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Kunal Mehta</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>
-                                         <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Konal Doshi </h2>
-                                                 <span> Co-convener </span> 
-                                            </div>
-                                        </div>-->
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mansukh-kothari.png" class="img-fluid"></div>
-                                                <h2> Mansukh Kothari</h2>
-                                                 <span> Co-convener </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/anil.png" class="img-fluid"></div>
+                                                <h2>Shri. Anil Sankhwal </h2>
+                                                 <span> Convener  </span> 
                                             </div>
                                         </div>
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/tayal.png" class="img-fluid"></div>
-                                                <h2> Mahender Tayal</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/pincha.png" class="img-fluid"></div>
-                                                <h2> Prakash Pincha</h2>
-                                                 <span> Member </span> 
-                                            </div>
-                                        </div>-->
-                                       
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/suryakumar_sen.png" class="img-fluid"></div>
-                                                <h2> Suvankar Sen</h2>
-                                                 <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Smt. Renu Sharma</h2>
+                                                 <span> Co-Opted Member </span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/shailesh-sangani.png" class="img-fluid"></div>
-                                                <h2> Shailesh Sangani</h2>
-                                                 <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Sanjay Kumar Sanghi </h2>
+                                                 <span>Co-Opted Member</span> 
                                             </div>
                                         </div>
-                                        
-                                                               
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Nitin Jain </h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Kushal Dhadda</h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Manish Mehta</h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Atul Jain </h2>
+                                                 <span> Gujarat Region </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Shantilal Barmecha</h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
                                     </div>
-                                
-                                        
+
                                 </div>
-                            
+
                             </div>
                         
                         </div>
-                        
+
                         <div id="pane-D" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-D">
                             
                             <div class="card-header" role="tab" id="heading-D">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-D" aria-expanded="false" aria-controls="collapse-D">
-                                         Sales To Foreign Tourists / Synthetic Stones / Costume Fashion Jewellery 
+                                    Lab Grown Diamond Panel
+
                                     </a>
                                 </h5>
                             </div>
@@ -644,44 +949,91 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>  Sales To Foreign Tourists / Synthetic Stones / Costume Fashion Jewellery </h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Lab Grown Diamond Panel</h2>
                                 
                                     <div class="row justify-content-center">
                                     	<div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/badrinarayan.png" class="img-fluid"></div>
-                                                <h2> Badrinarayanan Gupta</h2>
-                                                <span> Convener </span> 
-                                            </div>
-                                      	</div>
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Jitendra Kumar Rakyan</h2>
-                                                <span> Co-convener [S F T] </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/smit.png" class="img-fluid"></div>
+                                                <h2>Shri. Smit Patel</h2>
+                                                 <span> Convener </span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Nagendra Mehta</h2>
-                                                <span> Co-convener [C F J] </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Anup Zaveri</h2>
+                                                 <span>Co-Opted Member </span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Suresh Punjabi</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Jayesh Mistri</h2>
+                                                 <span>Co-Opted Member </span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2> Sudhir Kasliwal</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Kautil Patel </h2>
+                                                 <span>Co-Opted Member</span> 
                                             </div>
-                                        </div>-->
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Manish Jivani</h2>
+                                                 <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Manish Patwa</h2>
+                                                 <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Nirav Virani</h2>
+                                                 <span> Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Smt. Pooja Shah</h2>
+                                                 <span>Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                       
                                     </div>
                                     
                                 
@@ -696,7 +1048,8 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div class="card-header" role="tab" id="heading-F">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-F" aria-expanded="false" aria-controls="collapse-F">
-                                        Silver Panel  
+                                    Coloured Gemstones Panel
+
                                     </a>
                                 </h5>
                             </div>
@@ -705,67 +1058,75 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Silver Panel</h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Coloured Gemstones Panel</h2>
                                 
                                     <div class="row justify-content-center">
                                     	
-                                        <!--<div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="assets/images/coa/coa_new/ashok-sheth.png" class="img-fluid"></div>
-                                                <h2>Ashok Seth</h2>
-                                                <span> Co-convener </span> 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-5">
-                                            <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Ashok Goyal</h2>
-                                                <span> Member </span> 
-                                            </div>
-                                        </div>
                                         
+                                      
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Arvind Gupta</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/mahendra-agarwal.png" class="img-fluid"></div>
+                                                <h2>Shri. Mahendra Agarwal</h2>
+                                                <span> Convener</span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Anand Rao</h2>
-                                                <span>Member</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Vijay Kedia</h2>
+                                                <span> Co-Convener (Co-Opted)</span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Abhishek Goyal</h2>
-                                                <span>Invitee</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Kamal Kothari</h2>
+                                                <span>Co-Opted Member </span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Bharat Lashkari</h2>
-                                                <span>Invitee</span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2> Shri. Dinesh Khatoria</h2>
+                                                <span>Co-Opted Member</span> 
                                             </div>
                                         </div>
+
                                         <div class="col-md-4 mb-5">
                                             <div class="team_box text-center">
-                                                <div class="team_pic"><img src="https://gjepc.org/assets/images/our_structure/RD/kk_dugal.png" class="img-fluid"></div>
-                                                <h2>Rajeev Nagori</h2>
-                                                <span> Member </span> 
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rajesh Dhamani</h2>
+                                                <span>Co-Opted Member</span> 
                                             </div>
-                                        </div>-->
+                                        </div>
+
                                         <div class="col-md-4 mb-5">
-                                                <div class="team_box text-center">
-                                                    <div class="team_pic"><img src="assets/images/coa/coa_new/ram-babu.png" class="img-fluid"></div>
-                                                    <h2> Ram Babu Gupta</h2>
-                                                    <span> Convener </span> 
-                                                </div>
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Sudhir Kothari</h2>
+                                                <span>Co-Opted Member</span> 
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Dwarka Prasad Khandelwal</h2>
+                                                <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri.Neeraj Lunawat</h2>
+                                                <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
                                         
 
                                     </div>
@@ -781,7 +1142,8 @@ $pageTitle = "Committee of Administration - GJEPC India";
                             <div class="card-header" role="tab" id="heading-G">
                                 <h5 class="mb-0">
                                     <a class="collapsed" data-toggle="collapse" href="#collapse-G" aria-expanded="false" aria-controls="collapse-G">
-                                         Government Nominee  
+                                         Silver Jewellery Panel
+
                                     </a>
                                 </h5>
                             </div>
@@ -790,19 +1152,216 @@ $pageTitle = "Committee of Administration - GJEPC India";
                                 
                                 <div class="card-body">
                                     
-                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Government Nominee</h2>
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div> Silver Jewellery Panel</h2>
                                 
                                     <div class="row justify-content-center">
-                                        
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/krishna.png" class="img-fluid"></div>
+                                                <h2>Shri. Krishna Behari Goyal</h2>
+                                                 <span> Convener </span> 
+                                            </div>
+                                        </div>
                                         
                                         <div class="col-md-4 mb-5">
-                                                <div class="team_box text-center">
-                                                    <div class="team_pic"><img src="assets/images/coa/coa_new/Vipul-Bansal.png" class="img-fluid"></div>
-                                                    <h2>Vipul Bansal, IAS</h2>
-                                                    <span>Jt. secretary, MoC&I </span> 
-                                                </div>
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Arvind Gupta</h2>
+                                                 <span> Co-opted Member </span> 
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rajeev Nagori </h2>
+                                                 <span> Co-opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ram Babu Gupta </h2>
+                                                 <span> Co-opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ashok Seth </h2>
+                                                 <span>Co-opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ravi Agarwal </h2>
+                                                 <span> Co-opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ashok Goyal</h2>
+                                                 <span> Co-opted Member </span> 
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Nikhil Jain</h2>
+                                                 <span>Co-opted Member </span> 
+                                            </div>
+                                        </div>
+
+
+
                                         
+                                    </div>
+                                
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+
+                        <div id="pane-H" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-H">
+                            
+                            <div class="card-header" role="tab" id="heading-H">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-H" aria-expanded="false" aria-controls="collapse-H"> Synthetic Stones/Sales to Foreign Tourists/Costume Fashion Jewellery</a>
+                                </h5>
+                            </div>
+                            
+                            <div id="collapse-H" class="collapse" data-parent="#content" role="tabpanel" aria-labelledby="heading-H">
+                                
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Synthetic Stones/Sales to Foreign Tourists/Costume Fashion Jewellery</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/badrinarayan.png" class="img-fluid"></div>
+                                                <h2>Shri. Badrinarayanan Gupta</h2>
+                                                 <span> Member </span> 
+                                            </div>
+                                        </div>
+
+                                        
+
+
+
+                                    </div>
+                                
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+
+                        <div id="pane-I" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-I">
+                            
+                            <div class="card-header" role="tab" id="heading-I">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapse-I" aria-expanded="false" aria-controls="collapse-I"> Special Economic Zone</a>
+                                </h5>
+                            </div>
+                            
+                            <div id="collapse-I" class="collapse" data-parent="#content" role="tabpanel" aria-labelledby="heading-I">
+                                
+                                <div class="card-body">
+                                    
+                                    <h2 class="d-none d-lg-block title text-center"> <div class="d-table mx-auto mb-3" style="width:30px; height:30px;"><img src="assets/images/black_star.png" class="img-fluid" /></div>Special Economic Zone</h2>
+                                
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/suryakumar_sen.png" class="img-fluid"></div>
+                                                <h2>Shri. Suvankar Sen</h2>
+                                                 <span> Convener </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Bobby Kothari </h2>
+                                                 <span>Co-Convener </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Mehul Vaghani</h2>
+                                                 <span>Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Neville Tata </h2>
+                                                 <span>Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Adil Kotwal </h2>
+                                                 <span>Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Ram Babu Gupta</h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Colin Shah</h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rohit Gupta </h2>
+                                                 <span> Co-Opted Member </span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="team_box text-center">
+                                                <div class="team_pic"><img src="assets/images/coa/coa_new/demo.png" class="img-fluid"></div>
+                                                <h2>Shri. Rashesh Bhanushali </h2>
+                                                 <span>Co-Opted Member</span> 
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
 
                                     </div>
                                 

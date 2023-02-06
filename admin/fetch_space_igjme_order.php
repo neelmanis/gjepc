@@ -5,11 +5,12 @@ require('razorpay-php/Razorpay.php');
 use Razorpay\Api\Api;
 $api = new Api( $keyId,  $keySecret);
 
-$sqlAPI = "SELECT * FROM `utr_history` WHERE 1 AND registration_id='".$_REQUEST['registration_id']."' AND (`event_selected` = 'signature23') AND (payment_status='pending' || payment_status='' || payment_status='captured') AND (razorpay_order_id!='' || razorpay_order_id IS NULL) AND source!='admin'";
+$sqlAPI = "SELECT * FROM `utr_history` WHERE 1 AND registration_id='".$_REQUEST['registration_id']."' AND `event_selected` = 'igjme23' AND (payment_status='pending' || payment_status='' || payment_status='captured') AND (razorpay_order_id!='' || razorpay_order_id IS NULL) AND source!='admin'";
+
 $querys =  $conn ->query($sqlAPI);
 while($result = $querys->fetch_assoc())
 {
-	//echo "<pre>";print_r($result);exit;
+	//echo "<pre>"; print_r($result); 
 	$post_date = date('Y-m-d');
 	$razorpay_order_id = $result['razorpay_order_id'];
 	$utr_number = $result['utr_number'];
@@ -32,10 +33,10 @@ while($result = $querys->fetch_assoc())
 	
 	if($payment_status == 'captured'){
 	if($_REQUEST['registration_id']!='' && $razorpay_order_id!=''){
-	$updateUTR = "UPDATE `utr_history` SET `modified_date`=NOW(),`order_id`='$order_id',`razorpay_payment_id`='$razorpay_payment_id',`currency`='$currency',`method`='$method',`payment_status`='$payment_status',`card_id`='$card_id',`bank`='$bank',`error_description`='$error_description',`comment`='dashboard status apis',`payment_date`='$payment_date' WHERE razorpay_order_id='$razorpay_order_id' AND `registration_id`='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND `event_selected`='signature23'"; 
+	$updateUTR = "UPDATE `utr_history` SET `modified_date`=NOW(),`order_id`='$order_id',`razorpay_payment_id`='$razorpay_payment_id',`currency`='$currency',`method`='$method',`payment_status`='$payment_status',`card_id`='$card_id',`bank`='$bank',`error_description`='$error_description',`comment`='dashboard status apis',`payment_date`='$payment_date' WHERE razorpay_order_id='$razorpay_order_id' AND `registration_id`='$registration_id' AND `show`='IGJME' AND `event_selected`='igjme23'"; 
 	$resultUTR = $conn->query($updateUTR);
 	
-	$update_query = "update exh_reg_payment_details set payment_status='approved', document_status='approved',application_status='approved',application_comment='dashboard' where uid='$registration_id' and `show`='IIJS SIGNATURE 2023'";
+	$update_query = "update exh_reg_payment_details set payment_status='approved', document_status='approved',application_status='approved',application_comment='dashboard' where uid='$registration_id' and `show`='IGJME'";
 	$result_update=$conn ->query($update_query);
 	
 	if(!$resultUTR) { die('Error: Update query failed' . $conn->error); }

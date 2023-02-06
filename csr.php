@@ -29,6 +29,25 @@ $pageDescription  = "Gem Jewellery Export Promotion Council (GJEPC) is Indias Ap
 	
 </div>
 
+
+<div class="row justify-content-center align-items-center no-gutters">
+    		
+			<div class="col-md-6 col-lg-5 order-md-12 mb-4 mb-md-0" data-aos="fade-right">
+				
+				<img src="assets/images/projects/gjnrf670x555.jpg" class="img-fluid d-block" alt="">
+
+			</div>
+
+			<div class="col-md-6 col-lg-5 mb-4 mb-md-0 text-center" data-aos="fade-left">
+				
+				<h2 class="title"> <span style="width:30px; height:30px;" class="d-table mx-auto mb-4"><img src="assets/images/black_star.png" class="d-block img-fluid" alt=""></span> gem & jewellery national relief foundation </h2>
+
+				<a href="gem-&-jewellery-national-relief-foundation.php" class="gold_btn d-table mx-auto">View More</a>
+
+			</div>
+
+    	</div>
+
 <div class="row justify-content-center align-items-center no-gutters">
     		
 			<div class="col-md-6 col-lg-5 mb-4 mb-md-0" data-aos="fade-right">

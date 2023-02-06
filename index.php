@@ -161,19 +161,32 @@ include 'db.inc.php';
                                             <div><h1 class="title mb-0">ViewPoint</h1></div>
                                             <div><a href="https://gjepc.org/solitaire/category/viewpoint/" target="_blank" class="fade_anim d-block viewPoint_btn"> View All</a></div>
                                         </div>
+
+                                        <a href="https://gjepc.org/solitaire/trade-pacts-are-the-booster-engines-for-indias-gem-jewellery-sector/" target="_blank">Trade Pacts Are The Booster Engines For India’s Gem & Jewellery Sector</a>
+
+                                        <a href="https://gjepc.org/solitaire/iibx-to-revolutionise-indias-bullion-trade/" target="_blank">IIBX To Revolutionise India’s Bullion Trade</a>
+
                                        <!--  <a href="https://gjepc.org/solitaire/south-india-is-opening-up-to-18-kt-gold/" target="_blank">South India Is Opening Up To 18-Kt Gold</a> -->
 
-                                        <a href="https://gjepc.org/solitaire/orders-worth-%e2%82%b949407-crores-placed-at-iijs-premiere-2022-hansa-report/" target="_blank">Orders Worth ₹49407 crores Placed at IIJS Premiere 2022: Hansa Report</a>
+                                      
+                                      
+                                        <!-- <a href="https://gjepc.org/solitaire/orders-worth-%e2%82%b949407-crores-placed-at-iijs-premiere-2022-hansa-report/" target="_blank">Orders Worth ₹49407 crores Placed at IIJS Premiere 2022: Hansa Report</a> -->
 
-                                        <a href="https://gjepc.org/solitaire/uks-financial-crisis-triggers-big-challenges-for-importing-jewellers/" target="_blank">UK’s Financial Crisis Triggers Big Challenges For Importing Jewellers</a>
+                                        <!-- <a href="https://gjepc.org/solitaire/uks-financial-crisis-triggers-big-challenges-for-importing-jewellers/" target="_blank">UK’s Financial Crisis Triggers Big Challenges For Importing Jewellers</a> -->
                                         
                                 
                                     </div>
-                                    <a href="gjepc-webinar.php" class="fade_anim d-block viewPoint_btn rounded-0 text-center py-2 mb-4"><i class="fa fa-desktop" aria-hidden="true"></i> Click Here For Webinar</a>
+
+                                    <div class="row">
+                                        <div class="col"><a href="gjepc-workshop.php" class="fade_anim d-block viewPoint_btn rounded-0 text-center py-2 mb-4"> GJEPC workshop</a></div>
+                                        <div class="col"><a href="gjepc-event.php" class="fade_anim d-block viewPoint_btn rounded-0 text-center py-2 mb-4"> GJEPC Events  </a></div>
+                                    </div>
+
+                                    
 
                                     <!-- <a href="https://gjepc.org/igja-nominations-form.php" class="d-block position-relative"> -->
-                                    <a href="https://intl.gjepc.org/dubai" class="d-block position-relative" target="_blank">
-                                        <img src="assets/images/IIJS-Dubai-2022-Logo-min.webp" class="img-fluid">
+                                    <a href="https://theartisanawards.com/" class="d-block position-relative" target="_blank">
+                                        <img src="assets/images/artisan2023.jpg" class="img-fluid">
                                         <!-- <span class="blink" style="position: absolute;/* top: 6px; */left: 0;right: 0; text-align: center; bottom: 20px;z-index: 1;color: #f00;/* display: table; */margin: 0 auto;font-size: 18px;">Live Now...</span> -->
                                     </a>
                                 </div>                        
@@ -287,8 +300,14 @@ include 'db.inc.php';
         
         <div class="event_slider"> 
 
+            <div>
+                <div class="event_wrp">
+                    <a href="gem-&-jewellery-national-relief-foundation.php"> <img src="assets/images/gjnrf.jpg" class="img-fluid"> </a>
+                </div>
+            </div> 
+
            
-             <div>
+            <div>
                 <div class="event_wrp">
                     <a href="annual_reports.php"> <img src="assets/images/annualReport.jpg" class="img-fluid"> </a>
                 </div>

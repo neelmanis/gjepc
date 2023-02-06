@@ -33,7 +33,7 @@ $getCHENNAIRegion = gotRegionID("RO-CHE",$conn);
 
 function getTotalRegionwiseData($getRegionIds,$show,$conn)
 {
-	$query_sel = "SELECT rm . * , oh . * 
+	$query_sel = "SELECT rm.id,rm.state, oh.payment_status,oh.status,oh.show 
 	FROM  visitor_order_history oh
 	INNER JOIN  registration_master rm ON oh.registration_id=rm.id
 	WHERE oh.payment_status='Y' and oh.status = '1' and oh.show='$show' AND rm.state IN($getRegionIds)";
@@ -47,10 +47,10 @@ function getTotalRegionwiseCurrentDate($getRegionIds,$show,$conn)
 	$curr_date_start=date("Y-m-d")." 00:00:00";
 	$curr_date_end=date("Y-m-d")." 23:59:59";
 		
-	$query_sel = "SELECT rm . * , oh . * 
+	$query_sel = "SELECT rm.id,rm.state, oh.payment_status,oh.status,oh.show,oh.create_date 
 	FROM  visitor_order_history oh
 	INNER JOIN  registration_master rm ON oh.registration_id=rm.id
-	WHERE oh.payment_status='Y' and oh.status = '1' and oh.show='$show' and oh.year='2022' AND rm.state IN($getRegionIds) AND 
+	WHERE oh.payment_status='Y' and oh.status = '1' and oh.show='$show' AND rm.state IN($getRegionIds) AND 
 	oh.create_date BETWEEN '$curr_date_start' AND '$curr_date_end'";
 	$result_sel = $conn->query($query_sel);
 	$total_data= $result_sel->num_rows;
@@ -84,7 +84,7 @@ function getRegionwiseCategoryCompany($category,$getRegionIds,$show,$conn)
 
 function getTotalCompanyRegionwise($getRegionIds,$show,$conn)
 {	
-	$query_sel = "select oh.create_date, rm.id,rm.company_name,rm.state, vd.name,vd.lname,vd.pan_no,vd.email,vd.category, oh.orderId, oh.amount as 'Amount', oh.payment_status as 'payment_status',vo.regId,vo.payment_type 
+	$query_sel = "select oh.create_date, rm.id,rm.company_name,rm.state, vd.name,vd.pan_no, oh.orderId, oh.amount as 'Amount', oh.payment_status as 'payment_status',vo.regId,vo.payment_type 
 	from visitor_order_history oh 
 	inner join registration_master rm on oh.registration_id=rm.id 
 	inner join visitor_directory vd on oh.visitor_id=vd.visitor_id 
@@ -157,7 +157,7 @@ $(document).ready(function(){
 	
 <script type="text/javascript">
 	$(window).load(function() {
-		$(".loader").fadeOut("slow");
+		$(".loader").fadeOut(3000);
 	});
 </script>
 <style>
@@ -209,11 +209,17 @@ select::-ms-expand {
 .select:hover::after {
    color: #23b499;
 }
+
+#main {
+    width: 1200px;
+    height: auto;
+    margin: 0px auto 20px;
+}
 </style>
 </head>
 
 <body>
-<div class="loader"><p>Manual loading please wait....</p></div>
+<div class="loader"><p>loading please wait....</p></div>
 
 <div id="header_wrapper"><?php include("include/header.php");?></div>
 
@@ -223,25 +229,17 @@ select::-ms-expand {
 
 <div class="clear"></div>
 
-<div class="breadcome_wrap">
-	<div class="breadcome"><a href="admin.php">Home</a> > Manage Visitor Order</div>
-</div>
-
 <div id="main">
 	<div class="content">
-		 
-    	<div class="content_head">	
-			Manage Visitor Orders
-		</div>
-		<?php if($_REQUEST['action']=='view') { ?>
+		<?php if($_REQUEST['action']=='view'){ ?>
 		<div class="manage-shows" style="text-align:center;">
-		<label style="display: block;margin-bottom: 10px;font-size: 18px;">Select show wise order detail</label>
+		<label style="display: block;margin-bottom: 10px;font-size: 18px;">Select show</label>
 			<div class="select">
-			<select name="data" id="data" class='websiteRadio'>
-				<!--<option value="https://gjepc.org/admin/manage_visitor_order.php?action=view&event=iijs22" <?php if($show=="iijs22"){?> selected <?php }?>>IIJS PREMIERE 2022</option>-->
+			<select name="data" id="data" class='websiteRadio'>				
 				<option value="https://gjepc.org/admin/manage_visitor_order.php?action=view&event=signature23" <?php if($show=="signature23"){?> selected <?php }?>>IIJS SIGNATURE 2023</option>
 				<option value="https://gjepc.org/admin/manage_visitor_order.php?action=view&event=iijstritiya23" <?php if($show=="iijstritiya23"){?> selected <?php }?>>IIJS TRITIYA 2023</option>
 				<option value="https://gjepc.org/admin/manage_visitor_order.php?action=view&event=combo23" <?php if($show=="combo23"){?> selected <?php }?>>IIJS PREMIERE 22 &amp;  IIJS SIGNATURE 23 &amp; IIJS TRITIYA 23</option>
+				<option value="https://gjepc.org/admin/manage_visitor_order.php?action=view&event=stcombo23" <?php if($show=="stcombo23"){?> selected <?php }?>> IIJS SIGNATURE &amp; IIJS TRITIYA 23</option>
 			</select>
 			</div>
 		</div>	
@@ -306,7 +304,7 @@ $_SESSION['succ_msg']="";
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
 	<tr class="orange1"><td colspan="11">Report Summary</td></tr>
 	<tr>
-	  <td><strong>Grand <br/>Total Application</strong></td>
+	  <td><strong>Grand Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
 	  <td><strong>Total City</strong></td>
 	  <td><strong>Total Application On Date (<?php echo date('Y-m-d');?>)</strong></td>	  
@@ -337,7 +335,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">HO-MUM Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ho-mum.png" width="20px;"> HO-MUM Report Summary</td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
@@ -368,7 +366,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">RO-SURAT Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ho-mum.png" width="20px;"> RO-SURAT Report Summary</td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
@@ -399,7 +397,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">RO-JAIPUR Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ro-jaipur.png" width="20px;"> RO-JAIPUR Report Summary</td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
@@ -430,7 +428,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">RO-DELHI Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ro-del.png" width="20px;"> RO-DELHI Report Summary </td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
@@ -461,7 +459,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">RO-KOLKATA Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ro-jaipur.png" width="20px;"> RO-KOLKATA Report Summary</td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>
@@ -492,7 +490,7 @@ $_SESSION['succ_msg']="";
 	</table>
 	
 	<table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
-	<tr class="orange1"><td colspan="11">RO-CHENNAI Report Summary</td></tr>
+	<tr class="orange1"><td colspan="11"><img src="images/ro-chennai.png" width="20px;"> RO-CHENNAI Report Summary</td></tr>
 	<tr>
 	  <td><strong>Total Application</strong></td>
 	  <td><strong>Total Company</strong></td>

@@ -119,7 +119,7 @@ ddsmoothmenu.init({
     $attach = " order by ".$order_by." ".$asc_desc." ";
     
     $i=1;
-	$sql="SELECT * FROM tender_download_info where 1";
+	$sql="SELECT * FROM tender_download_info order by id desc limit 5000";
 	if($_SESSION['tender_id'])
 	{
 		$sql.=" and tender_id='".$_SESSION['tender_id']."'";

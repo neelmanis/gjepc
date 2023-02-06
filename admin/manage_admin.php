@@ -4,6 +4,7 @@ include('../db.inc.php');
 include('../functions.php');
 if(!isset($_SESSION['curruser_login_id'])){ header('Location: index.php'); exit; } 
 $adminID = intval($_SESSION['curruser_login_id']);
+$admin_name = getAdminName($adminID,$conn);
 /*if(($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 {
 	$sql="delete from admin_master where id='$_REQUEST[id]'";	
@@ -116,6 +117,10 @@ if(($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 	$sql="update admin_master set contact_name='$contact_name',address='$address', mobile_no='$mobile_no',email_id='$email_id',role='$role',admin_access='$admin_access_new',region_id='$region_id',modified_date=NOW(),adminId='$adminID',region_access='$region_access_new',reports_access='$reports_access_new',reports_category='$reports_cat_new' where id='$id'";	
 	$resultx = $conn -> query($sql);
 	if($resultx) {
+	
+	$sqlLogs = "INSERT INTO visitor_approval_logs SET post_date=NOW(), visitor_id='$id',admin_id='$adminID',admin_name='$admin_name',type='reports_rights',action='Y',reason='$reports_access_new'";
+	$resultLogs = $conn ->query($sqlLogs);
+	
 	echo "<meta http-equiv=refresh content=\"0;url=manage_admin.php?action=view\">";
 	} else {
 	die ("Mysql Update Error: " . $conn->error);

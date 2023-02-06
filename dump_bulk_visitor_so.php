@@ -67,8 +67,6 @@ function CheckMembership($registration_id,$conn)
 	}
 }
 
-
-
 $soapRenewalUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageServlet?channel=:BC_Visitor:CC_Visitor_Sender"; // LIVE
 $soapUser = "pi_admin";  //  username
 $soapPassword = "Deloitte@123"; // password

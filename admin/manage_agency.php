@@ -52,7 +52,7 @@ if(($_REQUEST['action']=='visitorApproval') && isset($_POST['apply'] ))
 	$visitors = $_POST['visitor_id'];
 	$event = $_POST['event'];
 	$categoryId=getAgencyCat($agency_id,$conn);
-if($_POST['event'] !=""){
+	if($_POST['event'] !=""){
 	if($status !=""){
 		if($visitors !=""){
 			foreach ($visitors as $key => $visitor) {
@@ -100,7 +100,7 @@ if($_POST['event'] !=""){
                               	$global_status = "P";
 	                        	}
 
-                              $updateGlobal = "UPDATE  globalExhibition  SET `modified_date`='$modified_at',`status`='$status',`isDataPosted`='N' WHERE  `registration_id`='$agency_id' AND `visitor_id`='$visitor'  AND `pan_no`='$pan_no' AND `participant_type`= '$participant_type' AND event='$event' ";
+                              $updateGlobal = "UPDATE  globalExhibition  SET `modified_date`='$modified_at',`status`='$status',`isDataPosted`='N',`onspot_adminId`= '$adminID' WHERE  `registration_id`='$agency_id' AND `visitor_id`='$visitor'  AND `participant_type`= '$participant_type' AND event='$event' ";
 						        $updateGlobalResult = $conn->query($updateGlobal);
 								if($updateGlobalResult){
 
@@ -111,7 +111,7 @@ if($_POST['event'] !=""){
 									echo "<script langauge=\"javascript\">alert(\" Updating Global table failed. Error:".$conn->error."\");location.href='manage_agency.php?action=viewVisitors&agencyId=".$agency_id."';</script>";
 								}
 	                        }else{
-                                 $insertGlobal = "INSERT INTO globalExhibition  SET `post_date`='$created_at',`uniqueIdentifier`='$uniqueIdentifier',`registration_id`='$agency_id',`visitor_id`='$visitor',`fname`='$fname',`lname`='$lname',`mobile`='$mobile',`pan_no`='$pan_no',`designation`='$designation',`company`='$company',`photo_url`='$photo_url',`participant_type`='$participant_type',`covid_report_status`='$covid_report_status',`days_allow`='$days_allow',`agency_category`='$category',`committee`='$committee',`status`='$status',`event`='$event',`isDataPosted`='N'";
+                                 $insertGlobal = "INSERT INTO globalExhibition  SET `post_date`='$created_at',`uniqueIdentifier`='$uniqueIdentifier',`registration_id`='$agency_id',`visitor_id`='$visitor',`fname`='$fname',`lname`='$lname',`mobile`='$mobile',`pan_no`='$pan_no',`designation`='$designation',`company`='$company',`photo_url`='$photo_url',`participant_type`='$participant_type',`covid_report_status`='$covid_report_status',`days_allow`='$days_allow',`agency_category`='$category',`committee`='$committee',`status`='$status',`event`='$event',`isDataPosted`='N',`onspot_adminId`= '$adminID' ";
 						        $insertGlobalResult = $conn->query($insertGlobal);
 								if($insertGlobalResult){
 									$sqlUpdate = "UPDATE visitor_agency_registration SET `person_status`='$status',`adminId`='$adminID' WHERE `agency_id`='$agency_id' AND `id`='$visitor'";
@@ -222,9 +222,11 @@ if($_REQUEST['Reset']=="Reset")
 {
   $_SESSION['person_name']="";
   $_SESSION['person_status']="";
+  $_SESSION['global_status']="";
+
  
   
-  header("Location: manage_covid_report.php?action=view");
+  header("Location: manage_agency.php?action=viewVisitors&agencyId=".$_REQUEST['agencyId']);
 } else
 {
     $search_type=$_REQUEST['search_type'];
@@ -232,6 +234,8 @@ if($_REQUEST['Reset']=="Reset")
     { 
     $_SESSION['person_name']=  filter($_REQUEST['person_name']);
     $_SESSION['person_status']      =  filter($_REQUEST['person_status']);
+    $_SESSION['global_status']      =  filter($_REQUEST['global_status']);
+    
     
     }
 }
@@ -441,7 +445,23 @@ $(document).ready(function(){
 
 <div id="main">
 	<div class="content">
-    	<div class="content_head"><a href="manage_agency.php?action=add"><div class="content_head_button">Add Agency</div></a> <a href="manage_agency.php?action=view"><div class="content_head_button">View Agency</div></a> <a href="visitor-vendor-category.php?action=view" target="_blank"><div class="content_head_button">Add Category</div></a></div>
+      <?php if($_REQUEST['action'] =="viewVisitors" && $_REQUEST['agencyId'] !=="" ){ ?>
+			<div class="content_head">
+				<?php 
+
+				   $sql_agency = $conn->query("SELECT agency_name from visitor_agency_master where id='".$_REQUEST[agencyId]."' ");
+				   $result_agency =  $sql_agency->fetch_assoc();
+
+				?>
+       		<p>Company Name : <?php echo $result_agency['agency_name']; ?></p>
+       	</div>
+      <?php }?>
+       
+
+    	<div class="content_head">
+
+    		<a href="manage_agency.php?action=add"><div class="content_head_button">Add Agency</div></a> <a href="manage_agency.php?action=view"><div class="content_head_button">View Agency</div></a> <a href="visitor-vendor-category.php?action=view" target="_blank">
+    		<div class="content_head_button">Add Category</div></a></div>
 
 <?php if($_REQUEST['action']=='view') {?>    	
 <div class="content_details1">
@@ -449,6 +469,7 @@ $(document).ready(function(){
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
   	<tr class="orange1">
         <td ><a href="#">Sr. No.</a></td>
+		<!-- <td >Modified Date</td> -->
         <td >Agency Name</td>
 		  <!--<td >Vendor Service Area</td> -->
         <td >Category</td>
@@ -456,9 +477,7 @@ $(document).ready(function(){
         <td >Badge Approved</td>
         <td >Badge Disapproved</td>
         <td >Badge Pending</td>
-        <td >Badges Applied IIJS22</td>
-
-
+        <td >Badges Applied Signature</td>
         <td >Visitors</td>
         <td>Status</td>
         <td colspan="2" align="center">Action</td>
@@ -470,7 +489,7 @@ $(document).ready(function(){
     $attach = " order by ".$order_by." ".$asc_desc." ";
     
     $i=1;
-	$result =  $conn ->query("select t1.*, count(agency_id) as total_persons from visitor_agency_master t1   left join visitor_agency_registration t2 on t1.id=t2.agency_id where 1    group by t1.id order by total_persons desc ");
+	$result =  $conn ->query("select t1.*, count(agency_id) as total_persons from visitor_agency_master t1   left join visitor_agency_registration t2 on t1.id=t2.agency_id where 1 group by t1.id order by total_persons desc ");
 
     $rCount=0;
     $rCount = $result->num_rows;;		
@@ -497,7 +516,6 @@ $(document).ready(function(){
  	<tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
         <td><?php echo $i;?></td>
         <td><?php echo filter($row['agency_name']); ?></td>
-        <!-- <td><?php echo ""; ?></td> -->
         <td><?php echo getVisitorAgencyCategory(filter($row['category']),$conn); ?></td>
         <td><?php echo $totalBadgeRow['total'] ; ?></td>
         <td><?php echo $approvedBadgeRow['total']; ?></td>
@@ -560,6 +578,18 @@ $(document).ready(function(){
         <option value="D" <?php if($_SESSION['person_status']=='D'){echo "selected='selected'";}?>>Disapproved</option>
         </select>
     </td>
+
+</tr>
+<tr>
+<td style="width: 20%"><strong>Show Approve/ Disapprove status</strong></td>        
+    <td>
+        <select name="global_status" class="input_txt" >
+        <option value="">Select Status</option>
+        <option value="P" <?php if($_SESSION['global_status']=='P'){echo "selected='selected'";}?>>Pending</option>
+        <option value="Y" <?php if($_SESSION['global_status']=='Y'){echo "selected='selected'";}?>>Approved</option>
+        <option value="D" <?php if($_SESSION['global_status']=='D'){echo "selected='selected'";}?>>Disapproved</option>
+        </select>
+    </td>
 </tr>
 <tr>
 
@@ -575,17 +605,16 @@ $(document).ready(function(){
         		<select name="event"class="input_txt-select" id="event"  style="width: 200px" >
         		<option value="">Select</option>
         		<?php
-        		$sql_event = "SELECT * FROM `visitor_event_master` WHERE `status` ='1' and shortcode='iijs22' order by `serial_no` ASC";  
-									                      	$result_event = $conn->query($sql_event);
-									                      	$count_event = $result_event->num_rows;
-									                      	if($count_event > 0){
-									                        	while($row_event = $result_event->fetch_assoc()){ ?>
-                                             				<option value="<?php echo $row_event['shortcode'];?>" selected><?php echo $row_event['event_name'];?></option>
-									                          <?php } } 
-
-									                        ?>
+        		$sql_event = "SELECT shortcode,event_name FROM `visitor_event_master` WHERE `status` ='1' and shortcode='signature23' order by `serial_no` ASC";  
+				$result_event = $conn->query($sql_event);
+				$count_event = $result_event->num_rows;
+				if($count_event > 0){
+				while($row_event = $result_event->fetch_assoc()){ ?>
+                <option value="<?php echo $row_event['shortcode'];?>" selected><?php echo $row_event['event_name'];?></option>
+				<?php } } 
+				?>
         	</select>
-        		<select name="approval"class="input_txt-select" id="approval"  style="width: 200px" >
+        	<select name="approval"class="input_txt-select" id="approval"  style="width: 200px" >
         		<option value="">Select</option>
         		<option value="P">Pending</option>
         		<option value="Y">Approve</option>
@@ -601,36 +630,40 @@ $(document).ready(function(){
   	<tr class="orange1">
         <td ><input type="checkbox" name="checkAll" id="checkAll" value="all"></td>
         <td ><a href="#">Sr. No.</a></td>
+		<!-- <td >Update Date</td> -->
         <td >Person Name</td>
         <td >Mobile No.</td>
-        <td >Id Proof </td>
-       
+        <td >Id Proof </td>       
         <td>Photo</td>
          <td>Photo ID</td>
         <td  align="center">Action</td>
         <td  align="center">Person Status</td>
+        <td  align="center">Category</td>
         <td  align="center">Show Status</td>
     </tr>
     
-    <?php
- 
-    $order_by = isset($_REQUEST['order_by'])?$_REQUEST['order_by']:'modifiedDate';
+    <?php 
+    $order_by = isset($_REQUEST['order_by'])?$_REQUEST['order_by']:'ar.modifiedDate';
     $asc_desc = isset($_REQUEST['asc_desc'])?$_REQUEST['asc_desc']:'desc';
-    $attach = " order by modifiedDate DESC ";
+    $attach = " order by ar.modifiedDate DESC ";
     
     $i=1;
-    $sql = "SELECT * FROM visitor_agency_registration where agency_id='$agency_id'  ";
-	
-
-	 if($_SESSION['person_name']!="")
+    // $sql = "SELECT * FROM visitor_agency_registration where agency_id='$agency_id'  ";
+    $sql = "SELECT ar.id, ar.modifiedDate,ar.person_name, ar.mobile,ar.pan_no,ar.agency_id,ar.photo,ar.id_proof_file,ar.person_status,`gb`.`status` as global_status,gb.agency_category FROM visitor_agency_registration ar left join globalExhibition gb on ar.id=gb.visitor_id and ar.agency_id=gb.registration_id where ar.agency_id='$agency_id'  ";
+	if($_SESSION['person_name']!="")
     {
-    $sql.=" and person_name like '%".$_SESSION['person_name']."%'";
+    $sql.=" and ar.person_name like '%".$_SESSION['person_name']."%'";
     }
     if($_SESSION['person_status']!="")
     {
-    $sql.=" and person_status like '%".$_SESSION['person_status']."%'";
+    $sql.=" and ar.person_status like '%".$_SESSION['person_status']."%'";
     }
-     $sql = $sql.$attatch;
+    if($_SESSION['global_status']!="")
+    {
+    $sql.=" and gb.status like '%".$_SESSION['global_status']."%'";
+    }
+    
+    $sql = $sql.$attatch;
     $result =  $conn ->query($sql);
 
     
@@ -640,13 +673,13 @@ $(document).ready(function(){
     {	
 	while($row =  $result->fetch_assoc())
 	{	
-
-		$global_status = getVendorStatusFromGlobal($row['agency_id'],$row['id'],'iijs22',"CONTR",$conn);
-
+		//$global_status = getVendorStatusFromGlobal($row['agency_id'],$row['id'],'signature23',"CONTR",$conn);
+		$global_status = $row['global_status'];
     ?>  
  	<tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
         <td><input type="checkbox" class="checkBoxClass" name="visitor_id[]" value="<?php echo $row['id'] ?>"></td>
         <td><?php echo $i;?></td>
+		<!-- <td><?php //echo filter($row['modifiedDate']); ?></td> -->
         <td><?php echo filter($row['person_name']); ?></td>
         <td><?php echo filter($row['mobile']); ?></td>
         <td><?php echo $row['pan_no']; ?></td>
@@ -662,19 +695,17 @@ $(document).ready(function(){
 				elseif($row['person_status']=="Y")
 					echo "<img src='images/yes.gif' border='0' />";	
 				elseif($row['person_status']=="D")
-					echo "<img src='images/no.gif' border='0' />";
-				
+					echo "<img src='images/no.gif' border='0' />";				
 			?>
         </td>
+        <td><?php echo $row['agency_category'];?></td>
        <td >
        	<?php if($row['person_status'] !=="Y"){?>
             <a href="manage_agency.php?action=vis_del&id=<?php echo $row['id']?>&agency_id=<?php echo $row['agency_id'];?>" onClick="return(window.confirm('Are you sure you want to delete?'));"><img src="images/delete.png" title="Delete" border="0" />
-       <?php 	} ?>
-
-
-       	<?php  if($global_status ==""){ echo "Not Registered";}elseif($global_status =="P"){ echo "Approval Pending"; }elseif($global_status =="D"){ echo "Disapproved"; }elseif($global_status =="Y"){ echo "IIJS PREMIERE 222"; }  ?>
-       	</td>
-     
+       <?php } ?>
+  
+       	<?php  if($global_status ==""){ echo "Not Registered";}elseif($global_status =="P"){ echo "Approval Pending"; }elseif($global_status =="D"){ echo "Disapproved"; }elseif($global_status =="Y"){ echo "IIJS SIGNATURE 23"; }  ?>
+       	</td>     
 
  	</tr>
 
@@ -739,14 +770,11 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
     <td>
         <select name="category" id="category" title="Please enter agency name" class="show-tooltip input_txt" >
         	<option value="">Select category</option>
-        	<?php $categoryGet =$conn->query("SELECT * FROM visitor_vendor_category WHERE status='1'") ;
-
+        	<?php $categoryGet =$conn->query("SELECT * FROM visitor_vendor_category WHERE status='1'");
             while($rowCat = $categoryGet->fetch_assoc()){?>
 
            <option value="<?php echo $rowCat['id'];?>" <?php if($rowCat['id'] ==$category){echo "selected" ;}?> ><?php echo $rowCat['cat_name'];?></option>
-           <?php   }
-        	?>
-
+           <?php   }   	?>
         </select>
     	
     </tr>
@@ -818,52 +846,148 @@ if($_REQUEST['action']=='viewDetails'){
 			$id_proof_name=stripslashes($row2['id_proof_name']);
 			$id_proof_file=stripslashes($row2['id_proof_file']);
 			$photo=stripslashes($row2['photo']);
+			$status=stripslashes($row2['person_status']);
+			$remarks=stripslashes($row2['remarks']);
+			$modifiedDate=stripslashes($row2['modifiedDate']);
 		}
 ?>
  <div class="content_details1">
-   <table width="100%" border="0" cellspacing="5" cellpadding="5"  >
-     <tr class="orange1">
-       <td colspan="2">&nbsp;View Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="manage_agency.php?action=viewVisitors&agencyId=<?php echo $agencyId?>" align="right">Back</a></td>
-     </tr>  
-     <tr>
-       <td class="content_txt">Person Name</td>
-       <td class="text6"><?php echo $person_name; ?></td>
-     </tr>     
-     <tr>
-       <td class="content_txt">Mobile</td>
-       <td class="text6"><?php echo $mobile; ?></td>
-     </tr> 
-	 <tr>
-       <td class="content_txt">Pan No</td>
-       <td class="text6"><?php echo $pan_no; ?></td>
-     </tr> 
-	 <tr>
-       <td class="content_txt">Category</td>
-       <td class="text6"><?php echo $category; ?></td>
-     </tr> 
-      <tr>
-       <td class="content_txt">ID Proof</td>
-       <td class="text6"><?php echo $id_proof_name; ?></td>
-     </tr> 
-	 <?php if($category=="Committee Member"){?>
-	 <tr>
-       <td class="content_txt">Committee</td>
-       <td class="text6"><?php echo $committee; ?></td>
-     </tr> 
-	 <?php }?>
-	 <tr>
-       <td class="content_txt">ID Proof </td>
-       <td class="text6"><a data-fancybox="gallery" href="https://registration.gjepc.org/images/agency_directory/<?php echo $agencyId.'/id_proof/'.$id_proof_file;?>" target="_blank">View Id Proof</a></td>
-     </tr> 
-	  <tr>
-       <td class="content_txt">Photo</td>
-       <td class="text6"><a data-fancybox="gallery" href="https://registration.gjepc.org/images/agency_directory/<?php echo $agencyId.'/photo/'.$photo;?>" target="_blank">View photo</a></td>
-     </tr> 
-   </table>
+	<form action="" id="update_person" name='update_person' onsubmit="return checkdata()">
+		<table width="100%" border="0" cellspacing="5" cellpadding="5"  >
+			<tr class="orange1">
+				<td colspan="2">&nbsp;View Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="manage_agency.php?action=viewVisitors&agencyId=<?php echo $agencyId?>" align="right">Back</a></td>
+			</tr>  
+			<tr>
+			<td class="content_txt">Person Name</td>
+				<td class="text6"><?php echo $person_name; ?></td>
+			</tr>     
+			<tr>
+				<td class="content_txt">Mobile</td>
+				<td class="text6"><?php echo $mobile; ?></td>
+			</tr> 
+			<tr>
+				<td class="content_txt">Pan No</td>
+				<td class="text6"><?php echo $pan_no; ?></td>
+			</tr> 
+			<tr>
+				<td class="content_txt">Category</td>
+				<td class="text6"><?php echo $category; ?></td>
+			</tr> 
+			<tr>
+				<td class="content_txt">ID Proof</td>
+				<td class="text6"><?php echo $id_proof_name; ?></td>
+			</tr> 
+			<?php if($category=="Committee Member"){?>
+			<tr>
+				<td class="content_txt">Committee</td>
+				<td class="text6"><?php echo $committee; ?></td>
+			</tr> 
+			<?php }?>
+			<tr>
+				<td class="content_txt">ID Proof </td>
+				<td class="text6"><a data-fancybox="gallery" href="https://registration.gjepc.org/images/agency_directory/<?php echo $agencyId.'/id_proof/'.$id_proof_file;?>" target="_blank">View Id Proof</a></td>
+			</tr> 
+			<tr>
+				<td class="content_txt">Photo</td>
+				<td class="text6"><a data-fancybox="gallery" href="https://registration.gjepc.org/images/agency_directory/<?php echo $agencyId.'/photo/'.$photo;?>" target="_blank">View photo</a></td>
+			</tr> 
+			<tr>
+				<td class="content_txt">Update Date</td>
+				<td class="text6"><?php echo $modifiedDate ?></td>
+			</tr> 
+		
+			<td class="content_txt">Status</td>
+				<td class="text6">
+					<select id='per_status' name="per_status">
+						<option value="P" <?php echo $status == "P" ? 'selected' : ''; ?>>Pending</option>
+						<option value="Y" <?php echo $status == "Y" ? 'selected' : ''; ?>>Approve</option>
+						<option value="D" <?php echo $status == "D" ? 'selected' : ''; ?>>Disapprove</option>
+					</select>
+				</td>
+			</tr> 
+			<tr class='remarks' style="display : <?php echo $status == 'D' ? '' : 'none';  ?>">
+				<td class="content_txt">Remark</td>
+				<td class="text6">
+					<textarea  name='remark' id='remark' cols='40'><?php echo isset($remarks) && $remarks != '' ? $remarks : ''; ?></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" name="Update" value="Update"  class="input_submit" />
+					<input type="hidden" name="admin" value="<?php echo intval(filter($_SESSION['curruser_login_id'])) ?>" />
+					<input type="hidden" name="action" id="action" value="update_status" />
+					<input type="hidden" name="agencyId" id="agencyId" value="<?php echo $_REQUEST['agencyId'] ?>" />
+					<input type="hidden" name="visitorId" id="visitorId" value="<?php echo $_REQUEST['visitorId'] ?>" />
+				</td>
+			</tr>
+		</table>
+		
+	</form>
  </div>
- <?php } ?>     
+ <?php } ?>  
+ <?php if($_REQUEST['action'] == 'update_status' ) {
+	$person_status = $_REQUEST['per_status'];
+	$remark = $_REQUEST['remark'];
+	if($person_status == 'Y'){
+		$remark = '';
+	}
+	$adminId = $_REQUEST['admin'];
+	$agencyId = $_REQUEST['agencyId'];
+	$visitorId = $_REQUEST['visitorId'];
+	if(isset($agencyId) && isset($visitorId)){
+
+		$sqlStatusUpdate = "UPDATE visitor_agency_registration SET `person_status`='$person_status',`remarks`='$remark',`adminId`='$adminID' WHERE `agency_id`='$agencyId' AND `id`='$visitorId'";
+		$result = $conn->query($sqlStatusUpdate);
+		if($result){
+			echo "<script langauge=\"javascript\">alert(\" Data Updated Successfully\");location.href='manage_agency.php?action=viewVisitors&agencyId=".$agencyId."';</script>";
+		} else {
+			echo "<script langauge=\"javascript\">alert(\" Updating Global table failed. Error:".$conn->error."\");location.href='manage_agency.php?action=viewVisitors&agencyId=".$agencyId."';</script>";
+		}
+		
+	}
+	
+  } ?>	   
     </div>
 </div>
 <div id="footer_wrap"><?php include("include/footer.php");?></div>
 </body>
 </html>
+
+<script>
+	$( document ).ready(function() {
+		$("#per_status").change(function(e){
+			let person_status = $("#per_status").val();
+			if(person_status == 'D'){
+				$('.remarks').show();
+			} else {
+				$('.remarks').hide();
+			}
+		})
+	});	
+	function checkdata()
+    {
+
+        if(document.getElementById('per_status').value == '')
+        {
+            alert("Please Select Status.");
+            document.getElementById('per_status').focus();
+            return false;
+        }
+        if(document.getElementById('remark').value == '')
+        {
+			let status = $("#per_status").val();
+			if(status == "D"){
+				alert("Please Select Remark.");
+				document.getElementById('remark').focus();
+				return false;
+			} else {
+				return true;
+			}
+            
+        }
+        
+        
+            
+    }
+</script>

@@ -160,9 +160,11 @@ $("div.fancyDemo a").fancybox();
     
     	<div class="content_head"><a href="signature_exhibitor_rgistration.php">
     	<div class="content_head_button">IIJS-Signature Exhibitor List</div></a>
-		<div style="float:right; padding-right:10px; font-size:12px;">
+		<!--<div style="float:right; padding-right:10px; font-size:12px;">
 		<a href="export_combo_exhibitor_rgistration.php">Download COMBO Data</a>
-		<a href="export_utr_signature_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> <a href="export_approve_signature_exhibitor_rgistration.php">&nbsp;Download Data</a></div>
+		<a href="export_utr_signature_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> 
+		<a href="export_approve_signature_exhibitor_rgistration.php">&nbsp;Download Data</a>
+		</div>-->
 		<?php
 		if($_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='1'){ ?>
 		<a href="signature_exhibitor_rgistration.php?action=old_to_part" onClick="return(window.confirm('Are you sure you want to Clear Old to Part Data'));" >Clear SAP Error</a>	
@@ -489,7 +491,7 @@ b.section,b.selected_area,b.selected_premium_type,b.options,c.payment_status,c.s
 b.section,b.selected_area,b.selected_premium_type,b.options,c.payment_status,c.sap_sale_order_create_status,c.document_status,c.application_status,c.sales_order_no,u.utr_number,u.advance_doc,u.show,u.utr_approved,u.part_sales_order_no,u.part_salesorder_status,u.tds_salesorder_status from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid left join utr_history u on a.uid=u.registration_id where a.event_for='IIJS SIGNATURE 2023' AND (u.event_selected='iijs' || u.event_selected='signature')";*/
 
 $sql="select a.id,a.uid,a.company_name,a.contact_person,a.region,a.billing_address_id,a.get_billing_bp_number,a.created_date,b.last_yr_participant,
-b.section,b.selected_area,b.selected_premium_type,b.options,c.payment_status,c.sap_sale_order_create_status,c.document_status,c.application_status,c.sales_order_no,u.utr_number,u.advance_doc,u.show,u.utr_approved,u.part_sales_order_no,u.part_salesorder_status,u.tds_salesorder_status,u.payment_status as 'paymentCheck' from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid left join utr_history u on a.uid=u.registration_id and a.event_for=u.`show` where a.event_for='IIJS SIGNATURE 2023'";
+b.section,b.selected_area,b.selected_premium_type,b.options,c.payment_status,c.sap_sale_order_create_status,c.document_status,c.application_status,c.sales_order_no,u.utr_number,u.advance_doc,u.show,u.utr_approved,u.part_sales_order_no,u.part_salesorder_status,u.tds_salesorder_status,u.payment_status as 'paymentCheck',u.payment_date from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid left join utr_history u on a.uid=u.registration_id and a.event_for=u.`show` where a.event_for='IIJS SIGNATURE 2023'";
 }
 else
 {
@@ -721,10 +723,18 @@ where a.event_for='IIJS SIGNATURE 2023' and  a.region='".$_SESSION["curruser_reg
     <a href="delete_exh_registration.php?id=<?php echo $rows['id'];?>&registration_id=<?php echo $rows['uid'];?>"> Delete</a>
 	<?php } ?>
     </td>
-	
+	<?php $payment_date = $rows['payment_date'];
+			$time=strtotime($payment_date);
+			$payment_month=date("m",strtotime($payment_date));
+	      $current_month=date('m');
+		?>
 	<?php  if($rows['application_status']=="approved" ){ ?>
 	<?php if($rows['sap_sale_order_create_status'] == 0) { ?>
+			<?php if($payment_month == $current_month ){ ?>
 	<td class="so" data-url="<?php if($bpno==''){ echo $nonmemberBP; }else { echo $bpno; }?> <?php echo $rows['uid'];?> <?php echo csrf_sap_token();?>">CREATE SO</td>
+	<?php } else { ?>
+		<td><a onclick="return(window.confirm('Period Closed'));"><img src="images/active.png"/></a></td>
+	<?php } ?>
 	<?php } else { ?>
     <td><a onclick="return(window.confirm('Sales Order Already Created'));"><img src="images/active.png"/></a></td>
     <?php } ?>

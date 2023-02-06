@@ -17,12 +17,17 @@ if(!empty($_POST))
 {		
 	$registration_id = filter($_POST['registration_id']);
 	$bpno = filter($_POST['bpno']);
-		
+	$show = trim($_POST['show']);
 	$soapRenewalUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageServlet?channel=:BC_Exhibition:CC_Exhibition_Sender"; // LIVE
 	//$soapRenewalUrl = "https://webdisp.gjepcindia.com:44303/XISOAPAdapter/MessageServlet?channel=:BC_Exhibition:CC_Exhibition_Sender"; // Development
 	$soapUser = "pi_admin";  //  username
 	$soapPassword = "Deloitte@123"; // password
 	
+	$eventData ="select wbs from exh_event_master where eventDescription='$show'";
+	$eventResult =$conn ->query($eventData);
+	$fetch_Eventdata = $eventResult->fetch_assoc();
+	$wbs = $fetch_Eventdata['wbs'];
+
 	/*................................Get Country Code.....................................*/
 	$q=$conn ->query("select * from registration_master where `id` = '$registration_id'");
 	$r=$q->fetch_assoc();
@@ -39,8 +44,6 @@ if(!empty($_POST))
 	if($rows['region_id']=='RO-CHE'){ $region=1040;}
 	if($rows['region_id']=='RO-DEL'){ $region=1050;}
 	if($rows['region_id']=='RO-KOL'){ $region=1060;}
-	
-	$show = "IGJME 2022";
 
 	/*............................SO for Non Member and International END....................................*/	
 	
@@ -51,8 +54,8 @@ if(!empty($_POST))
 	$ho_bp_number = trim($bpRows['c_bp_number']); /* Pass Parent BP Number From communication_address_master Table*/
 		
 	$query="select a.id,a.uid,a.bp_number,a.billing_address_id,a.city,a.company_name,a.contact_person,a.region,a.created_date,b.gid,b.last_yr_participant,
-	b.section,b.selected_area,b.selected_premium_type,b.options,c.net_payable_amount,c.payment_status,c.document_status,c.application_status 
-	from igjme_exh_reg_general_info a inner join igjme_exh_registration b on a.id=b.gid inner join igjme_exh_reg_payment_details c on a.id=c.gid
+	b.section,b.selected_area,b.category,b.selected_premium_type,b.options,c.net_payable_amount,c.payment_status,c.document_status,c.application_status 
+	from exh_reg_general_info a inner join exh_registration b on a.id=b.gid inner join exh_reg_payment_details c on a.id=c.gid
 	where a.event_for='$show' and a.uid='".$registration_id."' ";
 
 	$getChallanResult = $conn ->query($query);
@@ -60,13 +63,18 @@ if(!empty($_POST))
 	$total_amount = $challanResult['cheque_tds_gross_amount'];
 	$net_payable_amount = $challanResult['net_payable_amount'];
 	$renewDate = date("Ymd", strtotime($challanResult['post_date']));
-	$cheque_no = $challanResult['cheque_dd_no'];
+	$last_yr_participant = strtoupper($challanResult['last_yr_participant']);
 	$billing_address_id = $challanResult['billing_address_id']; // Getting id from communication_address_master and send to exh_reg_general_info table billing_address_id
 	$billing_bp_number = getBillingBPNO($billing_address_id,$conn);
+	if($billing_bp_number==''){ $billing_bp_number = $bpno; }
+	if($ho_bp_number=='')     { $ho_bp_number=$bpno;}
+	
 	$section = trim($challanResult['section']);
 	$category = trim($challanResult['category']);
 	$area = trim($challanResult['selected_area']);
 	$selected_premium_type = trim($challanResult['selected_premium_type']);
+	$selected_scheme_type = trim($challanResult['selected_scheme_type']);
+	
 	$city = trim($challanResult['city']);
 	if($city=='')
 		$city = trim($rcity);
@@ -95,6 +103,7 @@ if(!empty($_POST))
 	}
 	
 	// Passing Premium value into category	
+	/*
 	if($selected_premium_type=='0')	     { 	$selected_premiumRate='normal';	}
 	else if($selected_premium_type=='5') {	$selected_premiumRate='corner_2side';	}
 	else if($selected_premium_type=='10'){	$selected_premiumRate='corner_3side';	}
@@ -102,27 +111,37 @@ if(!empty($_POST))
 	
 	if($selected_premium_type=="normal")	{ $selected_premiumRate='0';	}
 	else if($selected_premium_type=="premium"){	$selected_premiumRate='5';	}
+	*/
+	
+	if($selected_premium_type ==""){
+		$selected_premium_type="normal";
+	}
+	if($selected_premium_type=="normal")	  { $selected_premiumRate='0';	}
+	else if($selected_premium_type=="corner_2side"){	$selected_premiumRate='10';	}
+	else if($selected_premium_type=="corner_3side") {	$selected_premiumRate='10';	}
+	else if($selected_premium_type=="island_4side") {	$selected_premiumRate='15';	}
+	else if($selected_premium_type=="premium") {	$selected_premiumRate='15';	}
 	
 	/* signature_sap_dummy_stall */
-	$dummy_stall = "SELECT * FROM `signature_sap_dummy_stall` WHERE section='machinery' AND category='$selected_premiumRate' AND status='1'";
+	$dummy_stall = "SELECT * FROM `signature_sap_dummy_stall` WHERE section='machinery' AND category='$selected_premium_type' AND status='1'";
 	$dummy_stallResult = $conn ->query($dummy_stall);
 	$stallrows = $dummy_stallResult->fetch_assoc();
 	$materialNo = $stallrows['material_no'];
 	/* signature_sap_dummy_stall */
 	
 	/* UTR Data */
-	$getUTR = "SELECT * FROM `igjme_utr_history` where registration_id=$registration_id AND utr_approved='Y' AND `show`='IGJME 2022' order by `utr_date` asc limit 1";
+	$getUTR = "SELECT * FROM `utr_history` where registration_id='$registration_id' AND payment_status='captured' AND `show` ='$show'  order by `payment_date` asc limit 1";
 	$utrResult = $conn ->query($getUTR);
-	$utrResultrows = $utrResult->fetch_assoc(); 
+	$utrResultrows = $utrResult->fetch_assoc();
+	$utr_id = $utrResultrows['id'];
 	$utr_number = filter($utrResultrows['utr_number']);
 	$utr_date = $utrResultrows['utr_date']; 
 	$getUtr_Date = date("Ymd", strtotime($utr_date));
-	$amountPaid = filter($utrResultrows['amountPaid']);
+	$payment_date = $utrResultrows['payment_date']; 
+	$getPayment_date = date("Ymd", strtotime($payment_date));
+	$amountPaid = $utrResultrows['amountPaid'];
 	
 	$Date = date('Ymd');
-	//$cur_year = (int)date('Y'); // Current Year
-	$next_year  = $cur_year+1;
-	$next_finyr = $next_year."0331"; // Next Financial year
 	
 	$xml_exhibition_string = '<?xml version="1.0" encoding="utf-8"?>
 	<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gjep="http://gjepcexhibition.com">
@@ -154,7 +173,7 @@ if(!empty($_POST))
             <Cond2_Lebel>ZDIS</Cond2_Lebel>
             <Cond2_Val></Cond2_Val>			
             <Cond3_Lebel>ZBS1</Cond3_Lebel>
-            <Cond3_val>'.$selected_premium_type.'</Cond3_val>			
+            <Cond3_val>'.$selected_premiumRate.'</Cond3_val>			
             <Cond4_Lebel>ZPR1</Cond4_Lebel>
             <Cond4_Val></Cond4_Val>
             <Cond5_Lebel>ZBL1</Cond5_Lebel>
@@ -162,7 +181,7 @@ if(!empty($_POST))
             <Cond6_Lebel>ZDI2</Cond6_Lebel>
             <Cond6_Val></Cond6_Val>
             <Batch></Batch>
-            <WBS>DE-022</WBS>
+            <WBS>'.$wbs.'</WBS>
             <Incoterms>CFR</Incoterms>
             <Incoterms_Loc>Mumbai</Incoterms_Loc>
             <Net_weight>1</Net_weight>
@@ -170,10 +189,10 @@ if(!empty($_POST))
          </SOAD_Item>
          <SOAD_Advance>
             <Doc_date>'.$Date.'</Doc_date>
-            <Posting_date>'.$getUtr_Date.'</Posting_date>
+            <Posting_date>'.$getPayment_date.'</Posting_date>
             <Company_code>1000</Company_code>
             <Currency>'.$currency.'</Currency>
-			<WBS>DE-022</WBS>
+			<WBS>'.$wbs.'</WBS>
             <Account>'.$billing_bp_number.'</Account>
             <Sp_gl_indicator>A</Sp_gl_indicator>
             <Doc_text>SK</Doc_text>
@@ -217,7 +236,7 @@ if(!empty($_POST))
 
             // converting
             $respons = curl_exec($ch1); 
-			//echo $respons;
+			//echo $respons; exit;
             if(curl_errno($ch1))
 				print curl_error($ch1);
 			else
@@ -238,9 +257,13 @@ if(!empty($_POST))
 					$strings = $leadid;
 					if(!empty($strings))
 					{	$flag=1;
-						$sales_order_no=substr($strings, strpos($strings, "@ ")+1,11);
-						$sqlx = "UPDATE `igjme_exh_reg_payment_details` SET `sap_push_date`=NOW(),`sap_push_admin`='$adminID',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1' WHERE `uid`='$registration_id' AND `show` ='$show'";
+						$sales_order_no = trim(substr($strings, strpos($strings, "@ ")+1,11));
+						$advance_doc = trim(substr($strings, strpos($strings, "# ")+1,11));
+											
+						$sqlx = "UPDATE `exh_reg_payment_details` SET `sap_push_date`=NOW(),`sap_push_admin`='$adminID',`sales_order_no`='$sales_order_no',`sap_sale_order_create_status`='1' WHERE `uid`='$registration_id' AND `show` ='$show' ";
 						$result = $conn ->query($sqlx);
+						$sqly = "UPDATE `utr_history` SET `sap_push_date`=NOW(),`sap_push_admin`='$adminID',`first_sales_order_no`='$sales_order_no',`sap_so_status`='1',`IsDone`='1',`advance_doc`='$advance_doc' WHERE `registration_id`='$registration_id' AND id='$utr_id' AND `show` ='$show' ";
+						$resulty = $conn ->query($sqly);
 					}
 			}
 			echo $flag;	

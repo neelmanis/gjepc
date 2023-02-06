@@ -111,7 +111,7 @@ function refreshCaptcha()
 <div id="header_wrapper">
 	<div class="header">
      	<div class="logo"><img src="images/logo.png" /></div>
-        <div class="punch_line">&nbsp; &nbsp; &nbsp; &nbsp; Gems and Jewellery Export Promotion Council (GJEPC)</div>
+        <div class="punch_line">&nbsp; &nbsp; &nbsp; &nbsp; The Gem and Jewellery Export Promotion Council (GJEPC)</div>
 	</div>	
 </div>
 <div id="nav_wrapper">

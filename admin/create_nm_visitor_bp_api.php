@@ -76,7 +76,6 @@ if(!empty($_POST))
 	} */
 
 	if(isset($registration_id) && $registration_id!=""){
-		
 	$soapUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageServlet?channel=:BC_SOAP_Proxy_BP_PRD:CC_Soap_Proxy_BP_PRD"; // Production
 	//$soapUrl = "https://webdisp.gjepcindia.com:44303/XISOAPAdapter/MessageServlet?channel=:BC_SOAP_Proxy_BP:CC_Soap_Proxy_BP"; // Development
 	$soapUser = "pi_admin";  //  username
@@ -224,8 +223,7 @@ if(!empty($_POST))
 			<BP_grp>Z001</BP_grp>
 			<comp_code>1000</comp_code>
 			<r_ac_gl>0000250000</r_ac_gl>
-		</BP_Item>
-		  
+		</BP_Item>		  
 		<BP_item1>
 			<bus_role1>FLCU01</bus_role1>
 			<par_child1></par_child1>
@@ -315,7 +313,6 @@ if(!empty($_POST))
 	$xml_post_string .= "
 		</gjep:MT_BP_IN>
 	  </soapenv:Body>
-
 </soapenv:Envelope>";
 	/*header ("Content-Type:text/xml");
 	echo $xml_post_string; exit; */

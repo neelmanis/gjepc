@@ -1,7 +1,7 @@
 <?php
 include 'include-new/header.php';
 include 'db.inc.php'; 
-include('functions.php'); 
+include 'functions.php'; 
 $action=$_REQUEST['action'];
 if($action=="send")
 {   
@@ -81,11 +81,8 @@ $_SESSION['succ_msg']="";
 
 
 <div class="row justify-content-center grey_title_bg">      
-        	
-            	                <div class="bold_font text-center"> <div class="d-block"><img src="assets/images/gold_star.png"></div> Forgot password  </div>
-         
-        </div>
-
+<div class="bold_font text-center"> <div class="d-block"><img src="assets/images/gold_star.png"></div> Forgot password  </div>
+</div>
 
 <div class="row justify-content-center">
 	
@@ -113,16 +110,9 @@ $_SESSION['succ_msg']="";
                                     <div><a href="registration.php" class="ab_none d-block"> Register Now </a></div>
                                 </div>
                     	
-                    </div>
-                
-                
-		
-                
+                </div>
 			</div>
 		</form>
-		
-
-
 </div>
 
 </div>

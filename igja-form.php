@@ -1,4 +1,5 @@
 <?php
+exit;
 include('header_include.php');
 include('include-new/header.php');
 // error_reporting(E_ALL);
@@ -9,7 +10,7 @@ include('include-new/header.php');
 ?>
 <?php
 // Configure upload directory and allowed file types
-$upload_dir = 'images/igja_awards/';
+//$upload_dir = 'images/igja_awards/';
 $allowed_types = array('jpg', 'png', 'jpeg', 'doc','pdf','PDF','docx','csv','zip');
 // Define maxsize for files i.e 2MB
 $maxsize = 2 * 1024 * 1024;

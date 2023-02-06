@@ -1142,7 +1142,7 @@ $(".kyc").click(function() {
     	},
 		success:function(data)
 		{ 
-			console.log(data); 
+			//console.log(data); exit;
 			if($.trim(data)==1){
 				alert("BP successfully Pushed To Kyc..");
 				window.location.reload(true);

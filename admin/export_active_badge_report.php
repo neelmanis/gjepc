@@ -33,13 +33,10 @@ $table .= '<table border="1" cellpadding="0" cellspacing="0" width="100%">
 <td>Name</td>
 <td>Mobile</td>
 <td>Status</td>
-
-<td>Dose 2 Status</td>
-<td>Face Status</td>
 <td>Badge Download Status</td>
 </tr>';
 
-$sql="SELECT * FROM globalExhibition   order by participant_Type";
+$sql="SELECT * FROM globalExhibition order by isGenerated DESC";
 $result = $conn ->query($sql);
 while($row = $result->fetch_assoc())
 {	
@@ -50,17 +47,16 @@ while($row = $result->fetch_assoc())
 	$name = $row['fname'];
 	$mobile=$row['mobile'];
 	$status = $row['status'];
-	$dose1_status = $row['dose1_status'];
-	$dose2_status = $row['dose2_status'];
-	$face_status = $row['face_status'];
+
+	// $face_status = $row['face_status'];
 	$isGenerated = $row['isGenerated'];
 	if($isGenerated =="0"){
 		$isGenerated ="NO";
+		$date = "";
 	}else{
 		$isGenerated = "YES";
+		$date = $row['modified_date'];
 	}
-
-	$date = $row['modified_date'];
 	
 	$table .= '<tr>
 	<td>'.$date.'</td>
@@ -71,15 +67,12 @@ while($row = $result->fetch_assoc())
 	<td>'.$name.'</td>
 	<td>'.$mobile.'</td>
 	<td>'.$status.'</td>
-	<td>'.$dose2_status.'</td>
-	
-	<td>'.$face_status.'</td>
 	<td>'.$isGenerated.'</td>
 	</tr>';
 }
+
  $table .= $display;
  $table .= '</table>';
-
 		header("Content-type: application/x-msdownload"); 
 		# replace excelfile.xls with whatever you want the filename to default to
 		header("Content-Disposition: attachment; filename=$fn.xls");

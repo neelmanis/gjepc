@@ -2,10 +2,19 @@
 session_start();
 include('../db.inc.php');
 include('../functions.php');
+/*error_reporting(E_ALL);
+ini_set('display_errors', 1); */
 if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; }
 $adminID = $_SESSION['curruser_login_id'];
 ?>
 <?php 
+
+function getNmBpNumber($id,$conn){
+	$query_sel = "SELECT bp_number  FROM webinar_registration_details where id='$id'";	
+	$result = $conn->query($query_sel);
+	$row = $result->fetch_assoc();	 		
+	return $row['bp_number'];
+}
 if(($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 {
 	$sql="delete from webinar_master where id=?";	
@@ -191,9 +200,11 @@ if(($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Welcome to GJEPC</title>
+<link rel="stylesheet" type="text/css" href="https://gjepc.org/assets-new/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <!--navigation-->
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>      
+<script type="text/javascript" src="https://gjepc.org/assets-new/js/jquery.min.js?v=<?php echo $version;?>"></script>   
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 <script type="text/javascript" src="js/ddsmoothmenu.js"></script>
 <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
@@ -330,18 +341,19 @@ function checkdata()
        	<td>Type</td>
         <td>Post Date</td>
         <td>Banner</td>
-        <td>fees</td>
+        <td>Member fees</td>
+        <td>Non-Member fees</td>
         <td colspan="2">Orders/ export</td>
         <td colspan="4" align="center">Action</td>
     </tr>
     
     <?php 
-    $order_by = isset($_REQUEST['order_by'])?$_REQUEST['order_by']:'post_date';
+    $order_by = isset($_REQUEST['order_by'])?$_REQUEST['order_by']:'id';
     $asc_desc = isset($_REQUEST['asc_desc'])?$_REQUEST['asc_desc']:'desc';
-    $attach = " order by ".$order_by." ".$asc_desc." ";
+    $attach = " order by ".$order_by." ".$asc_desc." limit 15 ";
     
     $i=1;
-	$result = $conn ->query("SELECT * FROM webinar_master where 1 ".$attach." ");
+	$result = $conn ->query("SELECT * FROM webinar_master where  post_date >= '2023-01-05' ".$attach." ");
     $rCount=0;
     $rCount = $result->num_rows;
     if($rCount>0)
@@ -359,7 +371,8 @@ function checkdata()
         <img src="https://gjepc.org/assets/images/webinar/new/<?php echo $row['banner']; ?>" align="center" height="50" width="80">
 		<?php } ?>
         </td>
-        <td><?php echo $row['fees']; ?></td>
+        <td><?php echo $row['m_fees']; ?></td>
+        <td><?php echo $row['nm_fees']; ?></td>
 		<!-- <td>
 		<?php if($row['pdf_eng']!=""){?>
 		<a href="https://gjepc.org/pdf/key-points/<?php echo $row['pdf_eng']; ?>" target="_blank"><img src="images/pdf_icon.png" height="40" width="50"></a>
@@ -407,14 +420,14 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 {
   $action='save';
   if(($_REQUEST['id']!='') || ($_REQUEST['action']=='edit'))
-  {
+  {     $id = $_REQUEST['id'];
 		$action='update';
-		$sql3 = "SELECT * FROM webinar_master where id=?";
-		$query = $conn -> prepare($sql3);
-		$query -> bind_param("i", intval($_REQUEST['id']));
-		$query->execute();			
-		$result2 = $query->get_result();
-		if($row2 = $result2->fetch_assoc())
+		$sql3 = "SELECT * FROM webinar_master where id='$id'";
+		$query = $conn -> query($sql3);
+		// $query -> bind_param("i", intval($_REQUEST['id']));
+		// $query->execute();			
+		// $result2 = $query->get_result();
+		if($row2 = $query->fetch_assoc())
 		{
 			$title=stripslashes($row2['title']);
 			$description=stripslashes($row2['description']);
@@ -460,6 +473,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
       		<option value="">Select Type</option>
       		<option <?php if($type =="webinar"){echo "selected";}?> value="webinar">Webinar</option>
       		<option  <?php if($type =="workshop"){echo "selected";}?> value="workshop">Workshop</option>
+      		<option  <?php if($type =="event"){echo "selected";}?> value="event">Event</option>
       	</select>
        
     </tr>
@@ -566,7 +580,140 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 </form>
         </div>
         
- <?php } ?>    
+ <?php } ?>  
+ <?php if(isset($_REQUEST['webinar_id']) && $_REQUEST['webinar_id'] !="" && $_REQUEST['tab']=="webinar_payment_update"){ ?>
+
+ 	<?php 
+    $web_id = $_REQUEST['webinar_id'];
+ 	$querys =  $conn ->query("select * from webinar_payment_history where (Response_Code is null || Response_Code!='E000') and id='$web_id'");
+
+while($results = $querys->fetch_assoc())
+{
+	$post_date=date('Y-m-d');
+	$ReferenceNo = trim($results['ReferenceNo']);
+	$web_id = intval($results['id']);
+	$result = file_get_contents('https://eazypay.icicibank.com/EazyPGVerify?ezpaytranid=&amount=&paymentmode=&merchantid=296793&trandate=&pgreferenceno='.$ReferenceNo);
+	
+	$string1=explode('&',$result);
+	
+	$status=explode('=',$string1[0]);
+	$Unique_Ref_Number_temp=explode('=',$string1[1]);
+	$Transaction_Date_temp=explode('=',$string1[3]);
+	
+	$Unique_Ref_Number=$Unique_Ref_Number_temp[1];
+	$Transaction_Date=$Transaction_Date_temp[1];
+	
+	if($status[1]=="RIP" || $status[1]=="SIP" || $status[1]=="Success"){
+   // echo "update webinar_payment_history set Response_Code='E000',Unique_Ref_Number='$Unique_Ref_Number',ReferenceNo='$ReferenceNo',Transaction_Date='$Transaction_Date' where id='$web_id' and ReferenceNo='$ReferenceNo'";exit;
+
+	$result1 = $conn ->query("update webinar_payment_history set Response_Code='E000',Unique_Ref_Number='$Unique_Ref_Number',ReferenceNo='$ReferenceNo',Transaction_Date='$Transaction_Date' where id='$web_id' and ReferenceNo='$ReferenceNo'");	
+	if($result1){
+		echo "<p>Payment has been updated successfully</p> ";
+	}
+	}else{
+		echo "<p>Not updated</p>";
+	}
+}
+?>
+ 	<!-- <div class="content_details1">
+        	
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
+  <tr class="orange1">
+    <td colspan="15" >Payment Details</td>
+    </tr>
+   
+	<tr>
+	  <td colspan="5"><strong>Payment Mode: <span class="star">*</span></strong></td>
+	  <td width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="3" <?php if($payment_mode=="3"){?> checked="checked"<?php }?>/><span class="text6">NetBanking</span></td>
+	  <td width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="4" <?php if($payment_mode=="4"){?> checked="checked"<?php }?>/><span class="text6">Debit Card</span></td>
+	  <td width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="5" <?php if($payment_mode=="5"){?> checked="checked"<?php }?>/><span class="text6">Credit Card</span></td>
+	  <td width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="2" <?php if($payment_mode=="2"){?> checked="checked"<?php }?>/><span class="text6">NEFT</span></td>
+      <td width="2%"><input type="radio" name="payment_mode" id="payment_mode" value="1" <?php if($payment_mode=="1"){?> checked="checked"<?php }?>/><span class="text6">Cheque/DD</span></td>
+	</tr>
+    <tr>
+	  <td colspan="3"><strong>Membership Fees: <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt1" id="membership_fees" name="membership_fees" value="<?php echo $membership_fees;?>" readonly="readonly"/></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Admission Fees: <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt1" id="admission_fees" name="admission_fees" value="<?php echo $admission_fees;?>" readonly="readonly"/></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Total: <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt1" id="total" name="total" value="<?php echo $total;?>" readonly="readonly"/></td>
+	</tr>
+    
+    <tr >
+	  <td colspan="3"><strong>GST @ 18%: <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt1" id="service_tax" name="service_tax"  value="<?php echo $service_tax;?>" readonly="readonly"/></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Total Payable (in rupees): <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt1" id="total_payable" name="total_payable" value="<?php echo $total_payable;?>" readonly="readonly"></td>
+	</tr>
+    <?php if($payment_mode=="1"){?>
+    <tr>
+	  <td colspan="3"><strong>Drawn on Bank: <span class="star">*</span></strong></td>
+	  <td colspan="3">      
+      	<select name="bank_name" id="bank_name" class="input_txt1">
+		<option value="select">---------- Select ----------</option>
+        <?php 
+		$query = $conn ->query("select * from bank_master where status=1");
+		while($result=$query->fetch_assoc()){ ?>
+        <option value="<?php echo $result['bank_name'];?>" <?php if($result['bank_name']==$bank_name){?> selected="selected" <?php }?>><?php echo $result['bank_name'];?></option>
+        <?php } ?>
+		</select> 
+     </td>
+	</tr>
+    
+    <tr>
+	  <td colspan="3"><strong>Bank Branch:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="branch_name" name="branch_name" value="<?php echo $branch_name;?>"/></td>
+	</tr>    
+   	<tr>
+	  <td colspan="3"><strong>Bank City:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="branch_city" name="branch_city" value="<?php echo $branch_city;?>"/></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Branch Postal Code:  <span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="branch_postal_code" name="branch_postal_code" value="<?php echo $branch_postal_code;?>"></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Cheque/DD No.:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="cheque_no" name="cheque_no" value="<?php echo $cheque_no;?>"/></td>
+	</tr>    
+    <tr>
+	  <td colspan="3"><strong>Cheque Date (DD-MM-YYYY):<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="cheque_date" name="cheque_date" value="<?php echo $cheque_date;?>"/></td>
+	</tr>
+      <tr>
+	  <td colspan="3"><strong>SAP Posting Date:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" id="sap_push_date" name="sap_push_date" value="<?php echo $sap_push_date;?>" readonly/></td>
+	</tr>
+    <?php }?>
+    <tr>
+	  <td colspan="3"><strong>Response Code:(For Success - E000)<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3"  name="Response_Code" value="<?php echo $Response_Code;?>" /></td>
+	</tr>
+	<tr>
+	  <td colspan="3"><strong>Reference No:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" name="ReferenceNo" value="<?php echo $ReferenceNo;?>" /></td>
+	</tr>
+    <tr>
+	  <td colspan="3"><strong>Unique Ref No:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" name="Unique_Ref_Number" value="<?php echo $Unique_Ref_Number;?>" /></td>
+	</tr>
+    <tr>
+	  <td colspan="3"><strong>Transaction Date:<span class="star">*</span></strong> Like : 2019-05-08</td>
+	  <td colspan="3"><input type="text" class="input_txt3"  name="Transaction_Date" value="<?php echo $Transaction_Date;?>" placeholder="yyyy-mm-dd" /></td>
+	</tr>
+  </table>
+      </div> -->
+ <?php }?>  
     <?php if(isset($_REQUEST['webinar_id']) && $_REQUEST['webinar_id'] !="" && $_REQUEST['tab']=="webinar_payment_history" ){
     	$webinar_id = trim($_REQUEST['webinar_id']);
     	$orders = "SELECT * FROM webinar_payment_history WHERE webinar_id ='$webinar_id' ORDER BY created_at DESC";
@@ -574,21 +721,23 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
         $countOrders = $resultOrders->num_rows;?>
         <div class="content_details1">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
-  	<tr class="orange1">
-        <td>Sr. No.</td>
+  	    <tr class="orange1">
+        <td>Sr. No.</td> 
        	<td>User Type</td>
+       	<td>BP Number</td>
        	<td>Company Name </td>
-         <td>Name</td>
-         <td>Email Id</td>
-         <td>Mobile No.</td>
+        <td>Name</td>
+        <td>Email Id</td>
+        <!-- <td>Mobile No.</td> -->
        	<td>Order Id</td>
-       	<td>Ref No </td>
+       	<!-- <td>Ref No </td> -->
        	<td>Response</td>
        	<td>Created at</td>
        	<td>Amount </td>
-       	
+       	<td>SO / Action </td>
     </tr>
        <?php
+
         if($countOrders>0){
         	$i=1;
         	while ($rowOrders = $resultOrders->fetch_assoc()) {
@@ -610,23 +759,52 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 		       $email_id = $resultNmInfo['email_id'];
 		       $name = $resultNmInfo['name'];
 		       $mobile_no = $resultNmInfo['mobile_no'];
+
+
               }
         		?>
 
            <tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
            	<td><?php echo $i;?></td>
            	<td><?php echo $rowOrders['member_type'];?></td>
+           	<td><?php if($rowOrders['member_type'] =='member'){ echo $m_bp_number = getBPNO($rowOrders['registration_id'],$conn); }else if($member_type =="non-member"){ echo $nm_bp_number = getNmBpNumber($rowOrders['non_member_id'],$conn); } ?></td>
 
            	<td><?php echo $company_name;?></td>
            	<td><?php echo $name; ?> </td>
            	<td><?php echo $email_id; ?> </td>
-           	<td><?php echo $mobile_no; ?> </td>
+           	<!-- <td><?php // echo $mobile_no; ?> </td> -->
            	<td><?php echo $rowOrders['order_id'];?></td>
-           	<td><?php echo $rowOrders['ReferenceNo'];?></td>
-           	<td><?php if( $rowOrders['Response_Code']=="E00335"){echo "Cancelled by User";}else if($rowOrders['Response_Code']=="E000"){ echo "Successful";}else if($rowOrders['Response_Code']=="E00329"){echo "NEFT";}?></td>
-           	<td><?php echo $rowOrders['created_at'];?></td>
+           
+           	<td><?php  if($rowOrders['payment_status'] =="captured" || $rowOrders['payment_status'] =="authorized" ){ echo "Success"; }else{ echo $rowOrders['payment_status']; }  ?></td>
+           	<td><?php echo $rowOrders['payment_date'];?></td>
            	<td><?php echo $rowOrders['Transaction_Amount'];?></td>
-           	
+
+           	<?php 
+            $member_type = $rowOrders['member_type'];
+            if($rowOrders['payment_status'] =="captured" || $rowOrders['payment_status'] =="authorized" ){
+	            if($member_type =="member"){ 
+	            	
+	            ?>
+					<?php if( $rowOrders['sap_sale_order_create_status'] =="1"){ ?>  <td> <?php echo  $rowOrders['sales_order_no'];?></td> <?php }else{ ?>
+					 <td><a data-url="<?php echo $m_bp_number." ".$rowOrders['registration_id']." ".$rowOrders['id']; ?>"  title="Create Sales Order" class='so'><img src="images/yes.gif" border="0"></a></td>
+					<?php } ?>
+					
+	            <?php }else if($member_type =="non-member"){
+	                
+	            	if($nm_bp_number ==0 || $nm_bp_number =="" ||  $nm_bp_number ==NULL ){ ?>
+	                	<td class="comp" data-url="<?php echo $rowOrders['non_member_id']; ?>"><img src="images/reply.png" title="PUSH" border="0" style=""/></td>
+	               <?php  }else{ ?>
+		               	<?php if( $rowOrders['sap_sale_order_create_status'] =="1"){ ?>  <td> <?php echo  $rowOrders['sales_order_no'];?></td> <?php }else{ ?>
+						 <td><a data-url="<?php echo $nm_bp_number." ".$rowOrders['non_member_id']." ".$rowOrders['id']; ?>"  title="Create Sales Order" class='so'><img src="images/yes.gif" border="0"></a></td>
+						<?php } ?>
+
+						
+	               <?php } 
+	            }
+        	}
+
+            ?>
+
            </tr>
         		
         <?php $i++;	}
@@ -650,6 +828,108 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 
 <div id="footer_wrap"><?php include("include/footer.php");?></div>
 
+<script>
+$(document).ready(function(){
 
+   /* Company BP Creation */
+	$(".comp").click(function() {
+		let values = $(this).data('url');
+		var registration_id=values;
+		//alert(registration_id);
+		
+		if (confirm("Are you sure you want to Create Company BP")) {
+			$.ajax({
+			url: "create_company_nm_webinar_bp_api.php",
+			method:"POST",
+			data:{registration_id:registration_id},
+			type: "POST",
+			beforeSend: function() {
+	        	$("#overlay").show();
+	    	},
+			success:function(data)
+			{
+				// console.log(data);return false;  //exit;
+				if($.trim(data)==1){
+					alert("BP successfully Created..");
+					window.location.reload(true);
+				}else{
+					alert("Sorry There is some problem with SAP response");
+					window.location.reload(true);		
+				}
+				// console.log(data);
+			},
+			});
+		}	  
+	});
+});
+
+$(".so").click(function(){
+  var values = $(this).data('url').split(" ");
+  var bp_number =values[0];
+  var reg_no = values[1];
+  var payment_id = values[2];
+  
+
+  var action = "webinar_sales_order_action";
+
+  if (confirm("Are you sure you want to create sales order")) {
+    $.ajax({
+    url: "create_sales_order_webinar.php",
+    method:"POST",
+    data:{bp_number:bp_number,reg_no:reg_no,payment_id:payment_id,action:action},
+    type: "POST",
+    beforeSend: function() {
+      $("#overlay").show();
+      },
+    success:function(data)
+    {   
+     // console.log(data); 
+     // return false;
+     window.location.reload();
+
+    },
+    });
+  }else{
+  	return false;
+  }   
+});
+
+// $(".so").click(function() {
+// 	var values = $(this).data('url').split(" ");
+// 	var bpno=values[0];
+// 	var registration_id=values[1];
+// 	var order_id=values[2];
+// 	var csrf_sap_token=values[3];
+	
+// 	if (confirm("Are you sure you want to Create Sales Order")) {
+// 		$.ajax({
+// 		url: "create_sales_order_webinar.php",
+// 		method: "POST",
+// 		data: { bpno:bpno,registration_id:registration_id,order_id:order_id,csrf_sap_token:csrf_sap_token },
+// 		type: "POST",
+// 		beforeSend: function() {
+//         	$("#overlay").show();
+//     	},
+// 		success:function(data)
+// 		{
+// 			console.log(data);return false;
+// 			if($.trim(data)=='N'){
+// 				alert("Plz Create Employee BP First");
+// 				window.location.reload(true);
+// 			}
+// 			else if($.trim(data)==1){
+// 				alert("Sales Order successfully Created..");
+// 				window.location.reload(true);
+// 			} else {
+// 				alert("Sorry There is some problem with SAP response");
+// 				window.location.reload(true);			
+// 			}
+// 			console.log(data);
+// 		},
+// 		});
+// 	}	  
+// });
+
+</script>
 </body>
 </html>

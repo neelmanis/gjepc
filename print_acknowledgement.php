@@ -122,13 +122,13 @@ if($chln_num==0)
 		//print_r($date_range);
 		if(in_array($currentYear, $date_range)) { 
 			if($result['rcmc_certificate_issue_status']=="Y"){ ?>
-			<div class="col-md-12 form-block minibuffer p-4 mb-4">			
+			<!--<div class="col-md-12 form-block minibuffer p-4 mb-4">			
 			<div class="sub_head minibuffer blue">Registration cum Membership Certificate</div>
 			<div class="row">
 			<div class="col-6"><label class="form-label" for="pif">Print Registration cum membership certificate (RCMC) :</label></div>
 			<div class="col-6"><a href="rcmc/print_certificate.php?page=50" target="_blank"><button><i class="fa fa-print" aria-hidden="true"></i> Print</button></a> </div>
 			</div>
-			</div>
+			</div>-->
 		<?php } 
 		} else {		
 		} /* Issue RCMC Certificate Over */

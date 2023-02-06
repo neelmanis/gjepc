@@ -57,7 +57,7 @@ if($page=='')
                     
                 if(isset($_SESSION['txtsearch']) && $_SESSION['txtsearch']!='')
                 {
-                    $sql="SELECT * FROM `news_master` WHERE status=1 and name like '%".$_SESSION['txtsearch']."%' order by post_date desc";
+                    $sql="SELECT * FROM `news_master` WHERE status='1' and name like '%".$_SESSION['txtsearch']."%' order by post_date desc";
                 }else
                 {
                     $sql="SELECT * FROM `news_master` WHERE 1 and status=1 order by post_date desc,id desc";

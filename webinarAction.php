@@ -1,5 +1,9 @@
 <?php
 include('header_include.php');
+require('razorpay/webinar_config.php');
+require('razorpay/razorpay-php/Razorpay.php');
+use Razorpay\Api\Api;
+
 // Configure upload directory and allowed file types
 $upload_dir = 'images/company_logo/';
 $allowed_types = array('jpg', 'png', 'jpeg');
@@ -14,23 +18,31 @@ $mobile_number = filter($_POST['mobile_no']);
 $name = filter($_POST['name']);
 $email_id = filter($_POST['email_id']);
 $company_name = filter($_POST['company_name']);
+$pan_no = filter($_POST['pan_no']);
+$gst_no = filter($_POST['gst_no']);
+$address1 = filter($_POST['address1']);
+$address2 = filter($_POST['address2']);
+$address3 = filter($_POST['address3']);
+$pincode = filter($_POST['pincode']);
+$state = filter($_POST['state']);
 $webinar_id = $_POST['webinar_id'];
 $date_time = date("Y-m-d H:i:s");
+
 if($memberType!= ""){
 	if($memberType=="member"){
-		if($bp_number !="" && !empty($bp_number)){
-			$sql_chk_bp = "SELECT * FROM communication_address_master WHERE c_bp_number='$bp_number'";
+		if($pan_no !="" && !empty($pan_no)){
+			$sql_chk_bp = "SELECT * FROM registration_master WHERE company_pan_no='$pan_no' ";
 			$result_chk_bp = $conn->query($sql_chk_bp);
 			$count_chk_bp =$result_chk_bp->num_rows;
 				if($count_chk_bp==0){
-				echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"BP Number is not exist"));exit;
+				echo json_encode(array("status"=>"error-single","label"=>"pan_no","message"=>"Pan Number is not exist"));exit;
 				}else{
 					$row_chk_bp= $result_chk_bp->fetch_assoc();
-						$registration_id = $row_chk_bp['registration_id'];
+						$registration_id = $row_chk_bp['id'];
 					/*
 					** CHECK MEMBER
 					*/
-					$sql_chk_member = "SELECT * FROM `approval_master` WHERE 1 and `registration_id`='$registration_id' AND eligible_for_renewal='Y'";
+					 $sql_chk_member = "SELECT * FROM `approval_master` WHERE 1 and `registration_id`='$registration_id' AND issue_membership_certificate_expire_status='Y'";
 					$result_chk_member = $conn->query($sql_chk_member);
 					$count_chk_member = $result_chk_member->num_rows;
 					if($count_chk_member>0){
@@ -39,28 +51,31 @@ if($memberType!= ""){
 						$u_email_id =  $row_chk_bp['email_id'];
 						$u_mobile_number =$row_chk_bp['mobile_no'];
 						$u_company_name = getCompanyName($registration_id,$conn);
-						$company_bp_no = $row_chk_bp['c_bp_number'];
+						$company_bp_no = $row_chk_bp['company_bp_no'];
 						$company_pan_no = $row_chk_bp['pan_no'];
 					}else{
-						echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"Sorry You are not a Member"));exit;
+						echo json_encode(array("status"=>"error-single","label"=>"pan_no","message"=>"Sorry You are not a Member"));exit;
 					}
 				}
 		}else{
-			echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"BP Number is Required"));exit;
+			echo json_encode(array("status"=>"error-single","label"=>"pan_no","message"=>"Pan Number is Required"));exit;
 		}
 	}else{
+		
 		if($mobile_number !="" && !empty($mobile_number)){
 			$chk_webinar_reg = "SELECT * FROM webinar_registration_details WHERE mobile_no='$mobile_number'";
 			$result_chk_webinar_reg = $conn->query($chk_webinar_reg);
 			$count_chk_webinar_reg = $result_chk_webinar_reg->num_rows;
-			if($count_chk_webinar_reg>0){
-				$row_chk_webinar_reg = $result_chk_webinar_reg->fetch_assoc();
-				$u_name = $row_chk_webinar_reg['name'];
-				$u_email_id = $row_chk_webinar_reg['email_id'];
-				$u_mobile_number = $row_chk_webinar_reg['mobile_no'];
-				$u_company_name = $row_chk_webinar_reg['company_name'];
-				$non_member_id = $row_chk_webinar_reg['id'];
-			}else{
+			// if($count_chk_webinar_reg>0){
+			// 	$row_chk_webinar_reg = $result_chk_webinar_reg->fetch_assoc();
+			// 	$u_name = $row_chk_webinar_reg['name'];
+			// 	$u_email_id = $row_chk_webinar_reg['email_id'];
+			// 	$u_mobile_number = $row_chk_webinar_reg['mobile_no'];
+			// 	$u_company_name = $row_chk_webinar_reg['company_name'];
+			// 	$non_member_id = $row_chk_webinar_reg['id'];
+			
+
+			// }else{
 				if(empty($name))
 				{
 					$name_error[] = array("status"=>"empty","msg"=>" Name is Required","label"=>"name");
@@ -98,33 +113,113 @@ if($memberType!= ""){
 						$email_id_error[] =array();
 					}
 				}
+
 				if(empty($company_name))
 				{
 					$company_name_error[] = array("status"=>"empty","msg"=>"Company name is Required","label"=>"company_name");
 				}else{
 					$company_name_error[] =array();
 				}
-				$form_error = array_merge(array_filter($name_error),array_filter($mobile_number_error),array_filter($email_id_error),array_filter($company_name_error));
+			
+
+				if(empty($pan_no))
+				{
+					$pan_no_error[] = array("status"=>"empty","msg"=>"Pan number is required","label"=>"pan_no");
+				}else{
+
+					if (strlen($pan_no) !== 10) {
+						$pan_no_error[] = array("status"=>"empty","msg"=>"Pan number is Not Valid","label"=>"pan_no");
+					}else{
+						$pan_no_error[] =array();
+					}
+					
+				}
+				if(empty($gst_no))
+				{
+					//$gst_no_error[] = array("status"=>"empty","msg"=>"GST number is required","label"=>"gst_no");
+					$gst_no_error[] = array();
+				}else{
+
+					if (strlen($gst_no) !== 12) {
+						$gst_no_error[] = array("status"=>"empty","msg"=>"GST number is Not Valid","label"=>"gst_no");
+					}else{
+						$gst_no_error[] =array();
+					}
+					
+				}
+
+				if(empty($address1))
+				{
+					$address1_error[] = array("status"=>"empty","msg"=>"Address is Required","label"=>"address1");
+				}else{
+					$address1_error[] =array();
+				}
+
+				if(empty($address2))
+				{
+					$address2_error[] = array("status"=>"empty","msg"=>"Address is Required","label"=>"address2");
+				}else{
+					$address2_error[] =array();
+				}
+
+				if(empty($address3))
+				{
+					$address3_error[] = array("status"=>"empty","msg"=>"Address is Required","label"=>"address3");
+				}else{
+					$address3_error[] =array();
+				}
+
+				if(empty($pincode))
+				{
+					$pincode_error[] = array("status"=>"empty","msg"=>"Pincode number is required","label"=>"pincode");
+				}else{
+
+					if (strlen($pincode) !== 6) {
+						$pincode_error[] = array("status"=>"empty","msg"=>"Pincode number is Not Valid","label"=>"pincode");
+					}else{
+						$pincode_error[] =array();
+					}
+					
+				}
+				if(empty($state))
+				{
+					$state_error[] = array("status"=>"empty","msg"=>"State is Required","label"=>"state");
+				}else{
+					$state_error[] =array();
+				}
+
+				$form_error = array_merge(array_filter($name_error),array_filter($mobile_number_error),array_filter($email_id_error),array_filter($company_name_error),array_filter($pan_no_error),array_filter($gst_no_error),array_filter($address1_error),array_filter($address2_error),array_filter($address3_error),array_filter($pincode_error),array_filter($state_error));
 				if(!empty(array_filter($form_error)))
 				{
 					echo json_encode($form_error);exit;
 				}else{
-					$sql_new_user_insert = "INSERT INTO webinar_registration_details SET name='$name',type='$memberType',email_id='$email_id',mobile_no='$mobile_number',company_name='$company_name',created_date ='$date_time'";
-					$result_new_user_insert = $conn->query($sql_new_user_insert);
-					$non_member_id = $conn->insert_id;
-					if($result_new_user_insert){
-					$u_name = $name;
-					$u_email_id = $email_id;
-					$u_mobile_number = $mobile_number;
-					$u_company_name = $company_name;
 
-					}
+					if($count_chk_webinar_reg>0){
+
+						$row_chk_webinar_reg = $result_chk_webinar_reg->fetch_assoc();
+						$non_member_id = $row_chk_webinar_reg['id'];
+						$sql_new_user_update = "UPDATE webinar_registration_details SET name='$name',type='$memberType',email_id='$email_id',mobile_no='$mobile_number',company_name='$company_name',pan_no='$pan_no',gst_no='$gst_no',address1='$address1',address2='$address2',address3='$address3',pincode='$pincode',state='$state',updated_date ='$date_time' WHERE  id='$non_member_id'";
+						$result = $conn->query($sql_new_user_update);
+
+					}else{
+						$sql_new_user_insert = "INSERT INTO webinar_registration_details SET name='$name',type='$memberType',email_id='$email_id',mobile_no='$mobile_number',company_name='$company_name',pan_no='$pan_no',gst_no='$gst_no',address1='$address1',address2='$address2',address3='$address3',pincode='$pincode',state='$state',created_date ='$date_time'";
+						$result = $conn->query($sql_new_user_insert);
+						$non_member_id = $conn->insert_id;
+					}	
+				
 				}		
-			}
+			// }
 		}else{
 			echo json_encode(array("status"=>"error-single","label"=>"mobile_no","message"=>"Mobile Number is Required"));exit;
 		}
 	}
+
+	if($memberType =="member"){
+		$member_ref_id = $registration_id;
+	}else{
+		$member_ref_id = $non_member_id;
+	}
+
 $webinar_id = base64_decode($webinar_id);
 $sql_webinar = "SELECT * FROM webinar_master WHERE id = '$webinar_id' ";
 $result_webinar = $conn->query($sql_webinar);
@@ -134,55 +229,176 @@ if($count_webinar==1){
 	$chkResult = $conn->query($chks);
 	$row = $chkResult->fetch_assoc();
 	$num=$chkResult->num_rows;
-	$strNo = rand(1,10000000);
-	if($num<=0)
-	{ $order_id = 'ORDERID1'; }
-	else
-	{
-	  
-	  $order_id='ORDERID'.$strNo;
-	}
-	$_SESSION['order_id'] = $order_id; 
-	$row_webinar = $result_webinar->fetch_assoc();
+
+$row_webinar = $result_webinar->fetch_assoc();
 	$webinar_name = $row_webinar['title'];
 	$webinar_category = $row_webinar['type'];
-	$total_payable =  trim($row_webinar['fees']);
-	$key="2900042967901118";
-	$payment_mode="9";
-	$return_url = "https://gjepc.org/webinar_payment_success.php";
-	$_SESSION['ReferenceNo']=$ReferenceNo=rand(100,9999999).time();
-	$submerchantid ="45";
-	$mandate_str=aes128Encrypt($ReferenceNo."|".$submerchantid."|".$total_payable."|".$u_email_id."|".$u_company_name."|".$webinar_name,$key);
-	$optional_str=aes128Encrypt($total_payable."|10104|".$memberType."|".$order_id."|Others 2|0",$key);
-	$return_url_str=aes128Encrypt($return_url,$key);
-	$reference_str=aes128Encrypt($ReferenceNo,$key);
-	$submerchant_str=aes128Encrypt($submerchantid,$key);
-	$amount_str=aes128Encrypt($total_payable,$key);
-	$payment_mode_str=aes128Encrypt($payment_mode,$key);
-	if($total_payable !="0"){
-	  	$redirectUrl="https://eazypay.icicibank.com/EazyPG?merchantid=296793&mandatory fields=".$mandate_str."&optional fields=".$optional_str."&returnurl=".$return_url_str."&Reference No=".$reference_str."&submerchantid=".$submerchant_str."&transaction amount=".$amount_str."&paymode=".$payment_mode_str;
-    }else{
-    	$_SESSION['payment_mode'] = "free";
-    	$redirectUrl ="https://gjepc.org/webinar_payment_success.php";
-    }
-	
-
 
 	/*
 	** GENERATE ORDER ID
 	*/
+	$strNo = rand(1,10000000);
+	if($webinar_category  == "webinar"){
+		if($num<=0)
+		{ $order_id = 'WEBINARID1'; }
+		else
+		{
+		  $order_id='WEBINAR'.$strNo;
+		}
+	}else if($webinar_category  == "workshop"){
+        if($num<=0)
+		{ $order_id = 'WORKSHOP1'; }
+		else
+		{
+		  $order_id='WORKSHOP'.$strNo;
+		}
+	}else if($webinar_category  == "event"){
+       if($num<=0)
+		{ $order_id = 'EVENT1'; }
+		else
+		{
+		  $order_id='EVENT'.$strNo;
+		}
+	}
+	
+	
+
+	$_SESSION['order_id'] = $order_id; 
+
+
+	
 	
 	if($memberType=="member"){
-	 $sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`registration_id`='$registration_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`ReferenceNo`='$ReferenceNo',`created_at`='$date_time',`Transaction_Amount`='$total_payable'";
+		$total_payable =  trim($row_webinar['m_fees']);
+	}else{
+		$total_payable =  trim($row_webinar['nm_fees']);
+	}
+	// if($mobile_number =="9834797281"){
+	// 	$total_payable =  1;
+	// }
+
+
+	if($total_payable == 0){
+		if($memberType=="member"){
+	    	$sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`registration_id`='$registration_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`created_at`='$date_time',`razorpay_order_id`='',`Transaction_Amount`='$total_payable'";
 	 	}else{
-	 $sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`non_member_id`='$non_member_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`ReferenceNo`='$ReferenceNo',`created_at`='$date_time',`Transaction_Amount`='$total_payable'";
+		    $sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`non_member_id`='$non_member_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`created_at`='$date_time',`razorpay_order_id`='',`Transaction_Amount`='$total_payable'";
+		}
+		$result_payment = $conn->query($sql_payment);
+		$date = date("jS F Y ");
+	$message ='<table width="80%" align="center" style="margin:2% auto; border:2px solid #ddd; font-family:Arial, sans-serif; color:#333333; font-size:13px; border-radius:10px;padding:10px;">
+    <tbody>    
+    <tr>
+      <td align="left"><img src="http://www.gjepc.org/images/gjepc_logo.png"></td>
+    </tr>        
+    <tr>
+      <td colspan="3" height="30"><hr></td>
+    </tr>        
+    <tr>        
+        <td colspan="3" id="content">            
+            <table width="100%">
+                <tr>                   
+                    <td align="right"> <strong> '.$date.'</strong> </td>
+                </tr>
+            </table>
+
+           <p style="line-height:22px;">Dear '.$company_name.',</p>
+
+            <p style="line-height:22px;">Your registration for '.$webinar_name.' is Successfull</p>
+            <p style="line-height:22px;"><strong>Order Id : </strong>'.$order_id.'</p>
+            
+            <p style="line-height:22px;">Should you have any queries, contact on 
+             <a href="mailto:ajay.kumar@gjepcindia.com">ajay.kumar@gjepcindia.com</a>/ </p>
+            
+            <p style="line-height:22px;">Thanking you.</p>
+
+            <p style="line-height:22px;">Yours faithfully,</p>
+
+            <p style="line-height:22px;"><strong>Team GJEPC.</strong></p>
+                  
+        </td>                  
+    </tr>
+    
+    <td colspan="3">
+
+    </td>
+              
+            
+           
+    </tbody>
+    
+</table>';
+	
+		$to = $email_id;
+		//$to = "santosh@kwebmaker.com";
+		$cc = "";
+		$subject = $event_name; 
+		send_mail($to,$subject,$message,$cc);
+	
+
+		$url = "https://gjepc.org/webinar_payment_success.php?webinar=".$webinar_id."&isFree=yes&payment_id=".$order_id;
+		echo json_encode(array("status"=>"success","isFree"=>"yes","url"=>$url)); exit;
+
+	}
+
+    
+
+    $api = new Api($keyId, $keySecret);
+	$orderData = [
+		'receipt' => $order_id,
+		'amount' => $total_payable * 100,
+		'currency' => "INR",
+		'payment_capture' => 1
+	];
+
+	$razorpayOrder = $api->order->create($orderData);
+	$razorpayOrderId = $razorpayOrder['id'];
+	if( $razorpayOrderId ){
+
+					
+		$data = [
+			"key" => $keyId,
+			"amount" => $total_payable,
+			"name" => $webinar_name,
+			"description" => 'Event payment',
+			"order_id" => $razorpayOrderId,
+			"notes" => [
+				"amount" => $total_payable,
+				"registration_id" => $member_ref_id,
+				"company_name" => $company_name,
+				"name" => $name,
+				"email" => $email_id,
+				"mobile" => $mobile_no,
+				"member_type" => $memberType,
+				'event_id' => $webinar_id,
+				"event_name" => $webinar_name,
+				"merchant_order_id"=> $order_id,
+			],
+			"success" => true,
+			"action"=>"payment_capture"
+		];
+
+	if($memberType=="member"){
+	    $sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`registration_id`='$registration_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`created_at`='$date_time',`razorpay_order_id`='$razorpayOrderId',`Transaction_Amount`='$total_payable'";
+ 	}else{
+	    $sql_payment = "INSERT INTO webinar_payment_history SET `member_type`='$memberType',`order_id`='$order_id',`non_member_id`='$non_member_id',`webinar_id`='$webinar_id',occasion_name='webinar',vid_language='0',`created_at`='$date_time',`razorpay_order_id`='$razorpayOrderId',`Transaction_Amount`='$total_payable'";
 	}
 	$result_payment = $conn->query($sql_payment);
-	if($result_payment){
-	echo json_encode(array("status"=>"success","redirectUrl"=>$redirectUrl));exit;
+
+	// PAYMENT LOG
+	if($memberType=='member'){
+	 	$payment_log = "INSERT INTO webinar_payment_log SET member_type='$memberType',registration_id='$registration_id',amount='$total_payable',order_id='$order_id',razorpay_order_id='$razorpayOrderId',`status`='created'";
 	}else{
-	echo json_encode(array("status"=>"error-single","label"=>"common_error","message"=>"Something went wrong on server please contact admin"));exit;
+		$payment_log = "INSERT INTO webinar_payment_log SET member_type='$memberType',registration_id='$non_member_id',amount='$total_payable',order_id='$order_id',razorpay_order_id='$razorpayOrderId',`status`='created'";
 	}
+	$conn->query($payment_log);
+	echo json_encode(array("status"=>"success","isFree"=>"no", "response"=>$data)); exit;
+
+	}else{
+		echo json_encode(array("status"=>"alert", "title"=>"Oops! Error occured", "icon"=>"error", "message"=>$razorpayOrder['error'])); exit;
+	}
+	
+	
 }else{
     echo json_encode(array("status"=>"error-single","label"=>"common_error","message"=>"Webinar Details Not found please contact with admin"));exit;
 }
@@ -191,6 +407,109 @@ if($count_webinar==1){
 echo json_encode(array("status"=>"error-single","label"=>"check_member","message"=>"Select Member Type"));exit;
 }
 	
+}
+
+
+if($_POST && isset($_POST['razorpay_payment_id']) && $_POST['razorpay_payment_id'] !==""){
+	$api = new Api($keyId, $keySecret);
+	$payment = $api->payment->fetch($_POST['razorpay_payment_id']);
+	$razorpay_payment_id =  $_POST['razorpay_payment_id'];
+    $razorpay_signature = $_POST['razorpay_signature'];
+    $razorpay_order_id = $_POST['razorpay_order_id'];
+    $order_id = $_SESSION['order_id'];
+    $error_description =  $payment->error_description;
+	$card_id =  $payment->card_id;
+	$bank =  $payment->bank;
+	$payment_status =  $payment->status;
+	$method =  $payment->method;
+	$currency =  $payment->currency;
+	$payment_date = date('Y-m-d',$payment->created_at);
+	$notes_response = $payment->notes;
+	$merchant_order_id = $notes_response->merchant_order_id;
+	$post_date=date('Y-m-d');
+
+	$update_payment = "UPDATE webinar_payment_history SET error_description='$error_description',card_id='$card_id',bank='$bank',payment_status='$payment_status',method='method',currency='$currency',payment_date='$payment_date',razorpay_signature='$razorpay_signature',razorpay_payment_id='$razorpay_payment_id' WHERE  order_id='$order_id' AND razorpay_order_id='$razorpay_order_id'";
+	$result = $conn->query($update_payment);
+
+    /*=== UPDATE PAYMENT LOG  STATRT ===*/
+
+	$update_payment_log = $conn->query("UPDATE webinar_payment_log SET razorpay_signature='$razorpay_signature',razorpay_payment_id='$razorpay_payment_id' , `status`='$payment_status' WHERE  razorpay_order_id='$razorpay_order_id' AND order_id='$order_id'");
+
+    /*=== UPDATE PAYMENT LOG  END ===*/
+
+	if($result){
+
+     
+    $memberType = $notes_response->member_type;
+    $event_name = $notes_response->event_name;
+    $event_name = $notes_response->event_name;
+    $email_id =  $notes_response->email_id;
+    if($memberType =="member"){
+      $registration_id = $notes_response->registration_id;
+      $company_name = getCompanyName($registration_id,$conn);
+    }else{
+		$company_name = "";
+    }
+
+	$date = date("jS F Y ");
+	$message ='<table width="80%" align="center" style="margin:2% auto; border:2px solid #ddd; font-family:Arial, sans-serif; color:#333333; font-size:13px; border-radius:10px;padding:10px;">
+    <tbody>    
+    <tr>
+      <td align="left"><img src="http://www.gjepc.org/images/gjepc_logo.png"></td>
+    </tr>        
+    <tr>
+      <td colspan="3" height="30"><hr></td>
+    </tr>        
+    <tr>        
+        <td colspan="3" id="content">            
+            <table width="100%">
+                <tr>                   
+                    <td align="right"> <strong> '.$date.'</strong> </td>
+                </tr>
+            </table>
+
+           <p style="line-height:22px;">Dear '.$company_name.',</p>
+
+            <p style="line-height:22px;">Your registration for '.$event_name.' is Successfull</p>
+            <p style="line-height:22px;"><strong>Order Id : </strong>'.$order_id.'</p>
+            <p style="line-height:22px;margin-bottom:20px;"><strong>Ref No  :</strong>'.$razorpay_order_id.'</p>
+            
+            <p style="line-height:22px;">Should you have any queries, contact on 
+             <a href="mailto:ajay.kumar@gjepcindia.com">ajay.kumar@gjepcindia.com</a>/ </p>
+            
+            <p style="line-height:22px;">Thanking you.</p>
+
+            <p style="line-height:22px;">Yours faithfully,</p>
+
+            <p style="line-height:22px;"><strong>Team GJEPC.</strong></p>
+                  
+        </td>                  
+    </tr>
+    
+    <td colspan="3">
+
+    </td>
+              
+            
+           
+    </tbody>
+    
+</table>';
+	if($payment_status =="captured" || $payment_status =="authorized"){
+		//$to = $email_id;
+		$to = "santosh@kwebmaker.com";
+		$cc = "";
+		$subject = $event_name; 
+		send_mail($to,$subject,$message,$cc);
+	}
+	   $url = "https://gjepc.org/webinar_payment_success.php?isFree=no&payment_id=".$razorpay_payment_id;
+	   echo json_encode(array("status"=>"success","url"=>$url));exit;
+	  
+	}else{
+		$url  = "";
+		 echo json_encode(array("status"=>"error","message"=>" Something went wrong"));exit;
+	}
+
 }
 
 if($_POST && $_POST["action"]=="promo-video-registration"){
@@ -498,7 +817,14 @@ if($_POST && $_POST["action"]=="check_registered_webinar_user"){
 	        	$email_id = $row_chk_webinar_reg['email_id'];
 	        	$mobile_no = $row_chk_webinar_reg['mobile_no'];
 	        	$company_name = $row_chk_webinar_reg['company_name'];
-	            echo json_encode(array("isNew"=>"no","name"=>$name,"email_id"=>$email_id,"mobile_no"=>$mobile_no,"company_name"=>$company_name));exit;
+	        	$pan_no = $row_chk_webinar_reg['pan_no'];
+	        	$gst_no = $row_chk_webinar_reg['gst_no'];
+	        	$address1 = $row_chk_webinar_reg['address1'];
+	        	$address2 = $row_chk_webinar_reg['address2'];
+	        	$address3 = $row_chk_webinar_reg['address3'];
+	        	$pincode = $row_chk_webinar_reg['pincode'];
+	        	$state = $row_chk_webinar_reg['state'];
+	            echo json_encode(array("isNew"=>"no","name"=>$name,"email_id"=>$email_id,"mobile_no"=>$mobile_no,"company_name"=>$company_name,"pan_no"=>$pan_no,"gst_no"=>$gst_no,"address1"=>$address1,"address2"=>$address2,"address3"=>$address3,"pincode"=>$pincode,"state"=>$state));exit;
 	        }
 	    }else{
 	    	echo json_encode(array("status"=>"error-single","label"=>"mobile_no","message"=>"Enter  Valid Mobile Number"));exit;
@@ -509,20 +835,20 @@ if($_POST && $_POST["action"]=="check_registered_webinar_user"){
 
 }
 if($_POST && $_POST["action"]=="check_member_from_bp_number"){
-	$bp_number = filter($_POST['bp_number']);
-if($bp_number !="" && !empty($bp_number)){
-$sql_chk_bp = "SELECT * FROM communication_address_master WHERE c_bp_number='$bp_number'";
+	$pan_no = filter($_POST['pan_no']);
+if($pan_no !="" && !empty($pan_no)){
+$sql_chk_bp = "SELECT * FROM registration_master WHERE company_pan_no='$pan_no'  ";
 $result_chk_bp = $conn->query($sql_chk_bp);
 $count_chk_bp =$result_chk_bp->num_rows;
 if($count_chk_bp==0){
-echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"BP Number is not exist"));exit;
+echo json_encode(array("status"=>"error-single","label"=>"pan_number","message"=>"Pan Number is not exist"));exit;
 }else{
 $row_chk_bp= $result_chk_bp->fetch_assoc();
-	$registration_id = $row_chk_bp['registration_id'];
+	$registration_id = $row_chk_bp['id'];
 /*
 ** CHECK MEMBER
 */
-$sql_chk_member = "SELECT * FROM `approval_master` WHERE 1 and `registration_id`='$registration_id' AND eligible_for_renewal='Y'";
+ $sql_chk_member = "SELECT * FROM `approval_master` WHERE 1 and `registration_id`='$registration_id' AND issue_membership_certificate_expire_status='Y'";
 $result_chk_member = $conn->query($sql_chk_member);
 $count_chk_member = $result_chk_member->num_rows;
 if($count_chk_member>0){
@@ -530,16 +856,23 @@ if($count_chk_member>0){
 $name =  $row_chk_bp['name'];
 $email_id =  $row_chk_bp['email_id'];
 $mobile_number =$row_chk_bp['mobile_no'];
-$company_name = getCompanyName($registration_id,$conn);
 
-$company_gst = getCompanyGSTNO($registration_id,$conn);
-echo json_encode(array("status"=>"success","email_id"=>$email_id,"mobile_no"=>$mobile_number,"name"=>$name,"company_name"=>$company_name,"gst_no"=>$company_gst));exit;
+$address1 =$row_chk_bp['address_line1'];
+$address2 =$row_chk_bp['address_line2'];
+$address3 =$row_chk_bp['city'];
+$pincode =$row_chk_bp['pin_code'];
+$state = getState($row_chk_bp['state'],$conn);
+$company_name = getCompanyName($registration_id,$conn);
+$gst_no = $row_chk_bp['company_gstn'];
+$pan_no = $row_chk_bp['company_pan_no'];
+
+echo json_encode(array("status"=>"success","email_id"=>$email_id,"mobile_no"=>$mobile_number,"name"=>$name,"company_name"=>$company_name,"gst_no"=>$gst_no,"pan_no"=>$pan_no,"address1"=>$address1,"address2"=>$address2,"address3"=>$address3,"pincode"=>$pincode,"state"=>$state));exit;
 }else{
-	echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"Sorry You are not a Member"));exit;
+	echo json_encode(array("status"=>"error-single","label"=>"pan_no","message"=>"Sorry You are not a Member"));exit;
 }
 }
 }else{
-	echo json_encode(array("status"=>"error-single","label"=>"bp_number","message"=>"Please refer 10 digit number starting from 7 in membership certificate"));exit;
+	echo json_encode(array("status"=>"error-single","label"=>"pan_no","message"=>"Please refer 10 digit number starting from 7 in membership certificate"));exit;
 }
 	
 }

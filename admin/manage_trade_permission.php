@@ -67,14 +67,14 @@ function showDate(date) {
 
 <div id="main">
 <div class="content">
-<div class="content_head">
+<!--<div class="content_head">
 <a href="get_disapprove_app.php"><div class="content_head_button">Download Disapprove Application</div></a>
 <a href="get_approve_app.php"><div class="content_head_button">Download Approved Application </div></a>
 <a href="get_region_wise.php"><div class="content_head_button">Download Region Wise Application </div></a>
 <?php if($_SESSION['curruser_role']=="Super Admin" || $_SESSION['curruser_login_id']=='68') { ?>
 <a href="trade_exhibition_data_import.php"><div class="content_head_button">Download All Application with Exhibition </div></a>
 <?php } ?>
-</div>
+</div>-->
  
 <div class="content_details1">
 <?php 

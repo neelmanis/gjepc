@@ -38,6 +38,24 @@ include 'functions.php';
             <h1 class="bold_font text-center" style="color:#000;"> <img src="assets/images/gold_star.png" class="d-block mx-auto mb-3"> Gem & Jewellery Analytical Reports </h1>
             
             <div class="any_slider">
+
+            <div class="px-3">
+                    <a href="https://gjepc.org/pdf/Gem-and-Jewellery-Trade-Quick-Update-April-November-2022.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-November-2022.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
+
+            <div class="px-3">
+                    <a href="https://gjepc.org/pdf/GJEPC-Trade-Trade-Trends-Report-H1-2022-April-Sep-22.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/GJEPC-Trade-Trade-Trends-Report-H1-2022-April-Sep-22.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
+
+            <div class="px-3">
+                    <a href="https://gjepc.org/pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-October-2022.pdf" target="_blank" class="any_box">
+                        <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-October-2022.jpg" class="img-fluid d-block">
+                    </a>
+                </div>
             <div class="px-3">
                     <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-July-2022.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-July-2022.jpg" class="img-fluid d-block">
@@ -48,21 +66,22 @@ include 'functions.php';
                         <img src="assets/images/market_reports/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.jpg" class="img-fluid d-block">
                     </a>
                 </div>
-            <div class="px-3">
+            <!-- <div class="px-3">
                     <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-June-2022.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-June-2022.jpg" class="img-fluid d-block">
                     </a>
-                </div>
+                </div> -->
             <div class="px-3">
                     <a href="pdf/market_reports/India-Malaysia-Collaboration-Possibilities-2.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/India-Malaysia-Collaboration-Possibilities-2.jpg" class="img-fluid d-block">
                     </a>
                 </div>
-            <div class="px-3">
+                
+            <!-- <div class="px-3">
                     <a href="pdf/Gem-and-Jewellery-Trade-Quick-Update-April-May-2022.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/April-May-2022.jpg" class="img-fluid d-block">
                     </a>
-                </div>
+                </div> -->
                 <div class="px-3">
                     <a href="pdf/GJ-Trade-Trends-Annual-report-2021-22.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/Annual-report-2021-22.jpg" class="img-fluid d-block">
@@ -84,11 +103,11 @@ include 'functions.php';
                         <img src="assets/images/market_reports/India–Lebanon-IGC-Report.jpg" class="img-fluid d-block"> 
                     </a>
                 </div>
-                <div class="px-3">
+                <!-- <div class="px-3">
                     <a href="pdf/Reasons-of-fall-in-G&J-exports-2005-17.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/Reasons-of-fall-in-G&J-exports-2005-17.jpg" class="img-fluid d-block">
                     </a>
-                </div>
+                </div> -->
                 <div class="px-3">
                     <a href="/assets/images/statistics/sez/SEZ-Focus-GJEPC-Quarterly-Newsletter2.pdf" target="_blank" class="any_box">
                         <img src="assets/images/market_reports/SEZ-Focus-GJEPC-Quarterly-Newsletter2.jpg" class="img-fluid d-block"> 
@@ -109,9 +128,7 @@ include 'functions.php';
                     <marquee class="d-block"> 
                         <!-- <a href="#">August 2022 Export/Import figures </a>  -->
                         <a href="#">SEZ Catalyst for G&J sector report</a>
-                        <a href="#">G&J Trade Trends Half Yearly Report ( April -September 2022)</a>
-                        <a href="#">SEZ Catalyst for gems and jewellery sector report </a> 
-                        <a href="#">G&J Trade trends quarterly report - (April -June 2022)</a> 
+                        <a href="#">SEZ Catalyst for gems and jewellery sector report </a>  
                         <a href="#">SEZ Focus Quarterly Newsletter # 3</a> 
                     </marquee>                 
                 </div>  
@@ -122,6 +139,12 @@ include 'functions.php';
         
                 <div class="col">                
                     <marquee class="d-block"> 
+                    <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-November-2022.pptx" target="_blank">Gem-and-Jewellery-Trade-Quick-Update-April-November-2022</a>    
+
+                     <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-October-2022.pdf" target="_blank">October 2022 Export/Import figures</a>
+                     <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-October-2022.pdf" target="_blank">G&J Trade Quick Update April -October 2022</a></a>
+                    <a href="pdf/market_reports/GJEPC-Trade-Trade-Trends-Report-H1-2022-April-Sep-22.pdf" target="_blank" >G&J Trade Trends Half Yearly Report ( April -September 2022)</a>
+
                         <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-September-2022.pdf" target="_blank" >Gem and Jewellery Trade Update April - September 2022</a>
                        
                         <a href="pdf/Unleashing_The_Export_Potential_Of_Indian_G&J_Sector.pdf" target="_blank" >Unleashing The Export Potential Of Indian Gem & Jewellery Sector w.r.t Export Targets, Export Strategy and Achievements in FY2021-2022 </a>
@@ -496,6 +519,14 @@ include 'functions.php';
                                                 <div id="monthly_2022">
 
                                                     <ul class="row">
+
+                                                    <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-November-2022.pptx" target="_blank" class="new_pdf_wrp">April - November 2022</a>
+                                                        </li>
+
+                                                    <li class="col-md-4 px-2">
+                                                            <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-October-2022.pdf" target="_blank" class="new_pdf_wrp">April - October 2022</a>
+                                                        </li>
                                                     <li class="col-md-4 px-2">
                                                             <a href="pdf/market_reports/Gem-and-Jewellery-Trade-Quick-Update-April-September-2022.pdf" target="_blank" class="new_pdf_wrp">April - September 2022</a>
                                                         </li>
@@ -617,6 +648,10 @@ include 'functions.php';
                                                 
                                                 <ul class="row">  
 
+                                                <li class="col-md-4 px-2">
+                                                        <a href="pdf/GJEPC-Trade-Trade-Trends-Report-H1-2022-April-Sep-22.pdf" target="_blank" class="new_pdf_wrp">Gem & Jewellery Trade Trends - April - September 2022 </a>
+                                                    </li>
+
                                                     <li class="col-md-4 px-2">
                                                         <a href="pdf/GJ-Trade-Trends-Annual-report-2021-22.pdf" target="_blank" class="new_pdf_wrp">Gem & Jewellery Trade Trends - April - March 2022 </a>
                                                     </li>
@@ -718,12 +753,23 @@ include 'functions.php';
 
                                                 <div id="EP_2022" class="Economy_Updates_hide show">                                        
                                                     <ul class="row">  
-                                                        
                                                     <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/IIP-September-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            IIP-September-2022
+                                                    </a></li>
+                                                   <li class="col-md-6 px-2">
+                                                            <a href="/pdf/economy_updates/2022/Foreign-Trade-data-October-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            Foreign-Trade-data-October-2022
+                                                    </a></li>
+                                                   <li class="col-md-6 px-2">
                                                             <a href="pdf/economy_updates/2022/India's-Merchandise-Exports-and-Gem-and-Jewellery-Exports-September-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
                                                             India’s Merchandise Exports and Gem and Jewellery Exports September 2022
  
-</a></li>
+                                                    </a></li>
+                                                        <li class="col-md-6 px-2">
+                                                            <a href="pdf/economy_updates/2022/FDI-Inflows-in-Gem-and-Jewellery-Sector-H1-2022-2023.pdf" target="_blank" class="h-100 new_pdf_wrp">
+                                                            FDI-Inflows-in-Gem-and-Jewellery-Sector-H1-2022-2023
+                                                     </a></li>
 
                                                     <li class="col-md-6 px-2">
                                                             <a href="pdf/economy_updates/2022/WTO-Trade-Outlook-And-Statistics-2022.pdf" target="_blank" class="h-100 new_pdf_wrp">
@@ -1069,8 +1115,8 @@ June 2022</a>
                                         List Of HS Codes at 8-digit level list</a>
                                     </li>                                    
                                     <li class="col-md-6 px-2">
-                                        <a href="pdf/India-Imports-Tariff-Rates-20at-HS-Code-8-digit-level.pdf" target="_blank" class="new_pdf_wrp">
-                                        India's Import Tariff Rates at HS Codes - 8-digit level</a>
+                                        <a href="pdf/India's-Imports-Tariff-Rates-at-HS-Code-8-digit-level.pdf" target="_blank" class="new_pdf_wrp">
+                                        India's-Imports-Tariff-Rates-at-HS-Code-8-digit-level</a>
                                     </li>                                    
                                 </ul>                    
                         </div>                                
@@ -1225,7 +1271,7 @@ June 2022</a>
             </div>            
         </div>  <!-- Glance tab -->
         
-        <div class="mb-5 pb-5" data-aos="fade-up">          
+        <div class="mb-5 pb-5 d-none" data-aos="fade-up" >          
             <h2 class="title">Gem & Jewellery Exports & Imports (US$ million)</h2>            
             <div class="row normal_tab">                
                 <div class="col-lg-6 mb-4" data-aos="fade-right">                   
@@ -4101,7 +4147,7 @@ function drawMonthLinechart(){
     {
         $.ajax({
             type: "POST",
-            url: 'getStatsData.php',
+            url: 'getStatsData_closed.php',
             dataType: 'json',
             data: "actiontype=sendMonthDetails&year="+year+"&type="+type,
             beforeSend: function(){
@@ -4187,7 +4233,7 @@ function drawDestinationpiechart(){
     {   
     $.ajax({
             type: "POST",
-            url: 'getStatsData.php',
+            url: 'getStatsData_closed.php',
             dataType: 'json',
             data: "actiontype=sendDetails&year="+year+"&type="+type,
             beforeSend: function(){
@@ -4279,7 +4325,7 @@ function drawCommoditybarchart(){
     {
     $.ajax({
             type: "POST",
-            url: 'getStatsData.php',
+            url: 'getStatsData_closed.php',
             dataType: 'json',
             data: "actiontype=sendCommodityDetails&year="+year+"&type="+type,
             beforeSend: function(){
@@ -4416,7 +4462,7 @@ function drawCommoditybarchart(){
                 var info = values[0]; //alert(registration_id);
                 $.ajax({
                     type: "POST",
-                    url: "getStatsData.php",
+                    url: "getStatsData_closed.php",
                     data: "actiontype=getDetails&info="+info,
                     dataType:"json",
                     beforeSend: function(){

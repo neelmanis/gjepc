@@ -740,7 +740,7 @@ $_SESSION['form_chk_msg2']="";
                 </div>
         </div>
 			<div class="form-group col-sm-6">
-				<label class="form-label" >GSTIN No.: <span>*</span></label>
+				<label class="form-label">GSTIN No.: <span>*</span></label>
 				<div class="inputcontainer">
 				<input type="text" class="form-control" id="gst_no" name="gst_no" maxlength="15" 
 				<?php if($gst_holder_status=="N"){ ?> value="NA" <?php } else if(empty($gst_no)){ ?> value="" <?php } else { ?>
@@ -1110,7 +1110,7 @@ $.validator.addMethod("gst_no", function(value, element) {
 	 $('label[for="gst_no"]').html("");
 	if(value=='NA'){
 		return true;
-	}else {
+	} else {
 	var regex = /^([0][1-9]|[1-2][0-9]|[3][0-7])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/;
 	var gst_val = value.toUpperCase();
 	if(gst_val.match(regex)) {
@@ -1120,7 +1120,7 @@ $.validator.addMethod("gst_no", function(value, element) {
 		if(gst_true !=null && gst_val == gst_true){
             return true;
 		}else if(gst_false !=null && gst_val == gst_false){
-			$('label[for="gst_no"]').html("Invalid GST Number");
+			$('label[for="gst_no"]').html("Invalid GST Numbers");
             return false;
 		}else{
         	$.ajax({
@@ -1133,28 +1133,44 @@ $.validator.addMethod("gst_no", function(value, element) {
 	             $("#gst_check_loader").show();
 	             $('label[for="gst_no"]').css("display","none");
 	            },
-	        success:function(result){
+	        success:function(data){
 	        	 $("#gst_check_loader").hide();
 	        	 $(".error").css("display","block");
-			    if(result.status=="success")
-			    {
-			    	localStorage.setItem("gst_true", gst_val);
+			 //    if(result.status=="success")
+			 //    {
+			 //    	localStorage.setItem("gst_true", gst_val);
+			 //    	$('label[for="gst_no"]').html("");
+			 //        return true;
+			 //    }else if(result.status=="error1")
+			 //    {  
+			 //    	$('label[for="gst_no"]').html("GST is Inactive");
+			 //    	localStorage.setItem("gst_false", gst_val);
+			 //        return false;
+			 //    }else if(result.status=="error2")
+			 //    {
+			 //    	$('label[for="gst_no"]').html("Invalid GST Number");
+			 //    	localStorage.setItem("gst_false", gst_val);
+			 //        return false;
+				// }else{
+				// 	$('label[for="gst_no"]').html("No Record Found for this GST");
+				// 	localStorage.setItem("gst_false", gst_val);
+				// 	return false;
+				// }
+
+				if(data.success == true){
+				   if(data.response_code=="100"){
+					localStorage.setItem("gst_true", gst_val);
 			    	$('label[for="gst_no"]').html("");
 			        return true;
-			    }else if(result.status=="error1")
-			    {  
-			    	$('label[for="gst_no"]').html("GST is Inactive");
+				   }else{
+				   $('label[for="gst_no"]').html("Invalid GST Number");
 			    	localStorage.setItem("gst_false", gst_val);
-			        return false;
-			    }else if(result.status=="error2")
-			    {
-			    	$('label[for="gst_no"]').html("Invalid GST Number");
-			    	localStorage.setItem("gst_false", gst_val);
-			        return false;
+			        return false; 
+				   }
 				}else{
 					$('label[for="gst_no"]').html("No Record Found for this GST");
 					localStorage.setItem("gst_false", gst_val);
-					return false;
+					return false; 
 				}
 		    }
 	    });

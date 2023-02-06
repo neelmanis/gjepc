@@ -5,11 +5,30 @@ if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit;
 include('../db.inc.php');
 $date=date("d_m_Y");
 
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
 function reportLogs($category,$report_name,$conn)
 {
 	$adminID = intval($_SESSION['curruser_login_id']);
 	$adminName = strtoupper($_SESSION['curruser_contact_name']);
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = get_client_ip();
 	$query = "INSERT INTO report_logs SET post_date=NOW(),admin_id='$adminID',admin_name='$adminName',category='$category',report_name='$report_name',ip='$ip'";
 	$result = $conn->query($query);
 	if($result)

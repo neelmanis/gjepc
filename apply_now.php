@@ -1,6 +1,8 @@
 <?php 
 include 'include-new/header.php'; 
-include 'db.inc.php';?>
+include 'db.inc.php';
+include 'functions.php';
+?>
 
 <?php
 $job_id=$conn->real_escape_string($_REQUEST['jid']);
@@ -44,6 +46,7 @@ $apply_date=date("Y-m-d");
 		$temp_code = rand();
 		$file_name = $_FILES['resume']['name'];
 		$file_name = str_replace(" ","_",$file_name);
+		$file_name = str_replace("'","_",$file_name);
 		
 		if(preg_match("/.php/i", $file_name) || preg_match("/shell/i", $file_name) || preg_match("/.Php/i", $file_name) || preg_match("/.PhP/i", $file_name)){
     		echo "<script langauge=\"javascript\">alert(\"Sorry you have select Invalid file.\");location.href='careers.php';</script>";
@@ -62,8 +65,8 @@ $apply_date=date("Y-m-d");
 				$result=$conn->query($sql);
 				if($result){
 				
-				if($_REQUEST['page']=="gjepc"){$to = "hr@gjepcindia.com";}
-				if($_REQUEST['page']=="center"){$to = "judith.d@iij.net.in";}
+				if($_REQUEST['page']=="gjepc"){$to = "career@gjepcindia.com";}
+				if($_REQUEST['page']=="center"){$to = "career@gjepcindia.com";}
 		
 				$subject = "Applying Candidates Details";
 				$message = '<table width="600" border="0" cellspacing="2" cellpadding="2">
@@ -97,12 +100,13 @@ $apply_date=date("Y-m-d");
 				</tr>
 				</table>
 				<br><br>Please <a href="www.gjepc.org/resume/'.$resume.'" target="blank">click here</a> to view CV<br><br>
-				<a href="http://www.gjepc.org/">www.gjepc.org</a><br>';
-	
+				<a href="https://www.gjepc.org/">www.gjepc.org</a><br>';
+				/*
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers .= 'From: '.$email_id;				
-				@mail($to, $subject, $message, $headers);	
+				$headers .= 'From: '.$email_id;	*/
+				$cc = "";
+				send_mail($to,$subject,$message,$cc);
 				$msg = 'Thank you for applying.';
 				}
 			} else

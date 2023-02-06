@@ -20,6 +20,24 @@ include 'functions.php';
         	<div class="col-lg col-md-12 ">
         
                 <div class="row">
+                	<div class="col-12">
+					<a href="pdf/chairman-report.pdf" target="_blank" class="new_pdf_wrp">CHAIRMAN REPORT</a>
+					</div>
+
+					<div class="col-12">
+					<a href="pdf/scrutinizer-report.pdf" target="_blank" class="new_pdf_wrp">SCRUTINIZER REPORT</a>
+					</div>
+
+					<div class="col-12">
+					<a href="pdf/GJEPC-Annual-Report-2021-22-for-WEB.pdf" target="_blank" class="new_pdf_wrp">FIFTY SIXTH ANNUAL REPORT OF GJEPC FOR THE YEAR ENDED 31ST MARCH 2022</a>
+					</div>
+					<div class="col-12">
+					<a href="pdf/FINAL AGM NOTICE.pdf" target="_blank" class="new_pdf_wrp">56TH AGM OF GJEPC ON 30TH AUGUST 2022</a>
+					</div>
+					<div class="col-12">
+					<a href="pdf/HINDI FINAL AGM NOTICE.pdf" target="_blank" class="new_pdf_wrp">56TH AGM OF GJEPC ON 30TH AUGUST 2022 (HINDI)</a>
+					</div>
+				
                 	<div class="col-12">	
 						<a href="pdf/ELECTION-RULES-2022.pdf" target="_blank" class="new_pdf_wrp">ELECTION RULES 2022</a>
 					</div>

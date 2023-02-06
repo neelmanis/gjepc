@@ -100,7 +100,7 @@ if(!$result_update_challan) { die('Error: Update challan Failed - ' . $conn->err
 /*
 * Update Order ID in payment log
 */
- // echo "UPDATE  challan_payment_log SET `merchant_order_id`='$merchant_order_id',`razorpay_order_id`='$razorpayOrderId' WHERE registration_id='$registration_id',ReferenceNo='$merchant_order_id'";exit;
+
 $rz_pay_log = $conn->query("UPDATE  challan_payment_log SET `merchant_order_id`='$merchant_order_id',`razorpay_order_id`='$razorpayOrderId' WHERE `registration_id`='$registration_id' AND `ReferenceNo`='$merchant_order_id'");
 
 $result_pay_log = $conn->query($rz_pay_log);

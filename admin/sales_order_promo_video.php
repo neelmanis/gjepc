@@ -6,56 +6,56 @@ if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit;
 $adminID = intval($_SESSION['curruser_login_id']);
 if($_POST['bp_number'] !="" && $_POST['payment_id'] !="" &&  $_POST['reg_no'] !="" && $_POST['action'] =="promo_video_sales_order_action" ){
 
-	$reg_no = trim($_POST['reg_no']);
-	$bp_no = trim($_POST['bp_number']);
-	$payment_id = trim($_POST['payment_id']);
-	$eventType= "Domestic"; 
+    $reg_no = trim($_POST['reg_no']);
+    $bp_no = trim($_POST['bp_number']);
+    $payment_id = trim($_POST['payment_id']);
+    $eventType= "Domestic"; 
      // $soapRenewalUrl = "https://webdisp.gjepcindia.com:44303/XISOAPAdapter/MessageServlet?channel=:BC_Exhibition:CC_Exhibition_Sender"; // Development
-	 $soapRenewalUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageServlet?channel=:BC_Exhibition:CC_Exhibition_Sender"; // LIVE
-	$soapUser = "pi_admin";  //  username
-	$soapPassword = "Deloitte@123"; // password
-	
-	/*................................Get Country Code.....................................*/
+     $soapRenewalUrl = "https://webdisp.gjepcindia.com:44306/XISOAPAdapter/MessageServlet?channel=:BC_Exhibition:CC_Exhibition_Sender"; // LIVE
+    $soapUser = "pi_admin";  //  username
+    $soapPassword = "Deloitte@123"; // password
+    
+    /*................................Get Country Code.....................................*/
   
-	$sql_reg_data="select * from registration_master where `id` = '$reg_no'";
+    $sql_reg_data="select * from registration_master where `id` = '$reg_no'";
     $result_reg_data = $conn->query($sql_reg_data);
     $row_reg_data = $result_reg_data->fetch_assoc();
     
      $rcity=$row_reg_data['city'];
 
-	 $bpinfo = "SELECT c_bp_number,city FROM `communication_address_master` WHERE `registration_id` = '$registration_id' and type_of_address='2' limit 1";
+     $bpinfo = "SELECT c_bp_number,city FROM `communication_address_master` WHERE `registration_id` = '$registration_id' and type_of_address='2' limit 1";
 
-	$bpInfoResult = $conn->query($bpinfo);
+    $bpInfoResult = $conn->query($bpinfo);
 
-	$bpInfoRow = $bpInfoResult->fetch_assoc();
+    $bpInfoRow = $bpInfoResult->fetch_assoc();
 
-	$city = trim($bpInfoRow['city']);
+    $city = trim($bpInfoRow['city']);
 
-	if($city=='')
-		$city = trim($rcity);
-	else 
-		$city = trim($city);
+    if($city=='')
+        $city = trim($rcity);
+    else 
+        $city = trim($city);
     
     $query  = "SELECT * FROM promo_video_payment_history WHERE id='$payment_id'";
     $paymentResult = $conn->query($query);
     $paymentRow = $paymentResult->fetch_assoc();
-	$total_amount = trim($paymentRow['Transaction_Amount']);
+    $total_amount = trim($paymentRow['Transaction_Amount']);
     $billing_bp_number=$bp_no;
     $ho_bp_number=$bp_no;
     $occasion = explode(",",$paymentRow['occasion']);
     $totalItems = count($occasion);
 
 
-	$materialNo = "5000000400";
+    $materialNo = "5000000400";
     $wbs = "DE-049";
     $gl = "300026";
     $business_area = "1111";
     $profit_center = "1110";
     $bank_acnt_no="255251";
-	$Date = date('Ymd');
-	$payment_Date =  date("Ymd", strtotime($paymentRow['created_at']));
+    $Date = date('Ymd');
+    $payment_Date =  date("Ymd", strtotime($paymentRow['created_at']));
     $Unique_Ref_Number = $paymentRow['Unique_Ref_Number'];
-	$xml_exhibition_string="";
+    $xml_exhibition_string="";
 $xml_exhibition_string .= '<?xml version="1.0" encoding="utf-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gjep="http://gjepcexhibition.com">
     <soapenv:Header/>
@@ -131,11 +131,11 @@ $xml_exhibition_string .= '<?xml version="1.0" encoding="utf-8"?>
       </gjep:MT_Exhibition_IN>
    </soapenv:Body>
 </soapenv:Envelope>';
-		// header ("Content-Type:text/xml");
-		// echo $xml_exhibition_string; exit;
-	
-	
-		    $headers1 = array(
+        // header ("Content-Type:text/xml");
+        // echo $xml_exhibition_string; exit;
+    
+    
+            $headers1 = array(
                         "Content-type: text/xml;charset=\"utf-8\"",
                         "Accept: text/xml",
                         "Cache-Control: no-cache",
@@ -151,7 +151,7 @@ $xml_exhibition_string .= '<?xml version="1.0" encoding="utf-8"?>
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 1);
             curl_setopt($ch1, CURLOPT_URL, $urls);
             curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch1, CURLOPT_USERPWD, $soapUser.":".$soapPassword); // username and password - declared at the top of the doc
+            curl_setopt($ch1, CURLOPT_USERPWD, $soapUser.":".$soapPassword); // username and password - declared at the top of the doc
             curl_setopt($ch1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
            // curl_setopt($ch1, CURLOPT_TIMEOUT, 10);
             curl_setopt($ch1, CURLOPT_POST, true);
@@ -160,47 +160,47 @@ $xml_exhibition_string .= '<?xml version="1.0" encoding="utf-8"?>
 
             // converting
             $respons = curl_exec($ch1); 
-			//echo $respons;exit;
+            //echo $respons;exit;
             if(curl_errno($ch1))
-				print curl_error($ch1);
-			else
-				curl_close($ch1);
+                print curl_error($ch1);
+            else
+                curl_close($ch1);
 
-			/*print to get response*/ /*print_r($response);*/
-			/*var_dump($respons);*/ 			
-			$xmlstr="<?xml version='1.0' encoding='UTF-8'?>".$respons;
-			// echo $xmlstr;exit;
-			
-			$xml = simplexml_load_string($xmlstr, NULL, NULL, "http://schemas.xmlsoap.org/soap/envelope/");
-			$xml->registerXPathNamespace('soapenv', 'http://schemas.xmlsoap.org/soap/envelope/');
-			$flag=0;		
-			
-			
-		
-			foreach($xml->xpath('//soapenv:Body') as $header)
-			{
-					$arr = $header->xpath('//msg_val'); // Should output 'something'.
-					$leadid = $arr[0];
-					$strings = $leadid;
-					if(!empty($strings))
-					{	$flag=1;
-						$sales_order_no=substr($strings, strpos($strings, "@ ")+1,11);
-						$advance_doc = trim(substr($strings, strpos($strings, "# ")+1,11));
+            /*print to get response*/ /*print_r($response);*/
+            /*var_dump($respons);*/             
+            $xmlstr="<?xml version='1.0' encoding='UTF-8'?>".$respons;
+            // echo $xmlstr;exit;
+            
+            $xml = simplexml_load_string($xmlstr, NULL, NULL, "http://schemas.xmlsoap.org/soap/envelope/");
+            $xml->registerXPathNamespace('soapenv', 'http://schemas.xmlsoap.org/soap/envelope/');
+            $flag=0;        
+            
+            
+        
+            foreach($xml->xpath('//soapenv:Body') as $header)
+            {
+                    $arr = $header->xpath('//msg_val'); // Should output 'something'.
+                    $leadid = $arr[0];
+                    $strings = $leadid;
+                    if(!empty($strings))
+                    {   $flag=1;
+                        $sales_order_no=substr($strings, strpos($strings, "@ ")+1,11);
+                        $advance_doc = trim(substr($strings, strpos($strings, "# ")+1,11));
                         $date_time = date("Y-m-d H:i:s");
-						
+                        
 
                          $update_so = "UPDATE promo_video_payment_history SET sap_sale_order_create_status='1',sap_push_date='$date_time',sap_push_admin='$adminID',sales_order_no='$sales_order_no',advance_doc='$advance_doc' WHERE id='$payment_id'";
-						$result_update_so=$conn->query($update_so);
+                        $result_update_so=$conn->query($update_so);
                         if($result_update_so){
                              echo json_encode(array("status"=>"Success")); exit;
                         }else{
                              echo json_encode(array("status"=>"failed update")); exit;
                         }
-					}
-			}
-			echo $flag;	
+                    }
+            }
+            echo $flag; 
      }else{
-	 echo json_encode(array("status"=>"invalid Request")); exit;
+     echo json_encode(array("status"=>"invalid Request")); exit;
      }
 
 ?>

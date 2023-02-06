@@ -39,7 +39,7 @@ if($_SESSION['curruser_login_id']!=1){
 		  alert('Timeout!! Kindly verify Again');
 		<?php
 		$timestamp =  $_SERVER["REQUEST_TIME"];     // record the current time stamp 
-		if(($timestamp - $_SESSION['time']) > 20)  // 100 refers to 100 seconds
+		if(($timestamp - $_SESSION['time']) > 3000)  // 100 refers to 100 seconds
 		{
 			unset($_SESSION['mob_no']);
 			unset($_SESSION['time']);
@@ -48,7 +48,7 @@ if($_SESSION['curruser_login_id']!=1){
 		}
 		?>
 	  window.location.href = 'https://gjepc.org/admin/all-reports.php'
-	 }, 20000);
+	 }, 300000);
 	});
 </script>
 <?php } ?>

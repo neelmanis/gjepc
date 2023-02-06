@@ -160,8 +160,9 @@ $("div.fancyDemo a").fancybox();
     
     	<div class="content_head">
 		<a href="iijs_exhibitor_registration.php"><div class="content_head_button">IIJS Exhibitor List</div></a>
-		<div style="float:right; padding-right:10px; font-size:12px;">
-		<a href="export_utr_NM_iijs_exh_rgistration.php">&nbsp;Download Payment Including NM Data</a> | <a href="export_utr_iijs_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> | <a href="export_approve_iijs_exhibitor_registration.php">&nbsp;Download All Data</a> | <a href="iijs_exh_export_tds_amount.php">&nbsp;Download TDS Data</a></div>
+		<!--<div style="float:right; padding-right:10px; font-size:12px;">
+		<a href="export_utr_NM_iijs_exh_rgistration.php">&nbsp;Download Payment Including NM Data</a> | <a href="export_utr_iijs_exhibitor_rgistration.php">&nbsp;Download Payment Data</a> | <a href="export_approve_iijs_exhibitor_registration.php">&nbsp;Download All Data</a> | <a href="iijs_exh_export_tds_amount.php">&nbsp;Download TDS Data</a>
+		</div>-->
 		<?php
 		if($_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='1'){ ?>
 		<a href="iijs_exhibitor_rgistration.php?action=old_to_part" onClick="return(window.confirm('Are you sure you want to Clear Old to Part Data'));" >Clear SAP Error</a>	

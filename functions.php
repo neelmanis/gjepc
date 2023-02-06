@@ -1405,9 +1405,9 @@ function getEventName($orderId,$conn)
 function send_mail($to, $subject, $message,$cc="")
 {
 	/*Start Config*/
-	$account="donotreply@gjepcindia.com";
-	$password="kngtnsnqthmysqmp";
-	$from="donotreply@gjepcindia.com";
+	$account="noreply@gjepcindia.com";
+	$password="Kweb$$911%";
+	$from="noreply@gjepcindia.com";
 	//$from_name="gjepc.org";
 	$from_name="GJEPC INDIA";
 	//$cc="";
@@ -1441,9 +1441,9 @@ function send_mail($to, $subject, $message,$cc="")
 function send_mailArray($to, $subject, $message,$cc)
 { 
 	/*Start Config*/
-	$account="donotreply@gjepcindia.com";
-	$password="kngtnsnqthmysqmp";
-	$from="donotreply@gjepcindia.com";
+	$account="noreply@gjepcindia.com";
+	$password="Kweb$$911%";
+	$from="noreply@gjepcindia.com";
 	$from_name="GJEPC INDIA";
 	// $cc="";
     /*End Config*/
@@ -3952,6 +3952,27 @@ function checkIvrApproval_status($regid,$conn)
 
 }
 
+function getVisitorAgencyCategoryCar($short_name,$conn)
+{
+	$query_sel = "SELECT cat_name FROM  visitor_vendor_category  where short_name='$short_name'";	
+	$result_sel = $conn->query($query_sel);								
+	$row = $result_sel->fetch_assoc();	
+		return $row['cat_name'];
+}
+
+function getGateMaster($conn){
+	$query_sel = "SELECT cat_name FROM  gate_master  where `is_active`='1'";	
+	$result_sel = $conn->query($query_sel);								
+	$row = $result_sel->fetch_assoc();	
+	return $row['gate_no'];
+}
+
+function getType_of_company($registration_id,$conn){
+	$query_sel = "SELECT type_of_company FROM registration_master where `id`='$registration_id'";	
+	$result_sel = $conn->query($query_sel);								
+	$row = $result_sel->fetch_assoc();	
+	return $row['type_of_company'];
+}
 ?>
 
 <?php

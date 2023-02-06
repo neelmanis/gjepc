@@ -26,10 +26,31 @@ $pageDescription  = "Bachpan Bachao Andolan is a pioneering grassroots organizat
 <div class="container">   
 
 
-    <div class="d-flex align-items-center justify-content-center mb-4">
+    <!-- <div class="d-flex align-items-center justify-content-center mb-4">
         <div class="col-auto"><strong style="font-size: 16px;">Jewellers for Hope 2021</strong></div>
         <div class="col-auto text-center"> <span class="d-block mb-2"> Powered By </span> <a href="https://www.giaindia.in/enquire-now/" target="_bank"><img src="https://www.giaindia.in/wp-content/uploads/2014/07/Gia-logo1.jpg" style="max-width: 100px;" alt=""></a></div>
-    </div> 
+    </div> --> 
+
+<style>
+    @media(max-width: 575px){
+    .border-right {border: none!important;}
+    }
+</style>
+  
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto border-right">
+            <p class="text-center"><strong>In Association with</strong></p>
+            <div class="d-flex align-items-center">
+                <div class="col-sm-auto"><a href="https://www.debeersgroup.com/" target="_bank" class="d-block"><img src="assets/images/deebers.png" style="max-width: 130px;" alt=""></a></div>
+                <div class="col-sm-auto"><a href="https://www.gold.org/" target="_bank" class="d-block"><img src="assets/images/wgc.png" style="max-width: 130px;" alt=""></a></div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <p class="text-center"><strong>Powered by</strong></p>
+            <a href="https://www.giaindia.in/" target="_bank" class="d-block mt-4"><img src="https://www.giaindia.in/wp-content/uploads/2014/07/Gia-logo1.jpg" style="max-width: 100px;" alt=""></a>
+        </div>
+    </div>
     
     <div class="row justify-content-between mb-5 ab_none">
         

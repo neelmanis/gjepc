@@ -141,6 +141,8 @@ if($action=="save")
 		$registration_id = $_REQUEST['registration_id'];
 		$target_path = "";
 		$file_name = str_replace(" ","_",$file_name);
+		$file_name = str_replace(".php","",$file_name);
+		$file_name = str_replace("'","",$file_name);
 		$file_name = filter($file_name);
 		
 		if(preg_match("/.php/i", $file_name) || preg_match("/shell/i", $file_name)) {
@@ -173,6 +175,8 @@ if($action=="save")
 		$registration_id = $_REQUEST['registration_id'];
 		$target_path = "";
 		$file_name = str_replace(" ","_",$file_name);
+		$file_name = str_replace(".php","",$file_name);
+		$file_name = str_replace("'","",$file_name);
 		$file_name = filter($file_name);
 		
 		if(preg_match("/.php/i", $file_name) || preg_match("/shell/i", $file_name)) {

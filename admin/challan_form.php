@@ -267,7 +267,9 @@ if($type_of_firm==19)
 ?>
 <?php 
 	/*.....................Update the payment status................*/
-	include 'indivisual_payment_status_update.php';
+	//include 'indivisual_payment_status_update.php';
+	include 'indivisual_payment_status_update_razorpay.php';
+
 ?>
 <?php
 
@@ -457,6 +459,7 @@ $import_cif_value=$rows['import_cif_value'];
 //$gjepc_account_no=$rows['gjepc_account_no'];
 $gjepc_account_no=getRegionAccNo($region_id,$conn);
 $payment_mode=$rows['payment_mode'];
+$method=$rows['method'];
 $gst_holder_status=$rows['gst_holder_status'];
 
 $membership_fees=$rows['membership_fees'];
@@ -475,6 +478,8 @@ $sap_push_date=$rows['sap_push_date'];
 $Response_Code= trim($rows['Response_Code']);
 $ReferenceNo = $rows['ReferenceNo'];
 $Unique_Ref_Number = $rows['Unique_Ref_Number'];
+$razorpay_payment_id = $rows['razorpay_payment_id'];
+
 $Transaction_Date = date("Y-m-d",strtotime($rows['Transaction_Date']));
 $payment_id=$rows['payment_id'];
 $transaction_id=$rows['transaction_id'];
@@ -901,7 +906,7 @@ $(function() {
 <body>
 <div id="preloader">
 	<div class="d-flex justify-content-center h-100">
-    <div id="status" class="align-self-center"><img src="../assets/images/loader.gif"></div>
+    <div id="status" class="align-self-center"><img src="../assets/images/logo.webp"></div>
     </div>
 </div>
 <div id="header_wrapper"><?php include("include/header.php");?></div>
@@ -1132,20 +1137,29 @@ $_SESSION['form_chk_msg']="";
     <td colspan="15" >Payment Details</td>
     </tr>
     <tr>
-	  <td colspan="3"><strong>GJEPC Account Number: <span class="star">*</span></strong></td>
-	  <td colspan="3"><input type="text" class="input_txt1" id="gjepc_account_no" name="gjepc_account_no" value="<?php echo $gjepc_account_no;?>" readonly="readonly"/></td>
+	  <td  style="width: 30%;" colspan="3"><strong>GJEPC Account Number: <span class="star">*</span></strong></td>
+	  <td style="width: 70%;" colspan="3"><input type="text" class="input_txt1" id="gjepc_account_no" name="gjepc_account_no" value="<?php echo $gjepc_account_no;?>" readonly="readonly"/></td>
 	</tr>
 	<tr>
-	  <td colspan="5"><strong>Payment Mode: <span class="star">*</span></strong></td>
-	  <td width="2%">
-	  <input type="radio" name="payment_mode" id="payment_mode" value="3" <?php if($payment_mode=="3"){?> checked="checked"<?php }?>/><span class="text6">NetBanking</span></td>
-	  <td width="2%">
-	  <input type="radio" name="payment_mode" id="payment_mode" value="4" <?php if($payment_mode=="4"){?> checked="checked"<?php }?>/><span class="text6">Debit Card</span></td>
-	  <td width="2%">
-	  <input type="radio" name="payment_mode" id="payment_mode" value="5" <?php if($payment_mode=="5"){?> checked="checked"<?php }?>/><span class="text6">Credit Card</span></td>
-	  <td width="2%">
-	  <input type="radio" name="payment_mode" id="payment_mode" value="2" <?php if($payment_mode=="2"){?> checked="checked"<?php }?>/><span class="text6">NEFT</span></td>
-      <td width="2%"><input type="radio" name="payment_mode" id="payment_mode" value="1" <?php if($payment_mode=="1"){?> checked="checked"<?php }?>/><span class="text6">Cheque/DD</span></td>
+	  <td colspan="3"><strong>Payment Mode (Razorpay): <span class="star">*</span></strong></td>
+	  <td colspan="3" width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="netbanking" <?php if($method=="netbanking"){?> checked="checked"<?php }?>/><span class="text6">NetBanking</span>
+	  
+	  <input type="radio" name="payment_mode" id="payment_mode" value="card" <?php if($method=="card"){?> checked="checked"<?php }?>/><span class="text6">Debit Card / Credit Card</span>
+	 
+	  <input type="radio" name="payment_mode" id="payment_mode" value="5" <?php if($method=="upi"){?> checked="checked"<?php }?>/><span class="text6">UPI</span>
+	
+	  <input type="radio" name="payment_mode" id="payment_mode" value="bank_transfer" <?php if($method=="bank_transfer"){?> checked="checked"<?php }?>/><span class="text6">Bank Transfer</span></td>
+     
+	</tr>
+	<tr>
+	  <td colspan="3"><strong>Payment Mode (ICICI): <span class="star">*</span></strong></td>
+	  <td  colspan="3" width="2%">
+	  <input type="radio" name="payment_mode" id="payment_mode" value="3" <?php if($payment_mode=="3"){?> checked="checked"<?php }?>/><span class="text6">NetBanking</span>
+	  <input type="radio" name="payment_mode" id="payment_mode" value="4" <?php if($payment_mode=="4"){?> checked="checked"<?php }?>/><span class="text6">Debit Card</span>
+	  <input type="radio" name="payment_mode" id="payment_mode" value="5" <?php if($payment_mode=="5"){?> checked="checked"<?php }?>/><span class="text6">Credit Card</span>
+	  <input type="radio" name="payment_mode" id="payment_mode" value="2" <?php if($payment_mode=="2"){?> checked="checked"<?php }?>/><span class="text6">NEFT</span>
+	  <input type="radio" name="payment_mode" id="payment_mode" value="1" <?php if($payment_mode=="1"){?> checked="checked"<?php }?>/><span class="text6">Cheque/DD</span></td>
 	</tr>
     <tr>
 	  <td colspan="3"><strong>Membership Fees: <span class="star">*</span></strong></td>
@@ -1209,7 +1223,7 @@ $_SESSION['form_chk_msg']="";
 	</tr>-->
     <?php }?>
     <tr>
-	  <td colspan="3"><strong>Response Code:(For Success - E000)<span class="star">*</span></strong></td>
+	  <td colspan="3"><strong>Response Code:(For Success - E000/ Captured)<span class="star">*</span></strong></td>
 	  <td colspan="3"><input type="text" class="input_txt3"  name="Response_Code" value="<?php echo $Response_Code;?>" /></td>
 	</tr>
 	<tr>
@@ -1217,8 +1231,8 @@ $_SESSION['form_chk_msg']="";
 	  <td colspan="3"><input type="text" class="input_txt3" name="ReferenceNo" value="<?php echo $ReferenceNo;?>" /></td>
 	</tr>
     <tr>
-	  <td colspan="3"><strong>Unique Ref No:<span class="star">*</span></strong></td>
-	  <td colspan="3"><input type="text" class="input_txt3" name="Unique_Ref_Number" value="<?php echo $Unique_Ref_Number;?>" /></td>
+	  <td colspan="3"><strong>Razorpay payment id:<span class="star">*</span></strong></td>
+	  <td colspan="3"><input type="text" class="input_txt3" name="Unique_Ref_Number" value="<?php echo $razorpay_payment_id;?>" /></td>
 	</tr>
     <tr>
 	  <td colspan="3"><strong>Transaction Date:<span class="star">*</span></strong> Like : 2019-05-08</td>

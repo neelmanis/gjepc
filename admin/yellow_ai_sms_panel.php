@@ -1,6 +1,5 @@
 `<?php
 session_start();
-
 if(!isset($_SESSION['curruser_contact_name'])){ header('Location: index.php'); exit; }
 if(!isset($_SESSION['curruser_login_id'])){ header("location:index.php"); exit; }
 include('../whatsapp-functions.php');
@@ -13,6 +12,7 @@ function getWhatsappTemplateId($id,$conn)
   $row = $result->fetch_assoc();    
   return $row['templateId'];
 }
+
 $adminID = intval(filter($_SESSION['curruser_login_id']));
 
 function str_replace_variable($from, $to, $content)
@@ -51,6 +51,8 @@ function resetFields(){
   $_SESSION['test_number']="";
   $_SESSION['msg_dept']="";
   $_SESSION['msg_templates']="";
+  $_SESSION['m_membership_type']="";
+  $_SESSION['m_panel_name']="";
 }
 
 if($_REQUEST['action']=="Reset")
@@ -84,6 +86,8 @@ $_SESSION['test_variable']="";
 $_SESSION['test_number']="";
 $_SESSION['msg_dept']="";
 $_SESSION['msg_templates']="";
+$_SESSION['m_membership_type']="";
+ $_SESSION['m_panel_name']="";
 
 header("Location: yellow_ai_sms_panel.php?action=panel");
 }
@@ -102,9 +106,11 @@ if (isset($_POST["action"]) && $_POST["action"]=="send_messsage") {
   $_SESSION['company_name']=filter($_REQUEST['company_name']);
   $_SESSION['vendor']=filter($_REQUEST['vendor']);
   $_SESSION['m_member_type']=$_REQUEST['m_member_type'];
+  $_SESSION['m_membership_type']=$_REQUEST['membership_type'];
   $_SESSION['member_status']=$_REQUEST['member_status'];
   $_SESSION['member_region']=$_REQUEST['member_region'];
   $_SESSION['member_person_type']=$_REQUEST['member_person_type'];
+  $_SESSION['m_panel_name']=$_REQUEST['panel_name'];
   $_SESSION['exh_region']=$_REQUEST['exh_region'];
   $_SESSION['exh_show']=$_REQUEST['exh_show'];
   $_SESSION['document_status']=$_REQUEST['document_status'];
@@ -182,8 +188,9 @@ if (isset($_POST["action"]) && $_POST["action"]=="send_messsage") {
     //     $file = "";
     //   }
     // }
+    $templateId = trim(getWhatsappTemplateId($msg_templates,$conn));
      /*SAVE MESSAGE RECORD*/
-    $save_message = "INSERT INTO whatsapp_messages_history  SET `department`='".$_SESSION["msg_dept"]."',`category`='".$_SESSION["main_category"]."',`media_type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment'"; 
+    $save_message = "INSERT INTO whatsapp_messages_history  SET `department`='".$_SESSION["msg_dept"]."',`template_id`='$templateId',`category`='".$_SESSION["main_category"]."',`media_type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment',`adminId`='$adminID'"; 
     $conn->query($save_message);
     $insertId = $conn->insert_id;
     $isUploaded ="1";
@@ -195,7 +202,7 @@ if (isset($_POST["action"]) && $_POST["action"]=="send_messsage") {
     $messageCount = count($custom_numbersArr);
     if(count($custom_numbersArr) >0){
     foreach ($custom_numbersArr as $cust) {
-    $insertCust = "INSERT INTO whatsapp_temp_data SET `person`= '',`company`='',`mobile`='$cust->value',`variable_name`='',`type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment'";
+    $insertCust = "INSERT INTO whatsapp_temp_data SET `template_id`='$msg_templates',`person`= '',`company`='',`mobile`='$cust->value',`variable_name`='',`type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment',`platform`='Y'";
     $resCust = $conn->query($insertCust);
     }
 
@@ -205,7 +212,7 @@ if (isset($_POST["action"]) && $_POST["action"]=="send_messsage") {
     $successMsg = "Message has been sent successfully.";
 
     }else if($_SESSION["main_category"]=="import_csv"){
-      
+      $templateId = trim(getWhatsappTemplateId($msg_templates,$conn));
       $csv_filename=$_FILES["import_csv"]["tmp_name"]; 
       $messageCount = $_FILES["import_csv"]["size"];
       if($_FILES["import_csv"]["size"] > 0)
@@ -228,7 +235,7 @@ if (isset($_POST["action"]) && $_POST["action"]=="send_messsage") {
 
             $name="";
            
-            $sql_import = "INSERT INTO whatsapp_temp_data SET `template_id`='$msg_templates', `person`= '$person_name',`company`='$company_name',`mobile`='$mobile',`variable_name`='$variable',`type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment'";
+            $sql_import = "INSERT INTO whatsapp_temp_data SET  `template_id`='$templateId', `person`= '$person_name',`company`='$company_name',`mobile`='$mobile',`variable_name`='$variable',`type`='$msg_type',`title`='$msg_title',`description`='$msg_description',`attatchment`='$msg_attatchment',`platform`='Y'";
             $result_import = $conn->query($sql_import);
             $msg_description ="";
             
@@ -313,7 +320,7 @@ $counter_csv ++;
     $sql="SELECT  distinct (vd.mobile),rm.company_name as company,vd.name
     from visitor_directory vd 
     left join visitor_order_history oh on vd.visitor_id=oh.visitor_id  
-    join registration_master rm on vd.registration_id=rm.id where 1";
+    join registration_master rm on vd.registration_id=rm.id where 1 AND vd.whatsapp_verified='1'";
     if($_SESSION['category']!=""){
     if($_SESSION['category']=="visitor"){
     $sql.=" ";
@@ -373,7 +380,7 @@ $counter_csv ++;
     $sql.= "  ".$attach." ";
     break;
     case 'vendors':
-    $sql = " SELECT company_name as company, contact_name as name, contact_number as mobile FROM vendor_registration WHERE status='1'";
+    $sql = " SELECT company_name as company, contact_name as name, contact_number as mobile FROM vendor_registration WHERE status='1' ";
     $attach=" order by created_at desc";
     $sql.= "  ".$attach." ";
     break;
@@ -413,7 +420,8 @@ $counter_csv ++;
     $lastFinancialYear = 2020;
     $nextFinancialYear = $lastFinancialYear +1;
 
-    $sql = "SELECT distinct (c.mobile_no ) as mobile ,i.company_name as company,c.name FROM `approval_master` a,`type_of_comaddress_master` b, `information_master` i ,`communication_address_master` c WHERE c.type_of_address = b.id and c.`registration_id`=i.`registration_id` AND c.`registration_id`=a.`registration_id` and a.issue_membership_certificate_expire_status='Y'  AND c.mobile_no!='' AND c.mobile_no!=0 AND c.name!=''  ";
+    $sql = "SELECT distinct (c.mobile_no ) as mobile ,i.company_name as company,c.name FROM `approval_master` a,`type_of_comaddress_master` b, `information_master` i ,`communication_address_master` c, `challan_master` d,
+      `communication_details_master` e WHERE c.type_of_address = b.id and c.`registration_id`=i.`registration_id` AND c.`registration_id`=a.`registration_id` and d.`registration_id`=c.`registration_id` and a.`registration_id`=e.`registration_id` and d.`challan_financial_year`='2022' and d.`Response_Code`='E000' and a.issue_membership_certificate_expire_status='Y'  AND c.mobile_no!='' AND c.mobile_no!=0 AND c.name!='' AND c.whatsapp_verified='1' ";
 
     if($_SESSION['member_region']!="")
     {
@@ -425,6 +433,7 @@ $counter_csv ++;
     }else{
     $sql.=" or i.region_id='".$memRegionVal."' ";
     }
+
 
     $counterMemRegion ++;
     }
@@ -447,6 +456,29 @@ $counter_csv ++;
     }
     $sql.=")";
     }
+
+    if($_SESSION['m_panel_name'] !=="" && !empty($_SESSION['m_panel_name'])){
+      $m_panel_name = $_SESSION['m_panel_name'];
+      $sql.=" and e.panel_name = '$m_panel_name' " ;
+    }
+
+    if($_SESSION['m_membership_type']!="")
+    {
+    $sql.=" and (";
+    $countMemberShipType = 1;
+    foreach ($_SESSION['m_membership_type'] as $m_membership_type) {
+    if($countMemberShipType =="1"){
+    $sql.=" a.membership_certificate_type='".$m_membership_type."' ";
+    }else{
+    $sql.=" or a.membership_certificate_type='".$m_membership_type."' ";
+    }
+
+    $countMemberShipType ++;
+    }
+    $sql.=")";
+    }
+
+
     if($_SESSION['member_person_type']!="")
     {
 
@@ -463,7 +495,7 @@ $counter_csv ++;
     }
     $sql.=") ";
     }
-     $sql .=" GROUP BY c.mobile_no order by i.company_name ";
+      $sql .=" GROUP BY c.mobile_no order by i.company_name ";
 
     break;
     
@@ -522,7 +554,7 @@ $counter_csv ++;
     $sql = "";
     break;
     }
-    // echo $sql;exit;
+ 
     $result = $conn ->query($sql);
     $rCount =  $result->num_rows;
     $messageCount = $rCount;
@@ -712,20 +744,13 @@ $counter_csv ++;
        }else{
           $("#variable0").val(val+" name").attr("readonly",true);
        }
-
-      
     }else{
-      
-       
         $("#variable0").val("").attr("readonly",false);
     }
 
    });
 
   });
-
-
-    
     </script>
     <!--navigation end-->
   </head>
@@ -746,20 +771,15 @@ $counter_csv ++;
           echo "<span class='notification n-error'>".$errorMsg."</span>";
           $errorMsg="";
           }
-
         ?>
        
-        <div class="content_details1">
-        
-        
+        <div class="content_details1">        
           <a href="manage_templates.php?action=view" style="display: inline-block;margin-bottom: 10px"><div class="content_head_button">Add Templates</div> </a>
-        
-
- 
-          <form method="POST" name="form1" id="form1" onsubmit="return checkdata()" enctype="multipart/form-data" autocomplete="off" >
+         
+          <form method="POST" name="form1" id="form1" onsubmit="return checkdata()" enctype="multipart/form-data" autocomplete="off">
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
+        <tr>
           <td colspan="2" class="orange1"> Select Contact Category</td>
         </tr>
               <tr class="<?php if($_SESSION['main_category']=='visitors'){echo "orange1";}?>">
@@ -791,6 +811,7 @@ $counter_csv ++;
                   <option value="iijs21-2021" <?php if($_SESSION['visited_show']=='iijs21-2021'){echo "selected";}?>>IIJS PREMIERE 2021</option>
                   <option value="signature22-2022" <?php if($_SESSION['visited_show']=='signature22-2022'){echo "selected";}?>>IIJS SIGNATURE 2022</option>
                   <option value="iijs22-2022" <?php if($_SESSION['visited_show']=='iijs-2022'){echo "selected";}?>>IIJS PREMIERE 2022</option>
+                  <option value="signature23-2023" <?php if($_SESSION['visited_show']=='signature23-2023'){echo "selected";}?>>IIJS SIGNATURE 2023</option>
                 </select>
               </td>
             </tr>
@@ -866,15 +887,13 @@ $counter_csv ++;
         </tr>
         
         <tr class="<?php if($_SESSION['main_category']=='vendors'){echo "orange1";}?>">
-          <td colspan="2" class=""> <label><input type="radio" name="main_category" class="main_category" value="vendors" data-classname='vendors'  <?php if($_SESSION['main_category']=='vendors'){echo "checked";}?>  /> &nbsp; Vendors </label> </td>
+          <td colspan="2" class=""> <label><input type="radio" name="main_category" class="main_category" value="vendors" data-classname='vendors' <?php if($_SESSION['main_category']=='vendors'){echo "checked";}?>/> &nbsp; Vendors </label> </td>
         </tr>
         <tr class="vendors blocks">
           <td valign="top" class="text_content">All registered Vendors</td>
           <td class="text_content">
             
             <label> <input type="checkbox" name="vendor" value="YES"  <?php if($_SESSION['vendor']=='YES'){echo "checked";}?>   /> Yes&nbsp;</label>
-            
-            
           </td>
         </tr>
         <tr  class="<?php if($_SESSION['main_category']=='parichay'){echo "orange1";}?>" >
@@ -883,13 +902,13 @@ $counter_csv ++;
         
         <tr class="parichay blocks">
           <td valign="top" class="content_txt">Company Type</td>
-          <td> <select class="input_txt" name="parichay_company_type" id="parichay_company_type" >
+          <td> 
+		  <select class="input_txt" name="parichay_company_type" id="parichay_company_type" >
             <option value="" >Select </option>
             <option value="M"  <?php if($_SESSION['parichay_company_type']=='M'){echo "selected";}?>>Member Company</option>
-            <option value="association" <?php if($_SESSION['parichay_company_type']=='association'){echo "selected";}?>>Association</option>
-            
-            
-          </select> </td>
+            <option value="association" <?php if($_SESSION['parichay_company_type']=='association'){echo "selected";}?>>Association</option>            
+          </select>
+		  </td>
         </tr>
         <tr class="parichay blocks">
           <td valign="top" class="content_txt">Contact Types</td>
@@ -946,12 +965,104 @@ $counter_csv ++;
             <?php $commMaster = $conn->query("SELECT * FROM type_of_comaddress_master WHERE  address_identity='CTP' AND `status` = '1'");
             while ($commRow = $commMaster->fetch_assoc()) { ?>
             
-            <label><input type="checkbox" name="member_person_type[]" value="<?php echo $commRow["id"]; ?>" <?php if(in_array($commRow["id"], $_SESSION['member_person_type'])){echo "checked";}?> >&nbsp;<?php echo $commRow["type_of_comaddress_name"]; ?>&nbsp;&nbsp;</label>
-            
-            <?php  }  ?>
-            
+            <label><input type="checkbox" name="member_person_type[]" value="<?php echo $commRow["id"]; ?>" <?php if(in_array($commRow["id"], $_SESSION['member_person_type'])){echo "checked";}?> >&nbsp;<?php echo $commRow["type_of_comaddress_name"]; ?>&nbsp;&nbsp;</label>            
+            <?php  }  ?>            
           </td>
         </tr>
+        <tr class="member blocks">
+          <td valign="top" class="content_txt">Membership Type </td>
+          <td>
+            <label>
+              <input type="checkbox" name="membership_type[]" value="ZASSOC"  >&nbsp;<?php echo "Associate"; ?>&nbsp;&nbsp;
+              <input type="checkbox" name="membership_type[]" value="ZORDIN"  >&nbsp;<?php echo "Ordinary"; ?>&nbsp;&nbsp;
+            </label>
+          </td>
+        </tr>
+         <tr class="member blocks">
+          <td valign="top" class="content_txt">Membership panel </td>
+          <td>
+           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
+    <tr class="orange1">
+    <td colspan="14" >Panel</td>
+    </tr>   
+    <tr>
+    <td colspan="8"><strong class="text6">Panel Details: <span class="star">*</span><span id="panel_msg" class="star"></span></strong></td>
+    </tr> 
+    <tr>
+    <td colspan="2" align="center"> 
+  <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Coloured Gemstones" <?php if($_SESSION['m_panel_name'] =='Coloured Gemstones'){echo "checked='checked'";}?>/>
+    </div>
+  </td>
+    <td width="46%"><span class="text6 ">Coloured Gemstones</span></td>
+    <td colspan="2" align="center"> 
+  <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Pearls" <?php if($_SESSION['m_panel_name'] =='Pearls'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Pearls</span></td>
+    </tr>
+    
+    <tr bgcolor="#CCCCCC">
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Costume/Fashion Jewellery" <?php if($_SESSION['m_panel_name'] =='Costume/Fashion Jewellery'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Costume/Fashion Jewellery</span></td>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Sales To Foreign Tourists" <?php if($_SESSION['m_panel_name'] =='Sales To Foreign Tourists'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Sales To Foreign Tourists</span></td>
+    </tr>
+    
+    <tr>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Diamonds" <?php if($_SESSION['m_panel_name'] =='Diamonds'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Diamonds</span></td>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Synthetic Stones" <?php if($_SESSION['m_panel_name'] =='Synthetic Stones'){echo "checked='checked'";}?> />
+    </div></td>
+    <td width="46%"><span class="text6 ">Synthetic Stones</span></td>
+    </tr>
+    
+    <tr bgcolor="#CCCCCC">
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Gold Jewellery" <?php if($_SESSION['m_panel_name'] =='Gold Jewellery'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Gold Jewellery</span></td>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Not Indicated" <?php if($_SESSION['m_panel_name'] =='Not Indicated'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Not Indicated</span></td>
+    </tr>
+    
+    <tr>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="Other Precious Metal Jewellery" <?php if($_SESSION['m_panel_name'] =='Other Precious Metal Jewellery'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Other Precious Metal Jewellery</span></td>
+    
+    <td colspan="2" align="center"> <div align="left">
+      <input type="radio" name="panel_name" id="panel_name" value="Silver Jewellery" <?php if($_SESSION['m_panel_name'] =='Silver Jewellery'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Silver Jewellery</span></td>
+    </tr>
+  
+  <tr>
+    <td colspan="2" align="center"> <div align="left">
+    <input type="radio" name="panel_name" id="panel_name" value="SEZ" <?php if($_SESSION['m_panel_name'] =='SEZ'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">SEZ</span></td>
+    
+    <td colspan="2" align="center"> <div align="left">
+      <input type="radio" name="panel_name" id="panel_name" value="Studded Jewellery" <?php if($_SESSION['m_panel_name'] =='Studded Jewellery'){echo "checked='checked'";}?>/>
+    </div></td>
+    <td width="46%"><span class="text6 ">Studded Jewellery</span></td>
+    </tr>  
+  </table>
+
+          </td>
+        </tr>
+
         <tr class="<?php if($_SESSION['main_category']=='custom_numbers'){echo "orange1";}?>" >
           <td colspan="2" class=""> <label><input type="radio" name="main_category" class="main_category" value="custom_numbers" data-classname='custom_numbers'  <?php if($_SESSION['main_category']=='custom_numbers'){echo "checked";}?>   /> &nbsp; Add Multiple Numbers </label> </td>
         </tr>
@@ -966,8 +1077,6 @@ $counter_csv ++;
             }
 
             $custNumStr =  substr($custNumStr, 0, -1);
-
-
             ?>
             <input type="text" class="" name="custom_numbers" placeholder="Add comma saparated numbers" style="width: 50%;" value="<?php echo $custNumStr;?>">
             <br>
@@ -984,7 +1093,7 @@ $counter_csv ++;
             <br>
             <i>Use  column CSV file 1.Variable column 2.Mobile number column</i>
             <br>
-            <i><a href="http://gjepc.org/admin/whatsappAttatchments/import_csv_sample.csv" target="_blank" download="download">Click</a> here to download sample csv file format</i>
+            <i><a href="https://gjepc.org/admin/whatsappAttatchments/import_csv_sample.csv" target="_blank" download="download">Click</a> here to download sample csv file format</i>
           </td>
         </tr>
         <tr class="<?php if($_SESSION['main_category']=='test_template'){echo "orange1";}?>" >
@@ -993,8 +1102,7 @@ $counter_csv ++;
         <tr class="test_template blocks">
           <td valign="top" class="content_txt">Name  : </td>
           <td>
-            <input type="text" class="input_txt" name="test_variable" id="test_variable" value="<?php echo $_SESSION['test_variable'];?>">
-             
+            <input type="text" class="input_txt" name="test_variable" id="test_variable" value="<?php echo $_SESSION['test_variable'];?>">             
             <i>Add name if template required dynamic name  </i>
           </td>
         </tr>
@@ -1017,10 +1125,8 @@ $counter_csv ++;
             $sqlDept = "SELECT * FROM whatsapp_sender_department_master WHERE `status`='1' order by id desc";
             $resDept = $conn->query($sqlDept);
             while ($rowDept = $resDept->fetch_assoc()) { ?>
-            <option value="<?= $rowDept['id']; ?>" <?php if($_SESSION['msg_dept'] ==$rowDept['id']){echo "selected";}?>><?= $rowDept['department_name']; ?></option>
-             
-           <?php  }  ?>
-           
+            <option value="<?= $rowDept['id']; ?>" <?php if($_SESSION['msg_dept'] ==$rowDept['id']){echo "selected";}?>><?= $rowDept['department_name']; ?></option>             
+           <?php  }  ?>           
           </select>
         </td>
       </tr>
@@ -1039,7 +1145,6 @@ $counter_csv ++;
           <td valign="top" class="content_txt">Saved Templates </td>
           <td> <select class="input_txt" name="msg_templates" id="msg_templates">
             <option value="">---Select Template---</option>
-
           </select>
         </td>
       </tr>

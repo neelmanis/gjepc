@@ -1,39 +1,37 @@
 <?php session_start(); ?>
 <?php include('../db.inc.php');?>
 <?php include('../functions.php');?>
-<?php 
-if (($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
+<?php
+$adminID	=	intval($_SESSION['curruser_login_id']);
+if(($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 {
-	$sql="delete from job_master where id='$_REQUEST[id]'";	
-	if (!mysql_query($sql,$dbconn))
-	{
-		die('Error: ' . mysql_error());
-	}
-	echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">";
+	$sql="delete from job_master where id=?";
+	$stmtd = $conn -> prepare($sql);
+	$stmtd->bind_param("i", $_REQUEST['id']);
+	if($stmtd->execute()){	echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">"; }
 }
 
-if (($_REQUEST['action']=='active') && ($_REQUEST['id']!=''))
+if(($_REQUEST['action']=='active') && ($_REQUEST['id']!=''))
 {
-		$status=$_REQUEST['status'];	
-		$id=$_REQUEST['id'];
-		$sql="update job_master set status='$status' where id='$id'";
-		if (!mysql_query($sql,$dbconn))
-		{
-			die('Error: ' . mysql_error());
-		}
-		echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">";
+		$status = filter($_REQUEST['status']);	
+		$id     = filter($_REQUEST['id']);
+		$modified_date = date('Y-m-d');
+		$sql = "update job_master set status=?,adminId=?,modified_date=? where id=?";
+		$stmt = $conn -> prepare($sql);
+		$stmt->bind_param("iisi", $status,$adminID,$modified_date,$id);
+		if($stmt->execute()){	echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">"; }
 }
 
-if ($_REQUEST['action']=='save')
+if($_REQUEST['action']=='save')
 {
 	$post_date = date('Y-m-d');
-	$cat_id=mysql_real_escape_string($_REQUEST['cat_id']);
-	$position_name=mysql_real_escape_string($_REQUEST['position_name']);
-	$experience=mysql_real_escape_string($_REQUEST['experience']);
-	$no_of_vacancies=mysql_real_escape_string($_REQUEST['no_of_vacancies']);
-	$qualification=mysql_real_escape_string($_REQUEST['qualification']);
-	$requirement=mysql_real_escape_string($_REQUEST['requirement']);
-	$location=mysql_real_escape_string($_REQUEST['location']);
+	$cat_id		=	$conn->real_escape_string($_REQUEST['cat_id']);
+	$position_name	=	$conn->real_escape_string($_REQUEST['position_name']);
+	$experience	=	$conn->real_escape_string($_REQUEST['experience']);
+	$no_of_vacancies	=	$conn->real_escape_string($_REQUEST['no_of_vacancies']);
+	$qualification	=	$conn->real_escape_string($_REQUEST['qualification']);
+	$requirement	=	$conn->real_escape_string($_REQUEST['requirement']);
+	$location	=	$conn->real_escape_string($_REQUEST['location']);
 	
 	//---------------------------------------- uplaod  Full Profile -----------------------------------------------
 		$profile_detail = '';
@@ -44,10 +42,11 @@ if ($_REQUEST['action']=='save')
 		$filetoupload="";
 		$file_name = $_FILES['profile_detail']['name'];
 		$file_name = str_replace(" ","_",$file_name);
+		$file_name = str_replace("'","",$file_name);
 		$temp_code = rand();
 		
 		if(preg_match("/.php/i", $file_name)) {
-    		echo "<script langauge=\"javascript\">alert(\"Sorry you have select Invalid file.\");location.href='gold_rate.php?action=add';</script>";
+    		echo "<script langauge=\"javascript\">alert(\"Sorry you have select Invalid file.\");location.href='careers.php?action=add';</script>";
 			exit;
 		} else if($_FILES['profile_detail']['name']!='')
 		{
@@ -63,24 +62,20 @@ if ($_REQUEST['action']=='save')
 				}
 		}
 		
-	$sql="INSERT INTO job_master (cat_id,position_name,experience,no_of_vacancies,qualification,requirement,location,profile_detail,status,post_date) VALUES ('$cat_id','$position_name','$experience','$no_of_vacancies','$qualification','$requirement','$location','$profile_detail','1','$post_date')";
-			
-		if (!mysql_query($sql,$dbconn))
-		{
-			die('Error: ' . mysql_error());
-		}
-		echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">";
+	$sql = "INSERT INTO job_master (cat_id,position_name,experience,no_of_vacancies,qualification,requirement,location,profile_detail,status,post_date) VALUES ('$cat_id','$position_name','$experience','$no_of_vacancies','$qualification','$requirement','$location','$profile_detail','1','$post_date')";
+	$stmt = $conn->query($sql);
+	echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">";
 }
 if (($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 {
-	$cat_id=mysql_real_escape_string($_REQUEST['cat_id']);
-	$position_name=mysql_real_escape_string($_REQUEST['position_name']);
-	$experience=mysql_real_escape_string($_REQUEST['experience']);
-	$no_of_vacancies=mysql_real_escape_string($_REQUEST['no_of_vacancies']);
-	$qualification=mysql_real_escape_string($_REQUEST['qualification']);
-	$requirement=mysql_real_escape_string($_REQUEST['requirement']);
-	$location=mysql_real_escape_string($_REQUEST['location']);
-	$id=mysql_real_escape_string($_REQUEST['id']);
+	$cat_id=$conn->real_escape_string($_REQUEST['cat_id']);
+	$position_name=$conn->real_escape_string($_REQUEST['position_name']);
+	$experience=$conn->real_escape_string($_REQUEST['experience']);
+	$no_of_vacancies=$conn->real_escape_string($_REQUEST['no_of_vacancies']);
+	$qualification=$conn->real_escape_string($_REQUEST['qualification']);
+	$requirement=$conn->real_escape_string($_REQUEST['requirement']);
+	$location=$conn->real_escape_string($_REQUEST['location']);
+	$id=$conn->real_escape_string($_REQUEST['id']);
 
 	//---------------------------------------- uplaod  Full Profile -----------------------------------------------
 		$profile_detail = '';
@@ -106,11 +101,7 @@ if (($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 		}
 
 	$sql="update job_master set cat_id='$cat_id',position_name='$position_name', experience='$experience',no_of_vacancies='$no_of_vacancies',qualification='$qualification',requirement='$requirement',location='$location',profile_detail='$profile_detail' where id='$id'";
-	
-	if (!mysql_query($sql,$dbconn))
-	{
-		die('Error: ' . mysql_error());
-	}
+	$sqlDatas = $conn->query($sql);
 	echo"<meta http-equiv=refresh content=\"0;url=careers.php?action=view\">";
 }
 ?>
@@ -238,8 +229,6 @@ function IsNumeric(strString)
    }
    return blnResult;
 }
-
-
 </script>
 </head>
 
@@ -282,12 +271,12 @@ function IsNumeric(strString)
     $attach = " order by ".$order_by." ".$asc_desc." ";
     
     $i=1;
-	$result = mysql_query("SELECT * FROM job_master where 1".$attach." ");
-    $rCount=0;
-    $rCount = @mysql_num_rows($result);		
+	$result = $conn ->query("SELECT * FROM job_master where 1".$attach." ");
+    $rCount = 0;
+    $rCount = $result->num_rows;		
     if($rCount>0)
     {	
-	while($row = mysql_fetch_array($result))
+	while($row = $result->fetch_assoc())
 	{	
     ?>  
  	<tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
@@ -298,10 +287,10 @@ function IsNumeric(strString)
         <td><?php echo $row['location'] ?></td>
         <td>[
 		<?php
-		$sql2="SELECT count(*) FROM `job_apply` WHERE 1 and job_id=$row[id]";
-		$result2=mysql_query($sql2);
-		$rows2=mysql_fetch_array($result2);
-		echo $rows2[0];
+		$sql2 = "SELECT count(*) as 'count' FROM `job_apply` WHERE 1 and job_id=$row[id]";
+		$result2 = $conn ->query($sql2);
+		$rows2 = $result2->fetch_assoc();
+		echo $rows2['count'];
 		?>
         ] <a href="view_resume.php?jid=<?php echo $row['id'];?>&action=view" style="color:#000000">view </a></td>
         <td>
@@ -355,8 +344,12 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   if(($_REQUEST['id']!='') || ($_REQUEST['action']=='edit'))
   {
 		$action='update';
-		$result2 = mysql_query("SELECT *  FROM job_master  where id='$_REQUEST[id]'");
-		if($row2 = mysql_fetch_array($result2))
+		$sql3 = "SELECT * FROM job_master where id=?";
+		$query = $conn -> prepare($sql3);
+		$query -> bind_param("i", $_REQUEST['id']);
+		$query->execute();			
+		$result2 = $query->get_result();
+		if($row2 = $result2->fetch_assoc())
 		{
 			$cat_id=stripslashes($row2['cat_id']);
 			$position_name=stripslashes($row2['position_name']);
@@ -384,7 +377,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 		<option value="1" <?php if($cat_id==1){echo "selected='selected'";}?>>Careers at GJEPC</option>
         <option value="2" <?php if($cat_id==2){echo "selected='selected'";}?>>Careers Center</option>
       </select></td>
-	  </tr>
+	</tr>
 
     <tr>
     <td class="content_txt">Position Name </td>
@@ -401,9 +394,11 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   
     <tr>
       <td valign="top" class="content_txt">Qualification</td>
-      <td><label>
+      <td>
+	  <label>
         <textarea name="qualification" id="qualification" rows="5" class="input_txt" ><?php echo $qualification; ?></textarea>
-      </label></td>
+      </label>
+	  </td>
     </tr>
     
     <tr>
@@ -428,7 +423,8 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
     <td>
     <input type="submit" value="Submit" class="input_submit"/>
     <input type="hidden" name="action" id="action" value="<?php echo $action;?>" />
-    <input type="hidden" name="id" id="id"  value="<?php echo $_REQUEST['id'];?>" />    </td>
+    <input type="hidden" name="id" id="id"  value="<?php echo $_REQUEST['id'];?>" />  
+	</td>
     </tr>
 </table>
 </form>
@@ -436,11 +432,9 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
         
  <?php } ?>    
     
-    </div>
+</div>
 </div>
 
 <div id="footer_wrap"><?php include("include/footer.php");?></div>
-
-
 </body>
 </html>

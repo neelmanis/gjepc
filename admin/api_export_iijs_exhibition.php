@@ -135,7 +135,7 @@ if(!empty($_POST))
 		else if($section=="allied" && $member_type == "MEMBER")	  { $charge="14500"; } 
 		else if($section=="allied" && $member_type == "NON_MEMBER")	  { $charge="15000"; } 
 	//else if($section=="Synthetics_&_Simulants") 	{ $charge="20900"; }
-	else if($section=="Laboratories_&_Education") 	{ $charge="22000"; }
+	else if($section=="lab_edu") 	{ $charge="22000"; $section="Laboratories_&_Education"; }
 	else if($section=="silver_jewellery_artifacts") { $charge="22000"; }	
 	else if($section=="diamond_colorstone") 		{ $charge="22000"; }	
 	else if($section=="International Jewellery")    { $charge="350";   }
@@ -247,9 +247,10 @@ if(!empty($_POST))
       </gjep:MT_Exhibition_IN>
    </soapenv:Body>
 </soapenv:Envelope>';
-				
-	// header ("Content-Type:text/xml");
-	// echo $xml_exhibition_string; exit; 
+	/*			
+	 header ("Content-Type:text/xml");
+	 echo $xml_exhibition_string; exit;
+	 */
 	
 			$headers1 = array(
                         "Content-type: text/xml;charset=\"utf-8\"",

@@ -7,7 +7,7 @@ if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit;
 include('../db.inc.php');
 include('../functions.php');
 $action=$_REQUEST['action'];
-$show = "IGJME 2022";
+$show = "IGJME";
 if($action=='UPDATE')
 {
 	//validate Token
@@ -62,7 +62,7 @@ if($action=='UPDATE')
 		if($company_name == "" || $region == "" ) {
 		$_SESSION['error_msg']="Company Name or Region missing";
 		} else {
-	$updatesql="update igjme_exh_reg_general_info set company_name='".$company_name."', address1='".$address1."',address2='".$address2."',address3='".$address3."',billing_address_id='".$billing_address_id."',billing_gstin='".$billing_gstin."',billing_address1='".$billing_address1."',billing_address2='".$billing_address2."',billing_address3='".$billing_address3."',bcity='".$bcity."',bpincode='".$bpincode."',btelephone_no='".$btelephone_no."',pan_no='".$pan_no."',tan_no='".$tan_no."',city='".$city."',pincode='".$pincode."',country='".$country."',region='".$region."',telephone_no='".$telephone_no."',mobile='".$mobile."',fax_no='".$fax_no."',email='".$email."',kyc='$kyc',website='".$website."',contact_person='".$contact_person."',contact_person_desg='".$contact_person_desg."',contact_person_desg_show='".$contact_person_desg_show."',contact_person_co='".$contact_person_co."',contacts='".$contacts."' where id='$id' and uid='$registration_id' and event_for='$show'";	
+	$updatesql="update exh_reg_general_info set company_name='".$company_name."', address1='".$address1."',address2='".$address2."',address3='".$address3."',billing_address_id='".$billing_address_id."',billing_gstin='".$billing_gstin."',billing_address1='".$billing_address1."',billing_address2='".$billing_address2."',billing_address3='".$billing_address3."',bcity='".$bcity."',bpincode='".$bpincode."',btelephone_no='".$btelephone_no."',pan_no='".$pan_no."',tan_no='".$tan_no."',city='".$city."',pincode='".$pincode."',country='".$country."',region='".$region."',telephone_no='".$telephone_no."',mobile='".$mobile."',fax_no='".$fax_no."',email='".$email."',kyc='$kyc',website='".$website."',contact_person='".$contact_person."',contact_person_desg='".$contact_person_desg."',contact_person_desg_show='".$contact_person_desg_show."',contact_person_co='".$contact_person_co."',contacts='".$contacts."' where id='$id' and uid='$registration_id' and event_for='$show'";	
 	if(!$conn->query($updatesql))
 	{
 		die('Error: ' . mysqli_error($conn));
@@ -81,7 +81,7 @@ if($action=='UPDATE')
 <?php
 $id=intval(filter($_REQUEST['id']));
 $registration_id=intval(filter($_REQUEST['registration_id']));
-$sql="select  * from igjme_exh_reg_general_info where id='$id' and uid='$registration_id' and event_for='$show'";
+$sql="select  * from exh_reg_general_info where id='$id' and uid='$registration_id' and event_for='$show'";
 $result=$conn->query($sql);
 $rows=$result->fetch_assoc();
 
@@ -252,7 +252,7 @@ $(document).ready(function(){
 	<div class="content">
     
     	<div class="content_head">IGJME &gt; Exhibitor Registration
-        <div style="float:right; padding-right:10px; font-size:12px;"><a href="IGJME_exhibitor_rgistration.php">Back to Search</a></div>
+        <div style="float:right; padding-right:10px; font-size:12px;"><a href="igjme_exhibitor_rgistration.php">Back to Search</a></div>
         </div>
 <div class="content_details1">
 <?php 

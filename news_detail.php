@@ -44,7 +44,7 @@ $rows = $result->fetch_assoc();
             </div> 
             <?php
            $newsId = $rows['id'];
-         /*   $prevSql = "select * from news_master where id = (select max(id) from news_master where id < $newsId limit 1) limit 1";
+            $prevSql = "select * from news_master where id = (select max(id) from news_master where id < $newsId limit 1) limit 1";
             $prevResult =$conn->query($prevSql);
             $isExistPrev =$prevResult->num_rows;
             if($isExistPrev>0){
@@ -64,7 +64,7 @@ $rows = $result->fetch_assoc();
             $nextUrl = "news_detail.php?news=".$nextId;
             } else {
               $nextUrl = "#";
-            } */   ?> 
+            }   ?> 
              <div class="d-flex ">
                 <div class="mr-3"><a href="<?php echo $prevUrl;?>" class="gold_btn">Prev</a></div>
                 <div><a href="<?php echo $nextUrl;?>" class="gold_btn">Next</a></div>

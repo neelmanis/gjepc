@@ -25,9 +25,7 @@ $table .= '
 <td style="background:green;color:#fff">Mobile No.</td>
 <td style="background:green;color:#fff">Webinar</td>
 <td style="background:green;color:#fff">Order id</td>
-<td style="background:green;color:#fff">Ref No.</td>
-<td style="background:green;color:#fff">Response Code.</td>
-<td style="background:green;color:#fff">Response.</td>
+<td style="background:green;color:#fff">Payment status.</td>
 <td style="background:green;color:#fff">Amount</td>
 <td style="background:green;color:#fff">Created At</td>
 
@@ -42,8 +40,11 @@ if($countExport > 0){
 	 $i=0;
 	while($rowExport = $resultExport->fetch_assoc()){
        if($rowExport['Transaction_Amount'] > 0 ){
-          if($rowExport['Response_Code']=='E00335'){
-		 $response = 'Cancelled by User';}elseif($rowExport['Response_Code']=='E000'){ $response =  "success";}else if($rowExport['Response_Code']=='E00329'){$response =  'NEFT';}elseif($rowExport['Response_Code']==''){$response='Aborted';}else{ $response='';}
+          if($rowExport['payment_status']=='authorized' || $rowExport['payment_status']=='captured' ){
+		   	$response = 'Success';
+		  } else{
+			$response = $rowExport['payment_status'];
+		  }
        }else{
            $response =  "success";
        }
@@ -83,8 +84,7 @@ if($countExport > 0){
 
 	$table .='<td>'.$title.'</td>
 	<td>'.$rowExport['order_id'].'</td>
-	<td>'.$rowExport['ReferenceNo'].'</td>
-	<td>'.$rowExport['Response_Code'].'</td>
+	
 	<td>'.$response.'</td>
 	<td>'.$rowExport['Transaction_Amount'].'</td>
 	<td>'.$rowExport['created_at'].'</td>

@@ -85,9 +85,6 @@ padding: .35em;
 </div>
 
 <div class="clear"></div>
-
-
-
 <div id="main">
 	<div class="content">
     <div class="breadcome_wrap" style="width: 100%;">
@@ -95,13 +92,11 @@ padding: .35em;
     <?php if($_REQUEST['actions']=='companyedit'){ ?> Details
     <?php } else { ?>> Statistics Enquiries <?php } ?></div>
 </div>
-    
-		
+    	
 <?php if($_REQUEST['action']=='view') { ?>
 <div class="content_details1">
        <div style="float: left;width: 100%;"><p style="text-align:center;font-size: 17px;">Statistics Page  Enquiries</p></div>
-       <div><a href="stastics_enquiries_report.php" style="float: right;margin-top: -35px">Export  Data</a></div>
-   	     
+       <!--<div><a href="stastics_enquiries_report.php" style="float: right;margin-top: -35px">Export  Data</a></div>-->   	     
       </div>
 <?php } ?>
 <div class="content_details1" id="search">
@@ -111,8 +106,6 @@ echo "<span class='notification n-success'>".$_SESSION['succ_msg']."</span>";
 $_SESSION['succ_msg']="";
 }
 ?>
-
-
 <!------------------------------- ORDER DIRECTORY ---------------------------------->
 
 <?php if($_REQUEST['action']=='view') { ?>  
@@ -126,10 +119,8 @@ $_SESSION['succ_msg']="";
     <td width="10%">Organisation</td>
     <td width="10%">Designation</td>
     <td width="20%">Email</td>
-    <td width="10%">Country</td>
-	
-	<td width="30%">Purpose</td>
-    
+    <td width="10%">Country</td>	
+	<td width="30%">Purpose</td>    
   </tr>
 	<?php  
 	$page=1;//Default page
@@ -141,8 +132,6 @@ $_SESSION['succ_msg']="";
 	$start=($page-1)*$limit;
      
 	$sql="SELECT * FROM statistics_visitors WHERE 1 order by created_date DESC";
-  
-	
 	$result = $conn ->query($sql);
 	$rCount = $result->num_rows;
 	$sql1= $sql."  limit $start, $limit";

@@ -29,7 +29,7 @@ if($_REQUEST['Reset']=="Reset")
     $_SESSION['country']="";
     $_SESSION['status']="";
   $_SESSION['visitor_approval'] = "";
-  $_SESSION['IIJS_PREMIERE_2022'] = "";
+  $_SESSION['SHOW'] = "";
   
   
   header("Location: iijs_ivr.php?action=view");
@@ -48,11 +48,11 @@ if($_REQUEST['Reset']=="Reset")
     $_SESSION['country']=$_REQUEST['country'];
     $_SESSION['status']=$_REQUEST['status'];
     $_SESSION['visitor_approval'] = $_REQUEST['visitor_approval'];
-    $_SESSION['IIJS_PREMIERE_2022'] = $_REQUEST['IIJS_PREMIERE_2022'];
+    $_SESSION['SHOW'] = $_REQUEST['SHOW'];
   }
 if($search_type=='SEARCH')
 {
-if($_SESSION['first_name']=="" && $_SESSION['company_name']=="" && $_SESSION['from_date']=="Form" && $_SESSION['to_date']=="To" && $_SESSION['country']=="" && $_SESSION['status']=="" && $_SESSION['IIJS_PREMIERE_2022'] =="")
+if($_SESSION['first_name']=="" && $_SESSION['company_name']=="" && $_SESSION['from_date']=="Form" && $_SESSION['to_date']=="To" && $_SESSION['country']=="" && $_SESSION['status']=="" && $_SESSION['SHOW'] =="")
 {
 $_SESSION['error_msg']="Please fill atleast one field to search";
 }else if($_SESSION['from_date']=="Form" && $_SESSION['to_date'] !="To")
@@ -169,47 +169,40 @@ ddsmoothmenu.init({
 
 <div id="main">
   <div class="content">    
-      <div class="content_head">
+    <div class="content_head">
     <a href="iijs_ivr.php?action=view"><div class="content_head_button">Manage IIJS IVR</div></a> 
     <a href="iijs_ivr_onspot.php?action=view"><div class="content_head_button">Manage ONSPOT IIJS IVR</div></a> 
     <?php if(!empty($adminID)){ ?>
     <!--<a href="iijs_ivr_old_registration.php"><div class="content_head_button">IIJS IVR Old Registration</div> </a>-->
-<!--    <a href="iijs_ivr_old_step.php?action=view"><div class="content_head_button">IIJS IVR Old Process Registration</div> </a> -->
+    <!--<a href="iijs_ivr_old_step.php?action=view"><div class="content_head_button">IIJS IVR Old Process Registration</div></a>-->
     <?php if($adminID!=198){ ?>
-    
-    <div style="float:right; padding-right:10px; font-size:12px;"><a href="export_approve_iijs_ivr.php">&nbsp;Download Approved Data</a></div>
-    <div style="float:right; padding-right:10px; font-size:12px;"><a href="export_disapprove_iijs_ivr.php">&nbsp;Download DisApproved Data</a></div>
+    <!--<div style="float:right; padding-right:10px; font-size:12px;"><a href="export_approve_iijs_ivr.php">&nbsp;Download Approved Data</a></div>
+    <div style="float:right; padding-right:10px; font-size:12px;"><a href="export_disapprove_iijs_ivr.php">&nbsp;Download DisApproved Data</a></div>-->
     <div class="clear"></div>
-    <div style="float:right; padding-right:10px; font-size:12px;"><a href="export_iijs_ivr_vc.php">&nbsp;Download All Data with VC</a></div>
+    <!--<div style="float:right; padding-right:10px; font-size:12px;"><a href="export_iijs_ivr_vc.php">&nbsp;Download All Data with VC</a></div>-->
     <!--<div style="float:right; padding-right:10px; font-size:12px;"><a href="export_iijs_ivr.php">&nbsp;Download All Data without VC</a></div>-->
     <br/>
-    <div style="float:right; padding-right:10px; font-size:12px;"><a href="export_history_ivr_show.php">&nbsp;<u>Download PREMIERE 22 Registration</u></a></div>
+    <!--<div style="float:right; padding-right:10px; font-size:12px;"><a href="export_history_ivr_show.php">&nbsp;<u>Download PREMIERE 22 Registration</u></a></div>-->
     <?php } ?>
     <?php } ?>
     </div>
 
-<?php if($_REQUEST['action'] == "view"  ){?>
+<?php if($_REQUEST['action'] == "view"){ ?>
 <div class="content_details1">
 <?php 
-  $sql5="SELECT * FROM  `ivr_registration_history` WHERE 1 AND `show` = 'iijs22'";
+  $sql5="SELECT * FROM `ivr_registration_history` WHERE 1 AND `show` = 'signature23' AND `payment_status`='Y'";
   $result5=$conn ->query($sql5);
   $total_application=$result5->num_rows;
 ?>
 <table width="100%" border="0" cellspacing="2" cellpadding="2" class="detail_txt" >
   <tr class="orange1">
-    <td colspan="11">IIJS PREMIERE 2022 Summary</td>
+    <td>IIJS SIGNATURE 2023 Summary</td>
   </tr>
   <tr>
     <td><strong>Total Application</strong></td>
-    <!--<td><strong>Approve Application</strong></td>
-    <td><strong>Disapprove Application</strong></td>
-    <td><strong>Pending Application</strong></td>-->
   </tr>
    <tr>
     <td><?php echo $total_application;?></td>
-    <td><?php //echo $total_approve;?></td>
-    <td><?php //echo $total_disapprove;?></td>
-    <td><?php //echo $total_pending;?></td>
   </tr>
 </table>
 </div> 
@@ -324,9 +317,10 @@ $_SESSION['succ_msg']="";
     <tr>
     <td><strong>Show</strong></td>        
         <td>
-            <select name="IIJS_PREMIERE_2022" class="input_txt-select">
+            <select name="SHOW" class="input_txt-select">
             <option value="">Select Show</option>
-            <option value="IIJS PREMIERE 2022" <?php if($_SESSION['IIJS_PREMIERE_2022']=='IIJS PREMIERE 2022'){echo "selected='selected'";}?>>IIJS PREMIERE 2022</option>
+            <!-- <option value="iijs22" <?php if($_SESSION['SHOW']=='iijs22'){echo "selected='selected'";}?>>IIJS PREMIERE 2022</option> -->
+            <option value="signature23" <?php if($_SESSION['SHOW']=='signature23'){echo "selected='selected'";}?>>IIJS SIGNATURE 2023</option>
             </select>
         </td>
     </tr>
@@ -352,8 +346,8 @@ $_SESSION['succ_msg']="";
     <td width="17%" align="center">Email</td>
     <td width="20%">Country</td>
     <td width="20%">View Details</td>
-    <td width="10%">Registration Under Show</td>
-    <td width="24%">Registration For Show</td>
+    <td width="10%">Registration Under Signature Show</td>
+   <!--  <td width="24%">Registration For Show</td> -->
     <td width="15%">Date</td>
     <td width="15%">Directory Status</td>
  
@@ -426,14 +420,14 @@ $_SESSION['succ_msg']="";
     
   // }
 
-  if($_SESSION['IIJS_PREMIERE_2022']!="")
+  if($_SESSION['SHOW']!="")
   {
-  $sql.=" and vd.trade_show like '%".$_SESSION['IIJS_PREMIERE_2022']."%'";
+    $sql.=" and `vh`.`show` like '%".$_SESSION['SHOW']."%'";
   }
   
    
-  $sql.=" GROUP BY rm.id ORDER BY vd.modified_date desc "; 
-   $sql;
+  $sql.=" GROUP BY rm.id ORDER BY vh.create_date desc "; 
+  $sql;
   $result=$conn ->query($sql);
 
   $rCount=$result->num_rows;
@@ -454,8 +448,8 @@ if($rCount>0)
     <td><?php echo $rows['email_id'];?></td>
     <td><?php echo getCountryName($rows['country'],$conn);?></td>
     <td> <a href="iijs_ivr.php?action=employeesList&registration_id=<?php echo $rows['uid'];?>">View directory  </a> / <a href="iijs_ivr.php?action=ordersList&registration_id=<?php echo $rows['uid'];?>"> order history  </a></td>
-    <td> <?php echo $rows['payment_made_for']; ?> </td>
-    <td><?php echo strtoupper(filter($rows['trade_show']));?></td>
+    <td> <?php if($rows['payment_made_for'] =="signature23"){ echo "IIJS SIGNATURE 2023"; }else{ echo ""; } ?> </td>
+    <!-- <td><?php //echo strtoupper(filter($rows['trade_show']));?></td> -->
     <td> <?php echo date("Y-m-d", strtotime($date)); ?> </td>
     <td>
     <?php 
@@ -618,7 +612,7 @@ $counter_e = 1;
   
 
  
-   $sql_order="SELECT * FROM  `ivr_registration_history` WHERE 1 AND  `registration_id` = '$registration_id' and `show`='iijs22' order by create_date desc ";
+   $sql_order="SELECT * FROM  `ivr_registration_history` WHERE 1 AND  `registration_id` = '$registration_id' and `show`='signature23' order by create_date desc ";
   
     
   

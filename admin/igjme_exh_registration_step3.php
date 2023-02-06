@@ -9,13 +9,13 @@ include('../functions.php');
 $gid	=	intval(filter($_REQUEST['gid']));
 $registration_id	=	intval(filter($_REQUEST['registration_id']));
 
-$sql="select * from igjme_exh_reg_general_info where  uid='$registration_id' and event_for='IGJME 2022'";
+$sql="select * from igjme_exh_reg_general_info where  uid='$registration_id' and event_for='IGJME'";
 $result=$conn->query($sql);
 $rows=$result->fetch_assoc();
 
 $company_name	=	filter($rows['company_name']);
 $membership_id	=	filter($rows['membership_id']);
-$country		=	filter($rows['country']);
+$country		=	getMemberCountry ($registration_id,$conn);
 if($country=='IN'){
 	$currency ='INR';	
 } else {
@@ -46,7 +46,8 @@ if($action=='UPDATE')
 	$exh_id	=	intval(filter($_REQUEST['exh_id']));
 	$gid	=	intval(filter($_REQUEST['gid']));
 	$uid	=	intval(filter($_REQUEST['registration_id']));
-	
+	//print_r($_REQUEST);exit;
+	//echo $uid.' / '.$gid;exit;
 	$option=filter($_REQUEST['option']);
 	$selected_area=filter($_REQUEST['selected_area']);
 	$category=filter($_REQUEST['category']);
@@ -65,13 +66,13 @@ if($action=='UPDATE')
 	$modified_date=date('Y-m-d');	
 	
 	if(!empty($uid) && !empty($gid)){
-	$updatesql="update igjme_exh_registration set options='$option',category='$category',selected_area='$selected_area',selected_scheme_type='$selected_scheme_type',selected_premium_type='$selected_premium_type',tot_space_cost_rate='$tot_space_cost_rate',selected_scheme_rate='$selected_scheme_rate',selected_premium_rate='$selected_premium_rate',sub_total_cost ='$sub_total_cost',security_deposit='$security_deposit',govt_service_tax='$govt_service_tax',grand_total='$grand_total',modified_date='$modified_date' where exh_id='$exh_id' and gid='$gid' and uid='$uid' and `show`='IGJME 2022'";	
-	if(!$conn->query($updatesql)){	die('Error: ' . mysql_error($conn));	}
-	$_SESSION['succ_msg']="Stall updated successfully";
-	header("Location: igjme_exh_registration_step4.php?id=$gid&registration_id=$uid");
+		$updatesql="update exh_registration set options='$option',category='$category',selected_area='$selected_area',selected_scheme_type='$selected_scheme_type',selected_premium_type='$selected_premium_type',tot_space_cost_rate='$tot_space_cost_rate',selected_scheme_rate='$selected_scheme_rate',selected_premium_rate='$selected_premium_rate',sub_total_cost ='$sub_total_cost',security_deposit='$security_deposit',govt_service_tax='$govt_service_tax',grand_total='$grand_total',modified_date='$modified_date' where exh_id='$exh_id' and gid='$gid' and uid='$uid' and `show`='IGJME'";	
+		if(!$conn->query($updatesql)){	die('Error: ' . mysql_error($conn));	}
+		$_SESSION['succ_msg']="Stall updated successfully";
+		header("Location: igjme_exh_registration_step4.php?id=$gid&registration_id=$uid");
 	} else { $_SESSION['error_msg']="Something Missing"; }
 	} else { 
-	$_SESSION['error_msg']="Invalid Token Error";
+	   $_SESSION['error_msg']="Invalid Token Error";
 	}
 }
 ?>
@@ -494,13 +495,13 @@ $_SESSION['error_msg']="";
  <?php 
 	/*...........................Last year participant  ..........................*/
 	//$query1=mysql_query("select * from igjme_exh_registration where uid='$registration_id' and `show`='IGJME 2017' and last_yr_section_flag='1' and  curr_last_yr_check='N' order by exh_id desc limit 0,1");	
-	$query1=$conn->query("select * from igjme_exh_registration where uid='$registration_id' and `show`='IGJME 2021' order by exh_id desc limit 0,1");	
+	$query1=$conn->query("select * from exh_registration where uid='$registration_id' and `show`='IGJME' order by exh_id desc limit 0,1");	
 	$result1=$query1->fetch_assoc();
 	$exh_id=$result1['exh_id'];
 	$num1=$query1->num_rows;
-	
-	$query=$conn->query("select * from igjme_exh_registration where uid='$registration_id' and gid='$gid' and `show`='IGJME 2022'");
+	$query=$conn->query("select * from exh_registration where uid='$registration_id' and gid='$gid' and `show`='IGJME'");
 	$result=$query->fetch_assoc();
+	//print_r($result);exit;
 	$num=$query->num_rows;
 	if($num>0)
 	{
@@ -537,7 +538,7 @@ $_SESSION['error_msg']="";
    
 <?php if($num1>0) { ?>
 <tr>
-    <td><strong>Last year details :</strong></td>
+    <td><strong>Last year details <?php echo $member_type;?>:</strong></td>
     <td>	
     		<strong>Last year Participant :</strong><?php if($num1>0){ echo $last_yr="Yes"; } else {echo $last_yr="No";}?><br />
     		
@@ -550,10 +551,10 @@ $_SESSION['error_msg']="";
     
 <tr>
     <td>
-    <strong>Last year Participant :</strong><?php echo strtoupper(No);?><br />
+    <strong>Last year Participant  :</strong><?php echo strtoupper(No);?><br />
     <strong>Please select any of the :<sup>*</sup></strong></td>
     <td>
-        <input type="radio" id="option" class="bgcolor" name="option"  checked="checked" value="New participant" /> <label for="b_1">New participant</label><br />
+        <input type="radio" id="option" class="bgcolor" name="option"  checked="checked" value="New participant" /> <label for="b_1">New participant </label><br />
     </td>
 </tr>
    <?php } ?>

@@ -70,6 +70,7 @@ Redirect 301 /solitaire-international.php https://gjepc.org/solitaire/
 Redirect 301 /sap https://webdisp.gjepcindia.com/sap/bc/gui/sap/its/webgui/?sap-client=200&sap-language=EN
 Redirect 301 /ithelp https://sdpondemand.manageengine.com
 Redirect 301 /msme-overview.php https://www.gjepc.org/msme-defination.php
+Redirect 301 /Issuetracker https://gjepcindia-my.sharepoint.com/:l:/p/krishna_dhumal/FHgDR6qA64FJlu_SEUvY92EBU8flYSD8sQsuyOUMGCZUOw?e=po5UsI
 
 #Redirect File Only When Not Found
 ErrorDocument 404 https://gjepc.org/404.php

@@ -3,11 +3,30 @@ include('../db.inc.php');
 session_start();
 if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; }
 
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
 function reportLogs($category,$report_name,$conn)
 {
 	$adminID = intval($_SESSION['curruser_login_id']);
 	$adminName = strtoupper($_SESSION['curruser_contact_name']);
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = get_client_ip();
 	$query = "INSERT INTO report_logs SET post_date=NOW(),admin_id='$adminID',admin_name='$adminName',category='$category',report_name='$report_name',ip='$ip'";
 	$result = $conn->query($query);
 	if($result)
@@ -132,7 +151,7 @@ $sql="select gb.uniqueIdentifier,oh.visitor_id, oh.create_date as 'create_date',
 from visitor_order_history oh inner join registration_master rm on oh.registration_id=rm.id 
 inner join visitor_directory vd on oh.visitor_id=vd.visitor_id 
 inner join globalExhibition gb on gb.visitor_id=vd.visitor_id 
-where oh.payment_status='Y' and oh.status = '1' AND oh.show = gb.event and (oh.show='signature23' || oh.show='iijs22' || oh.show='iijstritiya23' || oh.show='combo23') and gb.participant_Type='VIS' ";
+where oh.payment_status='Y' and oh.status = '1' AND oh.show = gb.event and (oh.show='iijs22' || oh.show='combo23') and gb.participant_Type='VIS' ";
 $result = $conn ->query($sql);
 while($row = $result->fetch_assoc())
 {	

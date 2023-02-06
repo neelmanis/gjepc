@@ -11,11 +11,11 @@ $action=$_POST['action'];
 if($action=='regionwise')
 {
 	
-	 function reportLogs($category,$report_name,$conn)
+	function reportLogs($category,$report_name,$conn)
 	{
 	$adminID = intval($_SESSION['curruser_login_id']);
 	$adminName = strtoupper($_SESSION['curruser_contact_name']);
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = get_client_ip();
 	$query = "INSERT INTO report_logs SET post_date=NOW(),admin_id='$adminID',admin_name='$adminName',category='$category',report_name='$report_name',ip='$ip'";
 	$result = $conn->query($query);
 	if($result)

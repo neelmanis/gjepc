@@ -116,7 +116,7 @@ if(($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 	echo"<meta http-equiv=refresh content=\"0;url=manage_registration.php?action=view\">";
 	exit;
 	} else {	
-	$sql = $conn ->query("update registration_master set company_name='$company_name',email_id='$email_id',company_secret='$password',company_pan_no='$company_pan_no',city='$city',state='$state',pin_code='$pin_code',payment_defaulter='$payment_defaulter',payment_defaulter_reason='$payment_defaulter_reason' where id='$id'");
+	$sql = $conn ->query("update registration_master set company_name='$company_name',email_id='$email_id',company_pan_no='$company_pan_no',city='$city',state='$state',pin_code='$pin_code',payment_defaulter='$payment_defaulter',payment_defaulter_reason='$payment_defaulter_reason' where id='$id'");
 	if(!$sql) die ($conn->error);
 		
 	$sql = $conn ->query("update information_master set email_id='$email_id' where registration_id='$id'");

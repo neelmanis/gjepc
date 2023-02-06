@@ -18,6 +18,32 @@
         	<div class="col-md-11 text-center">
     	
                 <img src="assets/images/IGJA_logo.png" class="d-table mx-auto mb-4 event_logo" />
+
+                            <style>
+    @media(max-width: 575px){
+    .border-right {border: none!important;}
+    }
+</style>
+  
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto border-right">
+            <p class="text-center"><strong>In Association with</strong></p>
+            <a href="https://www.gold.org/" target="_bank" class="d-block"><img src="assets/images/wgc.png" style="max-width: 130px;" alt=""></a>
+        </div>
+
+        <div class="col-auto border-right">
+            <p class="text-center"><strong>Powered by</strong></p>
+            <a href="https://www.gold.org/" target="_bank" class="d-block"><img src="https://www.giaindia.in/wp-content/uploads/2014/07/Gia-logo1.jpg" style="max-width: 130px;" alt=""></a>
+        </div>
+
+        <div class="mt-3 mt-sm-0 col-sm-auto">
+            <p class="text-center"><strong>Co-Partner</strong></p>
+            <a href="https://www.gold.org/" target="_bank" class="d-block"><img src="https://www.goldstarjewellery.com/image/logo.png" style="max-width: 150px;" alt=""></a>
+        </div>
+
+            
+        </div>
                 
                <p>The GJEPC established the India Gem & Jewellery Awards (IGJA) 48 years ago to honour leading exporters of gems and jewellery. The selection criteria now include export performance, value addition, employment generation and investment in R&D among other parameters, during each financial year.</p>
                  
@@ -41,7 +67,7 @@
                 	<li class="flex-fill px-2"><a href="igja-awards.php" class="d-block">Awards category</a></li>
                     <li class="flex-fill px-2"><a href="igja-guidelines.php" class="d-block active">Guidelines & Definitions</a></li>
                     <li class="flex-fill px-2"><a href="igja-nominations-form.php" class="d-block">Nomination Form</a></li>
-                    <li class="flex-fill px-2"><a href="igja-winners.php" class="d-block">2020 Winners</a></li>
+                    <li class="flex-fill px-2"><a href="igja-winners.php" class="d-block">2021 Winners</a></li>
                     <li class="flex-fill px-2"><a href="igja-gallery.php" class="d-block">Gallery</a></li>
                 </ul> 
                 

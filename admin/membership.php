@@ -5,6 +5,7 @@ include('../functions.php');
 
 if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; }
 $adminID = intval($_SESSION['curruser_login_id']);
+$admin_name = getAdminName($adminID,$conn);
 if($_REQUEST['Reset']=="Reset")
 {
   $_SESSION['category_type']="";
@@ -89,6 +90,15 @@ $update_result_membership = $conn ->query($update_membership);
 
 $update_membership1 = "update approval_master set admin_issue_membership_certificate='Y',admin_issue_certificate='$adminID',admin_issue_date='$admin_issue_date' where registration_id='$val'";
 $update_result_membership1 = $conn ->query($update_membership1);
+
+/*.................................... Maintain Approval Log ..............................................*/
+$getCompany = getNameCompany($val,$conn);
+$getCompanyName = str_replace(array('&amp;','&AMP;'), '&', $getCompany);
+$update_log = "insert into membership_approval_logs set post_date=NOW(),type='issue_membership',registration_id='$val',company='$getCompanyName',admin_id='$adminID',admin_name='$admin_name',action='Y'";
+$update_result_log = $conn ->query($update_log);
+
+/*....................................Certificate History maintain for 5 year..............................................*/
+
 
 
 /*....................................Certificate History maintain for 5 year..............................................*/
@@ -271,7 +281,7 @@ $message ='<table width="80%" bgcolor="#fbfbfb" align="center" style="margin:2% 
 }  else if($eligible_for_renewal=='Y') { // For 'RENEW' Member's
 
     if(!empty($bp_number)) {
-$apiurl="http://api.mykycbank.com/service.svc/44402aeb2e5c4eef8a7100f048b97d84/BPID/".$bp_number;
+$apiurl="https://api.mykycbank.org/service.svc/44402aeb2e5c4eef8a7100f048b97d84/BPID/".$bp_number;
 $getResponse = file_get_contents($apiurl);
 $getResult = json_decode($getResponse,true);
 $apiResponse = json_decode($getResult,true);
@@ -620,13 +630,13 @@ function showDate(date) {
         
 <div class="clear"></div>
 <div class="content_details1">
-<div class="content_head">
+<!--<div class="content_head">
  <div style="float:right; padding-right:10px; font-size:12px;"><a href="member_esanchit_registration.php">E-Sanchit Registered List</a>&nbsp; &nbsp; &nbsp; | 
  <a href="member_payment_export_data.php">&nbsp; &nbsp;Export Payment List</a>
  &nbsp; &nbsp; &nbsp; | 
  <a href="get_membership_log.php">&nbsp; &nbsp;Approval log</a>
  </div>
-</div>
+</div>-->
 
 <form name="search" action="" method="post"/> 
 
@@ -810,7 +820,12 @@ $_SESSION['error_msg']="";
   
   if($_SESSION['curruser_role']=="Admin")
   {
-  $sql.=" and b.region_id='".$_SESSION['curruser_region_id']."' ";
+		if($adminID==26){
+			$result_string = "'" . str_replace(",", "','", $_SESSION['curruser_region_access']) . "'";
+			$sql1.=" and b.region_id IN ($result_string)";
+		} else {
+		$sql.=" and b.region_id='".$_SESSION['curruser_region_id']."' ";
+		}
   }
   
   if($_SESSION['category_type']!="" && $_SESSION['keyword']!="")
@@ -905,7 +920,12 @@ $_SESSION['error_msg']="";
   
     if($_SESSION['curruser_role']=="Admin")
     {
-    $sql1.=" and b.region_id='".$_SESSION['curruser_region_id']."' ";
+		if($adminID==26){
+			$result_string = "'" . str_replace(",", "','", $_SESSION['curruser_region_access']) . "'";
+			$sql1.=" and b.region_id IN ($result_string)";
+		} else {
+			$sql1.=" and b.region_id='".$_SESSION['curruser_region_id']."' ";
+		}
     }
     if($_SESSION['category_type']!="" && $_SESSION['keyword']!="")
     {
@@ -1007,7 +1027,7 @@ $_SESSION['error_msg']="";
   <tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
     <td><?php echo strtoupper($rows['company_name']);?></td>
     <td><?php echo $rows['Response_Code']."<br/>".$rows['Unique_Ref_Number']."<br/>".$rows['ReferenceNo'];
-    if($rows['Response_Code']=="E000"){ echo "<br/><span style='color:green'>Payment Success</span>"; }?></td>
+    if($rows['Response_Code']=="E000" || $rows['Response_Code'] =="captured"){ echo "<br/><span style='color:green'>Payment Success</span>"; }?></td>
     <td><?php echo getBPNO($rows['id'],$conn);?></td>
     <td><?php echo $rows['sales_order_no'];?></td>
     <td><?php if($rows['member_type_id']==5){ echo "Merchant"; } else { echo "Manufacturer"; } echo "<br/>";
@@ -1047,7 +1067,7 @@ $_SESSION['error_msg']="";
     ?>
 
 
-    <?php if(trim($rows['Response_Code'])=='E000' && $rows['Transaction_Date']!="" ) { ?>
+    <?php if( ( trim($rows['Response_Code'])=='E000' || trim($rows['Response_Code']) =='captured') && $rows['Transaction_Date']!="" ) { ?>
     <?php 
       if($count_outstanding > 0){ ?>
            <td> Outstanding is Pending</td>
@@ -1091,13 +1111,14 @@ $_SESSION['error_msg']="";
     if($_SESSION['status']=='Issue_membership_certificate')
     {
 	 if($rows['issue_membership_certificate_expire_status']=="Y"){
-		 echo "<td align='left'><input name='issue_mem_cer[]' type='checkbox' value='$rows[id]' checked /> /<a href='../rcmc/membership.php?registration_id=$rows[id]' target='_blank'> View Certificate</a></td>";
-	 }else{
-		 echo "<td align='left'><input name='issue_mem_cer[]' type='checkbox' value='$rows[id]' /> /<a href='../rcmc/membership.php?registration_id=$rows[id]' target='_blank'> View Certificate</a></td>";
-	 }
-    
+		 echo "<td align='left'><input name='issue_mem_cer[]' type='checkbox' value='$rows[id]' checked /> /<a href='../rcmc/membership.php?registration_id=$rows[id]' target='_blank'> View Certificate</a>"; ?>
+		<?php if($adminID==1 || $adminID==6){?> <a target="_blank" href="certificate-update.php?registration_id=<?php echo $rows['id'];?>"><b>Update Certificate</b></a> <?php } ?></td>
+	<?php } else {
+		 echo "<td align='left'><input name='issue_mem_cer[]' type='checkbox' value='$rows[id]' /> /<a href='../rcmc/membership.php?registration_id=$rows[id]' target='_blank'> View Certificate</a>"; ?>
+		<?php if($adminID==1 || $adminID==6){?> <a target="_blank" href="certificate-update.php?registration_id=<?php echo $rows['id'];?>"><b>Update Certificate</b></a> <?php } ?></td>
+	<?php }
     }
-    ?>  
+    ?>    
     <td><?php echo $gmember; ?></td>
     <?php /*
     if($_SESSION['status']=='pending'){ ?>

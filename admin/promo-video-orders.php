@@ -348,11 +348,12 @@ $_SESSION['succ_msg']="";
           }else{ ?>
           	<a data-url="<?php echo $bpNumber." ".$regNo." ".$payment_id; ?>"  title="Create Sales Order" class='so'><img src="images/yes.gif" border="0"></a>
 
-         <?php  }   }else{
+         <?php  }   }else{ ?>
+         		<a data-url="<?php echo $bpNumber." ".$regNo." ".$payment_id; ?>"  title="Create Sales Order" class='so'><img src="images/yes.gif" border="0"></a>
+          <?php  echo $sales_order_no; ?>
+         
 
-          echo $sales_order_no;
-
-           }
+          <?php }
          }else{ ?>
             <img src="images/notification-exclamation.gif" border="0">
         <?php }

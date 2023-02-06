@@ -437,9 +437,9 @@ $lgd_disclaimer =$rows['lgd_disclaimer'];
 								
 					<label class="col-md-4" for="opm"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="Other Precious Metal Jewellery" <?php if($panel_name!=''){ if($panel_name=='Other Precious Metal Jewellery'){echo "checked='checked'";}else{?> disabled="disabled" <?php } } else { } ?>/>Other Precious Metal Jewellery</label>
 					
-					<label class="col-md-4" for="sez"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="SEZ Panel" <?php if($panel_name!=''){ if($panel_name=='SEZ Panel'){echo "checked='checked'";}else{?> disabled="disabled" <?php } } else { } ?>/>SEZ Panel</label>
+					<label class="col-md-4" for="sez"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="SEZ" <?php if($panel_name!=''){ if($panel_name=='SEZ'){echo "checked='checked'";}else{?> disabled="disabled" <?php } } else { } ?>/>SEZ</label>
 					
-					<label class="col-md-4" for="sjp"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="Studded Jewellery Panel" <?php if($panel_name!=''){ if($panel_name=='Studded Jewellery Panel'){echo "checked='checked'";}else{?> disabled="disabled" <?php } } else { } ?>/>Studded Jewellery Panel</label>
+					<label class="col-md-4" for="sjp"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="Studded Jewellery" <?php if($panel_name!=''){ if($panel_name=='Studded Jewellery'){echo "checked='checked'";}else{?> disabled="disabled" <?php } } else { } ?>/>Studded Jewellery</label>
 					
 					<label class="col-md-4" for="lgd"><input type="radio" class="mr-2" name="panel_name" id="panel_name" value="Lab Grown Diamond" <?php if($panel_name!=''){ if($panel_name=='Lab Grown Diamond'){echo "checked='checked'";}else{?>  <?php } } else { } ?>/>Lab Grown Diamond </label>
 					

@@ -203,7 +203,7 @@ $_SESSION['err_msg']="";
                         
                         <div class="row cardSigned">
                         	<div class="col-3">
-                                <span class="d-block">COLIN SHAH</span>
+                                <span class="d-block">VIPUL SHAH</span>
                                 GJEPC CHAIRMAN
                             </div>
                             <div class="col-9 text-right">

@@ -62,7 +62,7 @@ $companyname = filter($regrow['company_name']);
    $email_id = filter($regrow['email_id']);
 }
 ?>
-<?php
+<?php /*
 if($_REQUEST['action']=='vaccineUploadAction')
 {    
 		function uploadSingleVIsitorCovid($file_name,$file_temp,$file_type,$file_size,$mobile,$name,$certificate,$registration_id)
@@ -104,7 +104,7 @@ if($_REQUEST['action']=='vaccineUploadAction')
         $certificate = $_POST['valueType'];
         $via="self";
 	    
-		/*=======================GET Details OF VISITOR===========================*/
+		/*=======================GET Details OF VISITOR===========================
          
          $resultMobileSql =$conn->query("SELECT * FROM `visitor_directory` WHERE `visitor_id`='$visitor_id'");
          $getMobileRow = 	 $resultMobileSql->fetch_assoc();
@@ -120,9 +120,9 @@ if($_REQUEST['action']=='vaccineUploadAction')
         $pan_no = $getMobileRow['pan_no'];
 
 
-		/*=======================GET Details OF VISITOR===========================*/
+		/*=======================GET Details OF VISITOR===========================
 
-		/*==================GET VISITOR SELECTED SHOW=============*/
+		/*==================GET VISITOR SELECTED SHOW=============
 		$category_for = getVisitorSelectedShow($visitor_id,$conn);
 	
 		if($category_for =="igjme22"){
@@ -130,7 +130,7 @@ if($_REQUEST['action']=='vaccineUploadAction')
 		}else{
 	    $category_for ="VIS";
 		}
-		/*===============GET VISITOR SELECTED SHOW================*/
+		/*===============GET VISITOR SELECTED SHOW================
 
 		$create_directory = 'images/covid/vis/'.$registration_id ;
 		if(!file_exists($create_directory)) {
@@ -177,14 +177,14 @@ if($_REQUEST['action']=='vaccineUploadAction')
  
 	$datetime = date("Y-m-d H:i:s");
 	
-	/*======================= SEND SMS AFTER UPLOAD CERTIFICATE  ===================*/
+	/*======================= SEND SMS AFTER UPLOAD CERTIFICATE  ===================
 	$cert = "Vaccination Certificate";
 	$website = "IIJS PREMIERE 2022";
     //$smsContent ="Your ".$cert." has been uploaded successfully. We will notify you on approval/disapproval of the document. Regards, GJEPC"; 
     $smsContent ="Your ".$cert." has been uploaded successfully for ".$website." .We will notify you on approval/disapproval. Regards, GJEPC";
     //get_data($smsContent,$mobile_no);
    // send_sms($smsContent,$mobile_no);
-    /*==============================SHOW MESSAGE AFTER UPLOAD CERTIFICATE=============================*/
+    /*==============================SHOW MESSAGE AFTER UPLOAD CERTIFICATE=============================
 
     if($certificate =='dose1'){
     	$messagev = "It is compulsory to carry Covid-19 Negative Report (RT PCR Test) done before 72 hrs before your first visit at IIJS Signature 2022";
@@ -223,7 +223,7 @@ if($_REQUEST['action']=='vaccineUploadAction')
 	    echo "<meta http-equiv=refresh content=\"0;url=iijs_employee_directory.php?action=uploadVaccineCertificate&visitor_id=$visitor_id&registration_id=$registration_id\">"; exit;
 	    
 	}
-}
+} */
 ?>
 <?php
 if($_REQUEST['action']=='old_to_part')
@@ -249,7 +249,7 @@ if(($_REQUEST['action']=='delVisitor') && ($_REQUEST['visitor_id']!='') && ($_RE
 	$visitor_id = filter($_REQUEST['visitor_id']);	
 	$registration_id  = filter(intval($_REQUEST['registration_id']));
 	
-	$sqlPaymentCheck = "SELECT * FROM visitor_order_history WHERE registration_id='$registration_id' AND visitor_id='$visitor_id' AND status='1' AND payment_status='Y' AND (`show`='combo23' || `show`='igjme23' || `show`='iijstritiya23' || `show`='signature23')";
+	$sqlPaymentCheck = "SELECT * FROM visitor_order_history WHERE registration_id='$registration_id' AND visitor_id='$visitor_id' AND status='1' AND payment_status='Y' AND (`show`='combo23' || `show`='igjme23' || `show`='iijstritiya23' || `show`='signature23' || `show`='stcombo23')";
     $resultPaymentCheck = $conn->query($sqlPaymentCheck);
     $countPaymentCheck = $resultPaymentCheck->num_rows;
     if($countPaymentCheck > 0 ){
@@ -259,13 +259,18 @@ if(($_REQUEST['action']=='delVisitor') && ($_REQUEST['visitor_id']!='') && ($_RE
     $ssx = "INSERT INTO visitor_directory_deleted
 		SELECT * FROM  visitor_directory WHERE visitor_id = $visitor_id AND `registration_id`='$registration_id'";
 	$queryData = $conn->query($ssx);
-	
+	if(!$queryData){ 
+	$deletex = "DELETE FROM `visitor_directory` WHERE `registration_id`='$registration_id' AND `visitor_id` ='$visitor_id' limit 1"; 
+	$resultz = $conn->query($deletex);
+	die ($conn->error); 
+	}
+	/*
 	$ssy = "INSERT INTO visitor_lab_info_log SELECT * FROM visitor_lab_info WHERE visitor_id = '$visitor_id' AND `registration_id`='$registration_id'";
 	$queryDatas = $conn->query($ssy);
 	if($queryDatas){
 	$deletxy = "DELETE FROM `visitor_lab_info` WHERE visitor_id = $visitor_id AND `registration_id`='$registration_id' limit 1";
 	$resultxy = $conn->query($deletxy);
-	}
+	} */
 	
 	if($queryData){
 	$deletx = "DELETE FROM `visitor_directory` WHERE `registration_id`='$registration_id' AND `visitor_id` ='$visitor_id' limit 1"; 
@@ -275,6 +280,8 @@ if(($_REQUEST['action']=='delVisitor') && ($_REQUEST['visitor_id']!='') && ($_RE
 	$updatx = $conn->query($updatx);
 	echo "<script> alert('Deleted from Visitor directory');</script>";
 	echo "<meta http-equiv=refresh content=\"0;url=iijs_employee_directory.php?action=viewReg&regid=$registration_id\">"; exit;
+	}else{
+		die ($conn->error);
 	}
 	} else { die ($conn->error); }	
 	}
@@ -494,6 +501,10 @@ if($face_isApplied =="Y")
 		//send_sms($messagev,$sendMobile);
      }
 } else {
+		$photo_url= 'https://registration.gjepc.org/images/employee_directory/'.$registration_id.'/photo/'.$photo;
+         $updateGlobal = "UPDATE globalExhibition SET photo_url='$photo_url',isDataPosted='N',`face_status`='Y',`status`='Y' WHERE `registration_id`='$registration_id' AND `visitor_id`='$id' AND (`participant_Type`='VIS' OR `participant_Type`='IGJME')";
+        $resultStatusUpdate = $conn->query($updateGlobal);
+
 		$sqlx = "UPDATE `visitor_directory` SET `mod_date`=NOW(), name='$name', lname='$lname', aadhar_no='$aadhar_no', `visitor_approval`='$approval', `disapprove_reason`='$disapprove_reason',category='$category',photo='$photo',adminID='$adminID' WHERE visitor_id='$id' and registration_id='$registration_id'";
 }
 	$resultx = $conn ->query($sqlx);
@@ -506,17 +517,16 @@ if($resultx)
 		/*.......................Send mail For Approved Visitor ........................*/
 
 		/*========================CHECK PAYMENT MADE OR NOT =====================*/
-		$sqlHistory = "SELECT * FROM visitor_order_history where visitor_id = '$id' and registration_id = '$registration_id' AND (payment_made_for='combo23' OR payment_made_for='iijs22' OR payment_made_for='signature23' OR payment_made_for='iijstritiya23' )  AND `status`='1' AND payment_status='Y'";
+		$sqlHistory = "SELECT * FROM visitor_order_history where visitor_id = '$id' and registration_id = '$registration_id' AND (payment_made_for='combo23' OR payment_made_for='stcombo23' OR payment_made_for='signature23' OR payment_made_for='iijstritiya23' ) AND `status`='1' AND payment_status='Y'";
 		$resultlHistory= $conn->query($sqlHistory);
 		$countHistory = $resultlHistory->num_rows;
 		
 if($approval=='Y' && $countHistory == 0 )
 {
-	$sendMobiles = "9834797281";
-	$website = "IIJS TRITIYA 2023";
+	$website = "IIJS SIGNATURE 2023";
 	$url = "https://registration.gjepc.org/single_visitor.php";
 	$message = "Dear ".$name.", your documents have been approved, kindly proceed for the payment for $website, click on https://registration.gjepc.org/single_visitor.php, In case of any further query please contact 1800-103-4353. Regards, GJEPC.";
-    //send_sms($message,$sendMobile);
+    send_sms($message,$sendMobile);
 	
 	/* WhastApp Msg */
 	/*$msgurl = single_visitor_approval($sendMobile,$name,$website,$url);
@@ -578,7 +588,7 @@ $message='<table width="80%" bgcolor="#fbfbfb" align="center" style="margin:2% a
 </tbody>
 </table>';
 
-//	$to =$email_id.',pvr@gjepcindia.com';	
+	$to =$email_id.',pvr@gjepcindia.com';	
 	$subject = "YOUR DATA FOR VISITOR BADGE FOR THE SHOW APPROVED"; 
 	$headers  = 'MIME-Version: 1.0' . "\n"; 
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\n"; 		
@@ -770,7 +780,7 @@ $message='<table width="80%" bgcolor="#fbfbfb" align="center" style="margin:2% a
 </tbody>
 </table>';
 
-//	$to =$email_id.',pvr@gjepcindia.com';
+	//$to =$email_id.',pvr@gjepcindia.com';
 	$subject = "YOUR GST And PAN No FOR THE SHOW Approved"; 
 	$headers  = 'MIME-Version: 1.0' . "\n"; 
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\n"; 
@@ -820,7 +830,7 @@ $message='<table width="80%" bgcolor="#fbfbfb" align="center" style="margin:2% a
      <tr>
 	<td colspan="2"><br/>
 	<p>Disapproved application can process for the participation through following link:
-    <a href="https://gjepc.org/iijs-premiere/" target="_blank">https://gjepc.org/iijs-premiere/</a></p>
+    <a href="https://gjepc.org/iijs-signature/" target="_blank">https://gjepc.org/iijs-signature/</a></p>
 	</td>
 	</tr>
     <tr>
@@ -875,8 +885,7 @@ if($_REQUEST['Reset']=="Reset")
 	$_SESSION['company_name']=	filter($_REQUEST['company_name']);
 	$_SESSION['pan_no']		 = 	filter($_REQUEST['pan_no']);
 	$_SESSION['mobile']		 =  filter($_REQUEST['mobile']);
-	$_SESSION['visitor_approval'] = $_REQUEST['visitor_approval'];
-	
+	$_SESSION['visitor_approval'] = $_REQUEST['visitor_approval'];	
 	$_SESSION['face_status'] = $_REQUEST['face_status'];
 	}
 }
@@ -886,7 +895,7 @@ if($_REQUEST['Reset']=="Reset")
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IIJS PREMIERE 2022</title>
+<title>IIJS SIGNATURE 2023</title>
 <link rel="stylesheet" type="text/css" href="https://gjepc.org/assets-new/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <link rel="stylesheet" type="text/css" href="fancybox/fancybox_css.css" media="screen" />
@@ -997,7 +1006,7 @@ $(document).ready(function(){
         var image = document.getElementById('crop_image');
         var cropper;
         var input = document.getElementById('photo');
-         $(".blah_photo").click(function(){
+        $(".blah_photo").click(function(){
 
           	let imgsrc = $(this).attr("src");
           	
@@ -1010,7 +1019,7 @@ $(document).ready(function(){
 	            $modal.modal('show');
 
          	});
-          });
+        });
         $(".preview_crop").change(function(event){
             let ref = $(this).data('ref');
             let isCrop = $(this).data("crop");
@@ -1126,12 +1135,7 @@ $(document).ready(function(){
 				img.src = url;
 			}
         });
-        
-		
-   
-		 
-
-       // ==============================XXXXXXXXXXXXXXXXXXXXXXXXXXXX CROPPING & PREVIEW END XXXXXXXXXXXXXXXXXXXXXXXXXXXXX===============================//
+       // ==============================XXXXXXXXXXXXXXXXXXXXXXXXXXXX CROPPING & PREVIEW END XXXXXXXXXXXXXXXXXXXXXXXXXXXXX========//
 </script>
 <style type="text/css">
 .style1 {color: #FF0000}
@@ -1198,12 +1202,12 @@ padding: .35em;
     
     	<div class="content_head">
 		<?php if($_REQUEST['actions']!='companyedit'){ ?>
-		<?php echo strtoupper(getNameCompany($_REQUEST['regid'],$conn)); echo "&nbsp;"; echo getFirmType(getCompanyType($_REQUEST['regid'],$conn),$conn);?>&nbsp; | <?php echo getCompanyPan($_REQUEST['regid'],$conn);?> |
+		<?php echo strtoupper(getNameCompany($_REQUEST['regid'],$conn)); echo "&nbsp;"; echo getFirmType(getCompanyType($_REQUEST['regid'],$conn),$conn);?>&nbsp; | <?php echo getCompanyPan($_REQUEST['regid'],$conn);?> &nbsp; | <?php echo strtoupper(getType_of_company($_REQUEST['regid'],$conn));?> |
 		<?php } ?>
         <?php if($_REQUEST['action']=='orderDetails') { ?>
         Order Details <div class="content_head_button" style="float:right; padding-right:10px; font-size:12px;"><a href="iijs_employee_directory.php?action=view">Back</a></div>
 		<?php } elseif($_REQUEST['action']=='orderHistory') { ?><div class="content_head_button" style="float:right; padding-right:10px; font-size:12px;">
-        <a href="iijs_employee_directory.php?action=orderDetails&regid=<?php echo $registration_id; ?>">Back</a></div>
+        <a href="iijs_employee_directory.php?action=orderDetails&regid=<?php echo $registration_id; ?>">Backs</a></div>
         Payment Details
         <?php } elseif($_REQUEST['action']=='viewReg'){ ?>Employee Directory 
         <div class="content_head_button" style="float:right; padding-right:10px; font-size:12px;"><a href="iijs_employee_directory.php?action=view">Employee Directory</a></div>
@@ -1215,7 +1219,7 @@ padding: .35em;
         Company Details  <div class="content_head_button" style="float:right; padding-right:10px; font-size:12px;">
         <a href="iijs_employee_directory.php?action=view">Back</a></div> 
         <?php } else { ?>	Employee Directory
-        <div style="float:right; padding-right:10px; font-size:12px;">
+        <!--<div style="float:right; padding-right:10px; font-size:12px;">
         <a href="visitor_FR_report.php">&nbsp;Download FR Data</a>
 		</div>
 		<div style="float:right; padding-right:10px; font-size:12px;">
@@ -1233,9 +1237,9 @@ padding: .35em;
         <a href="iijs_export_emp_directory.php">&nbsp;Download All Data</a>
         </div>
 		
-        <!--<div style="float:right; padding-right:10px; font-size:12px;">
+        <div style="float:right; padding-right:10px; font-size:12px;">
         <a href="iijs_export_visitor_order_history.php">&nbsp;Download Order History</a>
-        </div>-->
+        </div>
         <div style="float:right; padding-right:10px; font-size:12px;">
         <a href="iijs_export_visitordelivery.php">&nbsp;Download OrderID with Delivery</a>
         </div>
@@ -1245,7 +1249,7 @@ padding: .35em;
 		
         <div style="float:right; padding-right:10px; font-size:12px;">
         <a href="export_domestic_pending_vaccination_report.php">&nbsp;Download Pending VC Report</a>
-        </div>
+        </div>-->
 		<!--<div style="float:right; padding-right:10px; font-size:12px;">
         <a href="iijs_export_visitor-refund.php">&nbsp;Download Refund</a>
         </div>-->
@@ -1637,13 +1641,18 @@ return $pagination;
     <td>Designation Type</td>
     <td>Designation</td>
     <td>Mobile Number</td>
+	<?php if(getType_of_company($_REQUEST['regid'],$conn) !='institute'){ ?>
     <td>Pan No.</td>
+	<?php } else { ?>
+	<td>Document</td>
+	<?php }?>
+	
     <td>Aadhar Number</td>
 	<td colspan="2">Create BP</td>
     <td>Status</td>
     <td>Face Status</td>
     <td>View Details</td>
-	<?php if($adminID==1 || $adminID==44 || $adminID==131 || $adminID==123 || $adminID==91 || $adminID==109 || $adminID==97 || $adminID==32 || $adminID==110 || $adminID==34 || $adminID==31 || $adminID==195 || $adminID==55 || $adminID==28 || $adminID==197 || $adminID==180){?><td>Delete</td><?php } ?>
+	<?php if($adminID==1 || $adminID==44 || $adminID==131 || $adminID==123 || $adminID==91 || $adminID==109 || $adminID==97 || $adminID==32 || $adminID==110 || $adminID==34 || $adminID==31 || $adminID==195 || $adminID==55 || $adminID==28 || $adminID==197 || $adminID==180 || $adminID==204){?><td>Delete</td><?php } ?>
   </tr>
     <?php  
 	$page=1;//Default page
@@ -1705,7 +1714,7 @@ return $pagination;
     <td align="left" valign="middle"><a href="iijs_employee_directory.php?action=edit&id=<?php echo $rows['visitor_id'];?>&regid=<?php echo $rows['registration_id'];?>">
     <img src="images/edit.gif" title="Edit" border="0"/></a></td>
 	
-	<?php if($adminID==1 || $adminID==44 || $adminID==131 || $adminID==123 || $adminID==91 || $adminID==109 || $adminID==97 || $adminID==32 || $adminID==110 || $adminID==34 || $adminID==31 || $adminID==195 || $adminID==55 || $adminID==28 || $adminID==197 || $adminID==180){ ?>
+	<?php if($adminID==1 || $adminID==44 || $adminID==131 || $adminID==123 || $adminID==91 || $adminID==109 || $adminID==97 || $adminID==32 || $adminID==110 || $adminID==34 || $adminID==31 || $adminID==195 || $adminID==55 || $adminID==28 || $adminID==197 || $adminID==180 || $adminID==204){ ?>
 	<td><a style="text-decoration:none;" href="iijs_employee_directory.php?action=delVisitor&visitor_id=<?php echo $rows['visitor_id'];?>&registration_id=<?php echo $registration_id;?>" onClick="return(window.confirm('Are you sure you want to Delete.'));"><img src="images/no.gif" border="0" title="Delete"/></a></td>
 	<?php } ?>
   </tr>
@@ -1787,12 +1796,26 @@ return $pagination;
     <td><?php echo $rows['total_payable'];?></td> 
     <td><?php echo filter($rows['orderId']);?></td> 
 	<td align="left" valign="middle"><a href="iijs_employee_directory.php?action=orderHistory&orderId=<?php echo $rows['orderId'];?>&regid=<?php echo $rows['regId'];?>" style="color:#000000">VIEW</a></td>
-	<td><?php echo $rows['sales_order_no'];?></td>
+	<td><?php echo $rows['sales_order_no'];?> 
+	   <?php $payment_date = $rows['create_date'];
+			$time=strtotime($payment_date);
+			$payment_month=date("m",strtotime($payment_date));
+	      $current_month=date('m');
+		?>
+			
+		</td>
 	<!--.....................Sales Order Create API------------>
     <?php if($rows['sap_sale_order_create_status'] == 0) { ?>
 	<?php if($memberBP!=''){
 	if($rows['total_payable']>0 && $rows['txn_status']=='0300'){ ?>
+
+	<?php if($payment_month == $current_month ){ ?>
 	<td class="so" data-url="<?php echo $memberBP;?> <?php echo $rows['regId'];?> <?php echo $rows['orderId'];?> <?php echo csrf_sap_token();?>">CREATE SO</td>
+	<?php } else { ?>
+		<td><a onclick="return(window.confirm('Period Closed'));"><img src="images/active.png"/></a></td>
+	<?php } ?>
+	
+
 	<?php } else { ?><td>Free</td> <?php } 
 	} else { echo '<td>BP Missing</td>'; }?>
     <?php } else { ?>
@@ -1868,8 +1891,8 @@ return $pagination;
     <td><?php echo filter($rows['year']);?></td> 
     <td><?php echo $Pstatus;?></td>
 	<!--..................... Send to Global Table ------------>
-	<?php if($adminID==1){ if($rows['show'] == "iijs22" || $rows['show'] == "signature23" || $rows['show'] == "iijstritiya23" || $rows['show'] == "combo23"){ ?>
-	<td><a style="text-decoration:none;" href="iijs_employee_directory.php?action=global&visitor_id=<?php echo $rows['visitor_id'];?>&registration_id=<?php echo $registration_id;?>&show=<?php echo $rows['show'];?>" onClick="return(window.confirm('Are you sure you want to Send.'));"><img src="images/active.png" border="0" title="send"/></a></td>
+	<?php if($adminID==1){ if($rows['show'] == "stcombo23" || $rows['show'] == "signature23" || $rows['show'] == "iijstritiya23" || $rows['show'] == "combo23"){ ?>
+	<td><a style="text-decoration:none;" href="iijs_employee_directory.php?action=global&visitor_id=<?php echo $rows['visitor_id'];?>&registration_id=<?php echo $registration_id;?>&show=<?php echo $rows['show'];?>" onClick="return(window.confirm('Are you sure you want to Send...'));"><img src="images/active.png" border="0" title="send"/></a></td>
 	  
 	<?php } } ?>
 	<?php  if($rows['show'] == "iijs22"){ ?>
@@ -2049,7 +2072,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   <tr>
     <td ><strong>Primary Mobile Number</strong></td>
     <td><input type="text" name="mobile" id="mobile" class="input_txt" value="<?php echo $mobile; ?>" maxlength="10"/>
-	<?php if($adminID==1 || $adminID==180 || $adminID==44 || $adminID==34 || $adminID==97 || $adminID==195) { ?>
+	<?php if($adminID==1 || $adminID==180 || $adminID==44 || $adminID==34 || $adminID==97 || $adminID==195 || $adminID==204) { ?>
 	<label><input type="checkbox" id="is_mobile_change" name="is_mobile_change" value="Y"> Change Mobile</label>
 	<?php } ?>
 	</td>
@@ -2202,7 +2225,11 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   </tr>
  
   <tr>
+	<?php if(getType_of_company($_REQUEST['regid'],$conn) !='institute'){ ?>
     <td><strong>PAN Card Copy</strong></td>
+	<?php } else { ?>
+	<td><strong>Student College ID </strong></td>
+	<?php } ?>
     <td>
     <?php $pan_copy_ext =  pathinfo($pan_copy, PATHINFO_EXTENSION); ?>
     <?php if($pan_copy_ext == "pdf" || $pan_copy_ext == "PDF"){?>
@@ -2338,7 +2365,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   </tr>
   <tr>
     <td><strong>Company PAN No</strong></td>
-    <td><input type="text" name="company_pan_no" id="company_pan_no" class="input_txt" value="<?php echo $company_pan_no; ?>" maxlength="10"/></td>
+    <td><input type="text" name="company_pan_no" id="company_pan_no" class="input_txt" value="<?php echo $company_pan_no; ?>" maxlength="10" required/></td>
   </tr>
   <tr>
     <td ><strong>Company GST</strong></td>
@@ -2354,7 +2381,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
   </tr>
   <tr>
     <td ><strong>Address Line 1</strong></td>
-    <td><input type="text" name="address_line1" id="address_line1" class="input_txt" value="<?php echo $address_line1; ?>" /></td>
+    <td><input type="text" name="address_line1" id="address_line1" class="input_txt" value="<?php echo $address_line1; ?>" required/></td>
   </tr>
   <tr>
     <td ><strong>Address Line 2</strong></td>

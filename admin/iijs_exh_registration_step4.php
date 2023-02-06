@@ -1634,7 +1634,7 @@ $getgid = $getResult_signature['gid'];
 
 			
 // MANUAL iijs2021 DB CONNECTION
-$host2="localhost";
+$host2 = "192.168.40.107";
 $user2="appadmin";
 $password2="G@k593#sgtk";
 $dbname2="manual_iijs2021";

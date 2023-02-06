@@ -5,7 +5,7 @@ require('razorpay-php/Razorpay.php');
 use Razorpay\Api\Api;
 $api = new Api( $keyId,  $keySecret);
 //razorpay_order_id
-$sqlAPI = "SELECT * FROM `utr_history` WHERE 1 AND registration_id='".$_REQUEST['registration_id']."' AND (`event_selected` = 'iijstritiya23') AND (payment_status='pending' || payment_status='' ||  payment_status='captured' ) AND (razorpay_order_id!='' || razorpay_order_id IS NULL)";
+ $sqlAPI = "SELECT * FROM `utr_history` WHERE 1 AND registration_id='".$_REQUEST['registration_id']."' AND (`event_selected` = 'iijstritiya23') AND (payment_status='pending' || payment_status='' || payment_status='captured'  ) AND (razorpay_order_id!='' || razorpay_order_id IS NULL) AND source!='admin'";
 $querys =  $conn ->query($sqlAPI);
 while($result = $querys->fetch_assoc())
 {
@@ -15,7 +15,7 @@ while($result = $querys->fetch_assoc())
 	
 	$api  = new Api($keyId, $keySecret);
  	$payment = $api->order->fetch($razorpay_order_id)->payments();
-	//echo '<pre>'; print_r($payment);  exit;
+//echo '<pre>'; print_r($payment); exit;
 	//	print_r($payment['items']);
 	$payment_items = $payment['items'];
 	//echo '<pre>'; print_r($payment_items);

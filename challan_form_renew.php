@@ -34,7 +34,7 @@ $kycMessage = $apiResponse['Message'];
 // echo '<pre>';print_r($apiResponse);
 
 /*.....................Update the payment status................*/
-include 'indivisual_payment_status_update.php';
+//include 'indivisual_payment_status_update.php';
 
 $info_status = $conn ->query("select a.company_pan_no as `pan_no`,a.company_gstn as gst_no,b.status,region_id,b.member_type_id from registration_master a, information_master b where a.id='$registration_id' and b.registration_id='$registration_id' and b.status=1");
 $info_num = $info_status->num_rows;
@@ -869,25 +869,22 @@ $.validator.addMethod("gst_no", function(value, element) {
 	        success:function(result){
 	        	 $("#gst_check_loader").hide();
 	        	 $(".error").css("display","block");
-			    if(result.status=="success")
-			    {
-			    	localStorage.setItem("gst_true", gst_val);
+
+			    	if(data.success == true){
+				   if(data.response_code=="100"){
+					localStorage.setItem("gst_true", gst_val);
 			    	$('label[for="gst_no"]').html("");
 			        return true;
-			    }else if(result.status=="error1")
-			    {  
-			    	$('label[for="gst_no"]').html("GST is Inactive");
+				   }else{
+				   $('label[for="gst_no"]').html("Invalid GST Number");
 			    	localStorage.setItem("gst_false", gst_val);
-			        return false;
-			    }else if(result.status=="error2")
-			    {
-			    	$('label[for="gst_no"]').html("Invalid GST Number");
-			    	localStorage.setItem("gst_false", gst_val);
-			        return false;
+			        return false; 
+				   }
+				   
 				}else{
 					$('label[for="gst_no"]').html("No Record Found for this GST");
 					localStorage.setItem("gst_false", gst_val);
-					return false;
+					return false; 
 				}
 		    }
 	    }); 

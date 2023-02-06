@@ -3,17 +3,13 @@
 <?php include('../functions.php');?>
 <?php 
 $job_id=$_REQUEST['jid'];
-if (($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
+if(($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 {
-	$sql="delete from job_apply where id='$_REQUEST[id]'";
-	
-	if (!mysql_query($sql,$dbconn))
-	{
-		die('Error: ' . mysql_error());
-	}
-	echo"<meta http-equiv=refresh content=\"0;url=view_resume.php?jid=$job_id&action=view\">";
+	$sql="delete from job_apply where id=?";
+	$stmtd = $conn -> prepare($sql);
+	$stmtd->bind_param("i", $_REQUEST['id']);
+	if($stmtd->execute()){	echo"<meta http-equiv=refresh content=\"0;url=view_resume.php?jid=$job_id&action=view\">"; }
 }
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,10 +23,7 @@ if (($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>      
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 <script type="text/javascript" src="js/ddsmoothmenu.js"></script>
-
-
 <script type="text/javascript">
-
 ddsmoothmenu.init({
 	mainmenuid: "smoothmenu1", //menu DIV id
 	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
@@ -38,7 +31,6 @@ ddsmoothmenu.init({
 	//customtheme: ["#1c5a80", "#18374a"],
 	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
 })
-
 </script>
 
 <!--navigation end-->
@@ -58,7 +50,6 @@ ddsmoothmenu.init({
 <body>
 <div id="header_wrapper"><?php include("include/header.php");?></div>
 
-
 <div id="nav_wrapper">
 	<div class="nav"><?php include("include/menu.php");?></div>
 </div>
@@ -73,7 +64,7 @@ ddsmoothmenu.init({
 	<div class="content">
     	<div class="content_head"><a href="careers.php?action=view">Back To Careers</a> </div>
 
-<?php if($_REQUEST['action']=='view') {?>    	
+<?php if($_REQUEST['action']=='view'){ ?>    	
 <div class="content_details1">
         	
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
@@ -93,13 +84,13 @@ ddsmoothmenu.init({
     $attach = " order by ".$order_by." ".$asc_desc." ";
     
     $i=1;
-	$result = mysql_query("SELECT * FROM job_apply where 1 and job_id=$job_id ".$attach." ");
+	$result = $conn ->query("SELECT * FROM job_apply where 1 and job_id=$job_id ".$attach." ");
     $rCount=0;
-    $rCount = @mysql_num_rows($result);		
+    $rCount = $result->num_rows;		
     if($rCount>0)
     {	
-	while($row = mysql_fetch_array($result))
-	{	
+	while($row = $result->fetch_assoc())
+	{
     ?>  
  	<tr <?php if($i%2==0){echo "bgcolor='#CCCCCC'";}?>>
         <td><?php echo $i;?></td>
@@ -125,14 +116,9 @@ ddsmoothmenu.init({
 </table>
 </div>
 
-<?php } ?>        
-   
-    
+<?php } ?>         
     </div>
 </div>
-
 <div id="footer_wrap"><?php include("include/footer.php");?></div>
-
-
 </body>
 </html>

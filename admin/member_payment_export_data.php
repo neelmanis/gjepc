@@ -2,6 +2,7 @@
 session_start(); 
 ob_start();
 include('../db.inc.php');
+include('../functions.php');
 $date=date("d_m_Y");
 ?>
 
@@ -10,7 +11,7 @@ function reportLogs($category,$report_name,$conn)
 {
 	$adminID = intval($_SESSION['curruser_login_id']);
 	$adminName = strtoupper($_SESSION['curruser_contact_name']);
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = get_client_ip();
 	$query = "INSERT INTO report_logs SET post_date=NOW(),admin_id='$adminID',admin_name='$adminName',category='$category',report_name='$report_name',ip='$ip'";
 	$result = $conn->query($query);
 	if($result)
@@ -77,7 +78,7 @@ $table .= '<table border="1" cellpadding="0" cellspacing="0" width="100%">
 <td>Renewal Status</td>
 </tr>';
 
-$sql = "SELECT a.registration_id,c.`gcode`,t.`type_of_firm_name`,c.`company_name`, a.`Response_Code`,a.`ReferenceNo`,a.`Unique_Ref_Number`,a.`Transaction_Date`,a.total_payable,b.`c_bp_number`,b.`landline_no1`,b.`mobile_no`,a.`sales_order_no`,c.region_id ,d.`issue_membership_certificate_expire_status` as 'Issued Membership Certificate',d.membership_certificate_type,if(c.member_type_id = '5', 'Merchant','Manufacturer') as 'Member Type',d.eligible_for_renewal  FROM `challan_master` a,`communication_address_master` b , `information_master` c ,`approval_master` d,type_of_firm_master t WHERE a.`registration_id`=b.`registration_id` and a.`registration_id`=c.`registration_id` and a.`registration_id`=d.`registration_id` and c.type_of_firm=t.sap_value and a.`challan_financial_year`='2022' and b.type_of_address='2' and a.`Response_Code`='E000' group by b.`registration_id` order by region_id";
+$sql = "SELECT a.registration_id,c.`gcode`,t.`type_of_firm_name`,c.`company_name`, a.`Response_Code`,a.`ReferenceNo`,a.`Unique_Ref_Number`,`a`.`razorpay_order_id`,`a`.`Transaction_Date`,a.total_payable,b.`c_bp_number`,b.`landline_no1`,b.`mobile_no`,a.`sales_order_no`,c.region_id ,d.`issue_membership_certificate_expire_status` as 'Issued Membership Certificate',d.membership_certificate_type,if(c.member_type_id = '5', 'Merchant','Manufacturer') as 'Member Type',d.eligible_for_renewal  FROM `challan_master` a,`communication_address_master` b , `information_master` c ,`approval_master` d,type_of_firm_master t WHERE a.`registration_id`=b.`registration_id` and a.`registration_id`=c.`registration_id` and a.`registration_id`=d.`registration_id` and c.type_of_firm=t.sap_value and a.`challan_financial_year`='2022' and b.type_of_address='2' and (a.`Response_Code`='E000' OR a.`Response_Code`='captured') group by b.`registration_id` order by region_id";
 $result = $conn ->query($sql);
 while($row = $result->fetch_assoc())
 {	
@@ -86,7 +87,10 @@ $type_of_firm_name = $row['type_of_firm_name'];
 $company_name = $row['company_name'];
 $Response_Code = $row['Response_Code'];
 $ReferenceNo = $row['ReferenceNo'];
-$Unique_Ref_Number = $row['Unique_Ref_Number'];
+$razorpay_order_id = $row['razorpay_order_id'];
+$Unique_Ref_Number = "";
+if($Response_Code =="E000"){  $Unique_Ref_Number = $row['Unique_Ref_Number']; }else{ $Unique_Ref_Number = $row['razorpay_order_id']; } 
+
 $gettransaction_Date = $row['Transaction_Date'];
 $transaction_date = date("Y-m-d", strtotime($gettransaction_Date));
 	

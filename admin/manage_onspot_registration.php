@@ -5,8 +5,7 @@ include('../functions.php');
 if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; }
   $adminId = intval(filter($_SESSION['curruser_login_id']));
 	$admin_name = getAdminName($adminId,$conn);
-  ?>
-
+?>
 <?php
 if(($_REQUEST['action']=='updateApproval')&&($_REQUEST['id']!='') &&($_REQUEST['regid']!=''))
 {
@@ -24,6 +23,9 @@ if($_REQUEST['Reset']=="Reset")
   $_SESSION['category']="";
   $_SESSION['fname']="";
   $_SESSION['uniqueIdentifier']="";
+  $_SESSION['isDataPosted_Offline']="";
+  $_SESSION['isDataPosted']="";
+
   header("Location: manage_onspot_registration.php?action=view");
 } else
 {
@@ -38,11 +40,14 @@ if($_REQUEST['Reset']=="Reset")
 		$_SESSION['category'] = $_REQUEST['category'];
 		$_SESSION['fname'] = $_REQUEST['fname'];
 		$_SESSION['uniqueIdentifier'] = $_REQUEST['uniqueIdentifier'];
+		$_SESSION['isDataPosted_Offline']= $_REQUEST['isDataPosted_Offline'];
+  		$_SESSION['isDataPosted']= $_REQUEST['isDataPosted'];
     }
 }
 ?>
-<?php $shortcode = $_SESSION['event'];
-	$showInfo = $conn->query("SELECT * FROM visitor_event_master WHERE `shortcode`='$shortcode'");
+<?php 
+	$shortcode = $_SESSION['event'];
+	$showInfo = $conn->query("SELECT event_name FROM visitor_event_master WHERE `shortcode`='$shortcode'");
 	$showInfoResult = $showInfo->fetch_assoc();
 	$show_name = $showInfoResult['event_name'];
 ?>
@@ -50,17 +55,18 @@ if($_REQUEST['Reset']=="Reset")
 if(($_REQUEST['action']=='reset') && ($_REQUEST['id']!=''))
 {
 	$id = filter(intval($_REQUEST['id']));
-	$checkData = "SELECT isDataPosted FROM gjepclivedatabase.globalExhibition WHERE 1 and id='$id'" ;
-	$resultData =$conn->query($checkData);
+	$checkData = "SELECT isDataPosted,isDataPosted_Offline FROM gjepclivedatabase.globalExhibition WHERE 1 and id='$id'" ;
+	$resultData = $conn->query($checkData);
 	$rows = $resultData->fetch_assoc();
-	$isDataPosted=$rows['isDataPosted'];
+	$isDataPosted = $rows['isDataPosted'];
+	$isDataPosted_Offline = $rows['isDataPosted_Offline'];
 	if($isDataPosted=="Y")
 		$updateStatus='U';
 	else
 		$updateStatus='I';
 		
-	$sql="update gjepclivedatabase.globalExhibition set isDataPosted='N',updateStatus='$updateStatus' where id='$id'";
-	$query=$conn -> query($sql);
+	$sql = "update gjepclivedatabase.globalExhibition set isDataPosted='N',updateStatus='$updateStatus',isDataPosted_Offline='N' where id='$id'";
+	$query = $conn ->query($sql);
 	if($query) {
 		echo "<meta http-equiv=refresh content=\"0;url=manage_onspot_registration.php?action=view\">";
 	} else {
@@ -69,8 +75,8 @@ if(($_REQUEST['action']=='reset') && ($_REQUEST['id']!=''))
 }
 ?>
 <?php 
-if(isset($_REQUEST['update']) && $_REQUEST['update']=="UPDATE"){
-	
+if(isset($_REQUEST['update']) && $_REQUEST['update']=="UPDATE")
+{	
 	$id=$_REQUEST['id'];
 	$mobile=$_REQUEST['mobile'];
 	$email=$_REQUEST['email'];
@@ -78,12 +84,14 @@ if(isset($_REQUEST['update']) && $_REQUEST['update']=="UPDATE"){
 	$dose1_status=$_REQUEST['dose1_status'];
 	$dose2_status=$_REQUEST['dose2_status'];
 	$srl_report_url=$_REQUEST['srl_report_url'];
+	$plant_status=$_REQUEST['days_allow'];
 	//$booster_dose_status=$_REQUEST['booster_dose_status'];
 	
-	$checkData = "SELECT isDataPosted FROM gjepclivedatabase.globalExhibition WHERE 1 and id='$id'" ;
+	$checkData = "SELECT isDataPosted,isDataPosted_Offline FROM gjepclivedatabase.globalExhibition WHERE 1 and id='$id'" ;
 	$resultData = $conn->query($checkData);
 	$rows = $resultData->fetch_assoc();
-	$isDataPosted=$rows['isDataPosted'];
+	$isDataPosted = $rows['isDataPosted'];
+	$isDataPosted_Offline = $rows['isDataPosted_Offline'];
 	if($isDataPosted=="Y"){
 		$updateStatus='U';
 		$isDataPosted="N";
@@ -92,24 +100,51 @@ if(isset($_REQUEST['update']) && $_REQUEST['update']=="UPDATE"){
 		$isDataPosted="N";
 	}
 	
-	//$sql="update gjepclivedatabase.globalExhibition set mobile='$mobile',srl_report_url='$srl_report_url',status='$status',isDataPosted='$isDataPosted',updateStatus='$updateStatus',email='$email',dose1_status='$dose1_status',dose2_status='$dose2_status' where id='$id'";
-	$sql="update gjepclivedatabase.globalExhibition set mobile='$mobile',srl_report_url='$srl_report_url',status='$status',isDataPosted='$isDataPosted',updateStatus='$updateStatus',email='$email',dose2_status='$dose2_status' where id='$id'";
+	if($isDataPosted_Offline=="Y"){
+		$isDataPosted_Offline="N";
+	} else {
+		$isDataPosted_Offline="N";
+	}
+
+	$sql="update gjepclivedatabase.globalExhibition set mobile='$mobile',srl_report_url='$srl_report_url',status='$status',isDataPosted='$isDataPosted',updateStatus='$updateStatus',isDataPosted_Offline='$isDataPosted_Offline',email='$email',days_allow='$plant_status' where id='$id'";
 	$resultx = $conn -> query($sql);  
 	if($resultx) {
 	/* Maintain log */
-	$sqlLogs = "INSERT INTO visitor_approval_logs SET post_date=NOW(), visitor_id='$id',admin_id='$adminId',admin_name='$admin_name',type='onspot_approval',action='update'"; 
-	$resultLogs = $conn ->query($sqlLogs);
-	echo "<meta http-equiv=refresh content=\"0;url=manage_onspot_registration.php?action=view\">";
+		$sqlLogs = "INSERT INTO visitor_approval_logs SET post_date=NOW(), visitor_id='$id',admin_id='$adminId',admin_name='$admin_name',type='onspot_approval',action='update'"; 
+		$resultLogs = $conn ->query($sqlLogs);
+		echo "<meta http-equiv=refresh content=\"0;url=manage_onspot_registration.php?action=view\">";
 	} else {
-	die ("Mysql Insert Error: " . $conn->error);
+		die ("Mysql Insert Error: " . $conn->error);
 	}
 }
-//print_r($_SESSION);
 ?>
 <?php
 if($_REQUEST['action']=='onSpotRegistration')
 {
-	$mobile = $_POST['mobile'];
+	function compressImage($source, $destination, $quality) 
+	{
+    $imgInfo = getimagesize($source); 
+    $mime = $imgInfo['mime']; 
+    switch($mime){ 
+        case 'image/jpeg': 
+            $image = imagecreatefromjpeg($source); 
+            break; 
+        case 'image/png': 
+            $image = imagecreatefrompng($source); 
+            break; 
+        case 'image/jpg': 
+            $image = imagecreatefromgif($source); 
+            break; 
+        default: 
+            $image = imagecreatefromjpeg($source); 
+    } 
+    // Save image 
+    imagejpeg($image, $destination, $quality); 
+    // Return compressed image 
+    return $destination; 
+	}
+
+	$mobile = trim($_POST['mobile']);
 	$email = $_POST['email'];
 	$path = "onspot/".$mobile."/";
 	if (!file_exists($path)) {
@@ -124,21 +159,36 @@ if($_REQUEST['action']=='onSpotRegistration')
 	} 
 	
 	$visitor_photo = $_FILES['visitor_photo']['name'];
+	$visitor_photo = str_replace(" ","_",$visitor_photo);
+	$visitor_photo = str_replace(".php","",$visitor_photo);
+	$visitor_photo = str_replace("'","",$visitor_photo);
+	
 	$tmp = $_FILES['visitor_photo']['tmp_name'];
 	$ext = pathinfo($visitor_photo, PATHINFO_EXTENSION);
 
+	/*
 	$vaccine_certificate = $_FILES['vaccine_certificate']['name'];
 	$tmp1 = $_FILES['vaccine_certificate']['tmp_name'];
 	$ext1 = pathinfo($vaccine_certificate, PATHINFO_EXTENSION);
+	*/
 	
 	if($ext=="jpg" || $ext=="JPG" || $ext=="png" || $ext=="PNG" || $ext=="jpeg" || $ext=="JPEG")
 	{
-		$actual_image_name = $visitor_photo;
-		$target_path=$path.$actual_image_name;	
-		move_uploaded_file($tmp,$target_path);
-	}else{
+		$random_name = rand();
+		$actual_image_name = $mobile.'_'.$random_name.$visitor_photo;
+		$target_path = $path.$actual_image_name;		
+		//move_uploaded_file($tmp,$target_path); // comment because of compress image
+		$compressedImage = compressImage($tmp, $target_path, 75); 
+		if($compressedImage)
+		{
+				echo $upload_image = $mobile.'_'.$random_name.$visitor_photo;
+		} else {
+				echo $upload_image = "failed";
+		}
+	} else {
 		echo "<script> alert('Please upload visitor image only');</script>";
 	}
+	/*
 	if($ext1=="jpg" || $ext1=="JPG" || $ext1=="png" || $ext1=="PNG" || $ext1=="jpeg" || $ext1=="pdf")
 	{
 		$actual_certificate_name = $vaccine_certificate;
@@ -146,15 +196,18 @@ if($_REQUEST['action']=='onSpotRegistration')
 		move_uploaded_file($tmp1,$target_path);
 	}else{
 		echo "<script> alert('Please upload allowed extension vaccine file only');</script>";
-	}
+	}*/
 	
 	$event = $_POST['event'];
 	$fname = $_POST['fname'];
 	$pan_no = $_POST['pan_no'];
 	$designation = $_POST['designation'];
 	$company = $_POST['company'];
-	$certificate=$_POST['valueType'];
+	$country = $_POST['country'];
+	$state = $_POST['state'];
+	$city = $_POST['city'];
 	$recommended_by=$_POST['recommended_by'];
+	/*$certificate=$_POST['valueType'];
 	if($certificate=="dose1"){
 		$dose1_status="Y";
 		$dose2_status="P";
@@ -162,7 +215,7 @@ if($_REQUEST['action']=='onSpotRegistration')
 	elseif($certificate=="dose2"){
 		$dose2_status="Y";
 		$dose1_status="P";
-	}
+	} */
 		
 	$photo_url="https://gjepc.org/admin/".$path.$actual_image_name;
 	$vaccine_url="https://gjepc.org/admin/".$path.$actual_certificate_name;
@@ -172,25 +225,26 @@ if($_REQUEST['action']=='onSpotRegistration')
 	if($agency_category=='INTL'){
 		$participant_Type='INTL';
 		$agency_category="";
-	}
-	else{
+	} else {
 		$participant_Type='CONTR';
 	}
 		
-	$registration_id=substr($mobile,0,4);
-	$visitor_id=substr($mobile,0,4);
+	$registration_id = substr($mobile,0,4);
+	$visitor_id = substr($mobile,0,4);
 	
-	$checkData = "SELECT * FROM gjepclivedatabase.globalExhibition WHERE 1 and mobile='$mobile'" ;
-	$resultData =$conn->query($checkData);
+	$checkData = "SELECT mobile FROM gjepclivedatabase.globalExhibition WHERE 1 and mobile='$mobile'" ;
+	$resultData = $conn->query($checkData);
 	$countData =  $resultData->num_rows;
 	if($countData>0){
-		echo "<script> alert('This Mobile no is already exist');</script>";
-	}else{
-	$global = "INSERT INTO gjepclivedatabase.globalExhibition SET `uniqueIdentifier`='$uniqueIdentifier',registration_id='$registration_id',visitor_id='$visitor_id',fname='$fname',mobile='$mobile',email='$email',pan_no='$pan_no',designation='$designation',company='$company',photo_url='$photo_url',vaccine_url='$vaccine_url',srl_report_url='$srl_report_url',participant_Type='$participant_Type',agency_category='$agency_category',covid_report_status='negative',certificate='$certificate',days_allow='all',isDataPosted='N',status='Y',dose1_status='$dose1_status',dose2_status='$dose2_status',event='$event',onspot_adminId='$adminId',onspot_add_date=NOW(),`recommended_by`='$recommended_by'";
+		//echo "<script> alert('This Mobile no is already exist');</script>";
+		echo "<script langauge=\"javascript\">alert(\"Sorry This Mobile no is already exist.\");location.href='manage_onspot_registration.php?action=view';</script>";
+			exit;
+	} else {
+	$global = "INSERT INTO gjepclivedatabase.globalExhibition SET `uniqueIdentifier`='$uniqueIdentifier',registration_id='$registration_id',visitor_id='$visitor_id',fname='$fname',mobile='$mobile',email='$email',pan_no='$pan_no',designation='$designation',company='$company',photo_url='$photo_url',participant_Type='$participant_Type',agency_category='$agency_category',days_allow='',isDataPosted='N',isDataPosted_Offline='N',status='Y',event='$event',onspot_adminId='$adminId',onspot_add_date=NOW(),`recommended_by`='$recommended_by',country='$country',state='$state',city='$city'";
 	$globalQuery = $conn ->query($global);
 	if(!$globalQuery) die ($conn->error);
 	}
-	 header("Location: manage_onspot_registration.php?action=view");
+	header("Location: manage_onspot_registration.php?action=view");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -243,7 +297,6 @@ ddsmoothmenu.init({
 .fancybox-button--zoom,.fancybox-button--play,.fancybox-button--thumbs,.fancybox-button--arrow_left,.fancybox-button--arrow_right,.fancybox-infobar{display:none!important;}
 </style>
 <style type="text/css">
-
 .inner {/*  border: 1px solid #ccc;
 */
     border: 1px solid #ccc;
@@ -286,7 +339,8 @@ padding: .35em;
 		</div>
 		
 			<div style="float:right; margin-right: 15px; margin-bottom: 15px;">
-				<a href="export_active_badge_report.php?action=add">Download active badge report</a>
+				<a href="export_active_badge_report.php?action=add">Download All active badge report</a> | 
+				<a href="export_vis_badge_report.php?action=add">Download VIS active badge report</a>
 			</div>
 				<div style="clear:both"></div>
 		 <div style="float:right;">
@@ -317,10 +371,14 @@ $_SESSION['succ_msg']="";
     <td>
         <select name="event" id="event" class="input_txt-select">
         <option value="">Select Event</option>
-        <?php 
-          $events_result = $conn->query("SELECT * FROM visitor_event_master WHERE 1");
-          	while($events_rows = $events_result->fetch_assoc()){?>
-  					<option value="<?php echo $events_rows['shortcode']; ?>" <?php if($_SESSION['event']==$events_rows['shortcode']){echo "selected='selected'";}?>><?php echo $events_rows['event_name']; ?></option>
+        <?php        
+        $events_result = $conn->query("SELECT * FROM visitor_event_master WHERE 1");
+        while($events_rows = $events_result->fetch_assoc()){ ?>
+					<?php if($_SESSION['event'] != '' && !empty($_SESSION['event'])){ ?>
+						<option value="<?php echo $events_rows['shortcode']; ?>" <?php if($_SESSION['event']==$events_rows['shortcode']  ){echo "selected='selected'";}?>><?php echo $events_rows['event_name']; ?></option>
+					<?php } else { ?>
+						<option value="<?php echo $events_rows['shortcode']; ?>" <?php if("signature23"==$events_rows['shortcode']  ){echo "selected='selected'";}?>><?php echo $events_rows['event_name']; ?></option>
+					<?php } ?>
 			<?php } 
         ?>
         </select>
@@ -337,6 +395,7 @@ $_SESSION['succ_msg']="";
         <option value="EXHM" <?php if($_SESSION['category']=='EXHM'){echo "selected='selected'";}?>>Machinery Exhibitor</option>
         <option value="CONTR" <?php if($_SESSION['category']=='CONTR'){echo "selected='selected'";}?>>Contractor/Agency</option>
         <option value="IGJME" <?php if($_SESSION['category']=='IGJME'){echo "selected='selected'";}?>>IGJME</option>
+        <option value="G" <?php if($_SESSION['category']=='G'){echo "selected='selected'";}?>>Guest</option>
         </select>
     </td>
 </tr>
@@ -359,6 +418,24 @@ $_SESSION['succ_msg']="";
 <tr>
   <td><strong>Mobile Number</strong></td>
   <td><input type="text" name="mobile" id="mobile" class="input_txt" value="<?php echo $_SESSION['mobile'];?>" autocomplete="off"/></td>
+</tr>
+<tr>
+    <td><strong>Data Posted to online</strong></td>
+    <td> <select name="isDataPosted" id="isDataPosted" class="input_txt"> 
+  	        <option value="">Select Status</option>
+  	        <option value="Y">Yes</option>
+  	        <option value="N">No</option>
+  	    </select> 
+    </td>
+</tr>
+<tr>
+    <td><strong>Data Posted to Offline</strong></td>
+    <td> <select name="isDataPosted_Offline" id="isDataPosted_Offline" class="input_txt"> 
+  	        <option value="">Select Status</option>
+  	        <option value="Y">Yes</option>
+  	        <option value="N">No</option>
+  	    </select> 
+    </td>
 </tr>
 <tr>
 </tr>
@@ -391,13 +468,16 @@ $_SESSION['succ_msg']="";
     <td>Comment</td>
 	<td>Type</td>
     <td>Status</td>
-	<!--<td>D1 Status</td>-->
+	<!--<td>D1 Status</td>
 	<td>Face Status</td>
 	<td>D2 Status</td>
-	<!--<td>D3 Status</td>-->
-	<td>Down</td>
+	<td>D3 Status</td>-->
+	<td>Plant</td>
+	<td>Down Online</td>
+	<td>Down Offline</td>
 	<td>OTP</td>
 	<td width="7%" align="center">Action</td>
+	<td>Badge</td>
   </tr>
     <?php  
 		$page=1;//Default page
@@ -412,6 +492,8 @@ $_SESSION['succ_msg']="";
 		if($_SESSION['event']!="")
 		{
 			$sql.=" and event = '".$_SESSION['event']."'";
+		} else {
+			$sql.=" and event = 'signature23'";
 		}
 		if($_SESSION['category']!="")
 		{
@@ -438,6 +520,14 @@ $_SESSION['succ_msg']="";
 		{
 			$sql.=" and mobile like '%".$_SESSION['mobile']."%'";
 		}
+		if($_SESSION['isDataPosted']!="")
+		{
+			$sql.=" and isDataPosted like '%".$_SESSION['isDataPosted']."%'";
+		}
+		if($_SESSION['isDataPosted_Offline']!="")
+		{
+			$sql.=" and isDataPosted_Offline like '%".$_SESSION['isDataPosted_Offline']."%'";
+		}
 		$result = $conn ->query($sql);
 
 		$rCount = $result->num_rows;
@@ -448,97 +538,109 @@ $_SESSION['succ_msg']="";
 		{ 
 		while($rows = $result1->fetch_assoc())
 		{
-			$company_name=$rows['company'];
+			$company_name = trim($rows['company']);
 			$event=$rows['event'];
 			$visitor_name=$rows['fname'];
 			$pan_no=$rows['pan_no'];
 			$mobile=$rows['mobile'];
 			$email=$rows['email'];
-			$srl_report_url=$rows['srl_report_url'];
 			$participant_Type=$rows['participant_Type'];
 			$agency_category=$rows['agency_category'];
 			$status=$rows['status'];
 			$face_status=$rows['face_status'];
-			$dose1_status=$rows['dose1_status'];
-			$dose2_status=$rows['dose2_status'];
-			$booster_dose_status=$rows['booster_dose_status'];
+			$days_allow = $rows['days_allow']; // Plant status
 			$isDataPosted=$rows['isDataPosted'];
-			$otp = trim($rows['otp']);			
-  ?>
-    <form action="" method="POST">
-	<tr>
-		<td><?php echo $rows['uniqueIdentifier'];?></td>
-		<td><?php echo strtoupper($event);?></td>
-		<td><?php echo strtoupper($company_name);?></td>
-		<td><?php echo strtoupper($visitor_name);?></td>
-		<?php if($_SESSION['category']=="INTL"){?>
-		<td><input type="text" name="email" id='email' value="<?php echo $email;?>" /></td>
-		<?php } else { ?>
-		<td><?php echo $pan_no;?></td>
-		<td><input type="text" name="mobile" id='mobile' value="<?php echo $mobile;?>" /></td>
-		<?php } ?>
-		<td>
-			<input type="text" name='srl_report_url' id='srl_report_url' value="<?php echo $srl_report_url;?>" />
-		</td> 
-		<td>
-		<?php if($participant_Type=="CONTR"){echo $agency_category;}else{echo $participant_Type;}?></td>		
-		<td>
-		<select name="status" <?php if($status=="R"){ ?>  disabled="disabled" <?php }?>>
-			<option <?php if($status=="Y"){?> selected <?php }?>>Y</option>
-			<option <?php if($status=="P"){?> selected <?php }?>>P</option>
-			<option <?php if($status=="D"){?> selected <?php }?>>D</option>
-			<option <?php if($status=="DA"){?> selected <?php }?>>DA</option>
-			<option <?php if($status=="R"){ ?> selected <?php }?>>R</option> 
-		</select>
-		</td> 
-		<!--<td>
-		<select name="dose1_status">
-			<option <?php if($dose1_status=="Y"){?> selected <?php }?>>Y</option>
-			<option <?php if($dose1_status=="N"){?> selected <?php }?>>N</option>
-			<option <?php if($dose1_status=="P"){?> selected <?php }?>>P</option>
-		</select>
-		</td>--> 
-		<td>
-		<select name="face_status">
-			<option <?php if($face_status=="Y"){?> selected <?php }?>>Y</option>
-			<option <?php if($face_status=="N"){?> selected <?php }?>>N</option>
-			<option <?php if($face_status=="P"){?> selected <?php }?>>P</option>
-		</select>
-		</td>
-		<td>
-		<select name="dose2_status">
-			<option <?php if($dose2_status=="Y"){?> selected <?php }?>>Y</option>
-			<option <?php if($dose2_status=="N"){?> selected <?php }?>>N</option>
-			<option <?php if($dose2_status=="P"){?> selected <?php }?>>P</option>
-		</select>
-		</td>
-		<!--<td>
-		<select name="booster_dose_status">
-			<option <?php if($booster_dose_status=="Y"){?> selected <?php }?>>Y</option>
-			<option <?php if($booster_dose_status=="N"){?> selected <?php }?>>N</option>
-			<option <?php if($booster_dose_status=="P"){?> selected <?php }?>>P</option>
-		</select>
-		</td>-->
-		<td><?php echo $isDataPosted;?></td>
-		<td><?php echo $otp;?></td>
-		<td>
-		<input type="hidden" name="id" value="<?php echo $rows['id']?>"/>
-		
-		<?php if($_SESSION['curruser_login_id']=='1'){ ?>
-		<input type="submit" value="UPDATE" name="update" style="background-image: url('images/update_icon.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;height: 16px; width: 16px;cursor:pointer;" title="UPDATE">
-		
-		<a href="manage_onspot_registration.php?action=reset&id=<?php echo $rows['id'];?>"><img src="images/reset.png" title="Reset" border="0" width="16" height="16" /></a>
-		<?php } ?>
-		
-		<?php if($_SESSION['curruser_login_id']=='91' || $_SESSION['curruser_login_id']=='131' || $_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='44'){?>
-		<td>
-		<input type="submit" value="UPDATE" name="update" style="background-image: url('images/update_icon.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;height: 16px; width: 16px;cursor:pointer;" title="UPDATE">
-		</td>
-		<?php }?>
-	</tr>
-	</form>
-  <?php
-   $i++;
+			$isDataPosted_Offline=$rows['isDataPosted_Offline'];
+			$srl_report_url=$rows['srl_report_url'];
+			$otp = trim($rows['otp']);
+			if($days_allow =='' || $days_allow== 'null' || $days_allow== 'all'){ $days_allow = 'P'; } elseif($days_allow =='Y'){ $days_allow = 'Y'; }
+  			?>
+			<form action="" method="POST">
+				<tr>
+					<td><?php echo $rows['uniqueIdentifier'];?></td>
+					<td><?php echo strtoupper($event);?></td>
+					<td><?php echo strtoupper($company_name);?></td>
+					<td><?php echo strtoupper($visitor_name);?></td>
+					<?php if($_SESSION['category']=="INTL"){ ?>
+						<td><input type="text" name="email" id='email' value="<?php echo $email;?>" /></td>
+					<?php } else { ?>
+						<td><?php echo $pan_no;?></td>
+						<td><input type="text" name="mobile" id='mobile' value="<?php echo $mobile;?>" /></td>
+					<?php } ?>
+					<td>
+						<input type="text" name='srl_report_url' id='srl_report_url' value="<?php echo $srl_report_url;?>" />
+					</td> 
+					<td>
+					<?php if($participant_Type=="CONTR"){echo $agency_category;}else{echo $participant_Type;}?></td>		
+					<td>
+						<select name="status" <?php if($status=="R"){ ?>  disabled="disabled" <?php }?>>
+							<option <?php if($status=="Y"){?> selected <?php }?>>Y</option>
+							<option <?php if($status=="P"){?> selected <?php }?>>P</option>
+							<option <?php if($status=="D"){?> selected <?php }?>>D</option>
+							<option <?php if($status=="DA"){?> selected <?php }?>>DA</option>
+							<option <?php if($status=="R"){ ?> selected <?php }?>>R</option> 
+						</select>
+					</td> 
+					<!--<td>
+					<select name="dose1_status">
+						<option <?php if($dose1_status=="Y"){?> selected <?php }?>>Y</option>
+						<option <?php if($dose1_status=="N"){?> selected <?php }?>>N</option>
+						<option <?php if($dose1_status=="P"){?> selected <?php }?>>P</option>
+					</select>
+					</td> 
+					<td>
+					<select name="face_status">
+						<option <?php if($face_status=="Y"){?> selected <?php }?>>Y</option>
+						<option <?php if($face_status=="N"){?> selected <?php }?>>N</option>
+						<option <?php if($face_status=="P"){?> selected <?php }?>>P</option>
+					</select>
+					</td>
+					<td>
+					<select name="dose2_status">
+						<option <?php if($dose2_status=="Y"){?> selected <?php }?>>Y</option>
+						<option <?php if($dose2_status=="N"){?> selected <?php }?>>N</option>
+						<option <?php if($dose2_status=="P"){?> selected <?php }?>>P</option>
+					</select>
+					</td>-->
+					<!--<td>
+					<select name="booster_dose_status">
+						<option <?php if($booster_dose_status=="Y"){?> selected <?php }?>>Y</option>
+						<option <?php if($booster_dose_status=="N"){?> selected <?php }?>>N</option>
+						<option <?php if($booster_dose_status=="P"){?> selected <?php }?>>P</option>
+					</select>
+					</td>-->
+					<td>
+						<select name="days_allow">
+							<option <?php if($days_allow=="Y"){?> selected <?php }?>>Y</option>
+							<option <?php if($days_allow=="P"){?> selected <?php }?>>P</option>
+						</select>
+					</td>
+					<td><?php echo $isDataPosted;?></td>
+					<td><?php echo $isDataPosted_Offline;?></td>
+					<td><?php echo $otp;?></td>
+					<td>
+					<input type="hidden" name="id" value="<?php echo $rows['id']?>"/>
+					
+					<?php if($_SESSION['curruser_login_id']=='1' || $_SESSION['curruser_login_id']=='197'){ ?>
+						<input type="submit" value="UPDATE" name="update" style="background-image: url('images/update_icon.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;height: 16px; width: 16px;cursor:pointer;" title="UPDATE">
+						<a href="manage_onspot_registration.php?action=reset&id=<?php echo $rows['id'];?>"><img src="images/reset.png" title="Reset" border="0" width="16" height="16" /></a>
+					<?php } ?>
+					
+					<?php if($_SESSION['curruser_login_id']=='91' || $_SESSION['curruser_login_id']=='131' || $_SESSION['curruser_login_id']=='28' || $_SESSION['curruser_login_id']=='44'){ ?>
+					<td>
+						<input type="submit" value="UPDATE" name="update" style="background-image: url('images/update_icon.png'); border:none; background-repeat:no-repeat;background-size:100% 100%;height: 16px; width: 16px;cursor:pointer;" title="UPDATE">
+					</td>
+					<?php } ?>
+					<td>
+						<?php if($srl_report_url == '1000') { ?>
+							<a href="https://registration.gjepc.org/dump-visitor-badge.php?action=generateBadge&uniqueIdentifier=<?php echo $rows['uniqueIdentifier']; ?>" target="_blank">Download Blank Badge</a>
+						<?php } else { ?>
+							<a href="https://registration.gjepc.org/visitor-badge.php?action=generateBadge&uniqueIdentifier=<?php echo $rows['uniqueIdentifier']; ?>" target="_blank"> Download</a>
+						<?php } ?>		
+					</td>
+				</tr>
+			</form>
+	<?php $i++;
 	} }else{
    ?>
 	<tr>
@@ -569,9 +671,9 @@ if(($_REQUEST['action']=='add'))
         <select name="event" id="event" class="show-tooltip input_txt">
         <option value="">Select Event</option>
         <?php 
-          $events_result = $conn->query("SELECT * FROM visitor_event_master WHERE 1 AND shortcode='iijs22'");
+          $events_result = $conn->query("SELECT * FROM visitor_event_master WHERE 1 AND shortcode='signature23'");
           	while($events_rows = $events_result->fetch_assoc()){?>
-  					<option value="<?php echo $events_rows['shortcode']; ?>" <?php if($events_rows['shortcode'] =="iijs22"){echo "selected='selected'";}?>><?php echo $events_rows['event_name']; ?></option>
+  					<option value="<?php echo $events_rows['shortcode']; ?>" <?php if($events_rows['shortcode'] =="signature23"){echo "selected='selected'";}?>><?php echo $events_rows['event_name']; ?></option>
 			<?php } 
         ?>
         </select>
@@ -586,7 +688,7 @@ if(($_REQUEST['action']=='add'))
 		<?php $categoryGet =$conn->query("SELECT * FROM visitor_vendor_category WHERE status='1' and onspot_status='1'") ;
 		while($rowCat = $categoryGet->fetch_assoc()){?>
 		<option value="<?php echo $rowCat['short_name'];?>"><?php echo $rowCat['cat_name'];?></option>
-		<?php   }?>
+		<?php } ?>
 	</select>
 	</tr>
     <tr>
@@ -595,15 +697,15 @@ if(($_REQUEST['action']=='add'))
     </tr> 
 	<tr>
 		<td ><strong>Visitor Photo</strong></td>
-		<td><input type="file" name="visitor_photo" id="visitor_photo" class="input_txt"  />(jpg,jpeg,png)</td>
+		<td><input type="file" name="visitor_photo" id="visitor_photo" class="input_txt"/>(jpg,jpeg,png)</td>
 	</tr>
 	<tr>
 		<td class="content_txt">Mobile: <span class="star">*</span></td>
-		<td><input type="text" name="mobile" id="mobile" title="Please enter  Mobile" class="show-tooltip input_txt" value=""/></td>
+		<td><input type="text" name="mobile" id="mobile" title="Please enter Mobile" class="show-tooltip input_txt" value=""/></td>
 	</tr> 
 	<tr>
-		<td class="content_txt">Email: <span class="star">*</span></td>
-		<td><input type="text" name="email" id="email" title="Please enter  Email" class="show-tooltip input_txt" value=""/></td>
+		<td class="content_txt">Email: <span class="star"></span></td>
+		<td><input type="text" name="email" id="email" title="Please enter Email" class="show-tooltip input_txt" value=""/></td>
 	</tr> 
 	<tr>
 		<td class="content_txt">Pan:</td>
@@ -616,19 +718,51 @@ if(($_REQUEST['action']=='add'))
 	<tr>
 		<td class="content_txt">Company: <span class="star">*</span></td>
 		<td><input type="text" name="company" id="company" title="Please enter  company" class="show-tooltip input_txt" value=""/></td>
-	</tr> 	
-
-	<tr>
+	</tr>
+	<!--<tr>
 		<td ><strong>Select Dose</strong></td>
 		<td>
-			<!--<label><input type="radio" checked name="valueType" id="dose1" value="dose1"> Dose 1</label>-->
+			<!--<label><input type="radio" checked name="valueType" id="dose1" value="dose1"> Dose 1</label>
 			<label><input type="radio" checked name="valueType" id="dose2" value="dose2"> Dose 2</label>
 		</td>
 	</tr>
 	<tr>
 		<td><strong>Vaccine Certificate</strong></td>
 		<td><input type="file" name="vaccine_certificate" id="vaccine_certificate" class="input_txt"  />(jpg,jpeg,png,pdf)</td>
+	</tr>-->
+	<tr>
+	<td class="content_txt">Select Country: <span class="star">*</span></td>
+	<td>
+		<select name="country" id="country" class="show-tooltip input_txt" >
+		<option value="">Select Country</option>
+		<?php $categoryGet =$conn->query("SELECT * FROM country_master where 1 order by country_name ASC");
+		while($rowCat = $categoryGet->fetch_assoc()){ ?>
+		<option value="<?php echo $rowCat['country_name'];?>" ><?php echo $rowCat['country_name'];?></option>
+		<?php } ?>
+		</select>
+	</td>
 	</tr>
+	
+	<tr>
+	<td class="content_txt">Select State: </td>
+	<td>
+	<div id="stateDiv">
+       <select name="state" id="state" class="form-control">
+        <option value="">--- Select State ---</option>
+		<?php $categoryGet =$conn->query("SELECT state_name from state_master WHERE country_code = 'IN'") ;
+		while($rowCat = $categoryGet->fetch_assoc()){?>
+		<option value="<?php echo $rowCat['state_name'];?>" ><?php echo $rowCat['state_name'];?></option>
+		<?php } ?>
+		</select>
+	</div>	
+	</td>
+	</tr>
+
+	<tr>
+		<td class="content_txt">City: <span class="star">*</span></td>
+		<td><input type="text" name="city" id="city" title="Please Enter City" class="show-tooltip input_txt" value=""/></td>
+	</tr>
+						
 	<tr>
 		<td class="content_txt">Recommended By: <span class="star">*</span></td>
 		<td><input type="text" name="recommended_by" id="recommended_by" title="Please enter  recommended person name" class="show-tooltip input_txt" value=""/></td>
@@ -760,6 +894,12 @@ $().ready(function() {
 			company: {
 				required: true,
 			},
+			country: {
+				required: true,
+			},
+			city: {
+				required: true,
+			},
 			// vaccine_certificate: {
 			// 	required: true,
 			// 	specialChrs: true
@@ -787,10 +927,41 @@ $().ready(function() {
 			company: {
 				required: "Required",		
 			},
+			country: {
+				required: "Required",		
+			},
+			city: {
+				required: "Required",		
+			},
 			// vaccine_certificate: {
 			// 	required: "Required",
 			// }
 	 }
 	});
 });
+</script>
+<script>
+$(document).ready(function(){
+	$("#stateDiv").hide();
+$("#country").change(function(){
+	country = $("#country").val();
+	//$('#stateDiv').attr('disabled' , true);
+	
+		$.ajax({
+					type: 'POST',
+					url: 'ajax.php',
+					data: "actiontype=getCity&country="+country,
+					dataType:'html',
+					beforeSend: function(){
+							$('.loader').show();
+							},
+					success: function(data){
+							$('.loader').hide();
+							//alert(data);
+							$("#stateDiv").show();
+							$("#stateDiv").html(data);  
+							}
+		});
+ });
+ });
 </script>

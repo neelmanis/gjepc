@@ -4,29 +4,28 @@ include ("../db.inc.php");
 include('../functions.php');
 
 if(isset($_POST['actiontype']) && $_POST['actiontype']=="getCity"){
-$country=$_POST['country'];
-$query=mysql_query("SELECT * from state_master WHERE country_code = '$country'");
-if($country=="IN"){
+$country = $_POST['country'];
+
+if($country=="India"){
+$query = $conn ->query("SELECT * from state_master WHERE country_code = 'IN'");
 ?>
-	  <div class="field_name">State / Province <span>*</span> :</div>
         <div class="field_input">
           <select name="state" id="state" class="bgcolor">
               <option value="">----------Select State ----------</option>
-              <?php while($result=mysql_fetch_array($query)){?>
-              <option value="<?php echo $result['state_code'];?>"><?php echo $result['state_name'];?></option>
+              <?php while($result = $query->fetch_assoc()){ ?>
+              <option value="<?php echo $result['state_name'];?>"><?php echo $result['state_name'];?></option>
               <?php }?>
           </select>
-	</div>
+		</div>
     <div class="clear"></div>
-      <span id="error_first_name"></span>
-<?php } else { ?>
-<div class="field_name">State / Province <span>*</span> :</div>
+<?php } /* else { ?>
+<div class="field_name">State<span>*</span> :</div>
 <div class="field_input">
 <input type="text" class="bgcolor" id="state" name="state" />
 </div>
 <div class="clear"></div>
    <span id="error_first_name"></span>
-<?php } ?>
+<?php } */?>
 <?php } ?>
 
 <?php 
@@ -128,6 +127,10 @@ if(strtoupper($country)=="IN")
 		$charge="22000";
 	}
 	else if($section=="allied")
+	{
+		$charge="22000";
+	}
+	else if($section=="lgd")
 	{
 		$charge="22000";
 	}
@@ -814,6 +817,8 @@ $membershipfees=0;
 }?>
 <?php
 if(isset($_POST['actiontype']) && $_POST['actiontype']=="getSavedTemplatedOnType"){
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 	$category = $_POST["msg_type"];
     $query=$conn->query("SELECT * from whatsapp_templates_master WHERE category = '$category' and status='1'");
 

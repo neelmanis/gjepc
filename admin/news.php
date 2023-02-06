@@ -2,6 +2,9 @@
 session_start();
 include('../db.inc.php');
 include('../functions.php');
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
 if(!isset($_SESSION['curruser_login_id'])){	header("location:index.php"); exit; }
 $adminID	=	intval($_SESSION['curruser_login_id']);
 if($adminID!=1){ header("location:index.php"); exit; }
@@ -31,9 +34,9 @@ if($_REQUEST['action']=='save')
 	if(isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
 		
 	$post_date 	= 	date("Y-m-d",strtotime($_REQUEST['post_date']));
-	$n_name		=	$_REQUEST['name'];
-	$short_desc	=	$_REQUEST['short_desc'];
-	$long_desc	=	$_REQUEST['long_desc'];
+	$n_name		=	$conn->real_escape_string($_REQUEST['name']);
+	$short_desc	=	$conn->real_escape_string($_REQUEST['short_desc']);
+	$long_desc	=	$conn->real_escape_string($_REQUEST['long_desc']);
 	$order_no	=	$_REQUEST['order_no'];
 	$top_news	=	$_POST['top_news'];
     $slug = createSlug("news_master","slug",$n_name,$conn);
@@ -97,9 +100,9 @@ if($_REQUEST['action']=='save')
 if(($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 {
 if(isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
-	$n_name=$_REQUEST['name'];
-	$short_desc=$_REQUEST['short_desc'];
-	$long_desc=$_REQUEST['long_desc'];
+	$n_name= $conn->real_escape_string($_REQUEST['name']);
+	$short_desc= $conn->real_escape_string($_REQUEST['short_desc']);
+	$long_desc=$conn->real_escape_string($_REQUEST['long_desc']);
 	$order_no=$_REQUEST['order_no'];
 	$post_date = date("Y-m-d",strtotime($_REQUEST['post_date']));
 	

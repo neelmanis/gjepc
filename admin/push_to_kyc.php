@@ -14,11 +14,11 @@ if(!empty($_POST))
 	$company_pan=$row['pan_no'];
 	$company_bp_number=$row['c_bp_number'];
 	
-	//echo "http://api.mykycbank.com/service.svc/44402aeb2e5c4eef8a7100f048b97d84/newbpid/".$company_bp_number."/".$company_pan."/".$company_name; exit;
+	//echo "https://api.mykycbank.org/service.svc/44402aeb2e5c4eef8a7100f048b97d84/newbpid/".$company_bp_number."/".$company_pan."/".$company_name; exit;
 		$curl = curl_init();
 		
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => "http://api.mykycbank.com/service.svc/44402aeb2e5c4eef8a7100f048b97d84/newbpid/".$company_bp_number."/".$company_pan."/".$company_name,
+		CURLOPT_URL => "https://api.mykycbank.org/service.svc/44402aeb2e5c4eef8a7100f048b97d84/newbpid/".$company_bp_number."/".$company_pan."/".$company_name,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
@@ -33,7 +33,7 @@ if(!empty($_POST))
 		
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-		
+		//echo '<pre>'; print_r($response); exit;
 		curl_close($curl);
 		
 		if ($err) {

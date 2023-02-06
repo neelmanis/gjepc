@@ -830,7 +830,7 @@ if(isset($_POST['actionType']) && $_POST['actionType']=="sendOTP"){
 		$isSent = get_data($message,$mobile_no);
 		if($isSent ==TRUE){
 		$conn->query("update parichay_card_otp_check set otp='$otp',check_status='0' where mobile_no='$mobile_no'");
-		}
+		}else { echo 'Not send'; }
 		}
 	else {
 		$isSent = get_data($message,$mobile_no);

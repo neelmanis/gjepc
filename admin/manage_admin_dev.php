@@ -130,7 +130,7 @@ if(($_REQUEST['action']=='update')&&($_REQUEST['id']!=''))
 <title>Welcome to GJEPC</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <!--navigation-->
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 <script type="text/javascript" src="js/ddsmoothmenu.js"></script>
 <script type="text/javascript">
@@ -143,6 +143,22 @@ ddsmoothmenu.init({
 })
 </script>
 
+<script>
+$(document).ready(function() {
+  $('.child').on('change', ':checkbox', function() {
+    if ($(this).is(':checked')) {
+      var currentRow = $(this).closest('tr');
+      var targetedRow = currentRow.prevAll('.parent').first();
+      var targetedCheckbox = targetedRow.find(':checkbox');
+      targetedCheckbox.prop('checked', true).trigger('change');
+    }
+  });
+  
+  $(".parent-category").on("click", function(){
+    $(this).parent().find(":checkbox").prop('checked', true);
+  });
+});
+</script>
 <script language="javascript">
 function checkdata()
 {
@@ -567,7 +583,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
         ?>
         <fieldset class="scheduler-border">
         <legend class="scheduler-border"> 
-		<input type="checkbox" name="reports_category[]" value="<?php echo $row['category'];?>" <?php if(in_array($row['category'], $adminReports_category)){ echo "checked='checked'";}?>> &nbsp; <?php echo $row['category'];?> &nbsp;
+		<input type="checkbox" name="reports_category[]" value="<?php echo $row['category'];?>" <?php if(in_array($row['category'], $adminReports_category)){ echo "checked='checked'";}?> class="parent-category"> &nbsp; <?php echo $row['category'];?> &nbsp;
 		</legend>
         <?php 
 		$result1=$conn->query("SELECT * FROM report_master where status='1' AND category='$category'");
@@ -575,7 +591,7 @@ if(($_REQUEST['action']=='add') || ($_REQUEST['action']=='edit'))
 		while($row1=$result1->fetch_assoc()){ 
 		if ($i % 2 == 0)
         echo '<br>'; ?>
-        <input type="checkbox" name="reports_access[]" value="<?php echo $row1['slug'];?>" <?php if(in_array($row1['slug'], $adminReportAccess)){ echo "checked='checked'";}?>>&nbsp; <?php echo $row1['title'];?>&nbsp;
+        <input type="checkbox" name="reports_access[]" value="<?php echo $row1['slug'];?>" <?php if(in_array($row1['slug'], $adminReportAccess)){ echo "checked='checked'";}?> class="child-category">&nbsp; <?php echo $row1['title'];?>&nbsp;
         <?php $i++; } ?>
         </fieldset>
         <?php } ?>        

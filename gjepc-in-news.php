@@ -1396,6 +1396,10 @@ include 'db.inc.php';
             <h2 class="title">TV Interviews</h2>            
             <div class="video_listing">
 
+            <div class="mx-3">
+                    <a data-fancybox href="https://www.youtube.com/watch?v=ATe9U4UNHMg" class="d-block"><img src="assets/images/video_thumb/gjepc_news/20.12.2022.jpg" class="img-fluid d-block" alt=""></a>
+                </div>
+
 
               <div class="mx-3">
                     <a data-fancybox href="https://www.youtube.com/watch?v=RLP8VlITTl4" class="d-block"><img src="assets/images/video_thumb/gjepc_news/18.10.2022.jpg" class="img-fluid d-block" alt=""></a>

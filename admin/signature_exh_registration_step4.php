@@ -11,7 +11,7 @@ $gid = intval($_REQUEST['id']);
 $registration_id = intval($_REQUEST['registration_id']);
 $modified_date = date("Y-m-d");
 
-include('fetch_space_signature_order.php'); /* Space SIGNATURE order status API */
+include('fetch_space_signature_order.php'); /* Space SIGNATURE order status API */ 
 
 /*............................Check Membershi Status........................................*/
 $schk_membership="SELECT * FROM `approval_master`  WHERE 1 and `registration_id`='".$registration_id."' and issue_membership_certificate_expire_status='Y'";
@@ -44,10 +44,10 @@ if($country=='IN')
 if(($_REQUEST['action']=='del') && ($_REQUEST['id']!=''))
 {
 	$ssx = "INSERT INTO utr_history_log
-		SELECT * FROM  utr_history WHERE id='$_REQUEST[utr_id]' AND `registration_id`='$_REQUEST[registration_id]' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='ALLOTMENT' AND source='admin'";
+		SELECT * FROM  utr_history WHERE id='$_REQUEST[utr_id]' AND `registration_id`='$_REQUEST[registration_id]' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='SPACE' AND source='admin'";
 	$queryData = $conn->query($ssx);
 	if($queryData){
-	$sql = "delete from utr_history where id='$_REQUEST[utr_id]' AND registration_id='$_REQUEST[registration_id]' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='ALLOTMENT' AND source='admin'";
+	$sql = "delete from utr_history where id='$_REQUEST[utr_id]' AND registration_id='$_REQUEST[registration_id]' AND `show`='IIJS SIGNATURE 2023'  AND source='admin'";
 	$result = $conn->query($sql);
 	}
 	if(!$result){die($conn->error);}
@@ -65,7 +65,9 @@ if($saveUTR=="saveinfo")
 	$year = 2023;
 	$amountPaid = $_POST['amountPaid'];
 	$tdsAmount = $_POST['tdsAmount'];
+	$payment_made_for = $_POST['payment_made_for'];
 	if(empty($event)) { $eventError = "Plz Select Event Participated"; }
+	elseif(empty($payment_made_for)) { $payment_madeError = "Plz Select Payment Type"; }
 	elseif(empty($utr_number)) { $utrNameError = "Plz Enter UTR Number"; }
 	elseif(empty($amountPaid)) { $amountPaidError = "Plz Enter Amount Paid"; }
 	else {
@@ -83,7 +85,7 @@ if($saveUTR=="saveinfo")
 			$resultUTR = $conn->query($updateUTR);
 			if($resultUTR) { $utrNameSuccess = "Saved Successfully"; }
 			} else {
-			  $insertUTR = "INSERT INTO `utr_history`(`post_date`, `registration_id`,`gcode`, `utr_number`,`amountPaid`, `tdsAmount`, `show`,`event_selected`, `year`, `status`,`source`,`payment_made_for`,`payment_date`,`payment_status`,`merchant_order_id`,`utr_approved`,`adminid`,`comment`) VALUES (NOW(),'$registration_id','$gid','$utr_number','$amountPaid','$tdsAmount','$event_for','$event','$year','1','admin','ALLOTMENT','$utr_date','captured','$utr_number','Y','$adminID','ALLOTMENT')";
+			  $insertUTR = "INSERT INTO `utr_history`(`post_date`, `registration_id`,`gcode`, `utr_number`,`amountPaid`, `tdsAmount`, `show`,`event_selected`,`year`,`status`,`source`,`payment_made_for`,`payment_date`,`payment_status`,`merchant_order_id`,`utr_approved`,`adminid`,`comment`) VALUES (NOW(),'$registration_id','$gid','$utr_number','$amountPaid','$tdsAmount','$show','$event','$year','1','admin','$payment_made_for','$utr_date','captured','$utr_number','Y','$adminID','$payment_made_for')";
 			$resultUTR = $conn->query($insertUTR);
 			if($resultUTR) { $utrNameSuccess = "Saved Successfully"; }
 		}
@@ -678,7 +680,9 @@ else
 		});
     });
 </script>
-
+<style>
+.error {   color: red; }
+</style>
 </head>
 
 <body>
@@ -698,7 +702,7 @@ else
 	<div class="content">
     
     <div class="content_head">IIJS > Exhibitor Registration
-      <div style="float:right; padding-right:10px; font-size:12px;"><a href="iijs_exhibitor_rgistration.php">Back to Search</a></div>
+      <div style="float:right; padding-right:10px; font-size:12px;"><a href="signature_exhibitor_rgistration.php">Back to Search</a></div>
     </div>
     	
 <div class="clear"></div>
@@ -884,17 +888,17 @@ $_SESSION['error_msg']="";
 			<tbody>
 			<!-------------------------- Start Partial --------------------------------------------->
 			<?php
-			$utrExistSuccess = "SELECT * FROM `utr_history` WHERE registration_id='$registration_id' AND gcode='$gid' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='SPACE' AND payment_status='captured'";
+			 $utrExistSuccess = "SELECT * FROM `utr_history` WHERE registration_id='$registration_id'  AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='SPACE' AND payment_status='captured'";
 			$existResultSuccess = $conn->query($utrExistSuccess);
 			$rowmx = $existResultSuccess->fetch_assoc();
 		//	$isDone = $rowmx['IsDone']; 
 			$sap_so_status = $rowmx['sap_so_status']; 
-			$sales_order_no = trim($rowmx['first_sales_order_no']);			
+			 $sales_order_no = trim($rowmx['first_sales_order_no']);			
 		//	$part_salesorder_status = $rowmx['part_salesorder_status'];
 		//	$order_no = $rowmx['utr_number']; 
 		//	$numSuccess = $existResultSuccess->num_rows;
 		
-			 $utrExistAll = "SELECT * FROM `utr_history` WHERE registration_id='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='ALLOTMENT' AND comment='ALLOTMENT' ";
+			$utrExistAll = "SELECT * FROM `utr_history` WHERE registration_id='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND payment_made_for='ALLOTMENT'"; 
 			$existResultAll = $conn->query($utrExistAll);
 			while($printutrAll = $existResultAll->fetch_assoc())
 			{
@@ -920,13 +924,19 @@ $_SESSION['error_msg']="";
 				<td align="center"><?php echo $amountPaid;?></td>
 				<td align="center"><?php echo $cheque_tds_amount;?></td>					
 				<td align="center"><?php echo $utr_payment_status;?></td>				
-			
-			<?php if(($part_salesorder_status =='0' || $part_salesorder_status =='')&& $isDone==0 && $sales_order_no!='' && $utr_payment_status=='captured') { ?>
+			<?php //echo $part_salesorder_status.'=='.$part_salesorder_status.'=='.$isDone.'=='.$sales_order_no.'<br/>';?>
+			<?php if(($part_salesorder_status =='0' || $part_salesorder_status =='') && $isDone==0 && $sales_order_no !=='' && $utr_payment_status=='captured') { ?>
+
 					<td align="center" class="part" data-url="<?php echo $sales_order_no;?> <?php echo $registration_id;?> <?php echo $getUTR_no;?>">Click Partial </td>
+
 					<?php } elseif($utr_payment_status!='captured') { ?>
+
 					<td align="center">NO SO</td>
+
 					<?php } else { ?>
+
 					<td align="center"><a onclick="return(window.confirm('Sales Order Already Created'));"><img src="images/active.png"/></a></td>
+
 					<?php } ?>
 					
 					<?php if($adminID==160 || $adminID==28 || $adminID==1 && $source=='admin'){?>
@@ -1525,24 +1535,22 @@ Disapprove Reason
 		<input type="hidden" name="gid" value="<?php echo $_REQUEST['id'];?>">
 		<input type="hidden" name="saveUTR" value="saveinfo">
 		<table border="1" cellspacing="0" cellpadding="5" style="margin-bottom:10px;" width="100%">
-			<th>ADD UTR DETAIL</th>
+			<th>ADD Payment DETAIL</th>
 		</table>
 		<table border="1" cellspacing="0" cellpadding="5" style="margin-bottom:10px;" width="100%">
 			<thead>
 				<th align="center">Event Participated: </th>
+				<th align="center">Payment Type :</th>
 				<th align="center">UTR Number :</th>
 				<th align="center">UTR Date :</th>
 				<th align="center">Amount Paid :</th>
 				<th align="center">TDS Amount(If Any) :</th>
 			</thead>
 			<tr>
-				<td>
-				
-				  <div class="selection">
-					
+				<td>					
 				<select name="event" id="event" class="select-control">
 					<?php
-					$getEvent = "SELECT * FROM `exh_event_master` WHERE   country='IN' AND `eventDescription`='IIJS SIGNATURE 2023'";				
+					$getEvent = "SELECT * FROM `exh_event_master` WHERE country='IN' AND `eventDescription`='IIJS SIGNATURE 2023'";
 					$eventResult = $conn->query($getEvent);
 					while($eventRow = $eventResult->fetch_assoc()){ ?>				
 					<option value="">--Select Event--</option>
@@ -1551,12 +1559,19 @@ Disapprove Reason
 				</select>
 				<?php if(isset($eventError)) { echo  '<span style="color: red;"/>'.$eventError.'</span>';} ?>
 				</td>
+				<td>					
+				<select name="payment_made_for" id="payment_made_for" class="select-control">			
+					<option value="">--Select Payment Type--</option>
+					<option value="SPACE">First Payment</option>
+					<option value="ALLOTMENT" selected>Second Payment</option>
+				</select>
+				<?php if(isset($payment_madeError)) { echo  '<span style="color: red;"/>'.$payment_madeError.'</span>';} ?>
+				</td>
 				<td>
 				<input type="text" class="form-control" id="utr_number" name="utr_number" value=""/>
 				<?php if(isset($utrNameError)) { echo  '<span style="color: red;"/>'.$utrNameError.'</span>';} ?>
 				</td>
 				<td align="center"><input type="date" name="utr_date" name="utr_date" value="<?php echo $utr_date;?>" /></td>
-				
 				<td>
 				<input type="number" class="form-control" id="amountPaid" name="amountPaid" value="" onkeypress="return isNumberKey(event)"/>
 				<?php if(isset($amountPaidError)) { echo  '<span style="color: red;"/>'.$amountPaidError.'</span>';} ?>
@@ -1570,7 +1585,7 @@ Disapprove Reason
 	    </table>
 	</form>
 	
-<?php
+<?php /*
 if(isset($_POST['publish'])) {
         # Publish-button was clicked
 //		echo '<pre>'; print_r($_POST); exit;
@@ -1602,14 +1617,12 @@ elseif(isset($_POST['saveSign'])) {
 		echo $iijs20Update = "Insert into utr_history_last_year set amountPaid='$amountPaid',registration_id='$registration_id',utr_number='IIJS Signature 2021',`show`='IIJS Signature 2021',year='2021'";	
 		$iijs20ResultUpdate = $conn->query($iijs20Update);
 	}
-}
+} */
 ?>
 
 <?php
-
 $utrExist1 = "SELECT sum(amountPaid) as `amountPaid`,sum(tdsAmount) as `tdsAmount` FROM `utr_history` WHERE registration_id='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND payment_status='captured'";
-$existResult1 = $conn->query($utrExist1);	
-			
+$existResult1 = $conn->query($utrExist1);
 while($printutr1 = $existResult1->fetch_assoc())
 {				
 	$amountPaid1 = $printutr1['amountPaid'];
@@ -1618,15 +1631,30 @@ while($printutr1 = $existResult1->fetch_assoc())
 
 function getSpaceTDSAmount($registration_id,$conn)
 {
-	$query_sel1 = "select cheque_tds_amount from exh_reg_payment_details where uid='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND event_selected='iijs' limit 0,1";
+	$query_sel1 = "select cheque_tds_amount from exh_reg_payment_details where uid='$registration_id' AND `show`='IIJS SIGNATURE 2023' AND event_selected='signature23' limit 0,1";
 	$result_sel1 = $conn->query($query_sel1);								
 	$row = $result_sel1->fetch_assoc();								
 	return $row['cheque_tds_amount'];							
 }
+//if($tdsAmountUTR1=='0'){ echo 'zero';} else { echo 'not zero';}
 
-$tds_amount1 = getSpaceTDSAmount($registration_id,$conn) + $tdsAmountUTR1;
+if($tdsAmountUTR1=='0'){
+	$tdsAmount1 = getSpaceTDSAmount($registration_id,$conn); 
+} else {
+	$tdsAmount1 = $tdsAmountUTR1;
+	/*if(){
+	
+	} else { 
+	
+	} */
+}
+
+//echo '--'.$firstTDS = getSpaceTDSAmount($registration_id,$conn); 
+//echo '<--'.$tdsAmountUTR1;
+//echo $tds_amount1;
+//$tdsAmount1 = getSpaceTDSAmount($registration_id,$conn) + $tdsAmountUTR1;
 //echo getSpaceTDSAmount($registration_id,$conn).'==='.$tdsAmountUTR1;
-$tdsAmount1 = $tds_amount1;
+//$tdsAmount1 = $tds_amount1;
 
 $getSql_signature = "select * from exh_registration where uid='$registration_id' AND curr_last_yr_check='Y' AND `show`='$shows'";
 $getQuery_signature = $conn->query($getSql_signature);	
@@ -1636,15 +1664,14 @@ $getgid = $getResult_signature['gid'];
 
 			
 // MANUAL iijs2021 DB CONNECTION
-$host2="localhost";
+$host2 = "192.168.40.107";
 $user2="appadmin";
 $password2="G@k593#sgtk";
-$dbname2="manual_iijs2021";
+$dbname2="manual_signature";
 // Create connection
 $conn2 = new mysqli($host2, $user2, $password2, $dbname2);
 
-//$sexh="select * from  exh_registration where uid='$registration_id' and gid='$gid' and `show`='$show' order by gid desc";
-$sexh = "SELECT * FROM  `manual_iijs2021`.`iijs_exhibitor` WHERE  `manual_iijs2021`.`iijs_exhibitor`.Exhibitor_Registration_ID = '$registration_id' ";
+$sexh = "SELECT * FROM `manual_signature`.`iijs_exhibitor` WHERE `manual_signature`.`iijs_exhibitor`.Exhibitor_Registration_ID = '$registration_id' ";
 $qexh=$conn2->query($sexh); /* Don't forget to uncomment $conn*/
 $rexh=$qexh->fetch_assoc();
 $section=$rexh['Exhibitor_Section'];
@@ -1672,6 +1699,10 @@ if($Exhibitor_Country_ID == "IN")
 		$charge="22000";
 	}
 	else if($section=="diamond_colorstone" && $allotted_women =="0")
+	{
+		$charge="22000";
+	}
+	else if($section=="lgd" && $allotted_women =="0")
 	{
 		$charge="22000";
 	}
@@ -1724,162 +1755,46 @@ if($Exhibitor_Country_ID == "IN")
 }
 
 if($rexh['Exhibitor_Premium']=="premium"){
-	$categoryINR=0.25;
-	$category_per=25;
+	$category_per=0.15;
+	$category_per=15;
 } else {
 	if($category=="normal")
 	{
-		$categoryINR=0;
+		$category_per=0;
 		$category_per=0;
 	}		
 	else if($category=="corner_2side")
 	{
-		$categoryINR=0.1;
+		$category_per=0.01;
 		$category_per=10;
 	}
 	else if($category=="corner_3side")
 	{
-		$categoryINR=0.1;
+		$category_per=0.01;
 		$category_per=10;
 	}
 	else if($category=="island_4side")
 	{
-		$categoryINR=0.15;
+		$category_per=0.15;
 		$category_per=15;
 	}
 }
 
 $space_rate	=	intval($get_area*$charge);
-$category_rate = $space_rate*$categoryINR;
-$sub_total_cost = floatval($space_rate+$category_rate);
+$category_cost = floatval($space_rate*$category_per)/100;
+
+$sub_total_cost = floatval($space_rate+$category_cost);
 $security_deposit = floatval($sub_total_cost*10)/100;
-$category_rate = $space_rate*$categoryINR;
+
 if($exempt_gst =="1"){
 	$gst_percentage ="0";	
 }else if($exempt_gst =="0"){
   $gst_percentage ="18";
 }	
 $govt_service_tax = floatval($sub_total_cost*$gst_percentage)/100;
-
-//echo round($sub_total_cost+$security_deposit+$govt_service_tax);exit;
 $grand_total1 = round($sub_total_cost+$security_deposit+$govt_service_tax);	
 ?>
-
-
-<!-- <table id="example" class="display" cellspacing="0" border="1" width="100%">
-        <thead style="font-family:verdana; color:#fff; background-color:#924b77">
-            <tr>
-				<th></th>
-				<th></th>
-				<th align="center">Amount</th>
-            </tr>
-        </thead>       
-        <tbody>
-            <tr>
-                <td align='center'>Area </td>
-                <td><?php //echo $rexh['selected_area'];?></td>
-                <td></td>
-            </tr> 
-			<tr>
-                <td align='center'>Space Cost</td>
-                <td><?php //echo $charge;?></td>
-                <td><?php //echo $rexh['tot_space_cost_rate'];?></td>
-            </tr> 
-			<tr>
-                <td align='center'>Space cost after Incentive</td>
-                <td><?php //echo $space_rate_discount_per;?></td>
-                <td><?php //echo $rexh['incentive_value'];?></td>
-            </tr>
-			<tr>
-                <td align='center'>After Discount Space Cost</td>
-                <td></td>
-                <td><?php //echo $rexh['get_tot_space_cost_rate'];?></td>
-            </tr>
-            <tr>
-                <td align='center'>Premium</td>
-                <td><?php //echo $selected_premium_per;?></td>
-                <td><?php //echo $rexh['selected_premium_rate'];?></td>
-            </tr>             
-			<tr>
-                <td align='center'>Selected scheme rate</td>
-                <td><?php //echo $category_per."%";?></td>
-                <td><?php //echo $rexh['selected_scheme_rate'];?></td>
-            </tr> 
-			<tr>
-                <td align="right">Sub Total</td>
-                <td></td>
-                <td><?php //echo $rexh['sub_total_cost'];?></td>
-            </tr> 
-			<tr>
-                <td align='center'>10% Sec Dep.</td>
-                <td>10%</td>
-                <td><?php //echo $rexh['security_deposit'];?></td>
-            </tr> 
-			<tr>
-                <td align='center'>18% GST</td>
-                <td><?php //echo $gst_percentage;?>%</td>
-                <td><?php //echo $rexh['govt_service_tax'];?></td>
-            </tr> 
-			<tr>
-                <td align="right">TOTAL</td>
-                <td></td>
-                <td><?php //echo $rexh['grand_total'];?></td>
-            </tr> 
-			<?php
-			// $iijs2020 ="SELECT * FROM utr_history_last_year where registration_id='$registration_id' AND `show`='IIJS 2020'";
-			// $iijs2020Query = $conn->query($iijs2020);
-			// $iijs2020Result = $iijs2020Query->fetch_assoc();
-			
-			// $iijs2021 ="SELECT * FROM utr_history_last_year where registration_id='$registration_id' AND `show`='IIJS Signature 2021'";
-			// $iijs2021Query = $conn->query($iijs2021);
-			// $iijs2021Result = $iijs2021Query->fetch_assoc();
-			?>
-			<form method="POST" name="form1" action="">
-			<tr>
-                <td align="right">Amount Paid IIJS 2020</td>
-                <td></td>
-                <td><input type="text" name="amountPaid" value="<?php //echo $iijs2020Result['amountPaid'];?>"></td>
-				<td><input type="submit" name="publish" value="update"></td>
-            </tr>
-			<tr>
-                <td align="right">TDS 2020</td>
-                <td></td>
-                <td><input type="text" name="tdsAmount" value="<?php //echo $iijs2020Result['tdsAmount'];?>"></td>
-				<td><input type="submit" name="publish" value="update"></td>
-            </tr> 
-			</form>
-			<form method="POST" name="form2" action="">
-			<tr>
-                <td align="right">Amount Paid SIGNATURE 2021</td>
-                <td></td>
-                <td><input type="text" name="amountPaid" value="<?php //echo $iijs2021Result['amountPaid'];?>"></td>
-				<td><input type="submit" name="saveSign" value="update"></td>
-            </tr>
-			</form>
-			<tr>
-                <td align="right">Amount Paid IIJS 2021</td>
-                <td></td>
-                <td><?php //echo $totalAmountPaid;?></td>
-            </tr> 
-			<tr>
-                <td align="right">Total Amount Paid</td>
-                <td></td>
-                <td><?php //echo $totalAmountPaids = $iijs2020Result['amountPaid']+$iijs2021Result['amountPaid']+$totalAmountPaid;?></td>
-            </tr> 			
-			
-            <tr>
-                <td align="right">TDS 2021</td>
-                <td></td>
-                <td><?php //echo $totalTdsAmount;?></td>
-            </tr> 
-			<tr>
-                <td align="right"><b>Balance Payment</b></td>
-                <td></td>
-                <td><b><?php //echo $amountUnpaid = $rexh['grand_total']-($totalAmountPaids+$totalTdsAmount+$iijs2020Result['tdsAmount']);?></b></td>
-            </tr> 
-		</tbody>
-</table> -->
-		
+	
 <form onsubmit="return validation()">
         <table id="example" class="display" cellspacing="0" border="1" width="100%">
         <thead style="font-family:verdana; color:#fff; background-color:#924b77">
@@ -1916,9 +1831,9 @@ $grand_total1 = round($sub_total_cost+$security_deposit+$govt_service_tax);
                 <td><?php echo $premium_rate;?></td>
             </tr>-->             
 			<tr>
-                <td align='center'>Premium</td>
+                <td align='center'>Premium Charges</td>
                 <td><?php echo $category_per."%";?></td>
-                <td><?php echo $category_rate;?></td>
+                <td><?php echo $category_cost;?></td>
             </tr> 
 			<tr>
                 <td align="right">TOTAL</td>
@@ -1949,11 +1864,16 @@ $grand_total1 = round($sub_total_cost+$security_deposit+$govt_service_tax);
                 <td align="right">Total TDS Paid</td>
                 <td></td>
                 <td><?php echo $tdsAmount1;?></td>
+            </tr>
+			<tr>
+                <td align="right">Total Amount Paid</td>
+                <td></td>
+                <td><?php echo $totalAmountPaid = $amountPaid1+$tdsAmount1;?></td>
             </tr> 
 			<tr>
                 <td align="right">Balance Payment</td>
                 <td></td>
-                <td><?php echo $amountUnpaid = $grand_total1-($amountPaid1+$tdsAmount1);?></td>
+                <td><?php echo $amountUnpaid = $grand_total1-$totalAmountPaid;?></td>
             </tr> 
 			
 			<tr>
@@ -2046,7 +1966,7 @@ $(".tds").click(function() {
         	$("#overlay").show();
     	},
 		success:function(data)
-		{ 	console.log(data); 
+		{ 	console.log(data); exit;
 			if($.trim(data)==1){
 				alert("Sales Order successfully Created..");; 
 				window.location.reload(true);

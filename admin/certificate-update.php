@@ -3,60 +3,64 @@ session_start();
 include('../db.inc.php');
 include('../functions.php');
 
-if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; } ?>
+if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit; }
+$adminID = intval($_SESSION['curruser_login_id']);
+$admin_name = getAdminName($adminID,$conn);
+ ?>
+
 <?php
 $action=$_REQUEST['action'];
 if($action=="update")
 {
 $registration_id = intval($_REQUEST['registration_id']);
-$member_type_id  = $_REQUEST['member_type_id'];
+$membership_id = $_REQUEST['membership_id'];
+$membership_certificate_type = $_REQUEST['membership_certificate_type'];
+$invoice_no = $_REQUEST['invoice_no'];
+$receipt_no = $_REQUEST['receipt_no'];
+$invoice_date = $_REQUEST['invoice_date'];
 
-//$iec_issue_date=date('d-m-Y',strtotime($_REQUEST['iec_issue_date']));
-if($member_type_id==5){
-$merchant_certificate_no = $_REQUEST['merchant_certificate_no'];
-$manufacturer_certificate_no  = "";
-} else {
-$manufacturer_certificate_no  = $_REQUEST['manufacturer_certificate_no'];
-$merchant_certificate_no = "";
-}
-
-$e_rcmc_certificate_no=$_REQUEST['e_rcmc_certificate_no'];
-
-$rcmc_certificate_issue_date  = $_REQUEST['rcmc_certificate_issue_date'];
-$rcmc_certificate_expire_date = $_REQUEST['rcmc_certificate_expire_date'];
-
-
-
-$sql1="UPDATE `approval_master` SET `rcmc_certificate_issue_date`='$rcmc_certificate_issue_date',`rcmc_certificate_expire_date`='$rcmc_certificate_expire_date',`merchant_certificate_no`='$merchant_certificate_no',`manufacturer_certificate_no`='$manufacturer_certificate_no',e_rcmc_certificate_no='$e_rcmc_certificate_no' WHERE registration_id='$registration_id'";
+$sql1="UPDATE `approval_master` SET membership_id='$membership_id',membership_certificate_type='$membership_certificate_type',invoice_no='$invoice_no',receipt_no='$receipt_no',invoice_date='$invoice_date',receipt_date='$invoice_date',ie_download_status='admin' WHERE registration_id='$registration_id'";
 $result = $conn ->query($sql1);   
 if (!$result) die ($conn->error);
+
+/*.................................... Maintain Approval Log ..............................................*/
+$getCompany = getNameCompany($registration_id,$conn);
+$getCompanyName = str_replace(array('&amp;','&AMP;'), '&', $getCompany);
+$update_log = "insert into membership_approval_logs set post_date=NOW(),type='update_membership_certificate',registration_id='$registration_id',company='$getCompanyName',admin_id='$adminID',admin_name='$admin_name',action='Y',reason='update membership certificate from admin'";
+$update_result_log = $conn ->query($update_log);
+if (!$update_result_log) die ($conn->error);
 
 $_SESSION['succ_msg']="Information updated successfully";
 header("Location: membership.php?action=view");
 }
 
+
 $registration_id = intval($_REQUEST['registration_id']);
-$sql="SELECT * FROM `information_master` WHERE 1 and registration_id=$registration_id";
+$sql="SELECT member_type_id FROM `information_master` WHERE 1 and registration_id=$registration_id";
 $result = $conn ->query($sql);
 $rows   = $result->fetch_assoc();
-$company_name=$rows['company_name'];
-$member_type_id=$rows['member_type_id'];
+
+$getCompany = getNameCompany($registration_id,$conn);
+$company_name = str_replace(array('&amp;','&AMP;'), '&', $getCompany);
+
+$member_type_id = $rows['member_type_id'];
 
 $sqly="SELECT * FROM `approval_master` WHERE 1 and registration_id=$registration_id";
 $resulty = $conn ->query($sqly);
 $rowsy   = $resulty->fetch_assoc();
-$merchant_certificate_no=$rowsy['merchant_certificate_no'];
-$manufacturer_certificate_no=$rowsy['manufacturer_certificate_no'];
-$e_rcmc_certificate_no=$rowsy['e_rcmc_certificate_no'];
-$rcmc_certificate_issue_date=$rowsy['rcmc_certificate_issue_date'];
-$rcmc_certificate_expire_date=$rowsy['rcmc_certificate_expire_date'];
+
+$membership_id = $rowsy['membership_id'];
+$membership_certificate_type = $rowsy['membership_certificate_type'];
+$invoice_no = $rowsy['invoice_no'];
+$invoice_date = $rowsy['invoice_date'];
+$receipt_no = $rowsy['receipt_no'];
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Update RCMC Form ||GJEPC||</title>
+<title>Update Membership Certificate ||GJEPC||</title>
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -93,12 +97,12 @@ ddsmoothmenu.init({
 <div class="clear"></div>
 
 <div class="breadcome_wrap">
-	<div class="breadcome"><a href="admin.php">Home</a> > Membership  > RCMC Certificate Update</div>
+	<div class="breadcome"><a href="admin.php">Home</a> > Membership  > Membership Certificate Update</div>
 </div>
 
 <div id="main"> 
 	<div class="content">
-    	<div class="content_head">RCMC Certificate Update
+    	<div class="content_head">Membership Certificate Update
     </div>
     	
 <!--<form class="cmxform" method="post" name="from1" id="form1">-->
@@ -125,39 +129,44 @@ echo "</span>";
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="detail_txt" >
     <tr class="orange1">
-    <td colspan="11">RCMC Certificate Details</td>
+    <td colspan="11">Membership Certificate Details</td>
     </tr>
 	<tr>
     <td width="27%"><strong>Company Name </strong></td>
     <td width="73%"><?php echo $company_name;?></td>
     </tr>
  	<tr>
-    <td><strong>Member Type </strong></td>
-    <td><?php if($member_type_id==5){ echo "Merchant"; } else { echo "Manufacturer"; } ?>
-	<input type="hidden" name="member_type_id" class="input_txt_new" value="<?php echo $member_type_id;?>"/></td>
+		<td><strong>Member Type </strong></td>
+		<td><?php if($member_type_id==5){ echo "Merchant"; } else { echo "Manufacturer"; } ?></td>
 	</tr>
 	<tr>
-    <td><strong> <?php if($member_type_id==5){ echo "Merchant"; } else { echo "Manufacturer"; } ?> RCMC NO </strong></td>
-    <td><?php if($member_type_id==5){ ?>
-	<input type="text" name="merchant_certificate_no" id="merchant_certificate_no" class="input_txt_new" value="<?php echo $merchant_certificate_no;?>"/>
-	<?php } else { ?>
-	<input type="text" name="manufacturer_certificate_no" id="manufacturer_certificate_no" class="input_txt_new" value="<?php echo $manufacturer_certificate_no;?>"/>
-	<?php } ?>
-	</td>
+	  <td><strong>Membership Id</strong></td>
+	  <td><input type="text" name="membership_id" id="membership_id" class="input_txt_new" value="<?php echo $membership_id;?>" />
+      </td>
 	</tr>
 	<tr>
-	  <td><strong>E RCMC NO </strong></td>
-	  <td><input type="text" name="e_rcmc_certificate_no" id="e_rcmc_certificate_no" class="input_txt_new" value="<?php echo $e_rcmc_certificate_no;?>" />
+	  <td><strong>Membership Type</strong></td>
+	  <td>
+	  <select class="form_text_text" name="membership_certificate_type" id="membership_certificate_type" >
+		<option value="0">--- Select ---</option>
+		<option value="ZASSOC" <?php if($membership_certificate_type=="ZASSOC") echo 'selected="selected"'; ?>>ASSOCIATE</option>
+		<option value="ZORDIN" <?php if($membership_certificate_type=="ZORDIN") echo 'selected="selected"'; ?>>ORDINARY</option>
+	  </select>
+      </td>
+	</tr>
+	<tr>
+	  <td><strong>Invoice No</strong></td>
+	  <td><input type="text" name="invoice_no" id="invoice_no" class="input_txt_new" value="<?php echo $invoice_no;?>" />
+      </td>
+	</tr>
+	<tr>
+	  <td><strong>Receipt No</strong></td>
+	  <td><input type="text" name="receipt_no" id="receipt_no" class="input_txt_new" value="<?php echo $receipt_no;?>" />
       </td>
 	</tr>
     <tr>
 	  <td><strong>Date of Issue </strong></td>
-	  <td><input type="date" name="rcmc_certificate_issue_date" id="rcmc_certificate_issue_date" class="input_txt_new" value="<?php echo $rcmc_certificate_issue_date;?>" />
-      </td>
-	</tr>
-	<tr>
-	  <td><strong>Upto</strong></td>
-	  <td><input type="date" name="rcmc_certificate_expire_date" id="rcmc_certificate_expire_date" class="input_txt_new" value="<?php echo $rcmc_certificate_expire_date;?>" />
+	  <td><input type="date" name="invoice_date" id="invoice_date" class="input_txt_new" value="<?php echo $invoice_date;?>" />
       </td>
 	</tr>
     </tbody>

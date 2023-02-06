@@ -61,7 +61,7 @@ if($_REQUEST['action']=='save')
 				if(@move_uploaded_file($_FILES['upload_tender']['tmp_name'], $target_path))
 				{
 				$upload_tender = $temp_code.'_'.$file_name;
-				$sqlx="INSERT INTO tender_master (name,upload_tender,status,post_date,adminId) VALUES ('$name','$upload_tender','1','$post_date','$adminID')";
+				$sqlx="INSERT INTO tender_master (name,upload_tender,`type`,status,post_date,adminId) VALUES ('$name','$upload_tender','tender','1','$post_date','$adminID')";
 				$sql=$conn ->query($sqlx);
 				if(!$sql) die ($conn->error);
 
@@ -291,7 +291,7 @@ function IsNumeric(strString)
     $attach = " order by ".$order_by." ".$asc_desc." ";
     
     $i=1;
-	$result = $conn ->query("SELECT * FROM tender_master where 1".$attach." ");
+	$result = $conn ->query("SELECT * FROM tender_master where `type` ='tender' ".$attach." ");
     $rCount=0;
     $rCount =  $result->num_rows;		
     if($rCount>0)

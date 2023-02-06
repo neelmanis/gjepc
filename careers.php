@@ -17,20 +17,11 @@ include 'db.inc.php';
     </div>
 	<div class="row">
 
-        <div class="col-12">                
-            <a href="pdf/CEO-CFC-Advertisement.pdf" target="_blank" class="new_pdf_wrp">
-              <p class="blue">2022-07-19</p> 
-              <div class="circular_text">CEO - CFC Advertisement</div>
-            </a>              
-        </div>
-        <div class="col-12">                
-            <a href="pdf/CEO-CFC.pdf" target="_blank" class="new_pdf_wrp">
-              <p class="blue">2022-05-06</p> 
-              <div class="circular_text">CEO - Mega CFC</div>
-            </a>              
-        </div>
+        
 
-       <!-- <div class="col-12">
+
+
+        <div class="col-12">
             <div name="Imports">
 				<?php 
                 $sql="SELECT * FROM `job_master` WHERE 1 and `status`='1' and cat_id='1' order by id desc";
@@ -58,7 +49,7 @@ include 'db.inc.php';
                         <div class="docs_name">Description</div>
                         <div class="blank">
                             <p><a href="admin/ResumeProfile/<?php echo $rows['profile_detail'];?>" target="_blank">Click here for Complete Profile</a></p>
-                            <p>Suitable candidates may forward their CV at <a href="mailto:hr@gjepcindia.com">hr@gjepcindia.com</a></p>
+                            <!-- <p>Suitable candidates may forward their CV at <a href="mailto:career@gjepcindia.com">career@gjepcindia.com</a></p> -->
                         </div> 
                     </li>
                     <li>
@@ -103,12 +94,12 @@ include 'db.inc.php';
                 </ul>  
                 <?php } ?>
             </div>
-		</div>	-->
+		</div>	
         
         <!-- <h2 class="title" style="font-weight:normal; text-transform:inherit; color:#000;"> Currently no Vacancies </h2> -->
         		
     </div>
-    <div  style="display: block; margin-top: 180px"></div>
+    <!-- <div  style="display: block; margin-top: 180px"></div> -->
 
 </div>
 

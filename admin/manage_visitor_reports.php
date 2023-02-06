@@ -188,8 +188,8 @@ $_SESSION['succ_msg']="";
       <option value="igjme22" <?php if($_SESSION['visited_show']=='igjme22'){echo "selected";}?> >IIJS MACHINERY 2022</option>-->
     <!--<option value="iijstritiya22" <?php if($_SESSION['visited_show']=='iijstritiya22'){echo "selected";}?> selected>Tritiya</option>-->
 	
-	<option value="iijs22" <?php if($_SESSION['visited_show']=='iijs22'){echo "selected";}?> selected>IIJS PREMIERE 2022</option>
-	<option value="signature23" <?php if($_SESSION['visited_show']=='signature23'){echo "selected";}?> >IIJS SIGNATURE 2023</option>
+	<option value="iijs22" <?php if($_SESSION['visited_show']=='iijs22'){echo "selected";}?> >IIJS PREMIERE 2022</option>
+	<option value="signature23" <?php if($_SESSION['visited_show']=='signature23'){echo "selected";}?> selected>IIJS SIGNATURE 2023</option>
 	<option value="iijstritiya23" <?php if($_SESSION['visited_show']=='iijstritiya23'){echo "selected";}?> >IIJS TRITIYA 2023</option>
 	<option value="combo23" <?php if($_SESSION['visited_show']=='combo23'){echo "selected";}?> >IIJS PREMIERE 22 &  IIJS SIGNATURE 23 & IIJS TRITIYA 23</option>
     </select>

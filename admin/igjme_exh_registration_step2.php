@@ -5,7 +5,7 @@ if(!isset($_SESSION['curruser_login_id'])) { header("location:index.php"); exit;
 include('../db.inc.php');
 include('../functions.php');
 $action=$_REQUEST['action'];
-$show = "IGJME 2022";
+$show = "IGJME";
 
 if($action=='UPDATE')
 {
@@ -13,7 +13,7 @@ if($action=='UPDATE')
 	if(isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
 		
 	$id	 =	intval($_REQUEST['id']);
-	$gid =	intval($_REQUEST['gid']);
+	$gid =	intval($_REQUEST['id']);
 	$uid =  intval($_REQUEST['registration_id']);
 	
 	$brand_name1 = $_POST["brand_name1"];	
@@ -40,7 +40,7 @@ if($action=='UPDATE')
 	$modified_date=date("Y-m-d");
 	
 	if(!empty($uid) && !empty($id)){
-	$update_query = "update igjme_exh_reg_company_details set we_are_machinery='$wa_machinery', we_are='$we_are', we_are_machinery_any_other='$wa_machinery_other', we_are_any_other='$we_are_other', comp_desc='$comp_desc', last_yr_turn_over='$last_yr_turn_over', brand_name1='$brand_name1',brand_name2='$brand_name2',brand_name3='$brand_name3',brand_name4='$brand_name4',brand_name5='$brand_name5',brand_name6='$brand_name6',modified_date='$modified_date' where id='$id' and gid='$gid' and uid='$uid' and `show`='$show'";	
+	$update_query = "update exh_reg_company_details set we_are_machinery='$wa_machinery', we_are='$we_are', we_are_machinery_any_other='$wa_machinery_other', we_are_any_other='$we_are_other', comp_desc='$comp_desc', last_yr_turn_over='$last_yr_turn_over', brand_name1='$brand_name1',brand_name2='$brand_name2',brand_name3='$brand_name3',brand_name4='$brand_name4',brand_name5='$brand_name5',brand_name6='$brand_name6',modified_date='$modified_date' where id='$id' and gid='$gid' and uid='$uid' and `show`='$show'";	
 	$update_result = $conn->query($update_query);
 	if(!$update_result){
 		echo "Error: ".mysql_error($conn);	
@@ -57,7 +57,7 @@ if($action=='UPDATE')
 <?php
 $gid =	filter($_REQUEST['gid']);
 $registration_id	=	filter($_REQUEST['registration_id']);
-$sql="select  * from igjme_exh_reg_company_details where gid='$gid' and uid='$registration_id' AND `show` = '$show'";
+$sql="select  * from exh_reg_company_details where gid='$gid' and uid='$registration_id' AND `show` = '$show'";
 $result=$conn->query($sql);
 $rows=$result->fetch_assoc();
 $id = $rows["id"];
@@ -78,6 +78,7 @@ $product_on_display = $rows["product_on_display"];
 $comp_desc = stripslashes($rows["comp_desc"]);
 $last_yr_turn_over = $rows["last_yr_turn_over"];
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

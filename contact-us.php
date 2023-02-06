@@ -60,9 +60,9 @@ $pageDescription  = "For more details of Gems And Jewellery Companies In India p
                                             <div class="col-md-6 mb-3">                        
                                                 <div class="address_wrp">                                                
                                                     <ul class="address_listing">
-                                                        <li class="direction">D2B, D-Tower, West Core Wing, Bharat Dimaond Bourse, Bandra Kurla Complex, Bandra (E), Mumbai - 400 051, Maharashtra, India</li>
+                                                        <li class="direction">D2B, D-Tower, West Core Wing, Bharat Diamond Bourse, Bandra Kurla Complex, Bandra (E), Mumbai - 400 051, Maharashtra, India</li>
         
-                                                        <li>Tell : 91 22 4226 3600 <!-- 91 22 4226 3652 --></li>
+                                                        <li>Tell : 022 4226 3600 <!-- 91 22 4226 3652 --></li>
                                                         <!-- <li>Fax : 91 - 22 - 26524764</li> -->
                                                         <li>Web : <a href="index.php" target="_blank">www.gjepc.org</a></li>
                                                         <li>Email : <a href="mailto:ho@gjepcindia.com">ho@gjepcindia.com</a></li>                                                        
@@ -173,7 +173,7 @@ $pageDescription  = "For more details of Gems And Jewellery Companies In India p
         
                                                         <li>Tell : 011 - 4626 6920 to 4626 6925</li>
                                                         <li>Email :  <a href="mailto:delhi@gjepcindia.com">delhi@gjepcindia.com</a></li>
-                                                        <li>Contact :  Preeti Sharma (Assistant Director)<br> <a href="mailto:preeti.sharma@gjepcindia.com">preeti.sharma@gjepcindia.com</a></li>
+                                                        <li>Contact :  Sanjeev Bhatia (Assistant Director)<br> <a href="mailto:"></a></li>
                                                     </ul>                                
                                                 </div>                           
                                             </div>                        
@@ -191,8 +191,8 @@ $pageDescription  = "For more details of Gems And Jewellery Companies In India p
                                                         <li>Rajasthan Chamber Bhawan, 3rd Floor, Mirza Ismail Road, <br> Jaipur - 302 003.</li>        
                                                         <li>Tell : 0091-141-256 8029 / 257 4074</li>
                                                         <li>Fax : 0091-141-256 7921</li>
-                                                        <li>Email : <a href="mailto:jaipur@gjepcindia.com">jaipur@gjepcindia.com</a></li>
-                                                        <li>Contact :  Sanjay Singh (Regional Director)</li>
+                                                        <!-- <li>Email : <a href="mailto:"></a></li> -->
+                                                        <li>Contact :  Nitin Khandelwal (Dy. Director)</li>
                                                     </ul>                                
                                                 </div>                           
                                             </div>                        

@@ -3,11 +3,30 @@ session_start();
 ob_start();
 include('../db.inc.php');
 
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
 function reportLogs($category,$report_name,$conn)
 {
 	$adminID = intval($_SESSION['curruser_login_id']);
 	$adminName = strtoupper($_SESSION['curruser_contact_name']);
-	$ip = $_SERVER['REMOTE_ADDR'];
+	$ip = get_client_ip();
 	$query = "INSERT INTO report_logs SET post_date=NOW(),admin_id='$adminID',admin_name='$adminName',category='$category',report_name='$report_name',ip='$ip'";
 	$result = $conn->query($query);
 	if($result)
@@ -46,7 +65,7 @@ function cleanData(&$str)
  
   $sql = "SELECT vd.mod_date AS 'Date', rm.id AS 'Company Registration ID',rm.company_name AS 'Company Name',rm.company_pan_no AS 'Company PAN',rm.company_gstn AS 'Company GSTIN', rm.email_id,rm.address_line1,rm.address_line2,rm.city,sm.state_name,sm.region,rm.pin_code,rm.land_line_no,rm.mobile_no, vd.name, vd.lname, vd.degn_type,vd.designation, vd.gender, vd.mobile, vd.email, vd.pan_no,vd.visitor_approval,
 if(vd.visitor_approval='Y','APPROVED', if(vd.visitor_approval='D','DISAPPROVED','UPDATED')) AS Status,
-vd.adminId,am.contact_name, vd.disapprove_reason,rm.nature_of_buisness AS 'Nature of Business' from visitor_directory vd inner join registration_master rm on vd.registration_id = rm.id 
+vd.adminId,am.contact_name, vd.disapprove_reason from visitor_directory vd inner join registration_master rm on vd.registration_id = rm.id 
  left join state_master sm on sm.state_code = rm.state 
  left join admin_master am on am.id = vd.adminId
  where vd.status = '1' AND vd.mod_date between '2022-05-01' AND CURDATE() order by vd.mod_date";
